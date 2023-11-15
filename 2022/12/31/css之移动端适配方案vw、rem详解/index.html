@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="css之移动端适配方案vw、rem详解, Nan-ying&#39;s Blog">
+    <meta name="description" content="1. CSS 常见单位整体可以分成两类：
+
+绝对长度单位（Absolute length units）
+相对长度单位（Relative length units）
+
+1.1 绝对单位绝对单位：
+
+与其他任何东西都没有关系，通常被认为总是相同">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>css之移动端适配方案vw、rem详解 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">css之移动端适配方案vw、rem详解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/CSS/">
+              <span class="chip bg-color">CSS</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+              前端三件套
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2022-12-31
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 2.3k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          8 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="1-CSS-常见单位"><a href="#1-CSS-常见单位" class="headerlink" title="1. CSS 常见单位"></a>1. CSS 常见单位</h1><p>整体可以分成两类：</p>
+<ul>
+<li>绝对长度单位（Absolute length units）</li>
+<li>相对长度单位（Relative length units）</li>
+</ul>
+<h2 id="1-1-绝对单位"><a href="#1-1-绝对单位" class="headerlink" title="1.1 绝对单位"></a>1.1 绝对单位</h2><p>绝对单位：</p>
+<ul>
+<li>与其他任何东西都没有关系，通常被认为总是相同的大小。</li>
+<li>这些值中的大多数在用于打印时比用于屏幕输出时更有用，例如，我们通常不会在屏幕上使用cm。</li>
+<li>惟一一个经常使用的值是px(像素)。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>绝对单位</th>
+<th>名称</th>
+<th>等价换算</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cm</td>
+<td>厘米</td>
+<td>1cm = 96px/2.54</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>1mm = 1/10th of 1cm</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>四分之一毫米</td>
+<td>1Q = 1/40th of 1cm</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>1in = 2.54cm = 96px</td>
+</tr>
+<tr>
+<td>pc</td>
+<td>十二点活字</td>
+<td>1pc = 1/16th of 1in</td>
+</tr>
+<tr>
+<td>pt</td>
+<td>点</td>
+<td>1pt = 1/72th of 1in</td>
+</tr>
+<tr>
+<td>px</td>
+<td>像素</td>
+<td>1px = 1/96th of 1in</td>
+</tr>
+</tbody></table>
+<h2 id="1-2-相对单位"><a href="#1-2-相对单位" class="headerlink" title="1.2 相对单位"></a>1.2 相对单位</h2><p>相对单位：</p>
+<ul>
+<li>相对长度单位<strong>相对于其他一些东西</strong></li>
+<li>比如父元素的字体大小，或者视图端口的大小</li>
+<li>使用相对单位的好处是，经过一些仔细的规划，您可以使文本或其他元素的大小与页面上的其他内容相对应</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>相对单位</th>
+<th>相对于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>em</td>
+<td>在 font-size 中使用是相对于父元素的字体大小，在其他属性中使用是相对于自身的字体大小，如 width</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>字符“x”的高度</td>
+</tr>
+<tr>
+<td>ch</td>
+<td>数字“0”的宽度</td>
+</tr>
+<tr>
+<td>rem</td>
+<td>根元素的字体大小</td>
+</tr>
+<tr>
+<td>lh</td>
+<td>元素的line-height</td>
+</tr>
+<tr>
+<td>vw</td>
+<td>视窗宽度的1%</td>
+</tr>
+<tr>
+<td>vh</td>
+<td>视窗高度的1%</td>
+</tr>
+</tbody></table>
+<h2 id="1-3-px-详细介绍"><a href="#1-3-px-详细介绍" class="headerlink" title="1.3 px 详细介绍"></a>1.3 px 详细介绍</h2><p>px是pixel单词的缩写，翻译为像素。像素是影响显示的基本单位。</p>
+<p><img src="6d50758caf2b46d59ac80e5ce9fe5793.png" alt="在这里插入图片描述"></p>
+<p>像素单位常见的有三种像素名称：设备像素（也称之为物理像素）；设备独立像素（也称之为逻辑像素）；CSS像素</p>
+<ul>
+<li>设备像素，也叫物理像素。<ul>
+<li>设备像素指的是<strong>显示器上的真实像素，每个像素的大小是屏幕固有的属性</strong>，屏幕出厂以后就不会改变了</li>
+<li>我们在购买显示器或者手机的时候，提到的设备分辨率就是设备像素的大小</li>
+<li>比如iPhone X的分辨率 1125x2436，指的就是设备像素</li>
+</ul>
+</li>
+<li>设备独立像素，也叫逻辑像素。<ul>
+<li>如果面向开发者我们使用设备像素显示一个100px的宽度，那么在不同屏幕上显示效果会是不同的</li>
+<li>开发者针对不同的屏幕很难进行较好的适配，编写程序必须了解用户的分辨率来进行开发</li>
+<li>所以在设备像素之上，<strong>操作系统为开发者进行抽象，提供了逻辑像素的概念</strong></li>
+<li>比如你购买了一台显示器，在操作系统上是以1920x1080设置的显示分辨率，那么无论你购买的是2k、4k的显示器，对于开发者来说，都是 1920x1080的大小。</li>
+</ul>
+</li>
+<li>CSS像素<ul>
+<li>CSS中我们经常使用的单位也是pixel，它<strong>在默认情况下等同于设备独立像素（也就是逻辑像素）</strong>，毕竟逻辑像素才是面向我们开发者的</li>
+<li>我们可以通过JavaScript中的screen.width和screen.height获取到电脑的逻辑分辨率</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-移动端适配"><a href="#2-移动端适配" class="headerlink" title="2. 移动端适配"></a>2. 移动端适配</h1><p>移动端开发目前主要包括三类：</p>
+<ul>
+<li>原生App开发（iOS、Android、RN、uniapp、Flutter等）</li>
+<li>小程序开发（原生小程序、uniapp、Taro等）</li>
+<li>Web页面（移动端的Web页面，可以使用浏览器或者webview浏览）</li>
+</ul>
+<p>移动端适配包括两个概念：自适应、响应式</p>
+<h2 id="2-1-视口-viewport"><a href="#2-1-视口-viewport" class="headerlink" title="2.1 视口 viewport"></a>2.1 视口 viewport</h2><p>在一个浏览器中，我们可以看到的区域就是视口（viewport）</p>
+<p><strong>视口划分为三种：布局视口、视觉视口、理想视口</strong></p>
+<ul>
+<li>在PC端的页面中，我们是不需要对视口进行区分，因为我们的布局视口和视觉视口是同一个</li>
+<li>移动端的网页窗口往往比较小，布局视口是大于视觉视口的</li>
+</ul>
+<hr>
+<p>布局视口：</p>
+<ul>
+<li>一个在PC端的网页在移动端会<strong>按照宽度为980px来布局</strong>一个页面的盒子和内容</li>
+<li>这个视口称为布局视口，<strong>默认宽度980px</strong></li>
+</ul>
+<p>视觉视口：</p>
+<ul>
+<li>如果默认情况下，我们按照980px显示内容，那么右侧有一部分区域 就会无法显示，所以手机端浏览器会默认对页面进行缩放以显示到用户的可见区域中</li>
+<li>那么<strong>显示在可见区域的这个视口</strong>，就是视觉视口</li>
+</ul>
+<p><img src="a576718fd709423c85b06bf6b0bb5302.png" alt="在这里插入图片描述"></p>
+<p>理想视口：</p>
+<ul>
+<li>如果所有的网页都按照980px在移动端布局，那么最终页面都会被缩放显示。<strong>我们希望的是设置100px，那么显示的就是100px。</strong></li>
+<li>这时需要设置理想视口。</li>
+<li>设置meta中的viewport</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"&gt;</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>可能的附加值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>width</td>
+<td>一个正整数，或者字符串 device-width</td>
+<td>定义 viewport 的宽度。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>一个正整数，或者字符串 device-height</td>
+<td>定义 viewport 的高度。未被任何浏览器使用。</td>
+</tr>
+<tr>
+<td>initial-scale</td>
+<td>一个 0.0 和 10.0 之间的正数</td>
+<td>定义设备宽度与 viewport 大小之间的缩放比例。</td>
+</tr>
+<tr>
+<td>maximum-scale</td>
+<td>一个 0.0 和 10.0 之间的正数</td>
+<td>定义缩放的最大值，必须大于等于 minimum-scale，否则表现将不可预测。</td>
+</tr>
+<tr>
+<td>minimum-scale</td>
+<td>一个 0.0 和 10.0 之间的正数</td>
+<td>定义缩放的最小值，必须小于等于 maximum-scale，否则表现将不可预测。</td>
+</tr>
+<tr>
+<td>user-scalable</td>
+<td>yes 或者 no</td>
+<td>默认为 yes，如果设置为 no，将无法缩放当前页面。浏览器可以忽略此规则</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-移动端适配方案"><a href="#2-2-移动端适配方案" class="headerlink" title="2.2 移动端适配方案"></a>2.2 移动端适配方案</h2><ul>
+<li>方案一：百分比设置<ul>
+<li>因为不同属性的百分比值，相对的可能是不同参照物，所以百分比往往很难统一</li>
+<li>所以百分比在移动端适配中使用是非常少的</li>
+</ul>
+</li>
+<li>方案二：rem单位+动态html的font-size</li>
+<li>方案三：vw单位</li>
+<li>方案四：flex的弹性布局</li>
+</ul>
+<h3 id="2-2-1-rem-适配方案"><a href="#2-2-1-rem-适配方案" class="headerlink" title="2.2.1 rem 适配方案"></a>2.2.1 rem 适配方案</h3><p>rem单位是相对于html元素的font-size来设置的，那么如果我们需要在不同的屏幕下有不同的尺寸，可以<strong>动态的修改html的 font-size尺寸</strong></p>
+<p>在开发中，我们只需要考虑两个问题：</p>
+<ul>
+<li>问题一：针对不同的屏幕，<strong>设置html不同的font-size</strong></li>
+<li>问题二：将原来要设置的尺寸，<strong>转化成rem单位</strong></li>
+</ul>
+<h4 id="font-size-尺寸"><a href="#font-size-尺寸" class="headerlink" title="font-size 尺寸"></a>font-size 尺寸</h4><table>
+<thead>
+<tr>
+<th>屏幕尺寸</th>
+<th>html的font-size</th>
+<th>盒子的设置宽度</th>
+<th>盒子的最终宽度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>375px</td>
+<td>37.5px</td>
+<td>1rem</td>
+<td>37.5px</td>
+</tr>
+<tr>
+<td>320px</td>
+<td>32px</td>
+<td>1rem</td>
+<td>32px</td>
+</tr>
+<tr>
+<td>414px</td>
+<td>41.4px</td>
+<td>1rem</td>
+<td>41.4px</td>
+</tr>
+</tbody></table>
+<ul>
+<li>方案一：媒体查询<ul>
+<li>可以通过媒体查询来设置不同尺寸范围内的屏幕html的font-size尺寸</li>
+<li>缺点： <ul>
+<li>1.我们需要针对不同的屏幕编写大量的媒体查询</li>
+<li>2.如果动态改变尺寸，不会实时的进行更新</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方案二：编写js代码<ul>
+<li>如果希望实时改变屏幕尺寸时，font-size也可以实时更改，可以通过js代码</li>
+<li>方法：<ul>
+<li>1.根据html的宽度计算出font-size的大小，并且设置到html上</li>
+<li>2.监听页面的实时改变，并且重新设置font-size的大小到html上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方案三：lib-flexible库<ul>
+<li>事实上，lib-flexible库做的事情是相同的，你也可以直接引入它</li>
+</ul>
+</li>
+</ul>
+<p><img src="cb299e092059423286d07240d0b525c4.png" alt="在这里插入图片描述"></p>
+<h4 id="rem的单位换算"><a href="#rem的单位换算" class="headerlink" title="rem的单位换算"></a>rem的单位换算</h4><ul>
+<li>方案一：手动换算<ul>
+<li>比如有一个在375px屏幕上，100px宽度和高度的盒子</li>
+<li>我们需要将100px转成对应的rem值</li>
+<li>100/37.5=2.6667，其他也是相同的方法计算即可</li>
+</ul>
+</li>
+<li>方案二：less/scss函数</li>
+<li><strong>方案三：postcss-pxtorem</strong><ul>
+<li>目前在前端的工程化开发中，我们可以借助于webpack的工具来完成自动的转化</li>
+<li><code>npm install postcss-pxtorem</code></li>
+</ul>
+</li>
+<li>方案四：VSCode插件<ul>
+<li>px to rem 的插件，在编写时自动转化</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-2-vw-适配方案"><a href="#2-2-2-vw-适配方案" class="headerlink" title="2.2.2 vw 适配方案"></a>2.2.2 vw 适配方案</h3><p>1vw等于屏幕的1%，vw我们只面临一个问题：将尺寸换算成vw的单位即可</p>
+<p>vw相比于rem的优势：</p>
+<ul>
+<li>优势一：不需要去计算html的font-size大小，也<strong>不需要给html设置这样一个font-size</strong></li>
+<li>优势二：不会因为设置html的font-size大小，而必须给body再设置一个font-size，防止继承</li>
+<li>优势三：因为不依赖font-size的尺寸，所以不用担心某些原因html的font-size尺寸被篡改，页面尺寸混乱</li>
+<li>优势四：<strong>vw相比于rem更加语义化</strong>，1vw刚才是1/100的viewport的大小</li>
+<li>优势五：可以具备rem之前所有的优点</li>
+</ul>
+<h4 id="vw-的单位换算"><a href="#vw-的单位换算" class="headerlink" title="vw 的单位换算"></a>vw 的单位换算</h4><ul>
+<li>方案一：手动换算<ul>
+<li>比如有一个在375px屏幕上，100px宽度和高度的盒子</li>
+<li>我们需要将100px转成对应的vw值</li>
+<li>100/3.75=26.667，其他也是相同的方法计算即可</li>
+</ul>
+</li>
+<li>方案二：less/scss函数</li>
+<li><strong>方案三：postcss-px-to-viewport-8-plugin</strong><ul>
+<li>和rem一样，在前端的工程化开发中，我们可以借助于webpack的工具来完成自动的转化</li>
+<li><code>npm install postcss-px-to-viewport-8-plugin</code></li>
+</ul>
+</li>
+<li>方案四：VSCode插件<ul>
+<li>px to vw 的插件，在编写时自动转化</li>
+</ul>
+</li>
+</ul>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2022/12/31/css%E4%B9%8B%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88vw%E3%80%81rem%E8%AF%A6%E8%A7%A3/">https://nan-ying.github.io/2022/12/31/css%E4%B9%8B%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88vw%E3%80%81rem%E8%AF%A6%E8%A7%A3/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/CSS/">
+              <span class="chip bg-color">CSS</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2022-12-31T17-24-49',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/01/03/git-%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="git 工具介绍及使用">
+                        
+                        <span class="card-title">git 工具介绍及使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/git/">
+                        <span class="chip bg-color">git</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12/30/CSS-%E4%B9%8B-flex%E5%B8%83%E5%B1%80/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="CSS 之 flex布局">
+                        
+                        <span class="card-title">CSS 之 flex布局</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+                                    前端三件套
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >64.8k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>
