@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类, Nan-ying&#39;s Blog">
+    <meta name="keywords" content="contact, Nan-ying&#39;s Blog">
     <meta name="description" content="Nan-ying&#39;s Blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类 | Nan-ying&#39;s Blog</title>
+    <title>contact | Nan-ying&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -331,7 +331,13 @@
     </nav>
 
 </header>
- <div class="bg-cover pd-header about-cover">
+ <link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/barrager.css">
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.barrager.js"></script>
+
+<div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -386,94 +392,79 @@
     </div>
 </div>
 
-<main class="content">
-
-    
-
-<div id="category-cloud" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" title="项目实战: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">项目实战
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
+<style>
+    #send{
+        margin-bottom: 10px;
+        width: 49%;
+        background-color: #0ba360;
+    }
+    #clear{
+        margin-bottom: 10px;
+        width: 49%;
+        background-color: #e7c65c;
+    }
+    p{
+        text-align: center;
     }
 </style>
+<main class="content">
+    <div id="contact" class="container chip-container">
+        <div class="card">
+            <div class="card-content">
+                <div class="tag-title center-align">
+                    <i class="fas fa-comments"></i>&nbsp;&nbsp;留言板
+                </div>
+                
+            </div>
+            <!--valine评论弹幕-->
+            
+        </div>
 
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
+        <!--其他评论card-->
+        <div class="card">
+            
+                <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
     </div>
+    <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2022-12-10T17-25-30',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
 
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: '文章分类雷达图',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"项目实战","max":2}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [1],
-                    name : '文章分类数量'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
+    gitalk.render('gitalk-container');
 </script>
 
-    
+            
 
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
 </main>
  <footer class="page-footer bg-color">
    <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
