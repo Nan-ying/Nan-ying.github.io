@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Vue3 知识大总结（四）Vue3 全家桶 router、vuex、pinia、axios, Nan-ying&#39;s Blog">
+    <meta name="description" content="一、Vue-Router1. 前端路由发展历程==发展历程：==
+
+后端路由：当我们页面中需要请求不同的路径内容时, 交给服务器来进行处理, 服务器渲染好整个页面, 并且将页面返回给客户端。
+前后端分离：后端只提供API来返回数据，前端通过">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Vue3 知识大总结（四）Vue3 全家桶 router、vuex、pinia、axios | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Vue3 知识大总结（四）Vue3 全家桶 router、vuex、pinia、axios</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Vue/">
+              <span class="chip bg-color">Vue</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+              Vue框架
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-01-20
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 5.4k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          22 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="一、Vue-Router"><a href="#一、Vue-Router" class="headerlink" title="一、Vue-Router"></a>一、Vue-Router</h1><h2 id="1-前端路由发展历程"><a href="#1-前端路由发展历程" class="headerlink" title="1. 前端路由发展历程"></a>1. 前端路由发展历程</h2><p>==发展历程：==</p>
+<ul>
+<li>后端路由：当我们页面中需要请求不同的路径内容时, 交给服务器来进行处理, <strong>服务器渲染好整个页面, 并且将页面返回</strong>给客户端。</li>
+<li>前后端分离：<strong>后端只提供API</strong>来返回数据，前端通过Ajax获取数据，并且可以通过JavaScript将数据渲染到页面中</li>
+<li>单页面富应用：<ul>
+<li>SPA：single page web application<ul>
+<li>SPA最主要的特点就是<strong>在前后端分离的基础上加了一层前端路由</strong>。</li>
+</ul>
+</li>
+<li><em><strong>前端路由</strong></em><ul>
+<li>由前端来维护映射关系，在不同的URL显示不同的组件</li>
+<li>核心：<strong>监听URL的改变，URL和内容进行映射</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-两种模式"><a href="#1-1-两种模式" class="headerlink" title="1.1 两种模式"></a>1.1 两种模式</h3><ul>
+<li><p>hash模式：URL的hash也就是<strong>锚点(#)</strong>, 本质上是改变window.location的href属性</p>
+</li>
+<li><p>history模式：history接口是HTML5新增的，通过一些模式函数来改变URL但不刷新页面</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>hash</th>
+<th>history</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有 # 号</td>
+<td>没有 # 号</td>
+</tr>
+<tr>
+<td>能够兼容到IE8</td>
+<td>只能兼容到IE10</td>
+</tr>
+<tr>
+<td>实际的url之前使用哈希字符，这部分url不会发送到服务器，不需要在服务器层面上进行任何处理</td>
+<td>每访问一个页面都需要服务器进行路由匹配生成 html 文件再发送响应给浏览器，消耗服务器大量资源</td>
+</tr>
+<tr>
+<td>刷新不会存在 404 问题</td>
+<td>浏览器直接访问嵌套路由时，会报 404 问题。</td>
+</tr>
+<tr>
+<td>不需要服务器任何配置</td>
+<td>需要在服务器配置一个回调路由</td>
+</tr>
+</tbody></table>
+<h2 id="2-vue-router-的使用过程"><a href="#2-vue-router-的使用过程" class="headerlink" title="2. vue-router 的使用过程"></a>2. vue-router 的使用过程</h2><p>路由用于设定访问路径，<strong>将路径和组件映射起来</strong></p>
+<ul>
+<li>安装：<code>npm install vue-router</code></li>
+</ul>
+<p>使用vue-router的步骤：</p>
+<ul>
+<li>第一步：创建路由需要映射的组件（<strong>打算显示的页面</strong>）</li>
+<li>第二步：通过<strong>createRouter创建路由对象</strong>，并且<strong>传入routes和history模式</strong><ul>
+<li><p>routes：配置路由映射，组件和路径映射关系的routes数组</p>
+</li>
+<li><p>history：创建基于hash或者history的模式</p>
+<ul>
+<li>hash模式  :  <code>history: createWebHashHistory()</code></li>
+</ul>
+<ul>
+<li>history模式:    <code>history: createWebHistory()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三步：使用<strong>app注册路由对象</strong>（use方法）</li>
+<li>第四步：<strong>使用路径</strong><ul>
+<li>router-view: 占位</li>
+<li>router-link  进行路由的切换<ul>
+<li>编程式导航</li>
+<li>to 属性, 跳转到哪一个路由</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="6f86f3c449dc4c41814ba59d8b74347a.png" alt="在这里插入图片描述"></p>
+<h3 id="2-1-vue-router-知识点补充"><a href="#2-1-vue-router-知识点补充" class="headerlink" title="2.1 vue-router 知识点补充"></a>2.1 vue-router 知识点补充</h3><h4 id="2-1-1-路由的默认路径"><a href="#2-1-1-路由的默认路径" class="headerlink" title="2.1.1 路由的默认路径"></a>2.1.1 路由的默认路径</h4><p>让路径<strong>默认跳到到首页</strong></p>
+<ul>
+<li>path：配置的是根路径: /</li>
+<li>redirect：重定向，将根路径重定向到/home的路径下</li>
+</ul>
+<p><img src="5dff00e5cd32470287119c07a2144cf8.png" alt="在这里插入图片描述"></p>
+<h4 id="2-1-2-router-link-其他属性"><a href="#2-1-2-router-link-其他属性" class="headerlink" title="2.1.2 router-link 其他属性"></a>2.1.2 router-link 其他属性</h4><ul>
+<li>to属性：指定<strong>跳转到哪个路由</strong>。是一个字符串，或者是一个对象</li>
+<li>replace属性： 设置 replace 属性的话，当点击时，会调用 router.replace()，而不是 router.push()。导航后<strong>不会留下history记录</strong>，也就是不能回退到上一个页面</li>
+<li>active-class属性：设置激活a元素后应用的<strong>class名称</strong>，默认是router-link-active</li>
+<li>exact-active-class属性：链接<strong>精准激活</strong>时，应用于渲染的 的 class，默认是router-link-exact-active</li>
+</ul>
+<h4 id="2-1-3-路由懒加载-分包处理"><a href="#2-1-3-路由懒加载-分包处理" class="headerlink" title="2.1.3 路由懒加载-分包处理"></a>2.1.3 路由懒加载-分包处理</h4><p>把<strong>不同路由对应的组件分割</strong>成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就会更加高效</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">{ path: "/home", component: () =&gt; import(/* webpackChunkName: 'home' */"../Views/Home.vue") }
+// webpackChunkName 规定分包后的文件名称</code></pre>
+
+<h4 id="2-1-4-其他属性"><a href="#2-1-4-其他属性" class="headerlink" title="2.1.4 其他属性"></a>2.1.4 其他属性</h4><ul>
+<li>name：路由记录独一无二的名称</li>
+<li>meta：自定义数据</li>
+</ul>
+<p><img src="df608049783b4da49b52093d5c27a18a.png" alt="在这里插入图片描述"></p>
+<h2 id="3-动态路由"><a href="#3-动态路由" class="headerlink" title="3. 动态路由"></a>3. 动态路由</h2><p>如果需要将<strong>给定匹配模式的路由</strong>映射到<strong>同一个</strong>组件：可以<strong>在路径中使用一个动态字段</strong>来实现，我们称之为路径参数</p>
+<p><img src="1203c38349694cdd9334f51e57615d15.png" alt="在这里插入图片描述"></p>
+<p>在router-link中进行如下跳转：</p>
+<p><img src="e5fd8ea9245b4a04a96580c6c5d99901.png" alt="在这里插入图片描述"></p>
+<p>获取动态路由中对应的值：</p>
+<ul>
+<li>在template中，直接通过 <code>$route.params</code>获取值</li>
+<li>在created中，通过 <code>this.$route.param</code>s获取值</li>
+<li>在setup中，我们要使用 vue-router库给我们提供的一个hook，useRoute</li>
+</ul>
+<p><img src="abc9d88f1bc74c16972ffeaeb6a37877.png" alt="在这里插入图片描述"></p>
+<h3 id="3-1-NotFound-页面匹配"><a href="#3-1-NotFound-页面匹配" class="headerlink" title="3.1 NotFound 页面匹配"></a>3.1 NotFound 页面匹配</h3><p>没有匹配到的路由，我们通常会<strong>匹配到固定的某个页面</strong>：编写一个动态路由用于匹配所有页面<br><img src="212dc44a971f474c81367a43a7526655.png" alt="在这里插入图片描述"></p>
+<p>通过 $route.params.pathMatch获取到传入的参数：<br><img src="90582ec43b154e9da347a5f80134ef6c.png" alt="在这里插入图片描述"></p>
+<p>ps：另一种写法<br><img src="9877478a6b3443528488f2ac1bd563c2.png" alt="在这里插入图片描述"></p>
+<h2 id="4-路由的嵌套"><a href="#4-路由的嵌套" class="headerlink" title="4. 路由的嵌套"></a>4. 路由的嵌套</h2><p>会出现多层路由嵌套的情况：</p>
+<ol>
+<li>在一层路由Home中<strong>添加 children属性</strong>：</li>
+<li>在Home组件中添加 <code>&lt;router-view&gt;</code></li>
+<li>路径跳转 <code>&lt;router-link&gt;</code></li>
+</ol>
+<p><img src="f47256289fb44f5ebc003cb5801e7084.png" alt="在这里插入图片描述"></p>
+<p><img src="e16a478a66f344c292ee1bf2a6fd013d.png" alt="在这里插入图片描述"></p>
+<h2 id="5-路由的编程式导航"><a href="#5-路由的编程式导航" class="headerlink" title="5. 路由的编程式导航"></a>5. 路由的编程式导航</h2><h3 id="5-1-代码的页面跳转"><a href="#5-1-代码的页面跳转" class="headerlink" title="5.1 代码的页面跳转"></a>5.1 代码的页面跳转</h3><p>希望实现<strong>其他元素（按钮、span等）的跳转</strong>，可以通过 useRouter 来获取<br>通过query的方式来<strong>传递参数</strong>，在界面中通过 $route.query 来获取参数</p>
+<p>// App.vue<br><img src="61ad60b220554d5ca8b2087f6b64fbcf.png" alt="在这里插入图片描述"></p>
+<p>router.push({}) 中可传递参数<br><img src="1a0e1da1c1284aab9fd08d9cc57d61ca.png" alt="在这里插入图片描述"><br><img src="e47eafd1ea354bc28fca7b42d5729c8b.png" alt="在这里插入图片描述"></p>
+<h3 id="5-2-页面的前进后退"><a href="#5-2-页面的前进后退" class="headerlink" title="5.2 页面的前进后退"></a>5.2 页面的前进后退</h3><ul>
+<li>back()：回溯历史，相当于 router.go(-1)</li>
+<li>forward()：在历史中前进，相当于 router.go(1)</li>
+<li>go(number)</li>
+</ul>
+<p><img src="6393c39f0de04027924301bdb9299b7e.png" alt="在这里插入图片描述"></p>
+<h2 id="6-动态管理路由对象"><a href="#6-动态管理路由对象" class="headerlink" title="6. 动态管理路由对象"></a>6. 动态管理路由对象</h2><p>某些情况下我们可能需要动态的来添加路由：</p>
+<ul>
+<li>比如根据<strong>用户不同的权限，注册不同的路由</strong>（后台管理系统）</li>
+</ul>
+<p><img src="2532224ca0fa4005a7c3942929d8f09b.png" alt="在这里插入图片描述"></p>
+<h3 id="6-1-动态添加路由"><a href="#6-1-动态添加路由" class="headerlink" title="6.1 动态添加路由"></a>6.1 动态添加路由</h3><ul>
+<li>我们可以使用一个方法 addRoute</li>
+<li>如果我们是为route<strong>添加一个children路由</strong>，那么可以传入对应的name</li>
+</ul>
+<p><img src="c2f6b8451507400fbd1e2dd60e1321c3.png" alt="在这里插入图片描述"></p>
+<h4 id="6-1-1-管理路由的其他方法（了解）"><a href="#6-1-1-管理路由的其他方法（了解）" class="headerlink" title="6.1.1 管理路由的其他方法（了解）"></a>6.1.1 管理路由的其他方法（了解）</h4><ul>
+<li><p>删除路由有以下三种方式：</p>
+<ul>
+<li>方式一：添加一个name相同的路由</li>
+<li>方式二：通过removeRoute方法，传入路由的名称</li>
+<li>方式三：通过addRoute方法的返回值回调<br><img src="f6bec5cdbf3f4d30bc15c7bd0ba8ae34.png" alt="在这里插入图片描述"></li>
+</ul>
+</li>
+<li><p>路由的其他方法补充：</p>
+<ul>
+<li>router.hasRoute()：检查<strong>路由是否存在</strong>。</li>
+<li>router.getRoutes()：<strong>获取一个包含所有路由记录</strong>的数组</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-路由导航守卫"><a href="#7-路由导航守卫" class="headerlink" title="7. 路由导航守卫"></a>7. 路由导航守卫</h2><p>导航守卫主要用来<strong>通过跳转或取消的方式守卫导航</strong></p>
+<h3 id="7-1-beforeEach"><a href="#7-1-beforeEach" class="headerlink" title="7.1 beforeEach"></a>7.1 beforeEach</h3><p>全局的前置守卫beforeEach<strong>在导航触发时被回调</strong>：</p>
+<ul>
+<li>它有<strong>两个参数</strong>：<ul>
+<li>to：即将进入的路由Route对象</li>
+<li>from：即将离开的路由Route对象</li>
+</ul>
+</li>
+<li>它有<strong>返回值</strong>：<ul>
+<li>false：取消当前导航</li>
+<li>不返回或者undefined：进行<strong>默认导航</strong></li>
+<li>返回一个路由地址：<ul>
+<li>可以是一个string类型的路径</li>
+<li>可以是一个对象，对象中包含path、query、params等信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可选的第三个参数：next（不推荐使用）<ul>
+<li>在Vue2中我们是通过next函数来决定如何进行跳转的</li>
+<li>但是在Vue3中我们是通过返回值来控制的，不再推荐使用next函数，这是因为开发中很容易调用多次next</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-登录守卫功能"><a href="#7-2-登录守卫功能" class="headerlink" title="7.2 登录守卫功能"></a>7.2 登录守卫功能</h3><ul>
+<li>跳转order组件时, 判断用户是否登录<ul>
+<li>没有登录：<ul>
+<li>跳到登录页面</li>
+<li>进行登录的操作</li>
+<li>在浏览器localStorage保存token</li>
+</ul>
+</li>
+<li>已登录/登录成功：<ul>
+<li>跳到order页面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="5cb0bf206bbb49c4ba9091cdcf08a05a.png" alt="在这里插入图片描述"></p>
+<p><img src="616e68cc640240b1831b77eeec9614e7.png" alt="在这里插入图片描述"></p>
+<h3 id="7-3-路由导航的流程解析（了解）"><a href="#7-3-路由导航的流程解析（了解）" class="headerlink" title="7.3 路由导航的流程解析（了解）"></a>7.3 路由导航的流程解析（了解）</h3><p>完整的导航解析流程： </p>
+<ul>
+<li>导航被触发。</li>
+<li>在失活的组件里调用 beforeRouteLeave 守卫。</li>
+<li>调用全局的 beforeEach 守卫。</li>
+<li>在重用的组件里调用 beforeRouteUpdate 守卫(2.2+)。</li>
+<li>在路由配置里调用 beforeEnter。</li>
+<li>解析异步路由组件。</li>
+<li>在被激活的组件里调用 beforeRouteEnter。</li>
+<li>调用全局的 beforeResolve 守卫(2.5+)。</li>
+<li>导航被确认。</li>
+<li>调用全局的 afterEach 钩子。</li>
+<li>触发 DOM 更新。</li>
+<li>调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入</li>
+</ul>
+<h1 id="二、Vuex-状态管理"><a href="#二、Vuex-状态管理" class="headerlink" title="二、Vuex 状态管理"></a>二、Vuex 状态管理</h1><h2 id="1-理解状态管理"><a href="#1-理解状态管理" class="headerlink" title="1. 理解状态管理"></a>1. 理解状态管理</h2><p>在开发中，应用程序需要<strong>处理各种各样的数据</strong>，这些数据需要保存在应用程序中的某一个位置。对于这些数据的管理我们就 称之为是状态管理。</p>
+<p>随着发展，JavaScript需要管理的状态越来越多，越来越复杂</p>
+<ul>
+<li>这些状态包括<strong>服务器返回的数据、缓存数据、用户操作产生的数据等等</strong></li>
+<li>也包括一些UI的状态，比如某些元素是否被选中，是否显示加载动效，当前分页</li>
+<li>多个组件还会共享状态</li>
+</ul>
+<p>此时我们==将组件的内部状态抽离出来==，以一个全局单例的方式来管理</p>
+<ul>
+<li>在这种模式下，我们的组件树构成了一个巨大的 “试图View”</li>
+<li>不管在树的哪个位置，<strong>任何组件都能获取状态或者触发行为</strong></li>
+<li>通过定义和隔离状态管理中的各个概念，并通过强制性的规则来维护视图和状态间的独立性，我们的代码会变得更加结构化和易于维护、跟踪</li>
+</ul>
+<p><img src="5726e4d23e2141afa018bf226c14c779.png" alt="在这里插入图片描述"></p>
+<h2 id="2-Vuex-基本使用"><a href="#2-Vuex-基本使用" class="headerlink" title="2. Vuex 基本使用"></a>2. Vuex 基本使用</h2><ul>
+<li>安装vuex：<code>npm install vuex</code></li>
+</ul>
+<h3 id="2-1-创建-store"><a href="#2-1-创建-store" class="headerlink" title="2.1 创建 store"></a>2.1 创建 store</h3><p>Vuex应用的核心就是store（仓库）：包含着应用中大部分的状态（state）</p>
+<ul>
+<li>第一：Vuex的<strong>状态存储是响应式的</strong><ul>
+<li>当Vue组件从store中读取状态的时候，若store中的状态发生变化，那么相应的组件也会被更新</li>
+</ul>
+</li>
+<li>第二：你<strong>不能直接改变store中的状态</strong><ul>
+<li>改变store中的状态的唯一途径就<strong>显式提交</strong> (commit) 至mutation</li>
+<li>这样使得我们可以方便的跟踪每一个状态的变化，从而让我们能够通过一些工具帮助我们更好的管理应用的状态</li>
+</ul>
+</li>
+</ul>
+<p><img src="d37c3ed9c9464e90a3c86dda6f124aaf.png" alt="在这里插入图片描述"></p>
+<p><img src="ef4aa145fd974724b472a770e1c0d08a.png" alt="在这里插入图片描述"></p>
+<h3 id="2-2-组件中使用-store"><a href="#2-2-组件中使用-store" class="headerlink" title="2.2 组件中使用 store"></a>2.2 组件中使用 store</h3><p>在组件中使用store，有三种方式： </p>
+<ul>
+<li>在模板中使用</li>
+<li>在options api中使用，比如computed</li>
+<li>在setup中使用</li>
+</ul>
+<p><img src="c2ad8dcfad35407d8202b8e6f3e58536.png" alt="在这里插入图片描述"></p>
+<h2 id="3-核心概念一：state"><a href="#3-核心概念一：state" class="headerlink" title="3. 核心概念一：state"></a>3. 核心概念一：state</h2><p>Vuex 使用单一状态树，便于维护：</p>
+<ul>
+<li>用一个对象就包含了全部的应用层级的状态</li>
+<li>这也意味着，<strong>每个应用将仅仅包含一个 store 实例</strong></li>
+</ul>
+<h3 id="3-1-基本使用"><a href="#3-1-基本使用" class="headerlink" title="3.1 基本使用"></a>3.1 基本使用</h3><p>见 2.2 </p>
+<h3 id="3-2-映射使用"><a href="#3-2-映射使用" class="headerlink" title="3.2 映射使用"></a>3.2 映射使用</h3><p>如果我们有<strong>很多个状态都需要获取</strong>，可以使用mapState的辅助函数：</p>
+<ul>
+<li>mapState的方式一：对象类型</li>
+<li>mapState的方式二：数组类型</li>
+<li>也可以使用展开运算符和原有的computed混合在一起</li>
+</ul>
+<p>分为在options api中使用 &amp; 在setup中使用</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;button @click="incrementLevel"&gt;修改level&lt;/button&gt;
+		&lt;!-- 1.在模板中直接使用多个状态 --&gt;
+		&lt;!-- &lt;h2&gt;name: {{ $store.state.name }}&lt;/h2&gt;
+		&lt;h2&gt;level: {{ $store.state.level }}&lt;/h2&gt;
+		&lt;h2&gt;avatar: {{ $store.state.avatarURL }}&lt;/h2&gt; --&gt;
+		
+		&lt;!-- 2.计算属性(映射状态: 数组语法) --&gt;
+		&lt;h2&gt;name: {{ name() }}&lt;/h2&gt;
+		&lt;h2&gt;level: {{ level() }}&lt;/h2&gt;
+		
+		&lt;!-- 3.计算属性(映射状态: 对象语法) --&gt;
+		&lt;h2&gt;name: {{ sName }}&lt;/h2&gt;
+		&lt;h2&gt;level: {{ sLevel }}&lt;/h2&gt;
+		
+		&lt;!-- 4.setup计算属性(映射状态: 对象语法) --&gt;
+		&lt;h2&gt;name: {{ cName }}&lt;/h2&gt;
+		&lt;h2&gt;level: {{ cLevel }}&lt;/h2&gt;
+		
+		&lt;!-- 5.setup计算属性(映射状态: 对象语法) --&gt;
+		&lt;h2&gt;name: {{ name }}&lt;/h2&gt;
+		&lt;h2&gt;level: {{ level }}&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { mapState } from "vuex";
+
+export default {
+	computed: {
+		fullname() {
+			return "xxx";
+		},
+		...mapState(["name", "level", "avatarURL"]),
+		...mapState({
+			sName: (state) =&gt; state.name,
+			sLevel: (state) =&gt; state.level,
+		}),
+	},
+};
+&lt;/script&gt;
+
+&lt;script setup&gt;
+import { computed, toRefs } from "vue";
+import { mapState, useStore } from "vuex";
+import useState from "../hooks/useState";
+
+// 1.一步步完成
+// const { name, level } = mapState(["name", "level"])
+// const store = useStore()
+// const cName = computed(name.bind({ $store: store }))
+// const cLevel = computed(level.bind({ $store: store }))
+
+// 2.使用useState
+// const { name, level } = useState(["name", "level"]) 
+
+// 3.直接对store.state进行解构(推荐)
+const store = useStore();
+const { name, level } = toRefs(store.state);
+
+function incrementLevel() {
+	store.state.level++;
+}
+&lt;/script&gt;</code></pre>
+
+<h2 id="4-核心概念二：getter"><a href="#4-核心概念二：getter" class="headerlink" title="4. 核心概念二：getter"></a>4. 核心概念二：getter</h2><h3 id="4-1-基本使用"><a href="#4-1-基本使用" class="headerlink" title="4.1 基本使用"></a>4.1 基本使用</h3><p>某些属性我们可能需要<strong>经过变化后来使用</strong>，这个时候可以使用getters</p>
+<ul>
+<li>第一个参数：state</li>
+<li>第二个参数：getter</li>
+<li>返回值：可以返回一个函数，在使用的地方相当于可以调用这个函数</li>
+</ul>
+<p><img src="790c0ec1d6c6497d9bfe731f47cf7dde.png" alt="在这里插入图片描述"></p>
+<p><img src="fa4482cfdf4c47588727f615bab747c6.png" alt="在这里插入图片描述"></p>
+<h3 id="4-2-映射使用"><a href="#4-2-映射使用" class="headerlink" title="4.2 映射使用"></a>4.2 映射使用</h3><p>如果有多个getter中的函数需要获取，可以使用mapGetters的辅助函数：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;button @click="changeAge"&gt;修改name&lt;/button&gt;
+		
+		&lt;h2&gt;doubleCounter: {{ doubleCounter }}&lt;/h2&gt;
+		&lt;h2&gt;friendsTotalAge: {{ totalAge }}&lt;/h2&gt;
+		&lt;h2&gt;message: {{ message }}&lt;/h2&gt;
+		
+		&lt;!-- 根据id获取某一个朋友的信息 --&gt;
+		&lt;h2&gt;id-111的朋友信息: {{ getFriendById(111) }}&lt;/h2&gt;
+		&lt;h2&gt;id-112的朋友信息: {{ getFriendById(112) }}&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+	import { mapGetters } from 'vuex'
+	
+	export default {
+		computed: {
+			...mapGetters(["doubleCounter", "totalAge", "getFriendById"])
+		}
+	}
+&lt;/script&gt;
+
+&lt;script setup&gt;
+import { computed, toRefs } from 'vue';
+import { mapGetters, useStore } from 'vuex'
+
+const store = useStore()
+
+// 1.使用mapGetters
+// const { message: messageFn } = mapGetters(["message"])
+// const message = computed(messageFn.bind({ $store: store }))
+
+// 2.直接解构, 并且包裹成ref(会报警告)
+// const { message } = toRefs(store.getters)
+
+// 3.针对某一个getters属性使用computed（推荐）
+const message = computed(() =&gt; store.getters.message)
+
+function changeAge() {
+	store.state.name = "kobe"
+}
+&lt;/script&gt;</code></pre>
+
+<h2 id="5-核心概念三：mutations"><a href="#5-核心概念三：mutations" class="headerlink" title="5. 核心概念三：mutations"></a>5. 核心概念三：mutations</h2><p><strong>更改 Vuex 的 store 中的状态</strong>的==唯一方法==是提交 mutation</p>
+<h3 id="5-1-基本使用"><a href="#5-1-基本使用" class="headerlink" title="5.1 基本使用"></a>5.1 基本使用</h3><ul>
+<li>支持传入参数</li>
+<li>Mutation常量类型：为防止在两个文件中的Mutation名称拼写错误，可以将名称定义为一个常量，存入一个mutation-type.js文件中</li>
+</ul>
+<p><img src="11da06fd431644be84137c83fc898d4d.png" alt="在这里插入图片描述"></p>
+<p><img src="32efbfdb3fa240cf9deb1c660d667e1c.png" alt="在这里插入图片描述"></p>
+<p><img src="a08a328e0bc4464dbf216651740eecc7.png" alt="在这里插入图片描述"></p>
+<h3 id="5-2-映射使用"><a href="#5-2-映射使用" class="headerlink" title="5.2 映射使用"></a>5.2 映射使用</h3><p>如果有多个mutation中的函数需要获取，可以使用mapMutations的辅助函数：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;button @click="changeName('王小波')"&gt;修改name&lt;/button&gt;
+		&lt;button @click="incrementLevel"&gt;递增level&lt;/button&gt;
+		&lt;button @click="changeInfo({ name: '王二', level: 200 })"&gt;修改info&lt;/button&gt;
+		
+		&lt;h2&gt;Store Name: {{ $store.state.name }}&lt;/h2&gt;
+		&lt;h2&gt;Store Level: {{ $store.state.level }}&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+	import { mapMutations } from "vuex";
+	import { CHANGE_INFO } from "@/store/mutation_types";
+	
+	export default {
+		computed: {},
+		methods: {
+			btnClick() {
+				console.log("btnClick");
+			},
+			...mapMutations(["changeName", "incrementLevel", CHANGE_INFO]),
+		},
+	};
+&lt;/script&gt;
+
+&lt;script setup&gt;
+	import { mapMutations, useStore } from "vuex";
+	import { CHANGE_INFO } from "@/store/mutation_types";
+	
+	const store = useStore();
+	
+	// 1.手动的映射和绑定
+	const mutations = mapMutations(["changeName", "incrementLevel", CHANGE_INFO]);
+	
+	const newMutations = {};
+	Object.keys(mutations).forEach((key) =&gt; {
+	newMutations[key] = mutations[key].bind({ $store: store });
+	});
+	
+	const { changeName, incrementLevel, changeInfo } = newMutations;
+&lt;/script&gt;</code></pre>
+
+<h3 id="5-3-重要原则"><a href="#5-3-重要原则" class="headerlink" title="5.3 重要原则"></a>5.3 重要原则</h3><p>一条重要的原则就是要记住 mutation <strong>必须是同步函数</strong></p>
+<ul>
+<li>这是因为devtool工具会记录mutation的日记</li>
+<li>每一条mutation被记录，devtools都需要<strong>捕捉到前一状态和后一状态的快照</strong></li>
+<li>但是在mutation中执行异步操作，就无法追踪到数据的变化</li>
+</ul>
+<h2 id="6-核心概念四：actions"><a href="#6-核心概念四：actions" class="headerlink" title="6. 核心概念四：actions"></a>6. 核心概念四：actions</h2><h3 id="6-1-基本使用"><a href="#6-1-基本使用" class="headerlink" title="6.1 基本使用"></a>6.1 基本使用</h3><p>Action类似于mutation，不同在于：</p>
+<ul>
+<li>Action<strong>提交的是mutation</strong>，而不是直接变更状态</li>
+<li>Action可以<strong>包含任意异步操作</strong></li>
+</ul>
+<p>参数context：</p>
+<ul>
+<li>context是一个对象，<strong>和store实例有相同方法和属性</strong></li>
+<li>所以我们可以从其中获取到commit方法来提交一个mutation，或者通过 context.state 和 context.getters 来获取 state 和 getters</li>
+</ul>
+<p><img src="a245708bf9d84573bebdf8ce412d15f6.png" alt="在这里插入图片描述"></p>
+<p><img src="52bab9847829473c99474dc8ea1e4536.png" alt="在这里插入图片描述"></p>
+<h3 id="6-2-映射使用"><a href="#6-2-映射使用" class="headerlink" title="6.2 映射使用"></a>6.2 映射使用</h3><p><img src="16ea5b388e824ed2b09b65fb933d9568.png" alt="在这里插入图片描述"></p>
+<h3 id="6-3-actions-的异步操作"><a href="#6-3-actions-的异步操作" class="headerlink" title="6.3 actions 的异步操作"></a>6.3 actions 的异步操作</h3><p>通常应用于发送网络请求：<br><img src="778f0d8be1564c67aff25774969e9ef2.png" alt="在这里插入图片描述"></p>
+<p>实例：渲染页面banner</p>
+<ul>
+<li>home.vue -&gt; home.js -&gt; actions发送请求</li>
+</ul>
+<p><img src="778f7da245514d8f8ee417a0e07dda53.png" alt="在这里插入图片描述"></p>
+<p><img src="319ec58e2d6a44148c3200ce695c87dd.png" alt="在这里插入图片描述"></p>
+<h2 id="7-核心概念五：modules"><a href="#7-核心概念五：modules" class="headerlink" title="7. 核心概念五：modules"></a>7. 核心概念五：modules</h2><ul>
+<li>由于使用单一状态树，应用的所有状态会集中到一个比较大的对象，当应用变得非常复杂时，store 对象就有可能变得相当臃肿</li>
+<li>为了解决以上问题，Vuex 允许我们<strong>将 store 分割成模块</strong>（module）</li>
+<li>每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块</li>
+</ul>
+<h3 id="7-1-module-的基本使用"><a href="#7-1-module-的基本使用" class="headerlink" title="7.1 module 的基本使用"></a>7.1 module 的基本使用</h3><ul>
+<li>抽取到独立对象counter.js：<ul>
+<li>state</li>
+<li>mutations</li>
+<li>getters</li>
+<li>action</li>
+<li>modules: { home: 对象 }</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>在根文件index.js中引用</li>
+</ul>
+<p><img src="98c7f601961b436ebd863986070e6ad5.png" alt="在这里插入图片描述"></p>
+<p><img src="e188cadff0bb42d98c145a4e309556ed.png" alt="在这里插入图片描述"></p>
+<p><img src="c6667b4b2f2f4ec0aed316067b020f56.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>使用state时，需要指明模块</li>
+<li>使用getters时，不需要</li>
+<li>使用commit时，不需要</li>
+<li>使用dispatch时，不需要</li>
+</ul>
+<h3 id="7-2-module-的命名空间"><a href="#7-2-module-的命名空间" class="headerlink" title="7.2 module 的命名空间"></a>7.2 module 的命名空间</h3><p>默认情况下，模块内部的action和mutation仍然是<strong>注册在全局的命名空间</strong>中的，这样使得多个模块能够对同一个 action 或 mutation 作出响应。==此时需要注意，模块中定义的名称<strong>不要和根模块进行重复</strong>==</p>
+<p>如果我们希望模块具有更高的封装度和复用性，可以添加 <code>namespaced: true</code> 的方式使其成为<strong>带命名空间的模块</strong></p>
+<ul>
+<li>getters[“home/xxx”]</li>
+<li>commit(“home/xxx”)</li>
+<li>dispatch(“home/xxx”)</li>
+</ul>
+<p><img src="9b3d65cf79e74b378caa074b7a44372b.png" alt="在这里插入图片描述"></p>
+<p><img src="a1c659587c7c4970ad3e48cc3b7da8a7.png" alt="在这里插入图片描述"></p>
+<h1 id="三、Pinia-的使用"><a href="#三、Pinia-的使用" class="headerlink" title="三、Pinia 的使用"></a>三、Pinia 的使用</h1><h2 id="1-Pinia-的介绍和-Vuex-的区别（面试）"><a href="#1-Pinia-的介绍和-Vuex-的区别（面试）" class="headerlink" title="1. Pinia 的介绍和 Vuex 的区别（面试）"></a>1. Pinia 的介绍和 Vuex 的区别（面试）</h2><ul>
+<li>pinia是一个用于对状态进行管理的库，跨组件跨页面对状态进行共享<ul>
+<li>与vuex和redux在作用上并无区别</li>
+</ul>
+</li>
+<li><strong>核心区别</strong><ul>
+<li>pinia<strong>没有mutations选项</strong>，因为mutations的出现解决的问题是让devtools进行状态追踪<ul>
+<li>我们可以在任意组件中拿到store然后直接修改state中的任意值</li>
+</ul>
+</li>
+<li>不再需要modules这样的嵌套结构，取而代之的是<strong>可以创建一个个store</strong><ul>
+<li>可以在一个组件中拿任意数量的store</li>
+<li>除此之外你还可以在某个store中拿另外的store，然后使用store中的任何东西</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>使用上的区别</strong><ul>
+<li>使用state<ul>
+<li>在vuex中使用某个state时，需要$store.state.xxx</li>
+<li>在pinia中直接拿到store之后store.xxx即可</li>
+</ul>
+</li>
+<li>使用getter<ul>
+<li>在vuex中使用某个getter函数时，需要$store.getters.xxx</li>
+<li>在pinia中拿到store后，store.xxx即可</li>
+</ul>
+</li>
+<li>使用action<ul>
+<li>在vuex中进行异步请求需要派发action函数</li>
+<li>在pinia中拿到store后，直接调用action函数即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Pinia-的安装和基本使用"><a href="#2-Pinia-的安装和基本使用" class="headerlink" title="2. Pinia 的安装和基本使用"></a>2. Pinia 的安装和基本使用</h2><ul>
+<li>安装：<code>npm install pinia</code></li>
+</ul>
+<ul>
+<li>在根文件中createPinia</li>
+<li>app.use</li>
+</ul>
+<p><img src="182ac9b2d70b43e69cd2c4f1ecfbac1e.png" alt="在这里插入图片描述"></p>
+<p><img src="dc8f1de4fe8b48fb9e854b577b1b81b6.png" alt="在这里插入图片描述"></p>
+<h3 id="2-1-定义一个-store"><a href="#2-1-定义一个-store" class="headerlink" title="2.1 定义一个 store"></a>2.1 定义一个 store</h3><ul>
+<li>store 是<strong>使用 defineStore()</strong> 定义的</li>
+<li>并且它需要一个<strong>唯一名称</strong>，作为第一个参数传递</li>
+</ul>
+<p><img src="cb9d8d2e81174930b9d56d9df3c9981b.png" alt="在这里插入图片描述"></p>
+<h3 id="2-2-使用定义的-store"><a href="#2-2-使用定义的-store" class="headerlink" title="2.2 使用定义的 store"></a>2.2 使用定义的 store</h3><ul>
+<li>可以通过<strong>调用use函数</strong>来使用store</li>
+<li>为了从 Store 中提取属性<strong>同时保持响应式</strong>，您需要使用storeToRefs()</li>
+</ul>
+<p><img src="f9081fd301f04a59bf572353df45573e.png" alt="在这里插入图片描述"></p>
+<h2 id="3-Pinia-核心一：state"><a href="#3-Pinia-核心一：state" class="headerlink" title="3. Pinia 核心一：state"></a>3. Pinia 核心一：state</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;div class="home"&gt;
+		&lt;h2&gt;Home View&lt;/h2&gt;
+		&lt;h2&gt;name: {{ name }}&lt;/h2&gt;
+		&lt;h2&gt;age: {{ age }}&lt;/h2&gt;
+		&lt;h2&gt;level: {{ level }}&lt;/h2&gt;
+		
+		&lt;button @click="changeState"&gt;修改state&lt;/button&gt;
+		&lt;button @click="resetState"&gt;重置state&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import useUser from "@/stores/user";
+import { storeToRefs } from "pinia";
+
+const userStore = useUser();
+const { name, age, level } = storeToRefs(userStore);
+
+function changeState() {
+	// 1.一个个修改状态
+	userStore.name = "kobe";
+	userStore.age = 20;
+	userStore.level = 200;
+	
+	// 2.一次性修改多个状态
+	// userStore.$patch({
+	//   name: "james",
+	//   age: 35
+	// })
+	
+	// 3.替换state为新的对象
+	// const oldState = userStore.$state
+	// userStore.$state = {
+	//   name: "curry",
+	//   level: 200
+	// }
+	// console.log(oldState === userStore.$state) // true
+}
+
+function resetState() {
+	userStore.$reset();
+}
+&lt;/script&gt;</code></pre>
+
+<h2 id="4-Pinia-核心二：getters"><a href="#4-Pinia-核心二：getters" class="headerlink" title="4. Pinia 核心二：getters"></a>4. Pinia 核心二：getters</h2><ul>
+<li>getters中可以定义接受一个state作为参数的函数</li>
+<li>getters访问自己的其他getters：通过==this来访问到当前store实例的所有其他属性==（this是store实例）</li>
+<li>getters中可以<strong>访问其他store的getter</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 定义关于counter的store
+import { defineStore } from "pinia";
+// 引入其他module
+import useUser from "./user";
+
+const useCounter = defineStore("counter", {
+	state: () =&gt; ({
+		count: 99,
+		friends: [
+			{ id: 111, name: "why" },
+			{ id: 112, name: "kobe" },
+			{ id: 113, name: "james" },
+		],
+	}),
+	getters: {
+		// 1.基本使用
+		doubleCount(state) {
+			return state.count * 2;
+		},
+		// 2.一个getter引入另外一个getter
+		doubleCountAddOne() {
+			// this是store实例
+			return this.doubleCount + 1;
+		},
+		// 3.getters也支持返回一个函数
+		getFriendById(state) {
+			return function (id) {
+				for (let i = 0; i &lt; state.friends.length; i++) {
+					const friend = state.friends[i];
+					if (friend.id === id) {
+						return friend;
+					}
+				}
+			};
+		},
+		// 4.getters中用到别的store中的数据
+		showMessage(state) {
+			// 1.获取user信息
+			const userStore = useUser();
+			// 2.拼接信息
+			return `name:${userStore.name}-count:${state.count}`;
+		},
+	},
+	actions: {
+		increment() {
+			this.count++;
+		},
+		incrementNum(num) {
+			this.count += num;
+		},
+	},
+});
+
+export default useCounter;</code></pre>
+
+<p><img src="c1ccb550dd1e4f9380a60035635c4809.png" alt="在这里插入图片描述"></p>
+<h2 id="5-Pinia-核心三：actions"><a href="#5-Pinia-核心三：actions" class="headerlink" title="5. Pinia 核心三：actions"></a>5. Pinia 核心三：actions</h2><h3 id="5-1-基本使用-1"><a href="#5-1-基本使用-1" class="headerlink" title="5.1 基本使用"></a>5.1 基本使用</h3><p>在action中可以<strong>通过this访问整个store实例的所有操作</strong></p>
+<p><img src="c8e02c004d6347ee8634f709be337f8c.png" alt="在这里插入图片描述"></p>
+<h3 id="5-2-执行异步操作"><a href="#5-2-执行异步操作" class="headerlink" title="5.2 执行异步操作"></a>5.2 执行异步操作</h3><p><img src="4a0f09cfa5ea47908c897394c37be424.png" alt="在这里插入图片描述"></p>
+<h1 id="四、axios-库"><a href="#四、axios-库" class="headerlink" title="四、axios 库"></a>四、axios 库</h1><p>功能特点: </p>
+<ul>
+<li>在浏览器中发送 XMLHttpRequests 请求</li>
+<li>在 node.js 中发送 http请求</li>
+<li>支持 Promise API</li>
+<li>拦截请求和响应</li>
+<li>转换请求和响应数据等等</li>
+</ul>
+<p>相比与原生fetch，axios自动适配浏览器和node.js，同时还提供多种附加功能（拦截请求等）</p>
+<h2 id="1-axios-发送请求"><a href="#1-axios-发送请求" class="headerlink" title="1. axios 发送请求"></a>1. axios 发送请求</h2><p><img src="d2943269f55c4891a0c18241676e0e94.png" alt="在这里插入图片描述"></p>
+<p><img src="e82b64b4b9d64db0acb4ff6fdc5f2acf.png" alt="在这里插入图片描述"></p>
+<p><img src="1a04b982e6e740ce9bba8421e82b89af.png" alt="在这里插入图片描述"></p>
+<h3 id="1-1-axios-额外补充"><a href="#1-1-axios-额外补充" class="headerlink" title="1.1 axios 额外补充"></a>1.1 axios 额外补充</h3><ul>
+<li>axios.defaults.baseURL</li>
+<li>axios.defaults.timeout/headers</li>
+<li>axios.all -&gt; Promise.all</li>
+</ul>
+<p><img src="c4d62dfa598348f1bcb04f3dd62c174b.png" alt="在这里插入图片描述"></p>
+<h2 id="2-axios-创建实例"><a href="#2-axios-创建实例" class="headerlink" title="2. axios 创建实例"></a>2. axios 创建实例</h2><ul>
+<li><p>为什么需要创建实例</p>
+<ul>
+<li>当我们从axios模块中导入对象时, 使用的实例是<strong>默认的实例</strong><ul>
+<li>当给该实例设置一些默认配置时, <strong>这些配置就被固定下来</strong>了。</li>
+<li>但是后续开发中, 某些配置可能会不太一样。比如某些请求需要使用特定的baseURL或者timeout等.</li>
+</ul>
+</li>
+<li>这个时候, 我们就可以<strong>创建新的实例</strong>, 并且传入属于该实例的配置信息</li>
+</ul>
+</li>
+<li><p>axios.create()</p>
+</li>
+</ul>
+<p><img src="1c45e79085a446e9b0a5baafa9dd8568.png" alt="在这里插入图片描述"></p>
+<h2 id="3-axios-的拦截器"><a href="#3-axios-的拦截器" class="headerlink" title="3. axios 的拦截器"></a>3. axios 的拦截器</h2><p>axios的也可以设置拦截器：<strong>拦截每次请求和响应</strong></p>
+<ul>
+<li>axios.interceptors.request.use(请求成功拦截, 请求失败拦截)</li>
+<li>axios.interceptors.response.use(响应成功拦截, 响应失败拦截)</li>
+</ul>
+<p><img src="d5c1b01c500945398f21911ff8572f3f.png" alt="在这里插入图片描述"></p>
+<h2 id="4-axios-的简洁封装"><a href="#4-axios-的简洁封装" class="headerlink" title="4. axios 的简洁封装"></a>4. axios 的简洁封装</h2><p>在项目中，我们会在多个地方使用到axios进行网络请求。但如果axios库发生停止维护的情况时，需要利用别的库进行替代。<br>此时一一替换非常不方便，因此我们事先对axios进行封装。</p>
+<p>在service文件夹中index.js进行封装</p>
+<p><img src="18ff03bf918a4da495c9c012b380e211.png" alt="在这里插入图片描述"></p>
+<p>使用时引入该文件即可：</p>
+<p><img src="6b0468bb16684ea6b264acb81c519007.png" alt="在这里插入图片描述"></p>
+<h1 id="五、项目实战"><a href="#五、项目实战" class="headerlink" title="五、项目实战"></a>五、项目实战</h1><h2 id="1-项目准备"><a href="#1-项目准备" class="headerlink" title="1. 项目准备"></a>1. 项目准备</h2><h3 id="1-1-项目目录结构划分"><a href="#1-1-项目目录结构划分" class="headerlink" title="1.1 项目目录结构划分"></a>1.1 项目目录结构划分</h3><p><img src="264846b3f3df4501be041eaa86e346b3.png" alt="在这里插入图片描述"></p>
+<h3 id="1-2-CSS样式的重置"><a href="#1-2-CSS样式的重置" class="headerlink" title="1.2 CSS样式的重置"></a>1.2 CSS样式的重置</h3><p>对默认CSS样式进行重置: </p>
+<ul>
+<li>common.css</li>
+<li>reset.css</li>
+<li>index.css：所有css文件的接口</li>
+</ul>
+<p><img src="d284e927cb4047f08baf08ed5af5e23b.png" alt="在这里插入图片描述"></p>
+<h3 id="1-3-路由配置和状态管理"><a href="#1-3-路由配置和状态管理" class="headerlink" title="1.3 路由配置和状态管理"></a>1.3 路由配置和状态管理</h3><p><img src="68ee3e1233ea4c0396c7cb4ac8c7cc20.png" alt="在这里插入图片描述"></p>
+<p><img src="c35b3176e3b040c99c8bf1a323aa3996.png" alt="在这里插入图片描述"></p>
+<h2 id="2-Tips"><a href="#2-Tips" class="headerlink" title="2. Tips"></a>2. Tips</h2><ol>
+<li>动态绑定图片的相对路径，需要使用getAssetURL()</li>
+</ol>
+<p><img src="13ebd4f08d964e37ba8c703c8abb99f2.png" alt="在这里插入图片描述"></p>
+<p>封装一个工具utils：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// load_assets.js
+export const getAssetURL = (image) =&gt; {
+	// 参数一: 相对路径
+	// 参数二: 当前路径的URL
+	return new URL(`../assets/img/${image}`, import.meta.url).href
+}</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;img :src="getAssetURL(item.image)" alt="" /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+	import { getAssetURL } from "@/utils/load_assets.js";
+&lt;/script&gt;</code></pre>
+
+<hr>
+<ol start="2">
+<li>善用组件库</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="http://vant-contrib.gitee.io/vant/v3/#/zh-CN/quickstart">http://vant-contrib.gitee.io/vant/v3/#/zh-CN/quickstart</a></p>
+<hr>
+<ol start="3">
+<li>使一整页（city模块）覆盖掉底部的tab-bar：</li>
+</ol>
+<p>封装一个class到common.css中</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">.top-page {
+	position: relative;
+	z-index: 9;
+	height: 100vh;
+	background-color: #fff;
+	
+	overflow-y: auto;
+}</code></pre>
+
+<p>使用时直接添加top-page即可<br><img src="8f8170459d6f478daa2b8154675e1687.png" alt="在这里插入图片描述"></p>
+<hr>
+<ol start="4">
+<li>滑动city模块中的content，固定top组件</li>
+</ol>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">.city {
+	// 布局滚动
+	.content {
+		height: calc(100vh - 98px); // 98px为top的高度
+		overflow-y: auto;
+	}
+}</code></pre>
+
+<hr>
+<ol start="5">
+<li>请求数据</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;!-- city.vue --&gt;
+// 从Store中获取数据
+const cityStore = useCityStore()
+cityStore.fetchAllCitiesData()
+const { allCities } = storeToRefs(cityStore)
+
+
+&lt;!--  store-&gt;modules-&gt;city.js  --&gt;
+import { getCityAll } from "@/services";
+import { defineStore } from "pinia";
+
+const useCityStore = defineStore("city", {
+	state: () =&gt; ({
+		allCities: {},
+		currentCity: {
+			cityName: "广州"
+		}
+	}),
+	// 通过axios发送数据请求，得到的数据存储在store中
+	actions: {
+		async fetchAllCitiesData() {
+			const res = await getCityAll()
+			this.allCities = res.data
+		}
+	}
+})
+export default useCityStore
+
+&lt;!--  services-&gt;modules-&gt;city.js  --&gt;
+// 通过axios发送数据请求
+import hyRequest from '../request' // 对axios组件的再封装
+
+export function getCityAll() {
+	return hyRequest.get({
+	url: "/city/all"
+	})
+}</code></pre>
+
+<ol start="5">
+<li><p>格式化日期：npm install dayjs</p>
+</li>
+<li><p>防抖/节流函数：npm install underscore</p>
+</li>
+</ol>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E5%9B%9B%EF%BC%89Vue3-%E5%85%A8%E5%AE%B6%E6%A1%B6-router%E3%80%81vuex%E3%80%81pinia%E3%80%81axios/">https://nan-ying.github.io/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E5%9B%9B%EF%BC%89Vue3-%E5%85%A8%E5%AE%B6%E6%A1%B6-router%E3%80%81vuex%E3%80%81pinia%E3%80%81axios/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Vue/">
+              <span class="chip bg-color">Vue</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-01-20T18-59-22',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/02/01/css%E5%B8%83%E5%B1%80%E4%B8%AD%E4%BD%BF%E7%94%A8min-width-0%E7%9A%84%E4%BD%9C%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="css布局中使用min-width: 0的作用">
+                        
+                        <span class="card-title">css布局中使用min-width: 0的作用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    小知识
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%89%EF%BC%89Composition-API/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Vue3 知识大总结（三）Composition API">
+                        
+                        <span class="card-title">Vue3 知识大总结（三）Composition API</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    Vue框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >453.3k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CSS属性&amp;元素显示模式&amp;引用方式&amp;三大特性, Nan-ying&#39;s Blog">
+    <meta name="description" content="一、CSS 属性1. CSS 字体属性CSS fonts (字体)属性用于定义字体系列、大小、粗细、和文字样式（如斜体）。
+1.1 字体系列CSS 使用 font-family 属性定义文本字体系列。 
+body {
+  font-fami">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>CSS属性&amp;元素显示模式&amp;引用方式&amp;三大特性 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CSS属性&amp;元素显示模式&amp;引用方式&amp;三大特性</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/CSS/">
+              <span class="chip bg-color">CSS</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+              前端三件套
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2022-12-15
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 3.5k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          13 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="一、CSS-属性"><a href="#一、CSS-属性" class="headerlink" title="一、CSS 属性"></a>一、CSS 属性</h1><h2 id="1-CSS-字体属性"><a href="#1-CSS-字体属性" class="headerlink" title="1. CSS 字体属性"></a>1. CSS 字体属性</h2><p>CSS fonts (字体)属性用于定义字体系列、大小、粗细、和文字样式（如斜体）。</p>
+<h3 id="1-1-字体系列"><a href="#1-1-字体系列" class="headerlink" title="1.1 字体系列"></a>1.1 字体系列</h3><p>CSS 使用 <code>font-family</code> 属性定义文本字体系列。 </p>
+<pre class="line-numbers language-none"><code class="language-none">body {
+  font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+}</code></pre>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>尽量使用默认字体，保证不同浏览器的兼容性。（谷歌浏览器默认字体为微软雅黑）</li>
+<li>最常见的几个字体：<code>body {font-family: 'Microsoft YaHei',tahoma,arial,'Hiragino Sans GB'; }</code></li>
+<li>支持同时定义多个字体，<strong>从左至右优先级</strong>，以防因电脑未装字体而无法正常显示。</li>
+</ul>
+<h3 id="1-2-字体大小"><a href="#1-2-字体大小" class="headerlink" title="1.2 字体大小"></a>1.2 字体大小</h3><p>CSS 使用 <code>font-size</code> 属性定义字体大小。</p>
+<pre class="line-numbers language-none"><code class="language-none">body {
+  font-size: 16px;
+}</code></pre>
+
+<ul>
+<li>谷歌浏览器默认是 <code>16px</code></li>
+<li>不同浏览器可能默认显示的字号大小不一致，我们尽量给一个明确值大小，不要默认大小</li>
+<li>可以给 <code>body</code> 指定整个页面文字大小</li>
+</ul>
+<h3 id="1-3-字体粗细"><a href="#1-3-字体粗细" class="headerlink" title="1.3 字体粗细"></a>1.3 字体粗细</h3><p>CSS 使用 <code>font-weight</code> 属性设置字体粗细</p>
+<pre class="line-numbers language-none"><code class="language-none">p {
+  font-weight: 700;
+}</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>normal</td>
+<td>默认值（不加粗）</td>
+</tr>
+<tr>
+<td>bold</td>
+<td>定义粗体（加粗）</td>
+</tr>
+<tr>
+<td>100-900</td>
+<td>400 等价于 normal，700 等价于 bold，无单位</td>
+</tr>
+</tbody></table>
+<h3 id="1-4-文字样式"><a href="#1-4-文字样式" class="headerlink" title="1.4 文字样式"></a>1.4 文字样式</h3><p>CSS 使用 <code>font-style</code> 属性设置文本风格。</p>
+<pre class="line-numbers language-none"><code class="language-none">p { font-style: italic; }</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>normal</td>
+<td>正常显示</td>
+</tr>
+<tr>
+<td>italic</td>
+<td>斜体</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong><br>平常很少给字体加斜体，而是给斜体标签（<code>em</code>,<code>i</code>）改为不倾斜字体。</p>
+<h3 id="1-5-字体复合属性写法"><a href="#1-5-字体复合属性写法" class="headerlink" title="1.5 字体复合属性写法"></a>1.5 字体复合属性写法</h3><p>将各种字体属性写在同一选择器下，节约代码。</p>
+<p>规则：严格遵守顺序，且 <code>font-size</code> 和 <code>font-family</code> 必须有。</p>
+<pre class="line-numbers language-none"><code class="language-none">body {
+  font: font-style font-weight font-size/line-hight font-family;
+}</code></pre>
+
+<h3 id="1-6-字体属性总结"><a href="#1-6-字体属性总结" class="headerlink" title="1.6 字体属性总结"></a>1.6 字体属性总结</h3><table>
+<thead>
+<tr>
+<th>字体属性</th>
+<th>表示</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>font-family</td>
+<td>字体</td>
+<td>按照团队约定来写</td>
+</tr>
+<tr>
+<td>font-size</td>
+<td>字号</td>
+<td>单位是<code>px</code></td>
+</tr>
+<tr>
+<td>font-weight</td>
+<td>字体粗细</td>
+<td>400=normal,700=bold</td>
+</tr>
+<tr>
+<td>font-style</td>
+<td>字体样式</td>
+<td>italic，normal，常用 normal</td>
+</tr>
+<tr>
+<td>font</td>
+<td>属性连写</td>
+<td>顺序不能变，字体和字号属性必须有</td>
+</tr>
+</tbody></table>
+<h2 id="2-CSS-文本属性"><a href="#2-CSS-文本属性" class="headerlink" title="2. CSS 文本属性"></a>2. CSS 文本属性</h2><p>CSS text(文本)属性定义文本<strong>外观</strong>，比如颜色、对齐、装饰、缩进、行间距等。</p>
+<h3 id="2-1-文本颜色"><a href="#2-1-文本颜色" class="headerlink" title="2.1 文本颜色"></a>2.1 文本颜色</h3><p><code>color</code> 属性定义文本颜色。</p>
+<pre class="line-numbers language-none"><code class="language-none">div {
+  color: red;
+}</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>表示颜色</th>
+<th>属性值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>预定义的颜色值</td>
+<td>red,green,pink</td>
+</tr>
+<tr>
+<td>十六进制（常用)</td>
+<td><code>#FF0000</code>，<code>#FF6600</code></td>
+</tr>
+<tr>
+<td>RGB 代码</td>
+<td>rgb(255,0,0)</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-装饰文本"><a href="#2-2-装饰文本" class="headerlink" title="2.2 装饰文本"></a>2.2 装饰文本</h3><p><code>text-decoration</code> 属性规定添加到文本的修饰。可以给文本添加下划线、删除线、上划线等。</p>
+<pre class="line-numbers language-none"><code class="language-none">text-decoration: underline;</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>默认，无装饰（最常用）</td>
+</tr>
+<tr>
+<td>underline</td>
+<td>下划线，a 标签自带（常用）</td>
+</tr>
+<tr>
+<td>overline</td>
+<td>上划线。（几乎不用）</td>
+</tr>
+<tr>
+<td>line-through</td>
+<td>删除线。（不常用）</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-对齐文本"><a href="#2-3-对齐文本" class="headerlink" title="2.3 对齐文本"></a>2.3 对齐文本</h3><p><code>text-align</code> 属性用于设置元素文本内容的对齐方式。</p>
+<pre class="line-numbers language-none"><code class="language-none">div {
+  text-align: center;
+}</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>left</td>
+<td>左对齐（默认）</td>
+</tr>
+<tr>
+<td>right</td>
+<td>右对齐</td>
+</tr>
+<tr>
+<td>center</td>
+<td>居中对齐</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-文本缩进"><a href="#2-4-文本缩进" class="headerlink" title="2.4 文本缩进"></a>2.4 文本缩进</h3><p><code>text-indent</code>定义段落首行缩进。</p>
+<pre class="line-numbers language-none"><code class="language-none">p {
+  text-indet: 5px;
+}</code></pre>
+
+<p><code>em</code> 是一个相对单位，<code>1em</code> 就是一个字符所占大小。当 <code>text-indent=2em</code>，则恰好缩进两个文字。</p>
+<h3 id="2-5-行高"><a href="#2-5-行高" class="headerlink" title="2.5 行高"></a>2.5 行高</h3><p><code>line-height</code> 设置行间的距离，行间距=文本高度+上间距+下间距</p>
+<pre class="line-numbers language-none"><code class="language-none">p { 
+	line-height: 26px; 
+}</code></pre>
+
+<p><img src="a67be00ff20c43c69f6db5ac463be879.png" alt="在这里插入图片描述"></p>
+<h4 id="2-5-1-单行文字垂直居中的小技巧"><a href="#2-5-1-单行文字垂直居中的小技巧" class="headerlink" title="2.5.1 单行文字垂直居中的小技巧"></a>2.5.1 单行文字垂直居中的小技巧</h4><p>CSS 没有给我们提供文字垂直居中的代码. 这里我们可以使用一个小技巧来实现。</p>
+<ul>
+<li><p>解决方案：让<strong>文字的行高等于盒子的高度</strong>。</p>
+</li>
+<li><p>原理分析：行高=文字本身高度+上空隙+下空隙=盒子高度</p>
+</li>
+<li><p>当行高小于盒子高度，则文字偏上；当行高大于盒子高度，文字偏下。</p>
+</li>
+</ul>
+<h3 id="2-6-文本属性总结"><a href="#2-6-文本属性总结" class="headerlink" title="2.6 文本属性总结"></a>2.6 文本属性总结</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>表示</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>color</td>
+<td>文本颜色</td>
+<td>通常十六进制缩写</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>文本装饰</td>
+<td>添加下划线underline，取消下划线none</td>
+</tr>
+<tr>
+<td>text-align</td>
+<td>文本对齐</td>
+<td>可以设定文字水平的对齐方式</td>
+</tr>
+<tr>
+<td>text-indent</td>
+<td>文本缩进</td>
+<td>通常用于段落首行缩进2个字的距离，记住 <code>text-indent: 2em;</code></td>
+</tr>
+<tr>
+<td>line-height</td>
+<td>行高</td>
+<td>控制行与行之间的距离</td>
+</tr>
+</tbody></table>
+<h2 id="3-CSS背景属性"><a href="#3-CSS背景属性" class="headerlink" title="3. CSS背景属性"></a>3. CSS背景属性</h2><p>CSS 背景属性可以给元素添加背景样式。</p>
+<p>背景属性可以设置背景颜色、背景图片、背景平铺、背景图片位置、背景图像固定等。</p>
+<h3 id="3-1-背景颜色"><a href="#3-1-背景颜色" class="headerlink" title="3.1 背景颜色"></a>3.1 背景颜色</h3><p><code>background-color</code> 定义了元素的背景颜色。</p>
+<pre class="line-numbers language-none"><code class="language-none">background-color: 颜色值;</code></pre>
+
+<p>一般而言，颜色默认值是 <code>transparent</code>（透明），我们也可以指定背景颜色为透明色或其他色。</p>
+<h4 id="3-1-1-背景色半透明"><a href="#3-1-1-背景色半透明" class="headerlink" title="3.1.1 背景色半透明"></a>3.1.1 背景色半透明</h4><p>CSS3 提供 <code>background: rgba(r,g,b,a)</code> 属性设置图片透明度。</p>
+<pre class="line-numbers language-none"><code class="language-none">background-color: rgba(0, 0, 0, .3);</code></pre>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>背景半透明是指盒子背景半透明，盒子里面的内容不受影响。</li>
+</ul>
+<h3 id="3-2-背景图片"><a href="#3-2-背景图片" class="headerlink" title="3.2 背景图片"></a>3.2 背景图片</h3><p><code>background-image</code> 属性描述了元素的背景图像，实际开发用于 logo 或者一些装饰性开发的小图片或者是超大的背景图片，优点是<strong>便于控制位置</strong>。（也用于精灵图）</p>
+<pre class="line-numbers language-none"><code class="language-none">background-image: none（默认无背景图）|  url(图片url) （使用绝对或相对地址指定图片）;</code></pre>
+
+<h3 id="3-3-背景平铺"><a href="#3-3-背景平铺" class="headerlink" title="3.3 背景平铺"></a>3.3 背景平铺</h3><p>若需要在 HTML 页面上对背景图进行平铺，可以使用 <code>background-repeat</code> 属性。</p>
+<pre class="line-numbers language-none"><code class="language-none">background-repeat: repeat(默认) | no-repeat | repeat-x | repeat-y;</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>参数值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>repeat</td>
+<td>背景图像在纵向和横向上平铺（默认）</td>
+</tr>
+<tr>
+<td>no-repeat</td>
+<td>背景图像不平铺</td>
+</tr>
+<tr>
+<td>repeat-x</td>
+<td>背景图像在横向上平铺</td>
+</tr>
+<tr>
+<td>repeat-y</td>
+<td>背景图像在纵向上平铺</td>
+</tr>
+</tbody></table>
+<h3 id="3-4-背景图像固定"><a href="#3-4-背景图像固定" class="headerlink" title="3.4 背景图像固定"></a>3.4 背景图像固定</h3><p><code>background-attachment</code> 属性设置背景图像是否随着页面其余部分滚动。</p>
+<p><code>background-attachment</code> 后期可以制作视差滚动效果。</p>
+<pre class="line-numbers language-none"><code class="language-none">background-attachment: scroll | fixed;</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scroll</td>
+<td>背景图像随着对象内容滚动</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>背景图像固定</td>
+</tr>
+</tbody></table>
+<h3 id="3-5-背景图片位置"><a href="#3-5-背景图片位置" class="headerlink" title="3.5 背景图片位置"></a>3.5 背景图片位置</h3><p><code>background-position</code> 可以改变图片在背景中的位置。</p>
+<pre class="line-numbers language-none"><code class="language-none">background-position: x y;</code></pre>
+
+<p>参数代表的意思是：x 坐标和 y 坐标。 可以使用 <strong>方位名词</strong> 或者 <strong>精确单位</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>length</td>
+<td>百分数 / 由浮点数字和单位字符组成的长度值</td>
+</tr>
+<tr>
+<td>position</td>
+<td>top / center / bottom / left / center / right 方位名词</td>
+</tr>
+</tbody></table>
+<p><strong>1.参数是方位名词</strong></p>
+<ul>
+<li>若两个值都是方位名词，则两个值前后顺序无关，比如<code>left top</code>和<code>top left</code> 效果一致。</li>
+<li>若只指定了一个方位名词，另一个值省略，则第二个值默认居中对齐。</li>
+</ul>
+<p><strong>2.参数是精确单位</strong></p>
+<ul>
+<li>第一个必定是 x 坐标，第二个是 y 坐标</li>
+<li>若只指定一个数值，那该值一定是x坐标，另一个默认垂直居中</li>
+</ul>
+<p><strong>3.参数是混合单位</strong></p>
+<ul>
+<li>若是混合单位，则第一个值是 x 坐标，第二个值是 y 坐标。</li>
+</ul>
+<h3 id="3-6-背景属性复合写法"><a href="#3-6-背景属性复合写法" class="headerlink" title="3.6 背景属性复合写法"></a>3.6 背景属性复合写法</h3><p>简化代码，将属性写在同一个属性 <code>background</code> 下。 </p>
+<p>当使用简写属性时，没有特定的书写顺序，一般习惯约定顺序为：</p>
+<p><code>background：背景颜色 背景图片地址 背景平铺 背景图像滚动 背景图片位置</code></p>
+<pre class="line-numbers language-none"><code class="language-none">background: transparent url(image.jpg) repeat-y fixed top;</code></pre>
+
+<h3 id="3-7-背景属性总结"><a href="#3-7-背景属性总结" class="headerlink" title="3.7 背景属性总结"></a>3.7 背景属性总结</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background-color</td>
+<td>背景颜色</td>
+<td>颜色值/十六进制/RGB代码</td>
+</tr>
+<tr>
+<td>background-image</td>
+<td>背景图片</td>
+<td>url(图片路径)</td>
+</tr>
+<tr>
+<td>background-repeat</td>
+<td>背景平铺</td>
+<td>repeat(默认)/no-repeat/repeat-x/repeat-y</td>
+</tr>
+<tr>
+<td>background-attachment</td>
+<td>背景固定</td>
+<td>scroll/fixed</td>
+</tr>
+<tr>
+<td>background-position</td>
+<td>背景位置</td>
+<td>x,y坐标</td>
+</tr>
+<tr>
+<td>背景复合写法</td>
+<td>简化书写</td>
+<td>背景颜色 背景图片地址 背景平铺 背景图像滚动 背景图片位置</td>
+</tr>
+</tbody></table>
+<h1 id="二、元素显示模式"><a href="#二、元素显示模式" class="headerlink" title="二、元素显示模式"></a>二、元素显示模式</h1><p>元素显示模式就是<strong>元素（标签）以什么方式进行显示</strong>，比如<code>&lt;div&gt;</code>自己占一行，比如一行可以放多个<code>span</code>。</p>
+<h2 id="1-块元素"><a href="#1-块元素" class="headerlink" title="1. 块元素"></a>1. 块元素</h2><p>常见的块元素有 <code>h1-h6</code>、<code>p</code>、<code>div</code>、<code>ul</code>、<code>ol</code>、<code>li</code>等，典型块元素是 <code>div</code>。</p>
+<p>块级元素的特点：</p>
+<ol>
+<li>独占一行。</li>
+<li>高度、宽度、外边距以及内边距都可以控制。</li>
+<li>宽度默认是容器（父级宽度）的 100%。</li>
+<li>是一个容器及盒子，里面可以放行内或块级元素。</li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li>文字类的标签（主要用于存放文字）内不能放块级元素。</li>
+<li>文字类标签有 <code>p</code>，<code>h1-h6</code>，里面不能放块级元素，特别不能放 <code>div</code> 元素。</li>
+</ul>
+<h2 id="2-行内元素"><a href="#2-行内元素" class="headerlink" title="2. 行内元素"></a>2. 行内元素</h2><p>常见行内元素：<code>a</code>、<code>strong</code>、<code>b</code>、<code>em</code>、<code>i</code>、<code>del</code>、<code>s</code>、<code>ins</code>、<code>u</code>、<code>span</code>，典型行内元素是 <code>span</code>，行内元素也叫内联元素。</p>
+<p>行内元素的特点：</p>
+<ol>
+<li>相邻行内元素在一行上，<strong>之间存在空白缝隙</strong>，一行可以显示多个。</li>
+<li><strong>高、宽直接设置是无效的</strong>。</li>
+<li><strong>默认宽度就是它本身内容宽度</strong>。</li>
+<li>行内元素只能容纳文本或其他行内元素。</li>
+</ol>
+<p><strong>注意</strong></p>
+<ul>
+<li><code>a</code> 链接里面不能放链接</li>
+<li>特殊情况链接 <code>a</code> 里面可以放块级元素，但是给 <code>a</code> 转换一下块级模式最安全。</li>
+</ul>
+<h2 id="3-行内块元素"><a href="#3-行内块元素" class="headerlink" title="3. 行内块元素"></a>3. 行内块元素</h2><p>在行内元素中有几个特殊标签——<code>img</code>, <code>input</code>、<code>td</code>，它们同时具有块元素和行内元素的特点。有些资料称为行内块元素。</p>
+<p><strong>特点：</strong></p>
+<ol>
+<li>和相邻行内元素（行内块）在一行上，之间存在空白缝隙，一行可以显示多个（<strong>行内元素特点</strong>）。</li>
+<li>默认宽度是本身内容宽度（<strong>行内元素特点</strong>）。</li>
+<li>高度、行高、外边距、内边距都可以控制（<strong>块级元素特点</strong>）。</li>
+</ol>
+<h2 id="4-元素显示模式转换"><a href="#4-元素显示模式转换" class="headerlink" title="4. 元素显示模式转换"></a>4. 元素显示模式转换</h2><p>特殊情况下，需要将一个元素的模式转换为另外一种模式，使其具有另外一种模式的特性。<br>比如想要增加链接 <code>a</code> 的触发范围。</p>
+<ul>
+<li>行内-&gt;块级</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">a {
+  display: block;
+}</code></pre>
+
+<ul>
+<li>块级-&gt;行内</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">div {
+  display: inline;
+}</code></pre>
+
+<ul>
+<li>行内/块级-&gt; 行内块元素</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">span {
+  display: inline-block;
+}</code></pre>
+
+<h2 id="5-元素显示模式总结"><a href="#5-元素显示模式总结" class="headerlink" title="5. 元素显示模式总结"></a>5. 元素显示模式总结</h2><table>
+<thead>
+<tr>
+<th>元素模式</th>
+<th>元素排列</th>
+<th>设置样式</th>
+<th>默认宽度</th>
+<th>包含</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>块级元素</td>
+<td>一行只能放一个块级元素</td>
+<td>可以设置高度宽度</td>
+<td>容器的 100%</td>
+<td>可以包含任何标签</td>
+</tr>
+<tr>
+<td>行内元素</td>
+<td>一行可以放多个行内元素</td>
+<td>不可以设置宽度高度</td>
+<td>本身内容宽度</td>
+<td>容纳文本或者其他行内元素</td>
+</tr>
+<tr>
+<td>行内块元素</td>
+<td>一行可以放置多个行内块元素</td>
+<td>可以设置高度宽度</td>
+<td>本身内容宽度</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="三、CSS-引用方式"><a href="#三、CSS-引用方式" class="headerlink" title="三、CSS 引用方式"></a>三、CSS 引用方式</h1><p>按照 CSS 书写的位置不同，CSS 样式表可以分为三大类：</p>
+<ol>
+<li>行内样式表（行内式）</li>
+<li>内部样式表（嵌入式）</li>
+<li>外部样式表（链接式）</li>
+</ol>
+<h2 id="1-行内样式表"><a href="#1-行内样式表" class="headerlink" title="1. 行内样式表"></a>1. 行内样式表</h2><p>行内样式表（内联样式表）是在元素标签内部的 <code>style</code> 属性中设定 CSS 样式，适合修改简单样式。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div style="color: red; font-size: 12px"&gt;行内样式表&lt;/div&gt;</code></pre>
+
+<h2 id="2-内部样式表"><a href="#2-内部样式表" class="headerlink" title="2. 内部样式表"></a>2. 内部样式表</h2><p>将 CSS 代码写在 HTML 页面内部，单独放在一个 <code>&lt;style&gt;</code> 标签中。</p>
+<ul>
+<li><code>&lt;style&gt;</code> 理论上可以放在 HTML 文档中任何一个地方，一般放在 <code>&lt;head&gt;</code> 标签中。</li>
+<li>方便控制整个页面中的元素样式。</li>
+</ul>
+<p>练习时使用，实际开发不用。</p>
+<h2 id="3-外部样式表"><a href="#3-外部样式表" class="headerlink" title="3. 外部样式表"></a>3. 外部样式表</h2><p>实际开发中都是外部样式表，适用于样式比较多的情况。<br>核心：样式单独写到 CSS 文件中，再将 CSS 文件引入到 HTML 页面中。</p>
+<p><strong>引入外部样式表分为两步：</strong></p>
+<ol>
+<li>新建一个后缀名为 .css 的样式文件，把所有 CSS 代码都放入此文件中。 </li>
+<li>在 HTML 页面中，使用 标签引入这个文件。<pre class="line-numbers language-none"><code class="language-none">&lt;link rel="stylesheet" href="css文件路径" /&gt;</code></pre></li>
+</ol>
+<ul>
+<li>rel：定义当前文档与被链接文档之间的关系，在这里需要指定为”stylesheet”，表示被链接的文档是一个<strong>样式表文件</strong>。</li>
+<li>href：定义所链接外部样式表文件的URL，可以是相对路径，也可以是绝对路径。</li>
+</ul>
+<h1 id="四、CSS三大特性"><a href="#四、CSS三大特性" class="headerlink" title="四、CSS三大特性"></a>四、CSS三大特性</h1><h2 id="1-层叠性"><a href="#1-层叠性" class="headerlink" title="1. 层叠性"></a>1. 层叠性</h2><p><strong>相同选择器设置相同的样式</strong>，此时一个样式就会覆盖另一个冲突的样式。层叠性主要解决样式冲突的问题。</p>
+<p><em><strong>层叠性原则：</strong></em></p>
+<ul>
+<li>样式冲突：遵循的原则是<strong>就近原则</strong>，哪个样式离结构近，就执行哪个样式</li>
+<li>样式不冲突，不会层叠</li>
+</ul>
+<h2 id="2-继承性"><a href="#2-继承性" class="headerlink" title="2. 继承性"></a>2. 继承性</h2><p>CSS 中子标签会继承父标签的某些样式，如文本颜色和字号。</p>
+<ul>
+<li>恰当使用继承可以简化代码，降低 CSS 的复杂性</li>
+<li>子元素可以继承父元素的样式（<strong>text-, font-, line-这些元素开头的可以继承，以及 color 属性</strong>）</li>
+<li>不继承width、height、内外边距</li>
+</ul>
+<h3 id="2-1-行高的继承性"><a href="#2-1-行高的继承性" class="headerlink" title="2.1 行高的继承性"></a>2.1 行高的继承性</h3><pre class="line-numbers language-none"><code class="language-none">body {
+  font: 12px/1.5 Microsoft Yahei;
+}</code></pre>
+
+<ul>
+<li>行高可以跟单位也可以不跟</li>
+<li>如果子元素没有设置行高，则会继承父元素的行高为 1.5</li>
+<li>此时子元素的行高是：当前<strong>子元素的文字大小<code>*1.5</code></strong></li>
+<li>body 行高 1.5 这样写法最大优势就是里面的子元素<strong>可以根据文字大小自动调整行高</strong></li>
+</ul>
+<h2 id="3-优先级"><a href="#3-优先级" class="headerlink" title="3. 优先级"></a>3. 优先级</h2><p>当一个元素指定多个选择器时，就会有有优先级的产生。</p>
+<ul>
+<li>选择器相同，则执行层叠性</li>
+<li>选择器不同，则根据选择器权重执行</li>
+</ul>
+<p><strong>选择器权重：</strong></p>
+<p>important&gt;style=””&gt;id&gt;伪类&gt;class&gt;元素&gt;<code>*</code>&gt;浏览器&gt;继承</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>选择器权重</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>继承或者<code>*</code></td>
+<td><code>0,0,0,0</code></td>
+</tr>
+<tr>
+<td>元素选择器</td>
+<td><code>0,0,0,1</code></td>
+</tr>
+<tr>
+<td>类选择器，伪类选择器</td>
+<td><code>0,0,1,0</code></td>
+</tr>
+<tr>
+<td>id 选择器</td>
+<td><code>0,1,0,0</code></td>
+</tr>
+<tr>
+<td>行内样式 <code>style=""</code></td>
+<td><code>1,0,0,0</code></td>
+</tr>
+<tr>
+<td><code>!important</code></td>
+<td>∞ 无穷大</td>
+</tr>
+<tr>
+<td><code>!important</code>写法：</td>
+<td></td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-none"><code class="language-none">p {
+  color: pink !important;
+}</code></pre>
+
+<ul>
+<li>权重是有4组数字组成，但是不会有进位。可以理解为类选择器永远大于元素选择器，以此类推..</li>
+<li><strong>继承的权重为 0</strong>，如果该元素没有直接选中，不管父元素权重多高，子元素得到的权重都是 0。</li>
+<li><code>a</code> 链接，浏览器默认指定了一个样式（蓝色，下划线），不会继承父级样式。</li>
+</ul>
+<p><strong>复合选择器权重的叠加</strong></p>
+<p>权重可以叠加，需要计算权重，但是没有进位。</p>
+<ul>
+<li>div ul li ——&gt; 0,0,0,3 </li>
+<li>.nav ul li ——&gt; 0,0,1,2 </li>
+<li>a:hover —–—&gt; 0,0,1,1 </li>
+<li>.nav a ——&gt; 0,0,1,1</li>
+</ul>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2022/12/15/CSS%E5%B1%9E%E6%80%A7-%E5%85%83%E7%B4%A0%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%BC%8F-%E5%BC%95%E7%94%A8%E6%96%B9%E5%BC%8F-%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/">https://nan-ying.github.io/2022/12/15/CSS%E5%B1%9E%E6%80%A7-%E5%85%83%E7%B4%A0%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%BC%8F-%E5%BC%95%E7%94%A8%E6%96%B9%E5%BC%8F-%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/CSS/">
+              <span class="chip bg-color">CSS</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2022-12-15T17-12-38',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12/15/%E9%98%BF%E9%87%8Ciconfont%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="阿里iconfont的使用方法">
+                        
+                        <span class="card-title">阿里iconfont的使用方法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSS%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+                        <span class="chip bg-color">CSS小技巧</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12/15/CSS%E7%AE%80%E4%BB%8B%E4%B8%8E%E9%80%89%E6%8B%A9%E5%99%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="CSS简介与选择器">
+                        
+                        <span class="card-title">CSS简介与选择器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+                                    前端三件套
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >453.3k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

@@ -1,0 +1,3371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="JavaScript 高级（五）Promise、异步async await、防抖节流等, Nan-ying&#39;s Blog">
+    <meta name="description" content="一、Promise 使用1. 异步代码存在困境调用一个函数，这个函数中发送网络请求（我们可以用定时器来模拟）
+
+如果发送网络请求成功了，那么告知调用者发送成功，并且将相关数据返回过去
+如果发送网络请求失败了，那么告知调用者发送失败，并且告知">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>JavaScript 高级（五）Promise、异步async await、防抖节流等 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JavaScript 高级（五）Promise、异步async await、防抖节流等</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/JavaScript/">
+              <span class="chip bg-color">JavaScript</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+              前端三件套
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-01-15
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 11.1k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          48 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="一、Promise-使用"><a href="#一、Promise-使用" class="headerlink" title="一、Promise 使用"></a>一、Promise 使用</h1><h2 id="1-异步代码存在困境"><a href="#1-异步代码存在困境" class="headerlink" title="1. 异步代码存在困境"></a>1. 异步代码存在困境</h2><p>调用一个函数，这个函数中发送网络请求（我们可以用定时器来模拟）</p>
+<ul>
+<li>如果发送网络请求成功了，那么告知调用者发送成功，并且将相关数据返回过去</li>
+<li>如果发送网络请求失败了，那么告知调用者发送失败，并且告知错误信息；<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 1.设计这样的一个函数
+function execCode(counter, successCallback, failureCallback) {
+	// 异步任务
+	setTimeout(() =&gt; {
+		if (counter &gt; 0) { // counter可以计算的情况
+			let total = 0
+			for (let i = 0; i &lt; counter; i++) {
+				total += i
+			}
+			// 成功情况，在某一个时刻只需要回调传入的函数
+			successCallback(total)
+		} else { // 失败情况, counter有问题
+			failureCallback(`${counter}值有问题`)
+		}
+	}, 3000)
+	
+}
+
+// 2.ES5之前,处理异步的代码都是这样封装
+execCode(100, (value) =&gt; {
+	console.log("本次执行成功了:", value)
+}, (err) =&gt; {
+	console.log("本次执行失败了:", err)
+})</code></pre></li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要自己来设计回调函数、回调函数的名称、回调函数的使用等</li>
+<li>对于不同的人、不同的框架设计出来的方案是不同的，那么我们必须耐心去看别人的源码或者文档，以便可以理解这个函数到底怎么用</li>
+</ul>
+<h2 id="2-Promise-的代码结构"><a href="#2-Promise-的代码结构" class="headerlink" title="2. Promise 的代码结构"></a>2. Promise 的代码结构</h2><ul>
+<li>Promise是一个<strong>类</strong></li>
+<li>当我们需要的时候，给予调用者一个承诺：<strong>待会儿我会给你回调数据</strong>时，就可以创建一个Promise的对象</li>
+<li>在通过new创建Promise对象时，我们需要==传入一个回调函数==，我们称之为executor<ul>
+<li>这个回调函数会被<strong>立即执行</strong>，并且给传入另外两个回调函数<code>resolve、reject</code><ul>
+<li>当我们调用resolve回调函数时，会执行Promise对象的<code>then</code>方法传入的回调函数</li>
+<li>当我们调用reject回调函数时，会执行Promise对象的<code>catch</code>方法传入的回调函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+function execode(count) {
+	const promise = new Promise((resolve, reject) =&gt; { // 此处函数为立即执行函数
+	
+		setTimeout(() =&gt; {
+			if (count &gt; 0) {
+				let total = 0
+				for (let i = 0; i &lt;= count; i++) {
+					total += i
+				}
+				// 成功的回调
+				resolve(total)
+			} else {
+				// 失败的回调
+				reject(`${count}错误`)
+			}
+		}, 3000);
+		
+	})
+	return promise
+}
+
+execode(100).then((value) =&gt; {
+	console.log('成功，有了结果：', value);
+}).catch((err) =&gt; {
+	console.log('失败，有了错误：', err);
+})</code></pre>
+
+<h2 id="3-Promise-状态变化"><a href="#3-Promise-状态变化" class="headerlink" title="3. Promise 状态变化"></a>3. Promise 状态变化</h2><p>Promise使用过程，我们可以将它划分成三个状态： </p>
+<ul>
+<li><strong>待定（pending）:</strong> 初始状态，既没有被兑现，也没有被拒绝<ul>
+<li>当执行executor中的代码时，处于该状态</li>
+</ul>
+</li>
+<li><strong>已兑现（fulfilled）</strong>: 意味着操作成功完成<ul>
+<li>执行了resolve时，处于该状态，Promise已经被兑现</li>
+</ul>
+</li>
+<li><strong>已拒绝（rejected）</strong>: 意味着操作失败<ul>
+<li>执行了reject时，处于该状态，Promise已经被拒绝</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+	// 1.待定状态
+	console.log('111111');
+	console.log('222222');
+	
+	// 状态一旦确定，不会更改，不能再执行别的回调函数来改变状态
+	// 2.兑现状态
+	resolve()
+	
+	// 3.拒绝状态
+	reject()
+})
+
+promise.then((value) =&gt; {
+	console.log('成功的回调');
+}).catch((err) =&gt; {
+	console.log('失败的回调');
+})</code></pre>
+
+<h3 id="3-1-resolve不同的值"><a href="#3-1-resolve不同的值" class="headerlink" title="3.1 resolve不同的值"></a>3.1 resolve不同的值</h3><ul>
+<li>情况一：如果resolve传入<strong>一个普通的值或者对象</strong>，那么这个值会作为then回调的参数</li>
+<li>情况二：如果resolve中传入的是<strong>另外一个Promise</strong>，那么这个新Promise会决定原Promise的状态</li>
+<li>情况三：如果resolve中传入的是一个对象，并且这个<strong>对象有实现then方法</strong>，那么会执行该then方法，并且根据then方法的结果来决定Promise的状态</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const p = new Promise((resolve) =&gt; {
+	setTimeout(() =&gt; {
+		resolve("p的resolve")
+	}, 2000)
+})
+
+const promise = new Promise((resolve, reject) =&gt; {
+	//1.普通值
+	resolve({ name: 'why', age: 18 })
+	
+	//2.promise
+	resolve(p)
+	
+	//3.thenable
+	resolve({
+		then: function (resolve) {
+			resolve(1111)
+		}
+	})
+})
+
+promise.then(res =&gt; {
+	console.log("then中拿到结果:", res)
+})</code></pre>
+
+<h2 id="4-Promise-实例方法"><a href="#4-Promise-实例方法" class="headerlink" title="4. Promise 实例方法"></a>4. Promise 实例方法</h2><h3 id="4-1-then-和-catch-方法"><a href="#4-1-then-和-catch-方法" class="headerlink" title="4.1 then 和 catch 方法"></a>4.1 then 和 catch 方法</h3><p>then方法是Promise对象上的一个方法（实例方法）</p>
+<ul>
+<li>放在Promise的原型上的 <code>Promise.prototype.then</code></li>
+</ul>
+<p>then方法<strong>接受两个参数</strong>：</p>
+<ul>
+<li>resolve的回调函数：当状态变成resolve时会回调的函数</li>
+<li>reject的回调函数：当状态变成reject时会回调的函数</li>
+</ul>
+<p>一个Promise的then方法是可以<strong>被多次调用</strong>的：</p>
+<ul>
+<li>每次调用我们都可以传入对应的resolve回调</li>
+<li>当Promise的状态变成resolve的时候，这些回调函数<strong>都会被执行</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+	resolve('success')
+	// reject('failure')
+})
+
+// promise.then(res =&gt; {
+//     console.log('成功回调', res);
+// }, err =&gt; {
+//     console.log('失败回调', err);
+// })
+
+promise.then(res =&gt; {
+	console.log('成功回调', res);
+})
+promise.then(res =&gt; {
+	console.log('成功回调', res);
+})
+promise.then(res =&gt; {
+	console.log('成功回调', res);
+})
+promise.then(res =&gt; {
+	console.log('成功回调', res);
+})</code></pre>
+
+<p><em><strong>then 的返回值</strong></em><br>then方法本身是有<strong>返回值</strong>的，它的返回值是<strong>一个Promise</strong><br>当then方法中的回调函数<strong>返回一个结果</strong>时，那么它处于resolve状态，并且会将结果作为resolve的参数</p>
+<ul>
+<li>返回一个普通的值</li>
+<li>返回一个Promise</li>
+<li>返回一个thenable值<br>当then方法抛出一个异常时，那么它处于reject状态</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+	resolve('aaaaa')
+	// reject('failure')
+})
+
+promise.then(res =&gt; {  // 返回新的promise
+	console.log('第一个then', res); //aaaaa
+	return 'bbbbb'
+}).then(res =&gt; {
+	console.log('第二个then', res);//bbbbb
+	return 'ccccc'
+}).then(res =&gt; {
+	console.log('第三个then', res);//ccccc
+})
+
+promise.then(res =&gt; {
+	console.log('添加第二个then', res);//aaaaa
+})</code></pre>
+
+<p>then返回一个Promise，return中的值传入resolve的result中作为下一次执行的参数<br><img src="e0365588857c4a078c318e388f0dfa8a.png" alt="在这里插入图片描述"></p>
+<hr>
+<p>catch方法也是Promise对象上的一个方法（<strong>实例方法</strong>）</p>
+<p>一个Promise的catch方法是可以被<strong>多次调用</strong>的</p>
+<p>catch方法也是会<strong>返回一个Promise对象</strong>的，所以catch方法后面我们可以继续调用then方法或者catch方法</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+	// resolve('success')
+	reject('failure')
+})
+
+promise.catch(err =&gt; {
+	console.log('失败回调', err);
+}).then(res =&gt; {
+	console.log('成功回调', res);
+}) 
+// 输出：失败回调failure  成功回调undefined
+// 因为catch传入的回调在执行完后，默认状态依然会是resolve的</code></pre>
+
+<p><strong>需要catch() 方法兜底，处理异常情况</strong><br>中断函数继续执行:<br>方式一: return<br>方式二: throw new Error()<br>方式三: yield 暂停(暂时性的中断)</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+	resolve("aaaaaa")
+})
+
+promise.then(res =&gt; {
+	console.log("then第一次回调:", res)
+	// throw new Error("第二个Promise的异常error")
+	return "bbbbbb"
+}).then(res =&gt; {
+	console.log("then第二次回调:", res)
+	throw new Error("第三个Promise的异常error")
+}).then(res =&gt; {
+	console.log("then第三次回调:", res)
+}).catch(err =&gt; {
+	console.log("catch回调被执行:", err)
+})
+// then第一次回调: aaaaaa
+// then第二次回调: bbbbbb
+// catch回调被执行: Error: 第三个Promise的异常error</code></pre>
+
+<h3 id="4-2-finally-方法"><a href="#4-2-finally-方法" class="headerlink" title="4.2 finally 方法"></a>4.2 finally 方法</h3><p>finally方法<strong>不接收参数</strong>，无论Promise对象无论变成fulfilled还是rejected状态，最终<strong>都会被执行</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const promise = new Promise((resolve, reject) =&gt; {
+	resolve('aaaaa')
+//	reject('bbbbb')
+})
+
+promise.then(res =&gt; {
+	console.log('then', res);//执行
+}).catch(err =&gt; {
+	console.log('catch', err);
+}).finally(() =&gt; {
+	console.log('hhhhhhh');//执行
+})</code></pre>
+
+<h2 id="5-Promise-类方法"><a href="#5-Promise-类方法" class="headerlink" title="5. Promise 类方法"></a>5. Promise 类方法</h2><h3 id="5-1-resolve-和-reject-方法"><a href="#5-1-resolve-和-reject-方法" class="headerlink" title="5.1 resolve 和 reject 方法"></a>5.1 resolve 和 reject 方法</h3><p><code>Promise.resolve()</code> 相当于new Promise，并且执行resolve操作<br><code>Promise.reject()</code> 相当于new Promise，只是会调用reject</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const studentList = ['abc', 'nab']
+const promise = Promise.resolve(studentList)
+const promise1 = Promise.reject('error')
+
+promise.then(res =&gt; {
+	console.log(res);
+})
+
+promise1.catch(err =&gt; {
+	console.log(err);
+})</code></pre>
+
+<h3 id="5-2-all-和-allSettled-方法"><a href="#5-2-all-和-allSettled-方法" class="headerlink" title="5.2 all 和 allSettled 方法"></a>5.2 all 和 allSettled 方法</h3><p><code>Promise.all</code>：</p>
+<ul>
+<li>将多个Promise包裹在一起<strong>形成一个新的Promise</strong></li>
+<li>新的Promise状态由包裹的所有Promise共同决定：<ul>
+<li>当<strong>所有的Promise状态变成fulfilled状态</strong>时，新的Promise状态为fulfilled，并且会将所有Promise的返回值组成一个数组</li>
+<li>当<strong>有一个Promise状态为reject</strong>时，新的Promise状态为reject，并且会将第一个reject的返回值作为参数</li>
+</ul>
+</li>
+</ul>
+<p><code>Promise.allSettled</code>：</p>
+<ul>
+<li>在<strong>所有的Promise都有结果</strong>（settled），无论是fulfilled，还是rejected时，都会有最终的状态； </li>
+<li>并且这个Promise的结果一定是fulfilled的</li>
+<li>结果：一个数组，数组中每一个值都是对象。对象中包含<strong>status状态，以及对应的value值</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const p1 = new Promise((resolve, reject) =&gt; {
+	setTimeout(() =&gt; {
+		// resolve("p1 resolve")
+		reject("p1 reject error")
+	}, 3000)
+})
+const p2 = new Promise((resolve, reject) =&gt; {
+	setTimeout(() =&gt; {
+		resolve("p2 resolve")
+	}, 2000)
+})
+const p3 = new Promise((resolve, reject) =&gt; {
+	setTimeout(() =&gt; {
+		resolve("p3 resolve")
+	}, 5000)
+})
+
+// all
+Promise.all([p1, p2, p3]).then(res =&gt; {
+	console.log(res);
+}).catch(err =&gt; {
+	console.log(err);
+})
+
+// allSettled
+Promise.allSettled([p1, p2, p3]).then(res =&gt; {
+	console.log(res);
+}).catch(err =&gt; {
+	console.log(err);
+})</code></pre>
+
+<h3 id="5-3-race-和-any-方法"><a href="#5-3-race-和-any-方法" class="headerlink" title="5.3 race 和 any 方法"></a>5.3 race 和 any 方法</h3><p>race 表示<strong>多个Promise相互竞争</strong>，谁先有结果，那么就使用谁的结果</p>
+<ul>
+<li>any 会<strong>等到一个fulfilled状态</strong>，才会决定新Promise的状态，此时输出该返回值</li>
+<li>如果<strong>所有的Promise都是reject</strong>，会等到所有的Promise都变成rejected状态，报一个AggregateError的错误</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const p1 = new Promise((resolve, reject) =&gt; {
+	setTimeout(() =&gt; {
+		// resolve("p1 resolve")
+		reject("p1 reject error")
+	}, 3000)
+})
+const p2 = new Promise((resolve, reject) =&gt; {
+	setTimeout(() =&gt; {
+		resolve("p2 resolve")
+	}, 2000)
+})
+const p3 = new Promise((resolve, reject) =&gt; {
+	setTimeout(() =&gt; {
+		resolve("p3 resolve")
+	}, 5000)
+})
+
+// any
+Promise.any([p1, p2, p3]).then(res =&gt; {
+console.log("any promise res:", res)
+}).catch(err =&gt; {
+console.log("any promise err:", err)
+})// p2 resolve</code></pre>
+
+<h1 id="二、迭代器和生成器"><a href="#二、迭代器和生成器" class="headerlink" title="二、迭代器和生成器"></a>二、迭代器和生成器</h1><h2 id="1-迭代器-Iterator"><a href="#1-迭代器-Iterator" class="headerlink" title="1. 迭代器 Iterator"></a>1. 迭代器 Iterator</h2><p>迭代器是帮助我们<strong>对某个数据结构进行遍历</strong>的对象</p>
+<p>实现：next方法</p>
+<ul>
+<li>一个<strong>无参数或者一个参数的函数</strong></li>
+<li><strong>返回</strong>一个应当拥有以下两个属性的对象<ul>
+<li>==done（boolean）==<ul>
+<li>如果迭代器可以产生序列中的下一个值，则为 false。</li>
+<li>如果迭代器已将序列迭代完毕，则为 true。这种情况下，value 是可选的，如果它依然存在，即为迭代结束之后的默认返回值。</li>
+</ul>
+</li>
+<li>==value==<ul>
+<li>迭代器返回的任何 JavaScript 值。done 为 true 时可省略</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+// 为数组创建迭代器
+const names = ["abc", "cba", "nba"]
+const nums = [100, 24, 55, 66, 86]
+
+// 封装一个函数
+function createArrayIterator(arr) {
+	let index = 0
+	return {
+		next: function () {
+			if (index &lt; arr.length) {
+				return { done: false, value: arr[index++] }
+			} else {
+				return { done: true }
+			}
+		}
+	}
+}
+
+const namesIterator = createArrayIterator(names)
+console.log(namesIterator.next());
+console.log(namesIterator.next());
+console.log(namesIterator.next());
+console.log(namesIterator.next());</code></pre>
+
+<h3 id="1-1-可迭代对象"><a href="#1-1-可迭代对象" class="headerlink" title="1.1 可迭代对象"></a>1.1 可迭代对象</h3><p>但是上面的代码需要再创建一个迭代器对象，可以对代码进一步封装，让其变成一个可迭代对象</p>
+<p>使用 <code>[Symbol.iterator]</code> 访问该属性<br>需要返回一个: 迭代器</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 将infos变成一个可迭代对象
+/*
+1.必须实现一个特定的函数: [Symbol.iterator]
+2.这个函数需要返回一个迭代器(这个迭代器用于迭代当前的对象)
+*/
+const infos = {
+	friends: ["kobe", "james", "curry"],
+	
+	[Symbol.iterator]: function() {
+		let index = 0
+		const infosIterator = {
+			next: () =&gt; {
+				if (index &lt; this.friends.length) {
+					return { done: false, value: this.friends[index++] }
+				} else {
+					return { done: true }
+				}
+			}
+		}
+		return infosIterator
+	}
+}
+
+const iterator = infos[Symbol.iterator]()
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+// 可迭代对象可以进行for of 操作
+for (const item of infos) {
+	console.log(item);
+}</code></pre>
+
+<h4 id="1-1-1-原生迭代器对象"><a href="#1-1-1-原生迭代器对象" class="headerlink" title="1.1.1 原生迭代器对象"></a>1.1.1 原生迭代器对象</h4><p>平时创建的很多原生对象已经实现了可迭代协议，会生成一个迭代器对象</p>
+<p><strong>String、Array、Map、Set、arguments对象、NodeList集合</strong></p>
+<p>这些对象中必然有一个<code>[Symbol.iterator]</code>函数</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 1.数组
+const names = ["abc", "cba", "nba"]
+// for (const name of names) {
+//	console.log(name)
+// }
+console.log(names[Symbol.iterator]())
+
+// 2.Set
+const set = new Set(["abc", "cba", "nba"])
+// for (const item of set) {
+// console.log(item)
+// }
+
+const setIterator = set[Symbol.iterator]()
+console.log(setIterator.next())
+console.log(setIterator.next())
+console.log(setIterator.next())
+console.log(setIterator.next())</code></pre>
+
+<h4 id="1-1-2-可迭代对象的应用"><a href="#1-1-2-可迭代对象的应用" class="headerlink" title="1.1.2 可迭代对象的应用"></a>1.1.2 可迭代对象的应用</h4><ul>
+<li>用在特定的语法上：for …of、展开语法、yield*、解构赋值</li>
+<li>创建一些对象时：<code>new Map([Iterable])</code>、<code>new WeakMap([iterable])</code>、<code>new Set([iterable])</code>、<code>new WeakSet([iterable])</code></li>
+<li>一些方法的调用：Promise.all(iterable)、Promise.race(iterable)、Array.from(iterable)</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 1.用在特定的语法上(比如展开语法)
+const info = {
+	name: "why",
+	age: 18,
+	height: 1.88,
+	
+	[Symbol.iterator]: function() {
+		const values = Object.values(this)
+		let index = 0
+		const iterator = {
+			next: function() {
+				if (index &lt; values.length) {
+					return { done: false, value: values[index++] }
+				} else {
+					return { done: true }
+				}
+			}
+		}
+		return iterator
+	}
+}
+
+function foo(arg1, arg2, arg3) {
+	console.log(arg1, arg2, arg3)
+}
+foo(...info)
+
+// 2.一些类的构造方法中, 也是传入的可迭代对象
+const names = ["abc", "cba", "nba"]
+const set = new Set(names)
+console.log(set);
+const set1 = new Set(infos)
+console.log(set1);
+
+// 3.一些常用的方法
+const p1 = Promise.resolve("aaaa")
+const p2 = Promise.resolve("aaaa")
+const p3 = Promise.resolve("aaaa")
+const pSet = new Set()
+pSet.add(p1)
+pSet.add(p2)
+pSet.add(p3)
+Promise.all(pSet).then(res =&gt; {
+	console.log("res:", res)
+})// ['aaaa', 'aaaa', 'aaaa']
+
+function bar() {
+	// 将arguments转成Array类型
+	const arr = Array.from(arguments)
+	console.log(arr)
+}
+bar(111, 222, 333)</code></pre>
+
+<h3 id="1-2-自定义类的迭代"><a href="#1-2-自定义类的迭代" class="headerlink" title="1.2 自定义类的迭代"></a>1.2 自定义类的迭代</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">class Person {
+	constructor(name, age, height, friends) {
+		this.name = name
+		this.age = age
+		this.height = height
+		this.friends = friends
+	}
+
+	// 实例方法
+	[Symbol.iterator]() {
+		let index = 0
+		return {
+			next: () =&gt; {
+				if (index &lt; this.friend.length) {
+					return { done: false, value: this.friend[index++] }
+				} else {
+					return { done: true }
+				}
+			},
+			return: () =&gt; {
+				console.log('监听到迭代器中断了');
+				return { done: true }
+			}
+		}
+	}
+	
+}
+
+const p = new Person("why", 18, 1.88, ["curry", "kobe", "james", "tatumu"])
+for (const item of p) {
+	console.log(item)
+	if (item === 'curry') {
+		break
+	}
+}
+// james curry 监听到迭代器中断了</code></pre>
+
+<h3 id="1-3-迭代器的中断-了解"><a href="#1-3-迭代器的中断-了解" class="headerlink" title="1.3 迭代器的中断(了解)"></a>1.3 迭代器的中断(了解)</h3><ul>
+<li>迭代器在某些情况下会在没有完全迭代的情况下中断：<ul>
+<li>比如<strong>遍历的过程中</strong>通过break、return、throw中断了循环操作</li>
+<li>比如在解构的时候，没有解构所有的值</li>
+</ul>
+</li>
+<li>那么这个时候我们<strong>想要监听中断</strong>的话，可以<strong>添加return方法</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 见上面代码</code></pre>
+
+<h2 id="2-生成器-Generator"><a href="#2-生成器-Generator" class="headerlink" title="2. 生成器 Generator"></a>2. 生成器 Generator</h2><p>生成器是ES6中新增的一种函数控制、使用的方案，它可以让我们更加灵活的<strong>控制函数什么时候继续执行、暂停执行</strong>等</p>
+<h3 id="2-1-生成器函数"><a href="#2-1-生成器函数" class="headerlink" title="2.1. 生成器函数"></a>2.1. 生成器函数</h3><p>生成器函数也是一个函数，但是和普通的函数有一些区别：</p>
+<ul>
+<li>首先，生成器函数需要在function的后面加一个符号：<code>*</code></li>
+<li>其次，生成器函数可以<strong>通过yield关键字来控制函数</strong>的执行流程。<strong>调用生成器不会执行里面的函数</strong></li>
+<li>最后，生成器函数的返回值是一个Generator（生成器）：<ul>
+<li><strong>生成器事实上是一种特殊的迭代器</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+function* foo(name1) {
+	console.log('1111', name1);
+	console.log('2222', name1);
+	
+	const name2 = yield 'aaa'
+	console.log('3333', name2);
+	console.log('4444', name2);
+	
+	const name3 = yield 'bbb'
+	// return 'bbb'
+	console.log('5555', name3);
+	console.log('6666', name3);
+	
+	yield 'ccc'
+	return undefined
+}
+
+const generator = foo('next1')// 第一段代码的参数在这里传
+
+// 1.普通执行时
+console.log(generator.next());// {value: 'aaa', done: false}
+console.log(generator.next());// {value: 'bbb', done: false}
+console.log(generator.next());// {value: 'ccc', done: false}
+console.log(generator.next());// {value: undefined, done: true}
+
+// 2.中间有return语句时
+console.log(generator.next());// {value: 'aaa', done: false}
+console.log(generator.next());// {value: 'bbb', done: true}
+console.log(generator.next());// {value: undefined, done: true}
+
+// 3.给函数每次执行时，传入参数
+console.log(generator.next());
+console.log(generator.next('next2'));
+console.log(generator.next('next3'));</code></pre>
+
+<p>next函数：</p>
+<ul>
+<li>调用next函数的时候，可以给它传递参数</li>
+</ul>
+<p>return函数：</p>
+<ul>
+<li>return传值后这个生成器函数就会结束，之后调用next不会继续生成值了</li>
+</ul>
+<h3 id="2-2-提前结束return-throw-了解"><a href="#2-2-提前结束return-throw-了解" class="headerlink" title="2.2 提前结束return/throw(了解)"></a>2.2 提前结束return/throw(了解)</h3><p>除了return语句之外，也可以给生成器函数<strong>内部抛出异常</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function* foo(name1) {
+	console.log('1111', name1);
+	console.log('2222', name1);
+	const name2 = yield 'aaa'
+	console.log('3333', name2);
+	console.log('4444', name2);
+	const name3 = yield 'bbb'
+	console.log('5555', name3);
+	console.log('6666', name3);
+	yield 'ccc'
+	console.log('last');
+	return undefined
+}
+
+const generator = foo('next1')
+console.log(generator.next());
+// console.log(generator.return('next2'));
+console.log(generator.throw('next2 throw Error'));
+console.log('----------------');
+console.log(generator.next('next3'));
+console.log(generator.next('next4'));
+
+// 1111 next1     2222 next1    {value: 'aaa', done: false}
+// return语句生效的情况：
+// 1111 next1
+// 2222 next1
+// {value: 'aaa', done: false}
+// {value: 'next2', done: true}
+// ----------------
+// {value: undefined, done: true}
+// {value: undefined, done: true}</code></pre>
+
+<h3 id="2-3-generator-替代-iterator"><a href="#2-3-generator-替代-iterator" class="headerlink" title="2.3 generator 替代 iterator"></a>2.3 generator 替代 iterator</h3><p>生成器是一种<strong>特殊的迭代器</strong>，那么在某些情况下我们可以使用生成器来替代迭代器（更简便）</p>
+<ul>
+<li>不需要写next等复杂的结构，只需要写实现迭代功能的主体代码</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const names = ['abc', 'bac', 'nba']
+const nums = [100, 22, 66, 88, 55]
+
+function* createArrayIterator(arr) {
+//	yield* arr
+	for (let i = 0; i &lt; arr.length; i++) {
+		yield arr[i]
+	}
+}
+
+const iterator = createArrayIterator(names)
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())
+console.log(iterator.next())</code></pre>
+
+<p>改进版：使用 <code>yield*</code> 再生产一个可迭代对象</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 自定义类迭代
+class Person {
+	constructor(name, age, height, friends) {
+		 this.name = name
+		this.age = age
+		this.height = height
+		this.friends = friends
+	}
+
+	*[Symbol.iterator]() {
+		yield* this.friends
+	}
+}
+
+const p = new Person('why', 18, 1.8, ['kobe', 'james', 'curry'])
+for (const item of p) {
+	console.log(item);
+}</code></pre>
+
+<h3 id="2-4-异步处理方案"><a href="#2-4-异步处理方案" class="headerlink" title="2.4 异步处理方案"></a>2.4 异步处理方案</h3><p>案例需求：</p>
+<ul>
+<li>我们需要向服务器隔两秒发送网络请求获取数据，一共需要发送三次请求</li>
+<li>第二次的请求url依赖于第一次的结果</li>
+<li>第三次的请求url依赖于第二次的结果</li>
+<li>依次类推</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 因为是隔2秒后传值，不能直接用return
+function requestData(url) {
+	return new Promise((resolve) =&gt; {
+		setTimeout(() =&gt; {
+			resolve(url)
+		}, 2000)
+	})
+}</code></pre>
+
+<h4 id="2-4-1-处理一-回调地狱"><a href="#2-4-1-处理一-回调地狱" class="headerlink" title="2.4.1 处理一 - 回调地狱"></a>2.4.1 处理一 - 回调地狱</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 方式一: 层层嵌套(回调地狱 callback hell)
+function getData() {
+	// 1.第一次请求
+	requestData("why").then(res1 =&gt; {
+		console.log("第一次结果:", res1)
+		
+		// 2.第二次请求
+		requestData(res1 + "kobe").then(res2 =&gt; {
+			console.log("第二次结果:", res2)
+			
+			// 3.第三次请求
+			requestData(res2 + "james").then(res3 =&gt; {
+				console.log("第三次结果:", res3)
+			})
+		})
+	})
+}
+
+getData()</code></pre>
+
+<h4 id="2-4-2-处理二-Promise-链式"><a href="#2-4-2-处理二-Promise-链式" class="headerlink" title="2.4.2 处理二 - Promise 链式"></a>2.4.2 处理二 - Promise 链式</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 方式二: 使用Promise进行重构(解决回调地狱)
+// 链式调用
+function getData() {
+	requestData('why').then(res1 =&gt; {
+		console.log(res1);
+		return requestData(res1 + 'kobe')
+	}).then(res2 =&gt; {
+		console.log(res2);
+		return requestData(res2 + 'james')
+	}).then(res3 =&gt; {
+		console.log(res3);
+	})
+}
+
+getData()</code></pre>
+
+<h4 id="2-4-3-处理三-generator-yield"><a href="#2-4-3-处理三-generator-yield" class="headerlink" title="2.4.3 处理三 - generator+yield"></a>2.4.3 处理三 - generator+yield</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function* getData() {
+	const res11 = yield requestData('why')
+	console.log(res11);
+	const res22 = yield requestData(res11 + 'kobe')
+	console.log(res22);
+	const res33 = yield requestData(res22 + 'james')
+	console.log(res33);
+}
+
+// 调用方法一
+const generator = getData()// 生成器函数调用时不立即执行，先返回一个生成器
+generator.next().value.then(res1 =&gt; { //res1从promise函数中拿的why
+	generator.next(res1).value.then(res2 =&gt; { //res2从promise函数中拿的res11 + 'kobe'
+		generator.next(res2).value.then(res3 =&gt; {
+			generator.next(res3)
+		})
+	})
+})
+// generator.next(res1)是将参数'why'传给生成器getData的res11
+// generator.next(res1)执行结果为{value: requestData(res11 + 'kobe'), done: false}
+// generator.next(res1).value得到一个promise
+
+
+// 调用方法二：自动化执行生成器函数(了解)
+function execGenFn(genFn) {
+	// 1.获取对应函数的generator
+	const generator = genFn()
+	
+	// 2.定义一个递归函数
+	function exec(res) {
+		// result -&gt; { done: true/false, value: 值/undefined }
+		const result = generator.next(res)
+		if (result.done) return
+		result.value.then(res =&gt; {
+			exec(res)
+		})
+	}
+	// 3.执行递归函数
+	exec()
+}
+execGenFn(getData)</code></pre>
+
+<h4 id="2-4-4-处理四-await-async"><a href="#2-4-4-处理四-await-async" class="headerlink" title="2.4.4 处理四 - await/async"></a>2.4.4 处理四 - await/async</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 方式四: async/await的解决方案
+async function getData() {
+	const res1 = await requestData("why")
+	console.log("res1:", res1)
+	const res2 = await requestData(res1 + "kobe")
+	console.log("res2:", res2)
+	const res3 = await requestData(res2 + "james")
+	console.log("res3:", res3)
+}
+
+const generator = getData()</code></pre>
+
+
+<h2 id="3-异步-async、await"><a href="#3-异步-async、await" class="headerlink" title="3. 异步 async、await"></a>3. 异步 async、await</h2><h3 id="3-1-异步函数-async"><a href="#3-1-异步函数-async" class="headerlink" title="3.1 异步函数 async"></a>3.1 异步函数 async</h3><p>异步函数的内部<strong>代码执行过程和普通的函数是一致</strong>的，默认情况下也是会被同步执行</p>
+<p><strong>异步函数有返回值</strong>时，和普通函数会有区别： </p>
+<ul>
+<li>情况一：异步函数返回值是普通值时，返回值<strong>相当于被包裹到Promise.resolve中</strong></li>
+<li>情况二：如果我们的异步函数的返回值是Promise，状态由会由Promise决定</li>
+<li>情况三：如果我们的异步函数的返回值是一个对象并且实现了thenable，那么会由对象的then方法来决定</li>
+</ul>
+<p>如果我们在async中<strong>抛出异常</strong>，那么程序它并不会像普通函数一样报错，而是会<strong>作为Promise的reject来传递</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">async function foo() {
+	console.log('---------1');
+	'abc'.filter()
+	console.log('---------2');
+	
+	// --&gt; Promise.resolve(123)
+	return 123
+}
+
+foo().then(res =&gt; {
+	console.log('res:', res);
+}).catch(err =&gt; {
+	console.log('err', err);
+})</code></pre>
+
+<h3 id="3-2-await-关键字"><a href="#3-2-await-关键字" class="headerlink" title="3.2 await 关键字"></a>3.2 await 关键字</h3><p>async函数另外一个特殊之处就是可以在它内部<strong>使用await关键字</strong>，而普通函数中是不可以的</p>
+<p>通常使用await是后面会跟上一个表达式，这个表达式会返回一个Promise</p>
+<ul>
+<li><p>那么await会==等到Promise的状态变成fulfilled状态==，之后继续执行异步函数</p>
+</li>
+<li><p>如果await后面是一个<strong>普通的值</strong>，那么会直接返回这个值</p>
+</li>
+<li><p>如果await后面是一个<strong>thenable的对象</strong>，那么会根据对象的then方法调用来决定后续的值</p>
+</li>
+<li><p>如果await后面的表达式，<strong>返回的Promise是reject的状态</strong>，那么会将这个reject结果直接作为函数的Promise的reject值</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function requestData(url) {
+	return new Promise((resolve, reject) =&gt; {
+		setTimeout(() =&gt; {
+			// resolve(url)
+			reject('Error message')
+		}, 2000)
+	})
+}
+
+async function getData() {
+	const res1 = await requestData('why')
+	console.log(res1);
+	const res2 = await requestData(res1 + 'kobe')
+	console.log(res2);
+}
+
+getData().catch(err =&gt; {
+	console.log(err);
+}) // reject需要.catch()兜底</code></pre>
+
+<h1 id="四、事件循环-队列"><a href="#四、事件循环-队列" class="headerlink" title="四、事件循环/队列"></a>四、事件循环/队列</h1><h2 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1. 进程和线程"></a>1. 进程和线程</h2><ul>
+<li>==进程==：我们可以认为，<strong>启动一个应用程序，就会默认启动一个进程</strong>（也可能是多个进程）</li>
+<li>==线程==：每一个进程中，都会启动<strong>至少一个线程用来执行程序中的代码</strong>，这个线程被称之为主线程</li>
+</ul>
+<p><img src="32c621c589774e9da02e594774fad97e.png" alt="在这里插入图片描述"></p>
+<p>操作系统如何做到同时让多个进程（边听歌、边写代码、边查阅资料）同时工作：</p>
+<ul>
+<li>这是因为<strong>CPU的运算速度非常快</strong>，它可以快速的在多个进程之间迅速的切换</li>
+<li>当我们进程中的线程<strong>获取到时间片</strong>时，就可以快速执行我们编写的代码</li>
+<li>对于用户来说是感受不到这种快速的切换的</li>
+</ul>
+<h3 id="1-2-JavaScript-单线程"><a href="#1-2-JavaScript-单线程" class="headerlink" title="1.2 JavaScript 单线程"></a>1.2 JavaScript 单线程</h3><p>多数的浏览器都是多进程的</p>
+<ul>
+<li>当我们<strong>打开一个tab页面时就会开启一个新的进程</strong>，这是为了防止一个页面卡死而造成 所有页面无法响应，整个浏览器需要强制退出</li>
+<li>每个进程中又有很多的线程，其中包括执行JavaScript代码的线程</li>
+</ul>
+<p>JavaScript的代码执行是在<strong>一个单独的线程</strong>中执行的：</p>
+<ul>
+<li>这就意味着JavaScript的代码，在<strong>同一个时刻只能做一件事</strong></li>
+<li>如果这件事是非常耗时的，就意味着当前的线程就会被阻塞</li>
+</ul>
+<h2 id="2-事件队列-循环"><a href="#2-事件队列-循环" class="headerlink" title="2. 事件队列/循环"></a>2. 事件队列/循环</h2><p><img src="d2c26d477b324f1f90a33e68096e51e3.png" alt="在这里插入图片描述"></p>
+<h3 id="2-1-宏任务-微任务"><a href="#2-1-宏任务-微任务" class="headerlink" title="2.1 宏任务/微任务"></a>2.1 宏任务/微任务</h3><p>事件循环中并非只维护着一个队列，事实上是有两个队列：</p>
+<ul>
+<li><strong>宏任务队列</strong>（macrotask queue）：ajax、setTimeout、setInterval、DOM监听、UI Rendering等</li>
+<li><strong>微任务队列</strong>（microtask queue）：Promise的then回调、 Mutation Observer API、queueMicrotask()等</li>
+</ul>
+<p>执行顺序：</p>
+<ol>
+<li><strong>main script中的代码优先</strong>执行（编写的顶层script代码）</li>
+<li>在执行任何一个宏任务之前（不是队列，是一个宏任务），都会<strong>先查看微任务队列中是否有任务</strong>需要执行 <ol>
+<li>也就是宏任务执行之前，必须保证微任务队列是空的；</li>
+<li>如果不为空，那么就优先执行微任务队列中的任务（回调）</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-2-面试题：Promise-async-await"><a href="#2-2-面试题：Promise-async-await" class="headerlink" title="2.2 面试题：Promise/async/await"></a>2.2 面试题：Promise/async/await</h3><p>面试题一</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console.log("script start")
+
+setTimeout(function () {
+	console.log("setTimeout1");
+	new Promise(function (resolve) {
+		resolve();
+	}).then(function () {
+		new Promise(function (resolve) {
+			resolve();
+		}).then(function () {
+			console.log("then4");
+		});
+		console.log("then2");
+	});
+});
+
+new Promise(function (resolve) {
+	console.log("promise1");
+	resolve();
+}).then(function () {
+	console.log("then1");
+});
+
+setTimeout(function () {
+	console.log("setTimeout2");
+});
+
+console.log(2);
+
+queueMicrotask(() =&gt; {
+	console.log("queueMicrotask1")
+});
+
+new Promise(function (resolve) {
+	resolve();
+}).then(function () {
+	console.log("then3");
+});
+
+console.log("script end")
+
+/* 结果：
+script start
+promise1
+2
+script end
+
+then1
+queueMicrotask1
+then3
+
+setTimeout1
+then2
+then4
+
+setTimeout2 */</code></pre>
+
+<p><img src="eff350715078431f93eab5125ed0538f.png" alt="在这里插入图片描述"></p>
+<p>面试题二</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console.log("script start")
+
+function requestData(url) {
+	console.log("requestData")
+	return new Promise((resolve) =&gt; {
+		setTimeout(() =&gt; {
+			console.log("setTimeout")
+			resolve(url)
+		}, 2000);
+	})
+}
+
+// await/async
+async function getData() {
+	console.log("getData start") //和普通函数一样立即执行
+	const res = await requestData("why") // 需要等待requestData()返回结果才执行函数中剩下的部分
+	console.log("then1-res:", res)
+	console.log("getData end")
+}
+
+getData()
+
+console.log("script end")
+
+/* 结果：
+script start
+getData start
+requestData
+//setTimeout()需要等两秒，因此此时还不能加入队列中，先往后执行
+script end
+
+setTimeout
+
+//resolve(url)调用时，将29-31行代码加入微任务，相当于then(...代码)
+then1-res: why
+getData end */</code></pre>
+
+<p><img src="400eac8abe374370885fd8d311d66536.png" alt="在这里插入图片描述"></p>
+<p>面试题三</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">async function async1() {
+	console.log('async1 start')
+	await async2();
+	console.log('async1 end') // 这部分代码相当于then(undefined =&gt; {console.log('async1 end')}),会加入微任务
+}
+
+async function async2() {
+	console.log('async2')
+} // return undefined --&gt; return Promise.resolve(undefined)
+
+console.log('script start')
+
+setTimeout(function () {
+	console.log('setTimeout')
+}, 0)
+
+async1();
+
+new Promise(function (resolve) {
+	console.log('promise1')
+	resolve();
+}).then(function () {
+	console.log('promise2')
+})
+
+console.log('script end')
+
+/* 结果：
+script start
+async1 start
+async2
+
+promise1
+script end
+
+async1 end
+promise2
+
+setTimeout */</code></pre>
+
+<h1 id="五、其他知识补充"><a href="#五、其他知识补充" class="headerlink" title="五、其他知识补充"></a>五、其他知识补充</h1><h2 id="1-异常处理"><a href="#1-异常处理" class="headerlink" title="1. 异常处理"></a>1. 异常处理</h2><p>很多时候我们可能验证到不是希望得到的参数时，就会直接return：</p>
+<ul>
+<li>但是return存在很大的弊端：调用者<strong>不知道是因为函数内部没有正常执行，还是执行结果就是一个undefined</strong></li>
+<li>事实上，正确的做法应该是如果没有通过某些验证，那么应该<strong>让外界知道函数内部报错</strong>了</li>
+</ul>
+<p>此时<strong>通过throw关键字</strong>，抛出一个异常</p>
+<h3 id="1-1-throw-关键字"><a href="#1-1-throw-关键字" class="headerlink" title="1.1 throw 关键字"></a>1.1 throw 关键字</h3><ul>
+<li>throw语句用于<strong>抛出一个用户自定义的异常</strong></li>
+<li>当遇到throw语句时，当前的函数<strong>执行会被停止</strong></li>
+</ul>
+<p>throw关键字后的类型</p>
+<ul>
+<li>number/string/boolean</li>
+<li>自定义对象</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">class HYError {
+	constructor(message, code) {
+		this.errMessage = message
+		this.errCode = code
+	}
+}
+
+function foo() {
+	console.log('foo function1');
+	throw new HYError('err', -1001)
+	// throw new Error('错误信息')
+	console.log('foo function2');
+	console.log('foo function3');
+}
+
+foo()</code></pre>
+
+<h3 id="1-2-Error-类型"><a href="#1-2-Error-类型" class="headerlink" title="1.2 Error 类型"></a>1.2 Error 类型</h3><p>JavaScript已经给我们<strong>提供了一个Error类</strong>，我们可以直接创建这个类的对象</p>
+<p>Error包含<strong>三个属性</strong>：</p>
+<ul>
+<li><code>messsage</code>：创建Error对象时<strong>传入</strong>的message</li>
+<li><code>name</code>：Error的名称，通常和<strong>类的名称</strong>一致</li>
+<li><code>stack</code>：整个Error的错误信息，包括函数的调用栈，当我们直接打印Error对象时，打印的就是stack</li>
+</ul>
+<p>Error有一些自己的<strong>子类</strong>：</p>
+<ul>
+<li>RangeError：下标值越界时使用的错误类型</li>
+<li>SyntaxError：解析语法错误时使用的错误类型</li>
+<li>TypeError：出现类型错误时，使用的错误类型；</li>
+</ul>
+<h3 id="1-3-捕获异常"><a href="#1-3-捕获异常" class="headerlink" title="1.3 捕获异常"></a>1.3 捕获异常</h3><p>一个函数抛出了异常，但是我们并没有对这个异常进行处理，那么这个<strong>异常会继续传递</strong>到上一个函数调用中；<br>而如果<strong>到了最顶层（全局）的代码</strong>中依然没有对这个异常的处理代码，这个时候就会<strong>报错并且终止程序的运行</strong></p>
+<p>但是很多情况下当出现异常时，我们并不希望程序直接推出，而是希望可以正确的处理异常：</p>
+<ul>
+<li>这个时候我们就可以使用<code>try catch</code></li>
+<li>如果有一些<strong>必须要执行的代码</strong>，我们可以使用<code>finally</code>来执行<ul>
+<li>注意：如果try和finally中都有返回值，那么会使用finally当中的返回值</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+function foo() {
+	console.log('foo function1');
+	throw new Error('错误信息')
+	console.log('foo function2');
+	console.log('foo function3');
+}
+
+function test() {
+	try {
+		foo()
+	} catch (error) {
+		console.log(error.message, error.name, error.stack);
+	} finally {
+		console.log('finally');
+	}
+}
+
+function bar() {
+	test()
+}
+
+bar()</code></pre>
+
+<h2 id="2-Storage"><a href="#2-Storage" class="headerlink" title="2. Storage"></a>2. Storage</h2><p>见 JavaScript 基础（六）笔记</p>
+<p>封装 Cache</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">class Cache {
+	constructor(isLocal = true) {
+		this.storage = isLocal ? localStorage: sessionStorage
+	}
+	
+	setCache(key, value) {
+		if (!value) {
+			throw new Error("value error: value必须有值!")
+		}
+		if (value) {
+			this.storage.setItem(key, JSON.stringify(value))
+		}
+	}
+	
+	getCache(key) {
+		const result = this.storage.getItem(key)
+		if (result) {
+			return JSON.parse(result)
+		}
+	}
+	
+	removeCache(key) {
+		this.storage.removeItem(key)
+	}
+	
+	clear() {
+		this.storage.clear()
+	}
+}
+
+const localCache = new Cache()
+const sessionCache = new Cache(false)
+
+// 应用
+localCache.setCache("sno", 111)
+
+const userInfo = {
+	name: "why",
+	nickname: "coderwhy",
+	level: 100,
+	imgURL: "http://github.com/coderwhy.png"
+}// storage本身是不能直接存储对象类型的
+sessionCache.setCache("userInfo", userInfo)</code></pre>
+
+
+<h2 id="3-正则表达式"><a href="#3-正则表达式" class="headerlink" title="3. 正则表达式"></a>3. 正则表达式</h2><p>正则表达式是一种字符串匹配利器，可以帮助我们<strong>搜索、获取、替代字符串</strong></p>
+<h3 id="3-1-正则的创建"><a href="#3-1-正则的创建" class="headerlink" title="3.1 正则的创建"></a>3.1 正则的创建</h3><p>创建方法：</p>
+<ul>
+<li>new</li>
+<li>字面量</li>
+</ul>
+<p>正则表达式主要由两部分组成：<strong>模式</strong>（patterns）和<strong>修饰符</strong>（flags）</p>
+<ul>
+<li>修饰符：<code>g</code>（匹配全部的）、<code>i</code>（忽略大小写）、<code>m</code>（多行匹配）</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const re1 = new RegExp('abc', 'ig')
+const re1 = /abc/ig
+
+const message = "fdabc123 faBC323 dfABC222 A2324aaBc"
+// 需求: 将所有的abc(忽略大小写)换成cba
+const newMessage1 = message.replaceAll(/abc/ig, 'cba')
+console.log(newMessage1);
+// 需求：将所有的数字删除
+const newMessage2 = message.replaceAll(/\d+/ig, '')
+console.log(newMessage2);</code></pre>
+
+<h3 id="3-2-正则常见的方法"><a href="#3-2-正则常见的方法" class="headerlink" title="3.2 正则常见的方法"></a>3.2 正则常见的方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>exec</td>
+<td>在字符串中执行<strong>查找匹配</strong>的 RegExp 方法，它<strong>返回一个数组</strong>（未匹配到则返回 null）。</td>
+</tr>
+<tr>
+<td>test</td>
+<td>在字符串中<strong>测试是否匹配</strong>的 RegExp 方法，它<strong>返回 true 或 false</strong>。</td>
+</tr>
+<tr>
+<td>match</td>
+<td>在字符串中执行<strong>查找匹配</strong>的 String 方法，它<strong>返回一个数组</strong>（在未匹配到时会返回 null）。</td>
+</tr>
+<tr>
+<td>matchAll</td>
+<td>在字符串中执行<strong>查找所有匹配</strong>的 String 方法，它<strong>返回一个迭代器</strong>（iterator）。修饰符必须加g</td>
+</tr>
+<tr>
+<td>search</td>
+<td>在字符串中<strong>测试匹配</strong>的 String 方法，它返回匹配到的位置<strong>索引</strong>，或者在失败时返回-1。</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>在字符串中执行查找匹配的 String 方法，并且使用替换字符串<strong>替换掉</strong>匹配到的子字符串。</td>
+</tr>
+<tr>
+<td>split</td>
+<td>使用正则表达式或者一个固定字符串<strong>分隔</strong>一个字符串，并将分隔后的子字符串存储到数组中的String方法。</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">输入账号: &lt;input type="text"&gt;
+&lt;p class="tip"&gt;请输入账号&lt;/p&gt;
+
+const re1 = /abc/ig
+const message = "fdabc123 faBC323 dfABC222 A2324aaBc"
+
+// 1.test方法
+if (re1.test(message)) {
+	console.log('message符合规则');
+} else {
+	console.log('message不符合规则');
+}
+// 案例: 让用户输入的账号必须是aaaaa
+const inputEl = document.querySelector("input")
+const tipEl = document.querySelector(".tip")
+
+inputEl.oninput = function () {
+	const value = inputEl.value
+	if (/^aaaaa$/.test(value)) {
+		tipEl.textContent = '符合要求'
+	} else {
+		tipEl.textContent = '不符合要求'
+	}
+}
+
+// 2.exec方法
+const res1 = re1.exec(message)
+console.log(res1);//['abc', index: 2, input: 'fdabc123 faBC323 dfABC222 A2324aaBc', groups: undefined]
+
+// 3.match方法
+const res2 = message.match(re1)
+console.log(res2);//['abc', 'aBC', 'ABC', 'aBc']
+
+// 3.matchAll方法 修饰符必须加g
+const res3 = message.matchAll(re1)
+console.log(res3);//RegExpStringIterator {}
+for (const item of res3) {
+	console.log(item);
+}// 多个exec的结果
+
+// 4.split方法
+const res4 = message.split(re1)
+console.log(res4);
+
+// 5.search方法
+const res5 = message.search(re1)
+console.log(res5); // 2</code></pre>
+
+<h3 id="3-3-正则规则"><a href="#3-3-正则规则" class="headerlink" title="3.3 正则规则"></a>3.3 正则规则</h3><h4 id="3-3-1-字符类"><a href="#3-3-1-字符类" class="headerlink" title="3.3.1 字符类"></a>3.3.1 字符类</h4><p>字符类是一个特殊的符号，匹配特定集中的任何符号</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\d</code>（digit）</td>
+<td>数字：从 0 到 9 的字符。</td>
+</tr>
+<tr>
+<td><code>\s</code>（space）</td>
+<td>空格符号：包括空格，制表符 <code>\t</code>，换行符 <code>\n</code> 和其他少数稀有字符，例如 <code>\v</code>，<code>\f</code> 和 <code>\r</code>。</td>
+</tr>
+<tr>
+<td><code>\w</code>（word）</td>
+<td>“单字”字符：大小写字母或数字或下划线 。</td>
+</tr>
+<tr>
+<td><code>.</code>（点）</td>
+<td>点 . 是一种特殊字符类，它与 “除换行符之外的任何字符” 匹配</td>
+</tr>
+<tr>
+<td>反向类</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><code> \D</code> 非数字：除 <code>\d</code> 以外的任何字符，例如字母。</li>
+<li><code>\S</code> 非空格符号：除 <code>\s</code> 以外的任何字符，例如字母。</li>
+<li><code>\W</code> 非单字字符：除 <code>\w</code> 以外的任何字符，例如非拉丁字母或空格</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const message = "fdaa4 22242asfasdf2242"
+
+const re = /\d+/ig
+console.log(message.match(re))</code></pre>
+
+<h4 id="3-3-2-锚点、词边界与转义"><a href="#3-3-2-锚点、词边界与转义" class="headerlink" title="3.3.2 锚点、词边界与转义"></a>3.3.2 锚点、词边界与转义</h4><p>锚点：</p>
+<ul>
+<li>符号 ^ 匹配文本<strong>开头</strong>；</li>
+<li>符号 $ 匹配文本<strong>末尾</strong></li>
+</ul>
+<p>词边界：</p>
+<ul>
+<li>词边界 <code>\b</code> 是一种检查，就像 ^ 和 $ 一样，它会检查字符串中的位置是否是词边界。</li>
+<li>词边界测试 <code>\b</code> 检查位置的一侧是否匹配 <code>\w</code></li>
+</ul>
+<p>要把特殊字符作为常规字符来使用，需要对其进行转义：</p>
+<ul>
+<li>常见的需要转义的字符：<code>[] \ / ^ $ . | ? * + ( )</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 锚点
+const message = "My name is WHY."
+if (/why\.$/i.test(message)) {
+	console.log("以why结尾")
+}
+
+// 词边界的应用
+const infos = "now time is 11:56, 12:00 eat food, number is 123:456"
+const timeRe = /\b\d\d:\d\d\b/ig;
+console.log(infos.match(timeRe));
+
+// 获取到.js/.jsx的文件名
+const fileNames = ["abc.html", "Home.jsx", "index.html", "index.js", "util.js", "format.js"]
+const jsfileRe = /\.jsx?$/
+
+const newFileNames = fileNames.filter(filename =&gt; jsfileRe.test(filename))
+console.log(newFileNames);</code></pre>
+
+<h4 id="3-3-3-集合和范围"><a href="#3-3-3-集合和范围" class="headerlink" title="3.3.3 集合和范围"></a>3.3.3 集合和范围</h4><p>集合（Sets）</p>
+<ul>
+<li>比如说，<code>[eao]</code> 意味着查找在 3 个字符 ‘a’、‘e’ 或者 ‘o’ 中的任意一个；</li>
+</ul>
+<p>范围（Ranges） </p>
+<ul>
+<li>方括号也可以包含字符范围</li>
+<li>比如说，<code>[0-9A-F]</code> 表示两个范围：它搜索一个字符，满足数字 0 到 9 或字母 A 到 F</li>
+<li><code>\d</code> —— 和 <code>[0-9]</code> 相同；<code>\D</code> -&gt; <code>[^0-9]</code></li>
+<li><code>\w</code> —— 和 <code>[a-zA-Z0-9_]</code> 相同</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const phoneNum = '185025510280'
+const phoneRe = /^1[3-9]\d{9}$/
+console.log(phoneRe.test(phoneNum));</code></pre>
+
+<h4 id="3-3-4-量词"><a href="#3-3-4-量词" class="headerlink" title="3.3.4 量词"></a>3.3.4 量词</h4><p>量词用来<strong>形容我们所需要的数量</strong>的词</p>
+<p>数量 {n} </p>
+<ul>
+<li>确切的位数：{5} </li>
+<li>某个范围的位数：{3,5}</li>
+</ul>
+<p>缩写：</p>
+<ul>
+<li><code>+</code>：代表“一个或多个”，相当于 {1, } </li>
+<li><code>?</code>：代表“零个或一个”，相当于 {0,1}。换句话说，它使得符号变得可选；</li>
+<li><code>*</code>：代表“零个或多个”，相当于 {0, }。也就是说，这个字符可以多次出现或不出现</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 案例: 字符串的html元素, 匹配出来里面所有的标签
+const htmlElement = "&lt;div&gt;&lt;span&gt;哈哈哈&lt;/span&gt;&lt;h2&gt;我是标题&lt;/h2&gt;&lt;/div&gt;"
+const tagRe = /&lt;\/?[a-z][a-z0-9]*&gt;/ig
+
+const results2 = htmlElement.match(tagRe)
+console.log(results2)</code></pre>
+
+<h4 id="3-3-5-贪婪和惰性"><a href="#3-3-5-贪婪和惰性" class="headerlink" title="3.3.5 贪婪和惰性"></a>3.3.5 贪婪和惰性</h4><p><strong>默认</strong>情况下的匹配规则是<strong>查找到匹配的内容后，会继续向后查找</strong>，一直找到最后一个匹配的内容 </p>
+<ul>
+<li>这种匹配的方式，我们称之为贪婪模式（Greedy）</li>
+</ul>
+<p>懒惰模式中的量词与贪婪模式中的是相反的。</p>
+<ul>
+<li>只要获取到对应的内容后，就不再继续向后匹配</li>
+<li>我们可以<strong>在量词后面再加一个问号</strong> ‘?’ 来启用它</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const message = "我最喜欢的两本书: 《黄金时代》和《沉默的大多数》、《一只特立独行的猪》"
+
+// 默认.+采用贪婪模式
+const nameRe = /《.+》/ig
+const result1 = message.match(nameRe)
+console.log(result1)
+
+// 使用惰性模式
+const nameRe = /《.+?》/ig
+const result1 = message.match(nameRe)
+console.log(result1)</code></pre>
+
+<h4 id="3-3-6-捕获组"><a href="#3-3-6-捕获组" class="headerlink" title="3.3.6 捕获组"></a>3.3.6 捕获组</h4><p>模式的<strong>一部分可以用括号括起来</strong> (…)，这称为“捕获组</p>
+<ul>
+<li>它允许将匹配的一部分作为结果数组中的单独项</li>
+<li>它将括号视为一个整体</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// 1.打印书名，不要《》
+const message = "我最喜欢的两本书: 《黄金时代》和《沉默的大多数》、《一只特立独行的猪》"
+const nameRe = /《(?&lt;why&gt;.+?)》/ig
+
+const iterator = message.matchAll(nameRe)
+for (const item of iterator) {
+	console.log(item[1]);
+}
+
+// 2.将捕获组作为整体
+const info = "dfabcabcfabcdfdabcabcabcljll;jk;j"
+const abcRe = /(abc){2,}/ig
+console.log(info.match(abcRe));// ['abcabc', 'abcabcabc']</code></pre>
+
+<p>捕获组的补充：<br><img src="a2174ea65d4e4e258f2533b28df65b22.png" alt="在这里插入图片描述"></p>
+<h3 id="3-4-练习案例"><a href="#3-4-练习案例" class="headerlink" title="3.4 练习案例"></a>3.4 练习案例</h3><h4 id="3-4-1-歌词解析-重要"><a href="#3-4-1-歌词解析-重要" class="headerlink" title="3.4.1 歌词解析(重要)"></a>3.4.1 歌词解析(重要)</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const lyricString = "[00:00.000] 作词 : 许嵩\n[00:01.000] 作曲 : 许嵩\n[00:02.000] 编曲 : 许嵩\n[00:22.240]天空好想下雨\n[00:24.380]我好想住你隔壁\n[00:26.810]傻站在你家楼下\n[00:29.500]抬起头数乌云\n[00:31.160]如果场景里出现一架钢琴\n[00:33.640]我会唱歌给你听\n[00:35.900]哪怕好多盆水往下淋\n"
+
+// 封装
+function parseLyric(lyricString) {
+	// 1.根据\n切割字符串
+	const lyricLineStrings = lyricString.split('\n')
+	// 2.针对每一行歌词时间进行解析
+	const timeRe = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/i
+	
+	const lyricInfos = []
+	// [01:22.550]夏末秋凉里带一点温热有换季的颜色
+	for (const lineString of lyricLineStrings) {
+		// 1.获取时间
+		const result = lineString.match(timeRe)
+		if (!result) continue
+		const minuteTime = result[1] * 60 * 1000
+		const secondTime = result[2] * 1000
+		const mSecondTime = result[3].length === 3 ? result[3] * 1 : result[3] * 10
+		// 考虑毫秒有2位的情况[01:22.550]
+		const time = minuteTime + secondTime + mSecondTime
+		
+		// 2.获取内容
+		const content = lineString.replace(timeRe, '').trim()
+		
+		// 3.将对象放到数组中
+		lyricInfos.push({ time, content })
+	}
+	return lyricInfos
+}
+
+const lyricInfos = parseLyric(lyricString)
+console.log(lyricInfos)</code></pre>
+
+<h4 id="3-4-2-时间格式化"><a href="#3-4-2-时间格式化" class="headerlink" title="3.4.2 时间格式化"></a>3.4.2 时间格式化</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function formatTime(timestamp, fmtString) {
+	// 1.将时间戳转成Date
+	const date = new Date(timestamp)
+	
+	// // 2.获取到值
+	// const year = date.getFullYear()
+	// const month = date.getMonth() + 1
+	// const day = date.getDate()
+	// const hour = date.getHours()
+	// const minute = date.getMinutes()
+	// const second = date.getSeconds()
+	// // 3.创建正则
+	// const yearRe = /y+/
+	// const monthRe = /M+/
+	
+	// 2.正则和值匹配起来
+	const dateO = {
+		'y+': date.getFullYear(),
+		'M+': date.getMonth() + 1,
+		"d+": date.getDate(),
+		"h+": date.getHours(),
+		"m+": date.getMinutes(),
+		"s+": date.getSeconds()
+	}
+	
+	for (const key in dateO) {
+		if (new RegExp(key).test(fmtString)) {
+			const value = (dateO[key] + '').padStart(2, '0')
+			fmtString = fmtString.replace(new RegExp(key), value)
+		}
+	}
+
+	return fmtString
+}
+
+// 某一个商品上架时间, 活动的结束时间
+const timeEl = document.querySelector(".time")
+const productJSON = {
+	name: "iPhone",
+	newPrice: 4999,
+	oldPrice: 5999,
+	endTime: 1659252301637
+}
+timeEl.textContent = formatTime(productJSON.endTime, 'yyyy/MM/dd hh:mm:ss')</code></pre>
+
+<h1 id="六、防抖和节流"><a href="#六、防抖和节流" class="headerlink" title="六、防抖和节流"></a>六、防抖和节流</h1><ul>
+<li>JavaScript是事件驱动的，大量的操作会触发事件，加入到事件队列中处理。</li>
+<li>而对于某些频繁的事件处理会造成性能的损耗，我们就可以通过防抖和节流来限制事件频繁的发生</li>
+</ul>
+<h2 id="1-防抖"><a href="#1-防抖" class="headerlink" title="1. 防抖"></a>1. 防抖</h2><h3 id="1-1-认识防抖函数-debounce"><a href="#1-1-认识防抖函数-debounce" class="headerlink" title="1.1 认识防抖函数 debounce"></a>1.1 认识防抖函数 debounce</h3><p>==过程：==</p>
+<ul>
+<li>当事件触发时，相应的函数并<strong>不会立即触发，而是会等待一定的时间</strong>； </li>
+<li>当事件密集触发时，函数的触发会被频繁的推迟；</li>
+<li>只有等待了一段时间也没有事件触发，才会真正的执行响应函数</li>
+</ul>
+<p>==应用场景：==</p>
+<ul>
+<li>输入框中频繁的输入内容，搜索或者提交信息</li>
+<li>频繁的点击按钮，触发某个事件</li>
+<li>监听浏览器滚动事件，完成某些特定操作</li>
+<li>用户缩放浏览器的resize事件</li>
+</ul>
+<p>==应用案例：==<br>搜索联想，这些联想内容通常是保存在服务器的，所以需要一次网络请求</p>
+<ul>
+<li>在合适的情况下发送网络请求</li>
+<li>比如如果用户快速的输入一个macbook，那么只是发送一次网络请求</li>
+<li>比如如果用户是输入一个m想了一会儿，这个时候m确实应该发送一次网络请求</li>
+<li>也就是我们应该<strong>监听用户在某个时间，比如3000ms内，没有再次触发时间时，再发送网络请求</strong></li>
+</ul>
+<h3 id="1-2-自定义防抖函数"><a href="#1-2-自定义防抖函数" class="headerlink" title="1.2 自定义防抖函数"></a>1.2 自定义防抖函数</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;input type="text"&gt;
+&lt;script&gt;
+function hydebounce(fn, delay) {
+	// 1.记录上一次事件触发的timer
+	let timer = null
+	// 2.触发事件时执行的函数
+	const _debounce = function (...args) {
+		// console.log('_debounce的this,', this);// inputEl
+		// 2.1 如果有再次(更多次)触发事件，清除上一次的timer
+		if (timer) clearTimeout(timer)
+		// 2.2 延迟去执行对应的fn
+		timer = setTimeout(() =&gt; {
+			fn.apply(this, args)
+			timer = null
+		}, delay);
+	}
+	
+	// 返回一个新的函数
+	return _debounce
+}
+&lt;/script&gt;
+
+&lt;script&gt;
+// 1.获取input元素
+const inputEl = document.querySelector("input")
+// 2.防抖处理代码
+let counter = 1
+inputEl.oninput = hydebounce(function (e) {
+	console.log(`发送网络请求${counter++}:`, this.value, e)
+}, 3000)
+&lt;/script&gt;</code></pre>
+
+<h4 id="优化（了解）"><a href="#优化（了解）" class="headerlink" title="优化（了解）"></a>优化（了解）</h4><p>优化一：优化取消操作（增加取消功能）<br>优化二：优化立即执行效果：第一次输入时立即执行，后面每次输入触发流程结束后，重新输入都立即执行<br>优化三：优化返回值</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;input type="text"&gt;
+&lt;button class="cancel"&gt;取消&lt;/button&gt;
+
+&lt;script&gt;
+	function hydebounce(fn, delay, immediate = false, resultCallback) {
+		// 1.记录上一次事件触发的timer
+		let timer = null
+		let isInvoke = false
+		
+		// 2.触发事件时执行的函数
+		const _debounce = function (...args) {
+			return new Promise((resolve, reject) =&gt; {
+				try {
+					// 2.1 如果有再次(更多次)触发事件，清除上一次的timer
+					if (timer) clearTimeout(timer)
+					let res = undefined
+					
+					if (immediate &amp;&amp; !isInvoke) {
+						res = fn.apply(this, args)
+						if (resultCallback) resultCallback(res)
+						resolve(res)
+						isInvoke = true
+						return
+					}
+					
+					// 2.2 延迟去执行对应的fn
+					timer = setTimeout(() =&gt; {
+						res = fn.apply(this, args)
+						if (resultCallback) resultCallback(res)
+						resolve(res)
+						timer = null
+						isInvoke = false // 保证延迟执行后，再次输入时可以立即执行
+					}, delay);
+				} catch {
+					reject(error)
+				}
+			})
+		}
+		
+		// 3.给_debounce绑定一个取消的函数
+		_debounce.cancel = function () {
+			if (timer) clearTimeout(timer)
+			timer = null
+			isInvoke = false
+		}
+		// 返回一个新的函数
+		return _debounce
+	}
+&lt;/script&gt;
+
+&lt;script&gt;
+// 1.获取input元素
+const inputEl = document.querySelector("input")
+const cancelBtn = document.querySelector(".cancel")
+// 2.防抖处理代码
+let counter = 1
+const debounceFn = hydebounce(function (e) {
+	console.log(`发送网络请求${counter++}:`, this.value, e)
+}, 3000, true)
+inputEl.oninput = debounceFn
+
+cancelBtn.onclick = function () {
+	debounceFn.cancel()
+}
+
+// 优化返回值
+const myDebounceFn = hydebounce(function (name, age, height) {
+	console.log("----------", name, age, height)
+	return "coderwhy 哈哈哈哈"
+}, 1000, false)
+
+myDebounceFn("why", 18, 1.88).then(res =&gt; {
+	console.log("拿到执行结果:", res) //coderwhy 哈哈哈哈
+})
+&lt;/script&gt;</code></pre>
+
+<h2 id="2-节流"><a href="#2-节流" class="headerlink" title="2. 节流"></a>2. 节流</h2><h3 id="2-1-认识节流函数-throttle"><a href="#2-1-认识节流函数-throttle" class="headerlink" title="2.1 认识节流函数 throttle"></a>2.1 认识节流函数 throttle</h3><p>==过程：==</p>
+<ul>
+<li>当事件触发时，会执行这个事件的响应函数</li>
+<li>如果这个事件会被频繁触发，那么节流函数会<strong>按照一定的频率来执行</strong>函数</li>
+<li>不管在这个中间有多少次触发这个事件，执行函数的频繁总是固定的</li>
+</ul>
+<p>==应用场景：==</p>
+<ul>
+<li>监听页面的滚动事件</li>
+<li>鼠标移动事件</li>
+<li>用户频繁点击按钮操作</li>
+<li>游戏中的一些设计</li>
+</ul>
+<p>==应用案例：==<br>搜索联想，这些联想内容通常是保存在服务器的，所以需要一次网络请求</p>
+<ul>
+<li>监听input的输入，前后输入时间间隔超过一定时间（10s）后，对后面输入的发送请求</li>
+<li>若未超过，则不发送请求。此时过一段时间输入时，若与初次时间间隔超过10s则立即执行，startTime刷新</li>
+<li><strong>发送请求的间隔只会等于或大于10s</strong></li>
+</ul>
+<h3 id="2-2-自定义节流函数"><a href="#2-2-自定义节流函数" class="headerlink" title="2.2 自定义节流函数"></a>2.2 自定义节流函数</h3><p><img src="8d9d9e99ac6246bf9774a6cb3545aa79.png" alt="在这里插入图片描述"></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;input type="text"&gt;
+&lt;script&gt;
+function hythrottle(fn, interval) {
+	let startTime = 0
+	
+	const _throttle = function (...args) {
+		const nowTime = new Date().getTime()
+		const waitTime = interval - (nowTime - startTime)
+		if (waitTime &lt;= 0) {
+			fn.apply(this, args)
+			startTime = nowTime
+		}
+	}
+	return _throttle
+}
+&lt;/script&gt;
+
+&lt;script&gt;
+// 1.获取input元素
+const inputEl = document.querySelector("input")
+
+// 2.节流处理代码
+let counter = 1
+inputEl.oninput = hythrottle(function (e) {
+	console.log(`发送网络请求${counter++}:`, this.value, e)
+}, 10000)</code></pre>
+
+<h4 id="优化（了解）-1"><a href="#优化（了解）-1" class="headerlink" title="优化（了解）"></a>优化（了解）</h4><p>优化一：节流最后一次也可以执行<br><img src="555c1de7589a4fe4bf9c60644bfb26fc.png" alt="在这里插入图片描述"></p>
+<p>优化二：优化添加取消功能<br>优化三：优化返回值问题</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;input type="text"&gt;
+&lt;button class="cancel"&gt;取消&lt;/button&gt;
+&lt;script&gt;
+function hythrottle(fn, interval, leading = true, trailing = false) {
+	let startTime = 0
+	let timer = null
+	
+	const _throttle = function (...args) {
+		return new Promise((resolve, reject) =&gt; {
+			try {
+				// 1.获取当前时间
+				const nowTime = new Date().getTime()
+					
+				// 使函数在最开始不立即执行
+				if (!leading &amp;&amp; startTime === 0) {
+					startTime = nowTime
+				}
+					
+				// 2.计算需要等待的时间执行函数
+				const waitTime = interval - (nowTime - startTime)
+				if (waitTime &lt;= 0) {
+					if (timer) clearTimeout(timer)
+					const res = fn.apply(this, args)
+					resolve(res)
+					startTime = nowTime
+					timer = null
+					return
+				}
+					
+				// 3.使节流最后一次也可以执行
+				if (trailing &amp;&amp; !timer) {
+					timer = setTimeout(() =&gt; {
+						const res = fn.apply(this, args)
+						resolve(res)
+						startTime = new Date().getTime() // 最后一次没有触发_throttle函数，无法使用nowTime
+						timer = null
+					}, waitTime);
+				}
+			} catch (error) {
+				reject(error)
+			}
+		})
+		
+	_throttle.cancel = function() {
+		if (timer) clearTimeout(timer)
+		startTime = 0
+		timer = null
+	}
+	
+	return _throttle
+}
+&lt;/script&gt;
+
+&lt;script&gt;
+// 1.获取input元素
+const inputEl = document.querySelector("input")
+const cancelBtn = document.querySelector(".cancel")
+
+// 2.节流处理代码
+let counter = 1
+inputEl.oninput = hythrottle(function (e) {
+	console.log(`发送网络请求${counter++}:`, this.value, e)
+}, 1000, false, true)
+
+// 3.获取返回值
+const throttleFn = hythrottle(function(event) {
+	console.log(`发送网络请求${counter++}:`, this.value, event)
+	return "throttle return value"
+}, 3000, { trailing: true })
+
+throttleFn("aaaa").then(res =&gt; {
+	console.log("res:", res)
+})
+&lt;/script&gt;</code></pre>
+
+<h2 id="3-underscore-库实现防抖和节流"><a href="#3-underscore-库实现防抖和节流" class="headerlink" title="3. underscore 库实现防抖和节流"></a>3. underscore 库实现防抖和节流</h2><p>underscore的官网： <a target="_blank" rel="noopener" href="https://underscorejs.org/">https://underscorejs.org/</a></p>
+<p>里面有两个函数：<br>防抖函数：<code>_debounce(fn, ms)</code><br>节流函数：<code>_throttle(fn, ms)</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;input type="text"&gt;
+&lt;script src="./js/underscore.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+// 1.获取input元素
+const inputEl = document.querySelector("input")
+
+// 2.防抖处理代码
+let counter = 1
+inputEl.oninput = _.debounce(function () {
+	console.log(`发送网络请求${counter++}:`, this.value)
+}, 3000)
+
+// 3.节流处理代码
+inputEl.oninput = _.throttle(function () {
+	console.log(`发送网络请求${counter++}:`, this.value)
+}, 3000)</code></pre>
+
+<h1 id="七、深拷贝和事件总线"><a href="#七、深拷贝和事件总线" class="headerlink" title="七、深拷贝和事件总线"></a>七、深拷贝和事件总线</h1><h2 id="1-深拷贝"><a href="#1-深拷贝" class="headerlink" title="1. 深拷贝"></a>1. 深拷贝</h2><p>前面我们已经可以通过一种方法来实现深拷贝了：<code>JSON.parse</code> </p>
+<ul>
+<li>这种深拷贝的方式其实对于<strong>函数、Symbol</strong>等是无法处理的</li>
+<li>并且如果存在对象的<strong>循环引用</strong>，也会报错的</li>
+</ul>
+<p>自定义深拷贝函数：</p>
+<ol>
+<li>自定义深拷贝的基本功能</li>
+<li>对Symbol的key进行处理</li>
+<li>其他数据类型的值进程处理：数组、函数、Symbol、Set、Map</li>
+<li>对循环引用的处理</li>
+</ol>
+<h3 id="1-1-自定义深拷贝的基本功能"><a href="#1-1-自定义深拷贝的基本功能" class="headerlink" title="1.1 自定义深拷贝的基本功能"></a>1.1 自定义深拷贝的基本功能</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function isObject(value) {
+	const valueType = typeof value
+	// null -&gt; object
+	// function -&gt; function
+	// object/arr -&gt; object
+	return (value !== null) &amp;&amp; (valueType === 'object' || valueType === 'function')
+}
+
+function deepCopy(originValue) {
+	// 如果是原始类型，直接返回
+	if (!isObject(originValue)) {
+		return originValue
+	}
+	
+	// 如果是对象类型，需要创建对象
+	const newObj = {}
+	for (const key in originValue) {
+		newObj[key] = deepCopy(originValue[key])
+	}
+}
+
+const info = {
+	name: "why",
+	age: 18,
+	friend: {
+		name: "kobe",
+		address: {
+			name: "洛杉矶",
+			detail: "斯坦普斯中心"
+		}
+	}
+}
+
+const newObj = deepCopy(info)
+console.log(newObj);</code></pre>
+
+<h3 id="1-2-优化（了解）"><a href="#1-2-优化（了解）" class="headerlink" title="1.2 优化（了解）"></a>1.2 优化（了解）</h3><ul>
+<li>数组类型</li>
+<li>其他类型处理<ul>
+<li>Set</li>
+<li>函数</li>
+<li>Symbol key</li>
+<li>Symbol value</li>
+</ul>
+</li>
+<li>循环引用<ul>
+<li>WeakMap<pre class="line-numbers language-none"><code class="language-none">```
+```js
+function deepCopy(originValue, map = new WeakMap()) {
+	// 0.如果值是Symbol的类型
+	if (typeof originValue === "symbol") {
+		return Symbol(originValue.description)
+	}
+	
+	// 1.如果是原始类型, 直接返回
+	if (!isObject(originValue)) {
+		return originValue
+	}
+	
+	// 2.如果是set类型
+	if (originValue instanceof Set) {
+		const newSet = new Set()
+		for (const setItem of originValue) {
+			newSet.add(deepCopy(setItem))
+		}
+		return newSet
+	}
+	
+	// 3.如果是函数function类型, 不需要进行深拷贝
+	if (typeof originValue === "function") {
+		return originValue
+	}
+	
+	// 4.如果是对象类型, 才需要创建对象
+	if (map.get(originValue)) {
+		return map.get(originValue)
+	}
+	const newObj = Array.isArray(originValue) ? []: {} // 区分数组类型和对象类型
+	map.set(originValue, newObj)
+	
+	// 遍历普通的key
+	for (const key in originValue) {
+		newObj[key] = deepCopy(originValue[key], map);
+	}
+	
+	// 单独遍历Symbol key
+	const symbolKeys = Object.getOwnPropertySymbols(originValue)
+	for (const symbolKey of symbolKeys) {
+		newObj[Symbol(symbolKey.description)] = deepCopy(originValue[symbolKey], map)
+	}
+	
+	return newObj
+}
+
+
+const s1 = Symbol("s1")
+const s2 = Symbol("s2")
+const info = {
+	name: "why",
+	age: 18,
+	friend: {
+		name: "kobe",
+		address: {
+			name: "洛杉矶",
+			detail: "斯坦普斯中心"
+		}
+	},
+	// 1.特殊类型: Set
+	set: new Set(['abc', 'cba', 'nba']),
+	// 2.特性类型: function
+	running: function () {
+		console.log('running~');
+	},
+	// 3.值的特殊类型: Symbol
+	symbolKey: Symbol("abc"),
+	// 4.key是symbol时
+	[s1]: "aaaa",
+	[s2]: "bbbb"
+}
+info.self = info
+
+let newObj = deepCopy(info)
+console.log(newObj)
+console.log(newObj.self === newObj)</code></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-事件总线"><a href="#2-事件总线" class="headerlink" title="2. 事件总线"></a>2. 事件总线</h2><p>自定义事件总线属于一种观察者模式，其中包括三个角色：</p>
+<ul>
+<li>发布者（Publisher）：发出事件（Event）</li>
+<li>订阅者（Subscriber）：订阅事件（Event），并且会进行响应（Handler）</li>
+<li>事件总线（EventBus）：无论是发布者还是订阅者都是通过事件总线作为中台的</li>
+</ul>
+<p>实现自己的事件总线：</p>
+<ul>
+<li>事件的监听方法on</li>
+<li>事件的发射方法emit</li>
+<li>事件的取消监听off；</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;button class="nav-btn"&gt;nav button&lt;/button&gt;
+
+&lt;script&gt;
+class HYEventBus {
+	constructor() {
+		this.eventMap = {}
+	}
+	
+	on(eventName, eventFn) {
+		let eventFns = this.eventMap[eventName] // 找到eventMap对象中eventName属性对应的值
+		if (!eventFns) {
+			eventFns = [] // 创建为一个数组
+			this.eventMap[eventName] = eventFns // 加入eventMap对象中
+		}
+		eventFns.push(eventFn)
+	}
+	
+	off(eventName, eventFn) {
+		let eventFns = this.eventMap[eventName]
+		if (!eventFns) return
+		for (let i = 0; i &lt; eventFns.length; i++) {
+			const fn = eventFns[i]
+			if (fn === eventFn) {
+				eventFns.splice(i, 1)
+				break
+			}
+		}
+		// 如果eventFns已经清空了
+		if (eventFns.length === 0) {
+			delete this.eventMap[eventName]
+		}
+	}
+	
+	emit(eventName, ...args) {
+		let eventFns = this.eventMap[eventName]
+		if (!eventFns) return
+		// 遍历所有的函数，依次执行
+		eventFns.forEach(fn =&gt; {
+			fn(...args)
+		});
+	}
+}
+
+const eventBus = new HYEventBus()
+
+// aside.vue组件中监听事件
+eventBus.on('navclick', (name, age, height) =&gt; {
+	console.log('navclick listener 01', name, age, height);
+})
+const click = () =&gt; {
+	console.log("navclick listener 02")
+}
+eventBus.on("navclick", click) // 一个事件名称"navclick"可以绑定多个不同的函数
+
+setTimeout(() =&gt; {
+	eventBus.off("navclick", click)
+}, 5000);
+// eventBus.on('asideclick', () =&gt; {
+//	console.log('asideclick listener');
+// })
+
+// nav.vue
+const navBtnEl = document.querySelector(".nav-btn")
+navBtnEl.onclick = function () {
+	console.log("自己监听到")
+	eventBus.emit("navclick", "why", 18, 1.88)
+}</code></pre>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/01/15/JavaScript-%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89Promise%E3%80%81%E5%BC%82%E6%AD%A5async-await%E3%80%81%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81%E7%AD%89/">https://nan-ying.github.io/2023/01/15/JavaScript-%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89Promise%E3%80%81%E5%BC%82%E6%AD%A5async-await%E3%80%81%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81%E7%AD%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/JavaScript/">
+              <span class="chip bg-color">JavaScript</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-01-15T18-54-03',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/01/15/JavaScript-%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="JavaScript 高级（六）网络请求和响应">
+                        
+                        <span class="card-title">JavaScript 高级（六）网络请求和响应</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+                                    前端三件套
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/15/JavaScript-%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89E6-E13-%E6%96%B0%E7%89%B9%E6%80%A7/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="JavaScript 高级（四）E6 ~E13 新特性">
+                        
+                        <span class="card-title">JavaScript 高级（四）E6 ~E13 新特性</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+                                    前端三件套
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >453.3k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

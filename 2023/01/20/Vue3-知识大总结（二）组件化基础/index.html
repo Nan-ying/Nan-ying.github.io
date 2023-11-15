@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Vue3 知识大总结（二）组件化基础, Nan-ying&#39;s Blog">
+    <meta name="description" content="一、组件化开发思想组件化是Vue、React、Angular的核心思想：
+
+前面我们的createApp函数传入了一个对象App，这个对象其实本质上就是一个组件，也是我们应用程序的根组件
+组件化提供了一种抽象，让我们可以开发出一个个独立可复">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Vue3 知识大总结（二）组件化基础 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Vue3 知识大总结（二）组件化基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Vue/">
+              <span class="chip bg-color">Vue</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+              Vue框架
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-01-20
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 7k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          31 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="一、组件化开发思想"><a href="#一、组件化开发思想" class="headerlink" title="一、组件化开发思想"></a>一、组件化开发思想</h1><p>组件化是Vue、React、Angular的核心思想：</p>
+<ul>
+<li>前面我们的createApp函数传入了一个对象App，这个对象其实本质上就是一个组件，也是我们应用程序的<strong>根组件</strong></li>
+<li>组件化提供了一种抽象，让我们可以开发出一个个<strong>独立可复用的小组件</strong>来构造我们的应用</li>
+<li>任何的应用都会被抽象成一颗<strong>组件树</strong></li>
+</ul>
+<h2 id="1-注册全局组件"><a href="#1-注册全局组件" class="headerlink" title="1. 注册全局组件"></a>1. 注册全局组件</h2><ul>
+<li>全局组件：在任何其他的组件中都可以使用的组件</li>
+<li>通过<strong>component方法</strong>传入组件名称、组件对象即可注册一个全局组件了</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;HomeNav&gt;&lt;/HomeNav&gt;
+	&lt;home-nav&gt;&lt;/home-nav&gt;
+	
+	&lt;product-item&gt;&lt;/product-item&gt;
+	&lt;product-item&gt;&lt;/product-item&gt;
+	&lt;product-item&gt;&lt;/product-item&gt;
+&lt;/div&gt;
+
+&lt;template id="nav"&gt;
+	&lt;h2&gt;我是应用程序的导航&lt;/h2&gt;
+&lt;/template&gt;
+
+&lt;template id="product"&gt;
+	&lt;div class="product"&gt;
+		&lt;h2&gt;{{title}}&lt;/h2&gt;
+		&lt;p&gt;商品描述, 限时折扣, 赶紧抢购&lt;/p&gt;
+		&lt;p&gt;价格: {{price}}&lt;/p&gt;
+		&lt;button @click="favarItem"&gt;收藏&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {}
+		},
+	})
+	// 2.注册全局组件
+	app.component("product-item", {
+		template: "#product",
+		data() {
+			return {
+				title: "我是商品Item",
+				price: 9.9
+			}
+		},
+		methods: {
+			favarItem() {
+				console.log("收藏了当前的item")
+			}
+		}
+	})
+	
+	app.component("HomeNav", {
+		template: "#nav"
+	})
+	
+	// 3.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h2 id="2-注册局部组件"><a href="#2-注册局部组件" class="headerlink" title="2. 注册局部组件"></a>2. 注册局部组件</h2><ul>
+<li>局部组件：只有在<strong>注册的组件中</strong>才能使用的组件（常用）</li>
+<li>通过<strong>components属性</strong>选项来进行注册</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;home-nav&gt;&lt;/home-nav&gt;
+	&lt;product-item&gt;&lt;/product-item&gt;
+	&lt;product-item&gt;&lt;/product-item&gt;
+	&lt;product-item&gt;&lt;/product-item&gt;
+&lt;/div&gt;
+
+&lt;template id="product"&gt;
+	&lt;div class="product"&gt;
+		&lt;h2&gt;{{title}}&lt;/h2&gt;
+		&lt;p&gt;商品描述, 限时折扣, 赶紧抢购&lt;/p&gt;
+		&lt;p&gt;价格: {{price}}&lt;/p&gt;
+		&lt;button&gt;收藏&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;template id="nav"&gt;
+	&lt;div&gt;-------------------- nav start ---------------&lt;/div&gt;
+	&lt;h1&gt;我是home-nav的组件&lt;/h1&gt;
+	&lt;product-item&gt;&lt;/product-item&gt; 
+	// 在此组件中加components属性才可使用
+	&lt;div&gt;-------------------- nav end ---------------&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	const ProductItem = {
+		template: "#product",
+		data() {
+			return {
+				title: "我是product的title",
+				price: 9.9
+			}
+		}
+	}
+	
+	// 1.创建局部组件
+	const app = Vue.createApp({
+		// components: option api
+		components: {
+			ProductItem,
+			HomeNav: {
+				template: "#nav",
+				components: {
+					ProductItem
+				}
+			}
+		},
+		// data: option api
+		data() {
+			return {
+				message: "Hello Vue"
+			}
+		}
+	})
+	
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h1 id="二、Vue-脚手架"><a href="#二、Vue-脚手架" class="headerlink" title="二、Vue 脚手架"></a>二、Vue 脚手架</h1><p>在真实开发中，我们可以通过一个<strong>后缀名为 .vue</strong> 的single-file components (单文件组件) 来解决，并且可以<strong>使用 webpack或者vite或者rollup等构建工具</strong>来对其进行处理</p>
+<p>想要使用这一的SFC的.vue文件，比较常见的是两种方式：</p>
+<ul>
+<li>方式一：使用<strong>Vue CLI来创建项目</strong>，项目会默认帮助我们配置好所有的配置选项，可以在其中直接使用.vue文件</li>
+<li>方式二：自己使用webpack或rollup或vite这类打包工具，对其进行打包处理</li>
+</ul>
+<h2 id="1-Vue-CLI-安装和使用"><a href="#1-Vue-CLI-安装和使用" class="headerlink" title="1. Vue CLI 安装和使用"></a>1. Vue CLI 安装和使用</h2><p>Vue的脚手架就是Vue CLI：</p>
+<ul>
+<li>CLI是Command-Line Interface, 翻译为<strong>命令行界面</strong></li>
+<li>我们可以通过CLI选择项目的配置和创建出我们的项目</li>
+<li>Vue CLI已经内置了webpack相关的配置，我们不需要从零来配置</li>
+</ul>
+<h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h3><ul>
+<li>安装Vue CLI：<code>npm install @vue/cli -g</code></li>
+<li>升级Vue CLI：<code>npm update @vue/cli -g</code></li>
+</ul>
+<h3 id="1-2-vue-create-项目的过程"><a href="#1-2-vue-create-项目的过程" class="headerlink" title="1.2 vue create 项目的过程"></a>1.2 vue create 项目的过程</h3><ul>
+<li>通过Vue的命令来创建项目：<code>Vue create 项目的名称</code></li>
+</ul>
+<p><img src="17da786379754ac1a7192141351c4b7b.png" alt="在这里插入图片描述"></p>
+<h2 id="2-Vue-项目目录结构"><a href="#2-Vue-项目目录结构" class="headerlink" title="2. Vue 项目目录结构"></a>2. Vue 项目目录结构</h2><pre class="line-numbers language-node" data-language="node"><code class="language-node">node_modules:  安装的所有依赖包
+
+public： public目录存放的是一些公用文件
+   ---favicon.ico  图标
+   ---index.html   打包webpack时所需要的的HTML 模板
+
+src： 存放vue项目的源代码
+   --assets: 资源文件,比如存放css,图片等资源
+   --components: 组件文件夹
+   --APP.vue   根组件
+   --main.js  项目的入口文件
+
+.browserslistrc：  设置目标浏览器,进行浏览器适配
+
+.gitignore：  git的忽略文件
+
+babel.config.js：  babel的配置
+
+jsconfig.json：  给vscode进行读取,vscode在读取到其中的内容时,给我们代码更加友好的提示
+
+package-lock.json：   项目包的锁定文件,npm install 可以通过package-lock文件来检测lock中包的版本是否和package.json中一致 ---一致,会优先查找缓存,不一致,就会重新构建依赖关系
+
+package.json：  npm配置文件,记录这你项目的名称,版本号,项目描述,也记录项目所依赖的其他库的信息和依赖库的版本号
+
+README.md：  项目说明(描述)
+
+vue.config.js：  vue 的配置文件</code></pre>
+
+<p><img src="edc7a4c51fd744049fe6bc8c3c06b97e.png" alt="在这里插入图片描述"></p>
+<h2 id="3-vue-初步使用"><a href="#3-vue-初步使用" class="headerlink" title="3. vue 初步使用"></a>3. vue 初步使用</h2><ul>
+<li>main.js</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">import { createApp } from "vue";
+import App from "./components/App.vue";
+// import ProductItem from "./components/ProductItem.vue";
+
+const app = createApp(App);
+
+// 全局注册
+// app.component("product-item", ProductItem);
+
+app.mount("#app");</code></pre>
+
+<ul>
+<li>App.vue</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;h2&gt;{{ title }}&lt;/h2&gt;
+	&lt;h2&gt;当前计数：{{ counter }}&lt;/h2&gt;
+	&lt;button @click="decrement"&gt;-&lt;/button&gt;
+	&lt;button @click="increment"&gt;+&lt;/button&gt;
+	&lt;product-item&gt;&lt;/product-item&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+// 局部注册
+import ProductItem from "./ProductItem.vue"
+
+export default {
+	components: {
+		ProductItem,
+	},
+	data() {
+		return {
+			title: "我还是标题",
+			counter: 0,
+		};
+	},
+	methods: {
+		decrement() {
+			this.counter--;
+		},
+		increment() {
+			this.counter++;
+		},
+	},
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+	h2 {
+		color: red;
+	}
+&lt;/style&gt;</code></pre>
+
+<ul>
+<li>ProductItem.vue</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;div class="product"&gt;
+		&lt;h2&gt;我是商品&lt;/h2&gt;
+		&lt;div&gt;商品图片&lt;/div&gt;
+		&lt;div&gt;
+			商品价格: &lt;span&gt;¥{{ price }}&lt;/span&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+	data() {
+		return {
+			price: 9.9,
+			count: 0,
+		};
+	},
+}
+&lt;/script&gt;
+
+&lt;style&gt;&lt;/style&gt;</code></pre>
+
+<h2 id="4-知识补充"><a href="#4-知识补充" class="headerlink" title="4. 知识补充"></a>4. 知识补充</h2><h3 id="4-1-jsconfig-文件的作用"><a href="#4-1-jsconfig-文件的作用" class="headerlink" title="4.1 jsconfig 文件的作用"></a>4.1 jsconfig 文件的作用</h3><p>给vscode进行读取,vscode在读取到其中的内容时,给我们代码<strong>更加友好的提示</strong></p>
+<p>jsconfig 文件<br><img src="2f7217460c7d4dccadd6b52c9a9aff86.png" alt="在这里插入图片描述"></p>
+<p>vue.config.js 文件<br><img src="94f00413f1d5426f8e9ee88acfe13445.png" alt="在这里插入图片描述"></p>
+<h3 id="4-2-vue-不同版本的作用"><a href="#4-2-vue-不同版本的作用" class="headerlink" title="4.2 vue 不同版本的作用"></a>4.2 vue 不同版本的作用</h3><ul>
+<li>runtime版本：没有对模板的编译，需要自己写对应的render函数(返回h函数)或者setup返回一个函数，函数的返回值是h函数<ul>
+<li>没有将模板转成vnode节点这一过程</li>
+</ul>
+</li>
+<li>runtime+comiple 版本：可以将template模板通过compile转换成对应的vnode节点</li>
+</ul>
+<h3 id="4-3-css-的-scoped-作用域"><a href="#4-3-css-的-scoped-作用域" class="headerlink" title="4.3 css 的 scoped 作用域"></a>4.3 css 的 scoped 作用域</h3><p>每个vue文件中的css：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;style scoped&gt;
+.title {
+	color: red;
+}
+&lt;/style&gt;</code></pre>
+
+<p>此时对title的样式只对此vue文件中的.title适用，其他vue文件中不适用</p>
+<h3 id="4-4-npm-init-vue-latest创建项目"><a href="#4-4-npm-init-vue-latest创建项目" class="headerlink" title="4.4 npm init vue@latest创建项目"></a>4.4 npm init vue@latest创建项目</h3><ul>
+<li>vite打包：<code>npm init vue@latest</code></li>
+</ul>
+<p><img src="ba8169979e394e3a8c5e08bc414c0fff.png" alt="在这里插入图片描述"></p>
+<h1 id="三、组件间的通信"><a href="#三、组件间的通信" class="headerlink" title="三、组件间的通信"></a>三、组件间的通信</h1><h2 id="1-组件的嵌套关系"><a href="#1-组件的嵌套关系" class="headerlink" title="1. 组件的嵌套关系"></a>1. 组件的嵌套关系</h2><p>对组件进行拆分，拆分成一个个功能的小组件：</p>
+<p><img src="935053d43ec34f57af2776bf161422d0.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>上面的嵌套逻辑如下，它们存在如下<strong>关系</strong>：</p>
+<ul>
+<li>App组件是Header、Main、Footer组件的父组件</li>
+<li>Main组件是Banner、ProductList组件的父组件</li>
+</ul>
+</li>
+<li><p>在开发过程中，我们会经常遇到需要<strong>组件之间相互进行通信</strong>：</p>
+<ul>
+<li>父组件传递给子组件：<strong>通过props属性</strong></li>
+<li>子组件传递给父组件：<strong>通过$emit触发事件</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-父传子-props（重要）"><a href="#2-父传子-props（重要）" class="headerlink" title="2. 父传子 - props（重要）"></a>2. 父传子 - props（重要）</h2><h3 id="2-1-基本用法"><a href="#2-1-基本用法" class="headerlink" title="2.1 基本用法"></a>2.1 基本用法</h3><p>父子组件之间通信，比如<strong>父组件有一些数据</strong>，需要子组件来进行展示：</p>
+<p>Props有两种常见的用法：</p>
+<ul>
+<li>方式一：==字符串数组==，数组中的字符串就是attribute的名称<ul>
+<li>只能说明传入的attribute的名称，并<strong>不能对其进行任何形式的限制</strong></li>
+</ul>
+</li>
+<li>方式二：==对象类型==，可以在指定attribute名称的同时，传入更多内容<ul>
+<li>指定传入的attribute的类型 <code>type</code><ul>
+<li>指定类型的最好在父组件传值时使用 <code>:age="18"</code></li>
+</ul>
+</li>
+<li>指定传入的attribute是否是必传的 <code>required</code></li>
+<li>指定没有传入时，attribute的默认值 <code>default</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-更多细节"><a href="#2-2-更多细节" class="headerlink" title="2.2 更多细节"></a>2.2 更多细节</h3><ol>
+<li><p>type 的类型</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Array</li>
+<li>Object</li>
+<li>Date</li>
+<li>Function</li>
+<li>Symbol</li>
+</ul>
+</li>
+<li><p>Prop 的大小写命名</p>
+<ul>
+<li>使用 DOM 中的模板时，<strong>camelCase</strong> (驼峰命名法) 的 prop 名需要使用其==等价==的 <strong>kebab-case</strong> (短横线分隔命名) 命名</li>
+</ul>
+</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;!-- 1.展示why的个人信息 --&gt;
+	&lt;!-- 如果当前的属性是一个非prop的attribute, 那么该属性会默认添加到子组件的根元素上 --&gt;
+	&lt;show-info name="why" :age="18" :height="1.88"
+address="广州市" abc="cba" class="active" /&gt;
+
+	&lt;!-- 2.展示kobe的个人信息 --&gt;
+	&lt;show-info name="kobe" :age="30" :height="1.87" /&gt;
+	
+	&lt;!-- 3.展示默认的个人信息 --&gt;
+	&lt;show-info :age="100" show-message="哈哈哈哈"/&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import ShowInfo from './ShowInfo.vue'
+
+export default {
+	components: {
+		ShowInfo
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// ShowInfo.vue
+&lt;template&gt;
+	&lt;div class="infos"&gt;
+		&lt;h2 :class="$attrs.class"&gt;姓名: {{ name }}&lt;/h2&gt;
+		&lt;h2&gt;年龄: {{ age }}&lt;/h2&gt;
+		&lt;h2&gt;身高: {{ height }}&lt;/h2&gt;
+		&lt;h2&gt;Message: {{ showMessage }}&lt;/h2&gt;
+	&lt;/div&gt;
+	
+	&lt;div class="others" v-bind="$attrs"&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+	// inheritAttrs: false,
+	// 作用: 接收父组件传递过来的属性
+	// 1.props数组语法
+	// 弊端: 1&gt; 不能对类型进行验证 2.没有默认值的
+	// props: ["name", "age", "height"]
+	
+	// 2.props对象语法(必须掌握)
+	props: {
+		name: {
+			type: String,
+			default: "我是默认name"
+		},
+		age: {
+			type: Number,
+			required: true,
+			default: 0
+		},
+		height: {
+			type: Number,
+			default: 2
+		},
+		// 重要的原则: 对象类型写默认值时, 需要编写default的函数, 函数返回默认值
+		friend: {
+			type: Object,
+			default() {
+				return { name: "james" }
+			}
+		},
+		hobbies: {
+			type: Array,
+			default: () =&gt; ["篮球", "rap", "唱跳"]
+		},
+		showMessage: {
+			type: String,
+			default: "我是showMessage"
+		}
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<h3 id="2-3-非-prop-的-attribute"><a href="#2-3-非-prop-的-attribute" class="headerlink" title="2.3 非 prop 的 attribute"></a>2.3 非 prop 的 attribute</h3><ul>
+<li>当我们传递给一个组件某个属性，但是<strong>该属性并没有定义对应的props或者emits</strong>时，就称之为 <strong>非Prop的Attribute</strong></li>
+<li>当组件有单个根节点时，非Prop的Attribute将<strong>自动添加到根节点</strong>的Attribute中</li>
+</ul>
+<p><img src="395952595ed147c1a412b4c841659dd0.png" alt="在这里插入图片描述"></p>
+<h3 id="2-4-禁用Attribute继承和多根节点"><a href="#2-4-禁用Attribute继承和多根节点" class="headerlink" title="2.4 禁用Attribute继承和多根节点"></a>2.4 禁用Attribute继承和多根节点</h3><ul>
+<li>如果我们不希望组件的根元素继承attribute，可以在组件中设置 <code>inheritAttrs: false</code></li>
+<li>多个根节点的attribute如果没有显示的绑定，那么会报警告，我们必须<strong>手动的指定要绑定</strong>到哪一个属性上 <code>v-bind="$attrs"</code>、<code>:class="$attrs.address"</code></li>
+</ul>
+<h2 id="3-子传父-emit（重要）"><a href="#3-子传父-emit（重要）" class="headerlink" title="3. 子传父 - $emit（重要）"></a>3. 子传父 - $emit（重要）</h2><p>当<strong>子组件有一些事件发生</strong>的时候，比如在组件中发生了点击，父组件需要切换内容； 子组件<strong>有一些内容想要传递</strong>给父组件：</p>
+<ul>
+<li>首先，我们需要在子组件中<strong>定义好</strong>在某些情况下触发的事件名称，之后<strong>通过this.$emit</strong>的方式发出去事件</li>
+<li>其次，在父组件中<strong>以v-on的方式传入</strong>要监听的事件名称，并且绑定到对应的方法中</li>
+<li>最后，在子组件中发生某个事件的时候，根据事件名称触发对应的事件</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// AddCounter.vue
+&lt;template&gt;
+	&lt;div class="add"&gt;
+		&lt;button @click="btnClick(1)"&gt;+1&lt;/button&gt;
+		&lt;button @click="btnClick(5)"&gt;+5&lt;/button&gt;
+		&lt;button @click="btnClick(10)"&gt;+10&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+	// 1.emits数组语法
+	emits: ["add"],
+	// 2.emmits对象语法(了解)
+	// emits: {
+	//   add: function(count) {
+	//     if (count &lt;= 10) {
+	//       return true
+	//     }
+	//     return false
+	//   }
+	// },
+	
+	methods: {
+		btnClick(count) {
+			// 让子组件发出去一个自定义事件
+			// 第一个参数自定义的事件名称
+			// 第二个参数是传递的参数
+			this.$emit("add", 100)
+		}
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;h2&gt;当前计数: {{ counter }}&lt;/h2&gt;
+		&lt;!-- 1.自定义add-counter, 并且监听内部的add事件 --&gt;
+		&lt;add-counter @add="addBtnClick"&gt;&lt;/add-counter&gt;
+		
+		&lt;!-- 2.自定义sub-counter, 并且监听内部的sub事件 --&gt;
+		&lt;sub-counter @sub="subBtnClick"&gt;&lt;/sub-counter&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import AddCounter from './AddCounter.vue'
+import SubCounter from './SubCounter.vue'
+
+export default {
+	components: {
+		AddCounter,
+		SubCounter
+	},
+	data() {
+		return {
+			counter: 0
+		}
+	},
+	methods: {
+		addBtnClick(count) {
+			this.counter += count
+		},
+		subBtnClick(count) {
+			this.counter -= count
+		}
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<h2 id="4-阶段案例练习-TabControl的封装"><a href="#4-阶段案例练习-TabControl的封装" class="headerlink" title="4. 阶段案例练习 - TabControl的封装"></a>4. 阶段案例练习 - TabControl的封装</h2><ul>
+<li>父组件将列表选项中的内容传给子组件</li>
+<li>子组件将点击选项的事件传给父组件，使父组件下面的页面内容随之改变<br><img src="f49dbf73367244e4b8b729fe6bf0cb97.png" alt="在这里插入图片描述"></li>
+</ul>
+<h1 id="四、组件的插槽-Slot"><a href="#四、组件的插槽-Slot" class="headerlink" title="四、组件的插槽 Slot"></a>四、组件的插槽 Slot</h1><h2 id="1-认识-Slot-的作用"><a href="#1-认识-Slot-的作用" class="headerlink" title="1. 认识 Slot 的作用"></a>1. 认识 Slot 的作用</h2><p>假如我们定制一个通用的导航组件 - NavBar</p>
+<ul>
+<li>这个组件分成三块区域：<strong>左边-中间-右边</strong>，每块区域的内容是不固定</li>
+<li>左边区域可能显示一个菜单图标，也可能显示一个返回按钮，可能什么都不显示</li>
+<li>中间区域可能显示一个搜索框，也可能是一个列表，也可能是一个标题，等等</li>
+<li>右边可能是一个文字，也可能是一个图标，也可能什么都不显示</li>
+</ul>
+<p>定义插槽slot：</p>
+<ul>
+<li>插槽的使用过程其实是<strong>抽取共性、预留不同</strong></li>
+<li>我们会将共同的元素、内容依然在组件内进行封装</li>
+<li>同时会将<strong>不同的元素使用slot作为占位</strong>，让<strong>外部决定</strong>到底显示什么样的元素</li>
+</ul>
+<h2 id="2-Slot-的基本使用和默认值（重要）"><a href="#2-Slot-的基本使用和默认值（重要）" class="headerlink" title="2. Slot 的基本使用和默认值（重要）"></a>2. Slot 的基本使用和默认值（重要）</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;!-- 1.内容是button --&gt;
+		&lt;show-message&gt;
+			&lt;button&gt;我是按钮元素&lt;/button&gt;
+		&lt;/show-message&gt;
+		
+		&lt;!-- 2.内容是超链接 --&gt;
+		&lt;show-message&gt;
+			&lt;a href="#"&gt;百度一下&lt;/a&gt;
+		&lt;/show-message&gt;
+		
+		&lt;!-- 3.内容是一张图片 --&gt;
+		&lt;show-message&gt;
+			&lt;img src="@/img/kobe02.png" alt=""&gt;
+		&lt;/show-message&gt;
+		
+		&lt;!-- 4.内容没有传递 --&gt;
+		&lt;show-message&gt;&lt;/show-message&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import ShowMessage from './ShowMessage.vue'
+
+export default {
+	components: {
+		ShowMessage
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// ShowMessage.vue
+&lt;template&gt;
+	&lt;h2&gt;哈哈哈哈哈&lt;/h2&gt;
+	&lt;div class="content"&gt;
+		&lt;slot&gt;
+			&lt;p&gt;我是默认内容, 哈哈哈&lt;/p&gt;
+		&lt;/slot&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<h2 id="3-Slot-的具名插槽（重要）"><a href="#3-Slot-的具名插槽（重要）" class="headerlink" title="3. Slot 的具名插槽（重要）"></a>3. Slot 的具名插槽（重要）</h2><p>当有多个插槽时，默认情况下每个插槽都会获取到我们插入的内容来显示。希望达到的效果是<strong>插槽对应的显示</strong>，这个时候我们就可以使用 具名插槽：</p>
+<ul>
+<li>具名插槽顾名思义就是给<strong>插槽起一个名字</strong>， 元素有一个特殊的 attribute：name</li>
+<li>一个不带 name 的slot，会带有隐含的名字 default</li>
+</ul>
+<p><img src="472601b17a5f4d109996cf9f1c823b46.png" alt="在这里插入图片描述"></p>
+<h3 id="3-1-动态插槽名（了解）"><a href="#3-1-动态插槽名（了解）" class="headerlink" title="3.1 动态插槽名（了解）"></a>3.1 动态插槽名（了解）</h3><p>可以通过 <code>v-slot:[dynamicSlotName]</code>方式动态绑定一个名称</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;nav-bar&gt;
+		&lt;template v-slot:left&gt;
+			&lt;button&gt;{{ leftText }}&lt;/button&gt;
+		&lt;/template&gt;
+		// 语法糖写法
+		&lt;template #center&gt;
+			&lt;span&gt;内容&lt;/span&gt;
+		&lt;/template&gt;
+		&lt;template #right&gt;
+			&lt;a href="#"&gt;登录&lt;/a&gt;
+		&lt;/template&gt;
+	&lt;/nav-bar&gt;
+	
+	&lt;!-- nav-bar只给一个插槽传入数据 --&gt;
+	&lt;nav-bar&gt;
+		&lt;template v-slot:[position]&gt;
+			&lt;a href="#"&gt;注册&lt;/a&gt;
+		&lt;/template&gt;
+	&lt;/nav-bar&gt;
+	&lt;button @click=" position = 'left' "&gt;左边&lt;/button&gt;
+	&lt;button @click=" position = 'center' "&gt;中间&lt;/button&gt;
+	&lt;button @click=" position = 'right' "&gt;右边&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import NavBar from './NavBar.vue'
+
+export default {
+	components: {
+		NavBar
+	},
+	data() {
+		return {
+			position: "center",
+			leftText: "返回"
+		}
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// NavBar.vue
+&lt;template&gt;
+	&lt;div class="nav-bar"&gt;
+		&lt;div class="left"&gt;
+			&lt;slot name="left"&gt;left&lt;/slot&gt;
+		&lt;/div&gt;
+		&lt;div class="center"&gt;
+			&lt;slot name="center"&gt;center&lt;/slot&gt;
+		&lt;/div&gt;
+		&lt;div class="right"&gt;
+			&lt;slot name="right"&gt;right&lt;/slot&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	
+	&lt;div class="other"&gt;
+		&lt;slot name="default"&gt;&lt;/slot&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+	.nav-bar {
+		display: flex;
+		height: 44px;
+		line-height: 44px;
+		text-align: center;
+	}
+	
+	.left {
+		width: 80px;
+		background-color: orange;
+	}
+	
+	.center {
+		flex: 1;
+		background-color: skyblue;
+	}
+	
+	.right {
+		width: 80px;
+		background-color: aquamarine;
+	}
+&lt;/style&gt;</code></pre>
+
+<h2 id="4-作用域插槽"><a href="#4-作用域插槽" class="headerlink" title="4. 作用域插槽"></a>4. 作用域插槽</h2><h3 id="4-1-渲染作用域"><a href="#4-1-渲染作用域" class="headerlink" title="4.1 渲染作用域"></a>4.1 渲染作用域</h3><p>在Vue中有渲染作用域的概念：</p>
+<ul>
+<li>父级模板里的所有内容都是在父级作用域中编译的</li>
+<li>子模板里的所有内容都是在子作用域中编译的</li>
+</ul>
+<p><img src="87733bd3c9404c5598ee10b38b98fa53.png" alt="在这里插入图片描述"></p>
+<h3 id="4-2-作用域插槽使用"><a href="#4-2-作用域插槽使用" class="headerlink" title="4.2 作用域插槽使用"></a>4.2 作用域插槽使用</h3><ul>
+<li>核心：希望父组件可以访问到<strong>slot传入的子组件的内容</strong></li>
+</ul>
+<p>阶段案例练习改进版：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// TabControl.vue
+&lt;template&gt;
+	&lt;div class="tab-control"&gt;
+		&lt;template v-for="(item, index) in titles" :key="item"&gt;
+			&lt;div class="tab-control-item"
+			:class="{ active: index === currentIndex }"
+			@click="itemClick(index)"&gt;
+				// 选项列表中的内容形式span希望可以在外部更改为其他形式(如button)，故引入slot插槽
+				// 将子组件的内容item、abc通过slot传至父组件
+				&lt;slot :item="item" abc="cba"&gt;
+					&lt;span&gt;{{ item }}&lt;/span&gt;
+				&lt;/slot&gt;
+			&lt;/div&gt;
+		&lt;/template&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+	export default {
+		props: {
+			titles: {
+				type: Array,
+				default: () =&gt; [],
+			},
+		},
+		data() {
+			return {
+				currentIndex: 0,
+			};
+		},
+		emits: ["tabItemClick"],
+		methods: {
+			itemClick(index) {
+				this.currentIndex = index;
+				this.$emit("tabItemClick", index);
+			},
+		},
+	};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+	.tab-control {
+		display: flex;
+		height: 44px;
+		line-height: 44px;
+		text-align: center;
+	}
+	
+	.tab-control-item {
+		flex: 1;
+	}
+	
+	.tab-control-item.active {
+		color: red;
+		font-weight: 700;
+	}
+	
+	.tab-control-item.active span {
+		border-bottom: 3px solid red;
+		padding: 8px;
+	}
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;!-- 1.tab-control --&gt;
+		&lt;tab-control :titles="['衣服', '鞋子', '裤子']"
+		@tab-item-click="tabItemClick"/&gt;
+		&lt;!-- 2.展示内容 --&gt;
+		&lt;h1&gt;{{ pageContents[currentIndex] }}&lt;/h1&gt;
+		
+		
+		&lt;!-- 1.tab-control: button --&gt;
+		&lt;tab-control :titles="['衣服', '鞋子', '裤子']"
+		@tab-item-click="tabItemClick"&gt;
+			// 从子组件中接收到内容放入props中
+			&lt;template v-slot:default="props"&gt;
+				&lt;button&gt;{{ props.item }}&lt;/button&gt;
+			&lt;/template&gt;
+		&lt;/tab-control&gt;
+		
+		&lt;!-- 2.tab-control: a元素(重要) --&gt;
+		&lt;tab-control :titles="['衣服', '鞋子', '裤子']"
+		@tab-item-click="tabItemClick"&gt;
+			// 从子组件中接收到内容放入props中
+			&lt;template #default="props"&gt;
+				&lt;a href="#"&gt;{{ props.item }}&lt;/a&gt;
+			&lt;/template&gt;
+		&lt;/tab-control&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+	import TabControl from './TabControl.vue'
+	
+	export default {
+		components: {
+			TabControl
+		},
+		data() {
+			return {
+				pageContents: [ "衣服列表", "鞋子列表", "裤子列表" ],
+				currentIndex: 0
+			}
+		},
+		methods: {
+			tabItemClick(index) {
+				this.currentIndex = index
+			}
+		}
+	}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+&lt;/style&gt;</code></pre>
+
+<h1 id="五、非父子组件的通信"><a href="#五、非父子组件的通信" class="headerlink" title="五、非父子组件的通信"></a>五、非父子组件的通信</h1><p>主要有两种方式： </p>
+<ul>
+<li>全局事件总线</li>
+<li>Provide/Inject</li>
+</ul>
+<h2 id="1-Provide-Inject"><a href="#1-Provide-Inject" class="headerlink" title="1. Provide / Inject"></a>1. Provide / Inject</h2><p>一些<strong>深度嵌套的组件</strong>，子组件想要获取父组件的部分内容，可以使用 Provide 和 Inject ：</p>
+<ul>
+<li>无论层级结构有多深，父组件都可以作为其所有子组件的依赖提供者</li>
+<li>父组件有<strong>一个 provide 选项</strong>来提供数据</li>
+<li>子组件有<strong>一个 inject 选项</strong>来开始使用这些数据</li>
+</ul>
+<p><img src="6660587239d04352b9415e0946447164.png" alt="在这里插入图片描述"></p>
+<h3 id="1-1-函数写法"><a href="#1-1-函数写法" class="headerlink" title="1.1 函数写法"></a>1.1 函数写法</h3><p>如果Provide中提供的一些数据是来自data，那么我们可能会想要通过this来获取：</p>
+<ul>
+<li>此时使用对象写法会报错</li>
+<li><strong>在日常使用中我们一般采用函数写法</strong><br><img src="13022d03f7e54a838228526c1f9f9bb1.png" alt="在这里插入图片描述"></li>
+</ul>
+<h3 id="1-2-数据的响应式"><a href="#1-2-数据的响应式" class="headerlink" title="1.2 数据的响应式"></a>1.2 数据的响应式</h3><p>如果修改了names之后，之前在provide中引入的 this.names.length 本身并不是响应式的：</p>
+<ul>
+<li>可以使用响应式的一些API来完成这些功能，比如说<strong>computed函数</strong></li>
+<li>因为computed返回的是<strong>一个ref对象</strong>，需要取出其中的<strong>value</strong>来使用<br><img src="93522a580b7149188b35a8388abda454.png" alt="在这里插入图片描述"></li>
+</ul>
+<h2 id="2-事件总线-hy-event-store"><a href="#2-事件总线-hy-event-store" class="headerlink" title="2. 事件总线 hy-event-store"></a>2. 事件总线 hy-event-store</h2><ol>
+<li><p>封装一个工具eventbus.js：<br><code>npm install hy-event-store</code><br><img src="57ad4f3054ed43afa78b6bcf156e8711.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>在Banner.vue中触发事件：<code>eventBus.emit("事件名"，参数)</code></p>
+</li>
+<li><p>在App.vue中监听事件：<code>eventBus.on("事件名"，回调函数)</code></p>
+</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// HomeBanner.vue
+&lt;template&gt;
+	&lt;div class="banner"&gt;
+		&lt;button @click="bannerBtnClick"&gt;banner按钮&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import eventBus from './utils/event-bus'
+
+export default {
+methods: {
+	bannerBtnClick() {
+		console.log("bannerBtnClick")
+		eventBus.emit("whyEvent", "why", 18, 1.88)
+	}
+}
+}
+&lt;/script&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;h2&gt;App Message: {{ message }}&lt;/h2&gt;
+		&lt;home&gt;&lt;/home&gt;
+		
+		&lt;button @click="isShowCategory = false"&gt;是否显示category&lt;/button&gt;
+		&lt;category v-if="isShowCategory"&gt;&lt;/category&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import eventBus from './utils/event-bus'
+import Home from './Home.vue'
+import Category from './Category.vue'
+
+export default {
+	components: {
+		Home,
+		Category
+	},
+	data() {
+		return {
+			message: "Hello App",
+			isShowCategory: true
+		}
+	},
+	created() {
+		// fetch()
+		
+		// 事件监听
+		eventBus.on("whyEvent", (name, age, height) =&gt; {
+			console.log("whyEvent事件在app中监听", name, age, height)
+			this.message = `name:${name}, age:${age}, height:${height}`
+		})
+	}
+}
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-1-取消事件"><a href="#2-1-取消事件" class="headerlink" title="2.1 取消事件"></a>2.1 取消事件</h3><p>某些情况下我们希望<strong>取消掉之前注册的函数监听</strong>：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// Category.vue
+&lt;template&gt;
+	&lt;div&gt;
+		&lt;h2&gt;Category&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import eventBus from './utils/event-bus'
+
+export default {
+	methods: {
+		whyEventHandler() {
+			console.log("whyEvent在category中监听")
+		}
+	},
+	created() {
+		eventBus.on("whyEvent", this.whyEventHandler)
+	},
+	unmounted() {
+		console.log("category unmounted")
+		&lt;!-- 取消事件 --&gt;
+		eventBus.off("whyEvent", this.whyEventHandler)
+	}
+}
+&lt;/script&gt;</code></pre>
+
+<h1 id="六、组件化-额外知识补充"><a href="#六、组件化-额外知识补充" class="headerlink" title="六、组件化-额外知识补充"></a>六、组件化-额外知识补充</h1><h2 id="1-组件的生命周期（重要）"><a href="#1-组件的生命周期（重要）" class="headerlink" title="1. 组件的生命周期（重要）"></a>1. 组件的生命周期（重要）</h2><ul>
+<li>生命周期函数是<strong>一些钩子函数（回调函数）</strong>，在某个时间会<strong>被Vue源码内部进行回调</strong></li>
+<li>通过对生命周期函数的回调，我们可以知道目前<strong>组件正在经历什么阶段</strong></li>
+<li>那么我们就可以在该生命周期中编写属于自己的逻辑代码了</li>
+</ul>
+<p><img src="6ff80aa869ae439994360b1692c2989e.png" alt="在这里插入图片描述"></p>
+<h2 id="2-refs引入元素-组件（重要）"><a href="#2-refs引入元素-组件（重要）" class="headerlink" title="2. refs引入元素/组件（重要）"></a>2. refs引入元素/组件（重要）</h2><p>某些情况下，我们在组件中想要<strong>直接获取到元素对象或者子组件实例</strong>：</p>
+<ul>
+<li>在Vue开发中我们是<strong>不推荐进行DOM操作</strong>的</li>
+<li>这个时候，我们可以给元素或者组件<strong>绑定一个ref的attribute属性</strong></li>
+<li>通过$parent来访问父元素</li>
+<li>通过$root来访问根组件</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;!-- 绑定ref属性 --&gt;
+		&lt;h2 ref="title" class="title" :style="{ color: titleColor }"&gt;
+			{{ message }}
+		&lt;/h2&gt;
+		&lt;button ref="btn" @click="changeTitle"&gt;修改title&lt;/button&gt;
+		
+		&lt;banner ref="banner" /&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Banner from "./Banner.vue";
+
+export default {
+	components: {
+		Banner,
+	},
+	data() {
+		return {
+			message: "Hello World",
+			titleColor: "red",
+		};
+	},
+	methods: {
+		changeTitle() {
+			// 1.获取h2/button元素
+			console.log(this.$refs.title);
+			console.log(this.$refs.btn);
+			
+			// 2.获取banner组件: 组件实例
+			console.log(this.$refs.banner); // Proxy(Object) {bannerClick: ƒ, …}
+			// 2.1.在父组件中可以主动的调用子组件的对象方法
+			this.$refs.banner.bannerClick();
+			// 2.2.获取banner组件实例, 获取banner template中的所有元素(单根)
+			console.log(this.$refs.banner.$el);
+			// 2.3.如果banner template是多个根, 拿到的是第一个node节点
+			// 注意: 开发中不推荐一个组件的template中有多个根元素
+			// console.log(this.$refs.banner.$el.nextElementSibling)
+			
+			// 3.组件实例还有两个属性(了解):
+			console.log(this.$parent); // 获取父组件 null
+			console.log(this.$root); // 获取根组件 Proxy(Object) {changeTitle: ƒ, …}
+		},
+	},
+};
+&lt;/script&gt;</code></pre>
+
+<h2 id="3-动态组件的使用"><a href="#3-动态组件的使用" class="headerlink" title="3. 动态组件的使用"></a>3. 动态组件的使用</h2><p>想要实现了一个功能：点击一个tab-bar，切换不同的内容显示<br>可以使用动态组件的方式实现</p>
+<ul>
+<li>动态组件是<strong>使用 component 组件</strong>，通过一个特殊的attribute <strong>is 来实现</strong>：</li>
+<li>动态组件的<strong>传值</strong>：将属性和监听事件放到component上来使用</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;div class="tabs"&gt;
+			&lt;template v-for="item in tabs" :key="item"&gt;
+				&lt;button :class="{ active: currentTab === item }"
+				@click="itemClick(item)"&gt;
+					{{ item }}
+				&lt;/button&gt;
+			&lt;/template&gt;
+		&lt;/div&gt;
+		
+		&lt;div class="view"&gt;
+			&lt;!-- 做法: 动态组件 component --&gt;
+			&lt;!-- is中的组件需要来自两个地方: 1.全局注册的组件 2.局部注册的组件 --&gt;
+			&lt;!-- 传值 --&gt;
+			&lt;component :is="currentTab"
+			name="why"
+			:age="18"
+			@homeClick="homeClick"&gt;
+			&lt;/component&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Home from './views/Home.vue'
+import About from './views/About.vue'
+import Category from './views/Category.vue'
+
+export default {
+	components: {
+		Home,
+		About,
+		Category
+	},
+	data() {
+		return {
+			tabs: ["home", "about", "category"],
+			currentTab: "home"
+		}
+	},
+	methods: {
+		itemClick(tab) {
+			this.currentTab = tab
+		},
+		homeClick(payload) {
+			console.log("homeClick:", payload)
+		}
+	}
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+	.active {
+		color: red;
+	}
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// Home.vue
+&lt;template&gt;
+	&lt;div&gt;
+		&lt;h2&gt;Home组件: {{ name }} - {{ age }}&lt;/h2&gt;
+		&lt;button @click="homeBtnClick"&gt;homeBtn&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+	// 与父组件进行传值
+	props: {
+		name: {
+			type: String,
+			default: ""
+		},
+		age: {
+			type: Number,
+			default: 0
+		}
+	},
+	emits: ["homeClick"],
+	methods: {
+		homeBtnClick() {
+			this.$emit("homeClick", "home")
+		}
+	}
+}
+&lt;/script&gt;</code></pre>
+
+<h2 id="4-keep-alive"><a href="#4-keep-alive" class="headerlink" title="4. keep-alive"></a>4. keep-alive</h2><ul>
+<li>默认情况下，我们在切换组件后，<strong>原组件会被销毁掉，再次回来时会重新创建组件</strong></li>
+<li>在开发中某些情况我们希望<strong>继续保持组件的状态，而不是销毁掉</strong>，这个时候我们就可以使用一个内置组件：keep-alive</li>
+</ul>
+<h3 id="4-1-keep-alive-属性"><a href="#4-1-keep-alive-属性" class="headerlink" title="4.1 keep-alive 属性"></a>4.1 keep-alive 属性</h3><p>keep-alive有一些属性：</p>
+<ul>
+<li>include - string | RegExp | Array。只有名称匹配的组件会被缓存</li>
+<li>exclude - string | RegExp | Array。任何名称匹配的组件都不会被缓存</li>
+<li>max - number | string。最多可以缓存多少组件实例，一旦达到这个数 字，那么缓存组件中最近没有被访问的实例会被销毁</li>
+</ul>
+<p>include 和 exclude prop 允许组件有条件地缓存：</p>
+<ul>
+<li>二者都可以用<strong>逗号分隔字符串、正则表达式或一个数组</strong>来表示</li>
+<li>匹配首先<strong>检查组件自身的 <code>name</code> 选项</strong></li>
+</ul>
+<h3 id="4-2-缓存组件的生命周期"><a href="#4-2-缓存组件的生命周期" class="headerlink" title="4.2 缓存组件的生命周期"></a>4.2 缓存组件的生命周期</h3><p>对于缓存的组件来说，再次进入时，我们是不会执行created或者mounted等生命周期函数的：</p>
+<ul>
+<li>可以使用<strong>activated 监听到何时重新进入到了组件</strong></li>
+<li>可以使用 <strong>deactivated 监听到何时离开了组件</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// App.vue
+&lt;template&gt;
+	&lt;div class="app"&gt;
+		&lt;div class="tabs"&gt;
+			&lt;template v-for="item in tabs" :key="item"&gt;
+				&lt;button :class="{ active: currentTab === item }"
+				@click="itemClick(item)"&gt;
+					{{ item }}
+				&lt;/button&gt;
+			&lt;/template&gt;
+		&lt;/div&gt;
+		
+		&lt;div class="view"&gt;
+			&lt;!-- include: 组件的名称来自于组件定义时 name 选项  --&gt;
+			&lt;keep-alive include="home,about"&gt;
+				&lt;component :is="currentTab"&gt;&lt;/component&gt;
+			&lt;/keep-alive&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+	import Home from './views/Home.vue'
+	import About from './views/About.vue'
+	import Category from './views/Category.vue'
+	
+	export default {
+		components: {
+			Home,
+			About,
+			Category
+		},
+		data() {
+			return {
+				tabs: ["home", "about", "category"],
+				currentTab: "home"
+			}
+		},
+		methods: {
+			itemClick(tab) {
+				this.currentTab = tab
+			},
+			homeClick(payload) {
+				console.log("homeClick:", payload)
+			}
+		}
+	}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+	.active {
+		color: red;
+	}
+&lt;/style&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">// Home.vue
+&lt;template&gt;
+	&lt;div&gt;
+		&lt;h2&gt;Home组件&lt;/h2&gt;
+		&lt;h2&gt;当前计数: {{ counter }}&lt;/h2&gt;
+		&lt;button @click="counter++"&gt;+1&lt;/button&gt;
+	&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+	// 需有name，与include配对
+	name: "home",
+	data() {
+		return {
+			counter: 0
+		}
+	},
+	created() {
+		console.log("home created")
+	},
+	unmounted() {
+		console.log("home unmounted")
+	},
+	// 对于保持keep-alive组件, 监听有没有进行切换
+	// keep-alive组件进入活跃状态
+	activated() {
+		console.log("home activated")
+	},
+	deactivated() {
+		console.log("home deactivated")
+	}
+}
+&lt;/script&gt;</code></pre>
+
+<h2 id="5-异步组件的使用"><a href="#5-异步组件的使用" class="headerlink" title="5. 异步组件的使用"></a>5. 异步组件的使用</h2><h3 id="5-1-webpack-分包处理"><a href="#5-1-webpack-分包处理" class="headerlink" title="5.1 webpack 分包处理"></a>5.1 webpack 分包处理</h3><ul>
+<li><strong>默认的打包过程</strong>：<ul>
+<li>默认情况下，在构建整个组件树的过程中，因为组件和组件之间是通过模块化直接依赖的，那么webpack在打包时就会<strong>将组件模块打包到一起</strong>（比如一个app.js文件中）</li>
+<li>随着项目的不断庞大，app.js文件的内容过大，会造成首屏的渲染速度变慢</li>
+</ul>
+</li>
+<li>打包时，<strong>代码的分包</strong>：<ul>
+<li>所以，对于一些不需要立即使用的组件，我们可以<strong>单独对它们进行拆分，拆分成一些小的代码块chunk.js</strong></li>
+<li>这些chunk.js会在需要时从服务器加载下来，并且运行代码，显示对应的内容</li>
+</ul>
+</li>
+</ul>
+<p><img src="3fb03dadfac94889b3cefe1b9d7926e8.png" alt="在这里插入图片描述"></p>
+<h3 id="5-2-Vue-中实现异步组件"><a href="#5-2-Vue-中实现异步组件" class="headerlink" title="5.2 Vue 中实现异步组件"></a>5.2 Vue 中实现异步组件</h3><p>提供了一个函数：defineAsyncComponent</p>
+<p><img src="4e6dcebdc5a04ec0b7d45ef84ff6dec9.png" alt="在这里插入图片描述"></p>
+<h2 id="6-组件的-v-model"><a href="#6-组件的-v-model" class="headerlink" title="6. 组件的 v-model"></a>6. 组件的 v-model</h2><p>vue也支持在组件上使用v-model</p>
+<p>// App.vue<br><img src="17cac1dfdbc34734b89a76be8e24b51e.png" alt="在这里插入图片描述"></p>
+<p>为了我们的MyInput组件可以正常的工作，这个组件内的<code>&lt;input&gt;</code>必须：</p>
+<ul>
+<li>将其 value attribute 绑定到一个<strong>名叫 modelValue 的 prop 上</strong></li>
+<li>在其 input 事件被触发时，将新的值<strong>通过自定义的 update:modelValue 事件抛出</strong></li>
+</ul>
+<p>// MyInput.vue<br><img src="7b6ec92af02140ada23898549a426576.png" alt="在这里插入图片描述"></p>
+<h3 id="6-1-绑定多个自定义名称属性"><a href="#6-1-绑定多个自定义名称属性" class="headerlink" title="6.1 绑定多个自定义名称属性"></a>6.1 绑定多个自定义名称属性</h3><ul>
+<li><strong>默认情况下</strong>的v-model其实是绑定了 modelValue 属性和 @update:modelValue的事件</li>
+<li>如果我们希望绑定更多，可以<strong>给v-model传入一个参数</strong>，那么这个参数的名称就是我们绑定属性的名称；</li>
+</ul>
+<p>// App.vue<br><img src="42cbecf97a9240349d6cf4f196785069.png" alt="在这里插入图片描述"></p>
+<p>// MyInput.vue<br><img src="75e065a401d749b4b73d522dc60e43b3.png" alt="在这里插入图片描述"></p>
+<h2 id="7-混入-Mixin"><a href="#7-混入-Mixin" class="headerlink" title="7. 混入 Mixin"></a>7. 混入 Mixin</h2><p>组件和组件之间有时候会<strong>存在相同的代码逻辑</strong>，我们希望对相同的代码逻辑进行抽取</p>
+<h3 id="7-1-Mixin-的基本使用"><a href="#7-1-Mixin-的基本使用" class="headerlink" title="7.1 Mixin 的基本使用"></a>7.1 Mixin 的基本使用</h3><p><img src="0f5d3d4f1b5a4d48af1aa623aa962a94.png" alt="在这里插入图片描述"></p>
+<p>如果<strong>Mixin对象中的选项和组件对象中的选项</strong>发生了冲突，合并规则：（以组件对象为优先）</p>
+<ul>
+<li>==情况一：如果是data函数的返回值对象==<ul>
+<li>返回值对象默认情况下会进行合并</li>
+<li>如果data返回值对象的属性发生了冲突，那么会<strong>保留组件自身的数据</strong></li>
+</ul>
+</li>
+<li>==情况二：生命周期钩子函数==<ul>
+<li>生命周期的钩子函数会被合并到数组中，<strong>都会被调用</strong></li>
+</ul>
+</li>
+<li>==情况三：值为对象的选项==，例如 methods、components 和 directives，将被合并为同一个对象。<ul>
+<li>比如都有methods选项，并且都定义了方法，那么它们<strong>都会生效</strong></li>
+<li>但是如果对象的key相同，那么会取<strong>组件对象</strong>的键值对</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-全局混入-Mixin"><a href="#7-2-全局混入-Mixin" class="headerlink" title="7.2 全局混入 Mixin"></a>7.2 全局混入 Mixin</h3><p>如果组件中的某些选项，是<strong>所有的组件都需要拥有的</strong>，那么这个时候我们可以使用<strong>全局的mixin</strong>：</p>
+<ul>
+<li>全局的Mixin可以使用 应用app的方法 mixin 来完成注册</li>
+<li>一旦注册，那么全局混入的选项将会影响每一个组件</li>
+</ul>
+<p><img src="1f1a245baceb4c958ba974747db15970.png" alt="在这里插入图片描述"></p>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E4%BB%B6%E5%8C%96%E5%9F%BA%E7%A1%80/">https://nan-ying.github.io/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E4%BB%B6%E5%8C%96%E5%9F%BA%E7%A1%80/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Vue/">
+              <span class="chip bg-color">Vue</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-01-20T18-57-26',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%89%EF%BC%89Composition-API/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Vue3 知识大总结（三）Composition API">
+                        
+                        <span class="card-title">Vue3 知识大总结（三）Composition API</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    Vue框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Vue3 知识大总结（一）基础语法">
+                        
+                        <span class="card-title">Vue3 知识大总结（一）基础语法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    Vue框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >453.3k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

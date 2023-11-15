@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Vue3 知识大总结（一）基础语法, Nan-ying&#39;s Blog">
+    <meta name="description" content="一. 初识 Vue.js 开发Vue 是一套用于构建用户界面的渐进式 JavaScript框架，它基于标准 HTML、CSS 和 JavaScript 构建，并提供了一套声明式的、组件化的编程模型。
+1. Vue 下载和使用安装和使用Vue">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Vue3 知识大总结（一）基础语法 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Vue3 知识大总结（一）基础语法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Vue/">
+              <span class="chip bg-color">Vue</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+              Vue框架
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-01-20
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 8.7k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          41 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="一-初识-Vue-js-开发"><a href="#一-初识-Vue-js-开发" class="headerlink" title="一. 初识 Vue.js 开发"></a>一. 初识 Vue.js 开发</h1><p>Vue 是一套用于构建用户界面的<strong>渐进式 JavaScript框架</strong>，它基于标准 HTML、CSS 和 JavaScript 构建，并提供了一套声明式的、组件化的编程模型。</p>
+<h2 id="1-Vue-下载和使用"><a href="#1-Vue-下载和使用" class="headerlink" title="1. Vue 下载和使用"></a>1. Vue 下载和使用</h2><p>安装和使用Vue这个JavaScript库有一些方式： </p>
+<ul>
+<li>方式一：在页面中通过CDN的方式来引入</li>
+<li>方式二：下载Vue的JavaScript文件，并且自己手动引入</li>
+<li>方式三：通过npm包管理工具安装使用它（webpack再讲）</li>
+<li>方式四：直接通过Vue CLI创建项目，并且使用它</li>
+</ul>
+<h3 id="1-1-方式一：CDN引入"><a href="#1-1-方式一：CDN引入" class="headerlink" title="1.1 方式一：CDN引入"></a>1.1 方式一：CDN引入</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="https://unpkg.com/vue@next"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 使用Vue
+	const app = Vue.createApp({
+		template: `&lt;h2&gt;Hello world&lt;/h2&gt;&lt;span&gt;哈哈哈&lt;/span&gt;`,
+	});
+	// 挂载
+	app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h3 id="1-2-方式二：下载和引入"><a href="#1-2-方式二：下载和引入" class="headerlink" title="1.2 方式二：下载和引入"></a>1.2 方式二：下载和引入</h3><p>下载Vue的源码（<a target="_blank" rel="noopener" href="https://unpkg.com/vue@next%EF%BC%89%E5%88%B0vue.js%E6%96%87%E4%BB%B6%E4%B8%AD">https://unpkg.com/vue@next）到vue.js文件中</a></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="./lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		template: `&lt;h1&gt;Hello world&lt;/h1&gt;&lt;span&gt;哈哈哈&lt;/span&gt;`
+});
+	// 2.挂载app
+	app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h2 id="2-Vue-初体验之三个案例"><a href="#2-Vue-初体验之三个案例" class="headerlink" title="2. Vue 初体验之三个案例"></a>2. Vue 初体验之三个案例</h2><h3 id="2-1-动态数据展示"><a href="#2-1-动态数据展示" class="headerlink" title="2.1 动态数据展示"></a>2.1 动态数据展示</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="./lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	const app = Vue.createApp({
+		template: `&lt;h2&gt;{{message}}&lt;/h2&gt;`,
+		data: function () {
+			return {
+				title: "Hello World",
+				message: "你好呀，Vue3",
+			};
+		},
+	});
+	
+	app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-2-动态展示列表"><a href="#2-2-动态展示列表" class="headerlink" title="2.2 动态展示列表"></a>2.2 动态展示列表</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="./lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	const app = Vue.createApp({
+		template: `
+		&lt;h2&gt;电影列表&lt;/h2&gt;
+		&lt;ul&gt;
+			&lt;li v-for="item in movies"&gt;{{item}}&lt;/li&gt;   
+		&lt;/ul&gt;
+		`,
+		data: function () {
+			return {
+				movies: ["情书", "怦然心动", "傲慢与偏见"],
+			};
+		},
+	});
+	
+	app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-3-计数器案例"><a href="#2-3-计数器案例" class="headerlink" title="2.3 计数器案例"></a>2.3 计数器案例</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="./lib/vue.js"&gt;&lt;/script&gt;
+ &lt;script&gt;
+	const app = Vue.createApp({
+		template: `
+		&lt;h2&gt;当前计数: {{counter}}&lt;/h2&gt;
+		&lt;button @click="increment"&gt;+1&lt;/button&gt;
+		&lt;button @click="decrement"&gt;-1&lt;/button&gt;
+		`,
+		data: function () {
+			return {
+				counter: 0,
+			};
+		},
+		methods: {
+			increment: function () {
+				this.counter++;
+			},
+			decrement: function () {
+				this.counter--;
+			},
+		},
+	});
+	
+	 app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h2 id="3-命令式和声明式编程"><a href="#3-命令式和声明式编程" class="headerlink" title="3. 命令式和声明式编程"></a>3. 命令式和声明式编程</h2><p>原生开发和Vue开发的模式和特点涉及到两种不同的编程范式：</p>
+<ul>
+<li><strong>命令式编程和声明式编程</strong></li>
+</ul>
+<ul>
+<li><p>==声明式编程==</p>
+<ul>
+<li>声明式编程关注的是 “<strong>what to do</strong>”，由框架(机器)完成 “how”的过程</li>
+<li>我们会在createApp传入的对象中<strong>声明需要的内容，模板template、数据data、方法methods</strong></li>
+<li>目前Vue、React、Angular、小程序的编程模式，我们称之为声明式编程</li>
+</ul>
+</li>
+<li><p>==命令式编程==</p>
+<ul>
+<li>命令式编程关注的是 “<strong>how to do</strong>”，自己完成整个how的过程</li>
+<li>我们<strong>每完成一个操作，都需要通过JavaScript编写一条代码</strong>，来给浏览器一个指令</li>
+<li>在早期的原生JavaScript和jQuery开发的过程中，我们都是通过这种命令式的方式在编写代码的</li>
+</ul>
+</li>
+</ul>
+<p><img src="58a7809ba50d45089265b97d27bf08c1.png" alt="在这里插入图片描述"></p>
+<h3 id="3-1-MVVM-模型"><a href="#3-1-MVVM-模型" class="headerlink" title="3.1 MVVM 模型"></a>3.1 MVVM 模型</h3><p>MVC和MVVM都是一种软件的体系结构 </p>
+<ul>
+<li>MVC是Model – View –Controller的简称，是在前期被使用非常框架的架构模式，比如iOS、前端</li>
+<li>MVVM是Model-View-ViewModel的简称，是目前非常流行的架构模式</li>
+</ul>
+<p>通常情况下，我们也经常称Vue是一个MVVM的框架</p>
+<p><img src="383792ec45ff4055be72317a67dd29b9.png" alt="在这里插入图片描述"></p>
+<h2 id="4-data-属性"><a href="#4-data-属性" class="headerlink" title="4. data 属性"></a>4. data 属性</h2><ul>
+<li>data属性必须是<strong>一个函数</strong>，并且该函数需要返回一个对象：</li>
+</ul>
+<ul>
+<li>data中返回的对象会被<strong>Vue的响应式系统劫持</strong>，之后对该<strong>对象的修改或者访问</strong>都会在劫持中被处理：<ul>
+<li>所以我们在template或者app中通过  访问counter，可以从对象中获取到数据</li>
+<li>所以我们修改counter的值时，app中的 也会发生改变</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-methods-属性"><a href="#5-methods-属性" class="headerlink" title="5. methods 属性"></a>5. methods 属性</h2><ul>
+<li>methods属性是<strong>一个对象</strong>，通常我们会在这个对象中定义很多的方法<ul>
+<li>这些方法可以被绑定到模板中</li>
+<li>在该方法中，我们可以<strong>使用this关键字</strong>来直接<strong>访问到data中</strong>返回的对象的属性</li>
+</ul>
+</li>
+<li>方法不能使用箭头函数，否则this就会是window了</li>
+</ul>
+<h1 id="二、Vue基础-模板语法"><a href="#二、Vue基础-模板语法" class="headerlink" title="二、Vue基础 - 模板语法"></a>二、Vue基础 - 模板语法</h1><h2 id="1-Mustache-语法（插值语法）"><a href="#1-Mustache-语法（插值语法）" class="headerlink" title="1. Mustache 语法（插值语法）"></a>1. Mustache 语法（插值语法）</h2><ul>
+<li>如果我们希望把数据显示到模板（template）中，使用最多的语法是 “Mustache”语法 (双大括号) 的文本插值</li>
+<li>Mustache中不仅仅可以是data中的属性，也<strong>可以是一个JavaScript的表达式</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.基本使用 --&gt;
+	&lt;h2&gt;{{ message }}&lt;/h2&gt;
+	&lt;h2&gt;当前计数: {{ counter }}&lt;/h2&gt;
+	
+	&lt;!-- 2.表达式 --&gt;
+	&lt;h2&gt;计数双倍: {{ counter * 2 }}&lt;/h2&gt;
+	&lt;h2&gt;展示的信息: {{ info.split(" ") }}&lt;/h2&gt;
+	
+	&lt;!-- 3.三元运算符 --&gt;
+	&lt;h2&gt;{{ age &gt;= 18 ? "成年人" : "未成年人" }}&lt;/h2&gt;
+	
+	&lt;!-- 4.调用methods中函数 --&gt;
+	&lt;h2&gt;{{ formatDate(time) }}&lt;/h2&gt;
+	
+	&lt;!-- 5.注意: 这里不能定义语句 --&gt;
+	&lt;!-- &lt;h2&gt;{{ const name = "why" }}&lt;/h2&gt; --&gt;
+&lt;/div&gt;
+
+&lt;script src="./lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function () {
+			return {
+				message: "Hello Vue",
+				counter: 100,
+				info: "my name is why",
+				age: 22,
+				time: 123,
+			};
+		},
+		methods: {
+			formatDate: function (date) {
+				return "2022-10-10-" + date;
+			},
+		},
+	});
+	
+	// 2.挂载app
+	app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h2 id="2-基本指令"><a href="#2-基本指令" class="headerlink" title="2. 基本指令"></a>2. 基本指令</h2><h3 id="2-1-不常见的指令"><a href="#2-1-不常见的指令" class="headerlink" title="2.1 不常见的指令"></a>2.1 不常见的指令</h3><ul>
+<li>v-once 用于指定元素或者组件<strong>只渲染一次</strong>：<ul>
+<li>当数据发生变化时，元素或者组件以及其所有的子元素将视为静态内容并且跳过</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+&lt;div id="app"&gt;
+	&lt;!-- 指令: v-once --&gt;
+	&lt;h2 v-once&gt;
+		{{ message }}
+		&lt;span&gt;数字: {{counter}}&lt;/span&gt;
+	&lt;/h2&gt; 
+	// 此中内容，点击按钮后均不变
+	
+	&lt;h1&gt;{{message}}&lt;/h1&gt;
+	
+	&lt;button @click="changeMessage"&gt;改变message&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				message: "Hello Vue",
+				counter: 100
+			}
+		},
+		methods: {
+			changeMessage: function() {
+				this.message = "你好啊, 李银河"
+				this.counter += 100
+				console.log(this.message, this.counter)
+			}
+		}
+	})
+	
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<ul>
+<li>v-text 用于<strong>更新元素的 textContent</strong>：</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	// 展示出的内容：aaHello Worldbbb
+	&lt;h2&gt; aa {{message}} bbb&lt;/h2&gt;
+	// 展示出的内容：Hello World,覆盖aaa
+	&lt;h2 v-text="message"&gt;aaa&lt;/h2&gt;
+	
+	&lt;span v-text="msg"&gt;&lt;/span&gt;
+	&lt;!-- 等价于 --&gt;
+	&lt;span&gt;{{msg}}&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+<ul>
+<li>v-html 使 html 的内容可以被Vue解析出来</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;h2&gt;{{ content }}&lt;/h2&gt;
+	&lt;h2 v-html="content"&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				content: `&lt;span style="color: red; font-size: 30px;"&gt;哈哈哈&lt;/span&gt;`
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<ul>
+<li>v-pre 用于跳过元素和它的子元素的编译过程，<strong>显示原始的Mustache标签</strong>：</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;div v-pre&gt;
+		&lt;h2&gt;{{ message }}&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+// 浏览器界面中展示：{{ message }}</code></pre>
+
+<ul>
+<li>v-cloak 保持在元素上直到关联组件实例结束编译<br> 可以<strong>隐藏未编译的 Mustache 标签直到组件实例准备完毕</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;style&gt;
+	[v-cloak] {
+		display: none;
+	}
+&lt;/style&gt;
+
+&lt;div id="app"&gt;
+	&lt;h2 v-cloak&gt;{{message}}&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	setTimeout(() =&gt; {
+		// 1.创建app
+		const app = Vue.createApp({
+			// data: option api
+			data: function() {
+				return {
+					message: "Hello Vue"
+				}
+			},
+		})
+		// 2.挂载app
+		app.mount("#app")
+	}, 3000)
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-2-新的指令-v-memo"><a href="#2-2-新的指令-v-memo" class="headerlink" title="2.2 新的指令 v-memo"></a>2.2 新的指令 v-memo</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;div v-memo="[name, age]"&gt;
+		&lt;h2&gt;姓名: {{ name }}&lt;/h2&gt;
+		&lt;h2&gt;年龄: {{ age }}&lt;/h2&gt;
+		&lt;h2&gt;身高: {{ height }}&lt;/h2&gt;
+	&lt;/div&gt;
+	
+	&lt;button @click="updateInfo"&gt;改变信息&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+<ul>
+<li>若name和age都保持不变，这个div及其子项的所有更新都将被跳过</li>
+<li>优化性能</li>
+</ul>
+<h2 id="3-v-bind-绑定属性"><a href="#3-v-bind-绑定属性" class="headerlink" title="3. v-bind 绑定属性"></a>3. v-bind 绑定属性</h2><p>除了内容需要动态来决定外，我们也希望<strong>动态绑定某些属性</strong></p>
+<h3 id="3-1-v-bind-绑定基本属性"><a href="#3-1-v-bind-绑定基本属性" class="headerlink" title="3.1 v-bind 绑定基本属性"></a>3.1 v-bind 绑定基本属性</h3><ul>
+<li>v-bind用于<strong>绑定一个或多个属性值</strong>，或者向另一个组件传递props值（这个学到组件时再介绍）</li>
+<li>可以绑定图片的链接src、网站的链接href、动态绑定一些类、样式等等</li>
+<li>v-bind有一个对应的<strong>语法糖</strong>，也就是简写方式：<code>:</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;button @click="switchImg"&gt;切换图片&lt;/button&gt;
+	
+	&lt;img v-bind:src="showImgUrl" alt="" /&gt;
+	&lt;!-- 语法糖写法 --&gt;
+	&lt;a :href="href"&gt;百度一下&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script src="./lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function () {
+			return {
+				imgUrl1:"http://p1.music.126.net/P89nasGuX_gjdBe_2PpQuw==/109951168455849588.jpg",
+				imgUrl2: "http://p1.music.126.net/zLNyOeVM5CVdx0OQ9TU11A==/109951168454700007.jpg",
+				showImgUrl: "http://p1.music.126.net/P89nasGuX_gjdBe_2PpQuw==/109951168455849588.jpg",
+				href: "http://www.baidu.com",
+			};
+		},
+		methods: {
+			switchImg: function () {
+				this.showImgUrl = this.showImgUrl === this.imgUrl1 ? this.imgUrl2 : this.imgUrl1;
+			},
+		},
+	});
+	
+	// 2.挂载app
+	app.mount("#app");
+&lt;/script&gt;</code></pre>
+
+<h3 id="3-2-v-bind-绑定-class"><a href="#3-2-v-bind-绑定-class" class="headerlink" title="3.2 v-bind 绑定 class"></a>3.2 v-bind 绑定 class</h3><ul>
+<li>基本绑定</li>
+<li><strong>对象语法</strong>:  我们可以传给 :class (v-bind:class 的简写) 一个对象（<code>{ className: Boolean }</code>），以<strong>动态地切换</strong> class<ul>
+<li>若为false，则不会加载该class</li>
+</ul>
+</li>
+<li><strong>数组语法</strong>:  我们可以把一个数组传给 :class，以应用一个 class 列表</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;style&gt;
+	.active {
+		color: red;
+	}
+&lt;/style&gt;
+
+
+&lt;div id="app"&gt;
+	&lt;!-- 1.基本绑定class --&gt;
+	&lt;h2 :class="classes"&gt;Hello World&lt;/h2&gt;
+	
+	&lt;!-- 2.动态class可以写对象语法 --&gt;
+	&lt;!-- 2.1.对象语法的基本使用(掌握) --&gt;
+	&lt;button :class="{ active: isActive, why: true, kobe: false }" @click="btnClick"&gt;我是按钮&lt;/button&gt;
+	
+	&lt;!-- 2.2.动态绑定的class是可以和普通的class同时的使用 --&gt;
+	&lt;button class="abc cba" :class="{ active: isActive, why: true, kobe: false }" @click="btnClick"&gt;我是按钮&lt;/button&gt;
+	
+	&lt;!-- 2.3.动态绑定的class是可以从methods获取 --&gt;
+	&lt;button class="abc cba" :class="getDynamicClasses()" @click="btnClick"&gt;我是按钮&lt;/button&gt;
+	
+	&lt;!-- 3.动态class可以写数组语法(了解) --&gt;
+	&lt;h2 :class="['abc', 'cba']"&gt;Hello Array&lt;/h2&gt;
+	&lt;h2 :class="['abc', className]"&gt;Hello Array&lt;/h2&gt;
+	&lt;h2 :class="['abc', className, isActive? 'active': '']"&gt;Hello Array&lt;/h2&gt;
+	&lt;h2 :class="['abc', className, { active: isActive }]"&gt;Hello Array&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				classes: "abc cba nba",
+				isActive: false,
+				className: "why"
+			}
+		},
+		methods: {
+			btnClick: function() {
+				this.isActive = !this.isActive
+			},
+			getDynamicClasses: function() {
+				return { active: this.isActive, why: true, kobe: false }
+			}
+		}
+	})
+	
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+
+<h3 id="3-3-v-bind-绑定-style"><a href="#3-3-v-bind-绑定-style" class="headerlink" title="3.3 v-bind 绑定 style"></a>3.3 v-bind 绑定 style</h3><p>可以利用v-bind:style来<strong>绑定一些CSS内联样式</strong></p>
+<p>CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名</p>
+<ul>
+<li>对象语法：<code>{ cssname: cssvalue }</code></li>
+<li>数组语法：<code>[obj1, obj2]</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.普通的html写法 --&gt;
+	&lt;h2 style="color: red; font-size: 30px;"&gt;哈哈哈哈&lt;/h2&gt;
+	
+	&lt;!-- 2.style中的某些值, 来自data中 --&gt;
+	&lt;!-- 2.1.动态绑定style, 在后面跟上对象类型 (重要)--&gt;
+	&lt;h2 :style="{ color: fontColor, fontSize: fontSize }"&gt;哈哈哈哈&lt;/h2&gt;
+	
+	&lt;!-- 2.2.动态的绑定属性, 这个属性是一个对象 --&gt;
+	&lt;h2 :style="objStyle"&gt;呵呵呵呵&lt;/h2&gt;
+	
+	&lt;!-- 3.style的数组语法 --&gt;
+	&lt;h2 :style="[objStyle, { backgroundColor: 'purple' }]"&gt;嘿嘿嘿嘿&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				fontColor: "blue",
+				fontSize: '30px',
+				objStyle: {
+					fontSize: '50px',
+					color: "green"
+				}
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+
+<h3 id="3-4-动态绑定属性名"><a href="#3-4-动态绑定属性名" class="headerlink" title="3.4 动态绑定属性名"></a>3.4 动态绑定属性名</h3><ul>
+<li>如果<strong>属性名称不是固定</strong>的，我们可以使用 :[属性名]=“值” 的格式来定义</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;!-- 动态绑定属性:属性名称不是固定的, --&gt;
+&lt;div id="app"&gt;
+	&lt;h2 :[name]="value"&gt;Hello World&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				name: "class"
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="3-5-v-bind-绑定对象"><a href="#3-5-v-bind-绑定对象" class="headerlink" title="3.5 v-bind 绑定对象"></a>3.5 v-bind 绑定对象</h3><p>可以直接使用 v-bind 绑定一个对象，将<strong>一个对象的所有属性</strong>，绑定到元素上</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;h2 :name="name" :age="age" :height="height"&gt;Hello World&lt;/h2&gt;
+	&lt;!-- v-bind绑定对象: 给组件传递参数 --&gt;
+	&lt;h2 v-bind="infos"&gt;Hello Bind&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				infos: { name: "why", age: 18, height: 1.88, address: "广州市" },
+				name: "why",
+				age: 18,
+				height: 1.88
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h2 id="4-事件绑定-v-on"><a href="#4-事件绑定-v-on" class="headerlink" title="4. 事件绑定 v-on"></a>4. 事件绑定 v-on</h2><p>在前端开发中，我们需要经常和用户进行各种各样的交互。<strong>使用v-on指令监听</strong>用户发生的事件，比如点击、拖拽、键盘事件等等</p>
+<h3 id="4-1-v-on-的基本使用"><a href="#4-1-v-on-的基本使用" class="headerlink" title="4.1 v-on 的基本使用"></a>4.1 v-on 的基本使用</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.基本的写法 --&gt;
+	&lt;div class="box" v-on:click="divClick"&gt;&lt;/div&gt;
+	
+	&lt;!-- 2.语法糖写法(重点掌握) --&gt;
+	&lt;div class="box" @click="divClick"&gt;&lt;/div&gt;
+	
+	&lt;!-- 3.绑定的方法位置, 也可以写成一个表达式(不常用, 不推荐) --&gt;
+	&lt;h2&gt;{{ counter }}&lt;/h2&gt;
+	&lt;button @click="counter++"&gt;+1&lt;/button&gt;
+	
+	&lt;!-- 4.绑定其他方法(掌握) --&gt;
+	&lt;div class="box" @mousemove="divMousemove"&gt;&lt;/div&gt;
+	
+	&lt;!-- 5.元素绑定多个事件(掌握) --&gt;
+	&lt;div class="box" @click="divClick" @mousemove="divMousemove"&gt;&lt;/div&gt;
+	&lt;!-- &lt;div class="box" v-on="{ click: divClick, mousemove: divMousemove }"&gt;&lt;/div&gt; --&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				counter: 0
+			}
+		},
+		methods: {
+			divClick() {
+				console.log("divClick")
+			},
+			divMousemove() {
+				console.log("divMousemove")
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="4-2-v-on-参数传递"><a href="#4-2-v-on-参数传递" class="headerlink" title="4.2 v-on 参数传递"></a>4.2 v-on 参数传递</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.默认传递event对象 --&gt;
+	&lt;button @click="btn1Click"&gt;按钮1&lt;/button&gt;
+	
+	&lt;!-- 2.只有自己的参数 --&gt;
+	&lt;button @click="btn2Click('why', age)"&gt;按钮2&lt;/button&gt;
+	
+	&lt;!-- 3.自己的参数和event对象 --&gt;
+	&lt;!-- 在模板中想要明确的获取event对象: $event --&gt;
+	&lt;button @click="btn3Click('why', age, $event)"&gt;按钮3&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {
+				message: "Hello Vue",
+				age: 18
+			}
+		},
+		methods: {
+			// 1.默认参数: event对象
+			// 总结: 如果在绑定事件的时候, 没有传递任何的参数, 那么event对象会被默认传递进来
+			btn1Click(event) {
+				console.log("btn1Click:", event)
+			},
+			// 2.明确参数:
+			btn2Click(name, age) {
+				console.log("btn2Click:", name, age)
+			},
+			// 3.明确参数+event对象
+			btn3Click(name, age, event) {
+				console.log("btn3Click:", name, age, event)
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="4-3-v-on-的修饰符"><a href="#4-3-v-on-的修饰符" class="headerlink" title="4.3 v-on 的修饰符"></a>4.3 v-on 的修饰符</h3><p>v-on支持修饰符，修饰符相当于对事件进行了一些特殊的处理：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	// 此时点击button按钮不会冒泡到输出divClick
+	&lt;div class="box" @click="divClick"&gt;
+		&lt;button @click.stop="btnClick"&gt;按钮&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data: function() {
+			return {}
+		},
+		methods: {
+			btnClick() {
+				console.log("btnClick")
+			},
+			divClick() {
+				console.log("divClick")
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<p><img src="8f64843973d1488baa9d4f17522122a0.png" alt="在这里插入图片描述"></p>
+<h2 id="5-条件渲染"><a href="#5-条件渲染" class="headerlink" title="5. 条件渲染"></a>5. 条件渲染</h2><p>在某些情况下，我们需要根据当前的条件<strong>决定某些元素或组件是否渲染</strong>，这个时候我们就需要进行条件判断</p>
+<h3 id="5-1-v-if-else-else-if"><a href="#5-1-v-if-else-else-if" class="headerlink" title="5.1 v-if/else/else-if"></a>5.1 v-if/else/else-if</h3><p>v-if的渲染原理：</p>
+<ul>
+<li>v-if是<strong>惰性</strong>的</li>
+<li>当条件为false时，其判断的内容<strong>完全不会被渲染或者会被销毁掉</strong></li>
+<li>当条件为true时，才会真正渲染条件块中的内容</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- v-if="条件" --&gt;
+	&lt;div class="info" v-if="Object.keys(info).length"&gt;
+		&lt;h2&gt;个人信息&lt;/h2&gt;
+		&lt;ul&gt;
+			&lt;li&gt;姓名: {{info.name}}&lt;/li&gt;
+			&lt;li&gt;年龄: {{info.age}}&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+	
+	&lt;!-- v-else --&gt;
+	&lt;div v-else&gt;
+		&lt;h2&gt;没有输入个人信息&lt;/h2&gt;
+		&lt;p&gt;请输入个人信息后, 再进行展示~&lt;/p&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				info: { name: "why", age: 18 }
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;h1 v-if="score &gt; 90"&gt;优秀&lt;/h1&gt;
+	&lt;h2 v-else-if="score &gt; 80"&gt;良好&lt;/h2&gt;
+	&lt;h3 v-else-if="score &gt;= 60"&gt;及格&lt;/h3&gt;
+	&lt;h4 v-else&gt;不及格&lt;/h4&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				score: 40
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h4 id="5-1-1-template-元素"><a href="#5-1-1-template-元素" class="headerlink" title="5.1.1 template 元素"></a>5.1.1 template 元素</h4><p>v-if是一个指令，所以必须将其添加到一个元素上：</p>
+<ul>
+<li>如果需要切换多个元素，此时我们将元素放进一个div，但是我们并<strong>不希望div这种元素被渲染</strong></li>
+<li>这个时候，我们可以选择使用template</li>
+<li><strong>template元素可以当做不可见的包裹元素</strong>，并且在v-if上使用，但是最终template<strong>不会被渲染出来</strong></li>
+</ul>
+<p><em><strong>v-for 指令处也可使用template</strong></em></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- v-if="条件" --&gt;
+	&lt;template class="info" v-if="Object.keys(info).length"&gt;
+		&lt;h2&gt;个人信息&lt;/h2&gt;
+		&lt;ul&gt;
+			&lt;li&gt;姓名: {{info.name}}&lt;/li&gt;
+			&lt;li&gt;年龄: {{info.age}}&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/template&gt;
+	
+	&lt;!-- v-else --&gt;
+	&lt;template v-else&gt;
+		&lt;h2&gt;没有输入个人信息&lt;/h2&gt;
+		&lt;p&gt;请输入个人信息后, 再进行展示~&lt;/p&gt;
+	&lt;/template&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				info: { name: "why", age: 18 }
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="5-2-v-show"><a href="#5-2-v-show" class="headerlink" title="5.2 v-show"></a>5.2 v-show</h3><p>v-show和v-if的用法看起来是一致的，也是根据一个条件<strong>决定是否显示元素或者组件</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;div&gt;
+		&lt;button @click="toggle"&gt;切换&lt;/button&gt;
+	&lt;/div&gt;
+	
+	&lt;div v-show="isShowCode"&gt;
+		&lt;img src="[https://game.gtimg.cn/images/yxzj/web201706/images/comm/floatwindow/wzry_qrcode.jpg](https://game.gtimg.cn/images/yxzj/web201706/images/comm/floatwindow/wzry_qrcode.jpg)" alt=""&gt;
+	&lt;/div&gt;
+	
+	&lt;div v-if="isShowCode"&gt;
+		&lt;img src="[https://game.gtimg.cn/images/yxzj/web201706/images/comm/floatwindow/wzry_qrcode.jpg](https://game.gtimg.cn/images/yxzj/web201706/images/comm/floatwindow/wzry_qrcode.jpg)" alt=""&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				isShowCode: true
+			}
+		},
+		methods: {
+			toggle() {
+				this.isShowCode = !this.isShowCode
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<ul>
+<li><p>与v-if用法区别：</p>
+<ul>
+<li>v-show是<strong>不支持template</strong></li>
+<li>v-show<strong>不可以和v-else一起使用</strong></li>
+</ul>
+</li>
+<li><p>与v-if的本质区别:</p>
+<ul>
+<li>v-show元素无论是否需要显示到浏览器上，<strong>它的DOM实际都是有存在的</strong>，只是通过CSS的display属性来进行切换</li>
+<li>v-if当条件为false时，其对应的原生压根<strong>不会被渲染到DOM中</strong></li>
+</ul>
+</li>
+<li><p>开发中如何进行选择：</p>
+<ul>
+<li>如果我们的原生需要在显示和隐藏之间<strong>频繁的切换</strong>，那么使用v-show</li>
+<li>不频繁使用 v-if</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-v-for-列表渲染"><a href="#6-v-for-列表渲染" class="headerlink" title="6. v-for 列表渲染"></a>6. v-for 列表渲染</h2><h3 id="6-1-v-for-的基本使用"><a href="#6-1-v-for-的基本使用" class="headerlink" title="6.1 v-for 的基本使用"></a>6.1 v-for 的基本使用</h3><ul>
+<li>v-for的基本格式是 <strong>“item in 数组</strong>“：数组通常是来自data或者prop，也可以是其他方式</li>
+<li>同时可以拿到<strong>数组的索引</strong>：**”(item, index) in 数组”**，需按顺序</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.电影列表进行渲染 --&gt;
+	&lt;h2&gt;电影列表&lt;/h2&gt;
+	&lt;ul&gt;
+		&lt;li v-for="movie in movies"&gt;{{ movie }}&lt;/li&gt;
+	&lt;/ul&gt;
+	
+	&lt;!-- 2.电影列表同时有索引 --&gt;
+	&lt;ul&gt;
+		&lt;li v-for="(movie, index) in movies"&gt;{{index + 1}} - {{ movie }}&lt;/li&gt;
+	&lt;/ul&gt;
+	
+	&lt;!-- 3.遍历数组复杂数据 --&gt;
+	&lt;h2&gt;商品列表&lt;/h2&gt;
+	&lt;div class="item" v-for="item in products"&gt;
+		&lt;h3 class="title"&gt;商品: {{item.name}}&lt;/h3&gt;
+		&lt;span&gt;价格: {{item.price}}&lt;/span&gt;
+		&lt;p&gt;秒杀: {{item.desc}}&lt;/p&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				// 1.movies
+				movies: ["星际穿越", "少年派", "大话西游", "哆啦A梦"],
+				// 2.数组: 存放的是对象
+				products: [
+					{ id: 110, name: "Macbook", price: 9.9, desc: "9.9秒杀, 快来抢购!" },
+					{ id: 111, name: "iPhone", price: 8.8, desc: "9.9秒杀, 快来抢购!" },
+					{ id: 112, name: "小米电脑", price: 9.9, desc: "9.9秒杀, 快来抢购!" },
+				]
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="6-2-v-for-其他的类型"><a href="#6-2-v-for-其他的类型" class="headerlink" title="6.2 v-for 其他的类型"></a>6.2 v-for 其他的类型</h3><ul>
+<li>v-for也支持<strong>遍历对象</strong>，并且支持有一二三个参数：<ul>
+<li>一个参数： “value in object”</li>
+<li>二个参数： “(value, key) in object”</li>
+<li>三个参数： “(value, key, index) in object”</li>
+</ul>
+</li>
+<li>v-for同时也支持<strong>数字的遍历</strong>：<ul>
+<li>每一个item都是一个数字</li>
+</ul>
+</li>
+<li>v-for也可以<strong>遍历其他可迭代对象</strong>(Iterable)</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.遍历数组 --&gt;
+	
+	&lt;!-- 2.遍历对象 --&gt;
+	&lt;ul&gt;
+		&lt;li v-for="(value, key, index) in info"&gt;{{value}}-{{key}}-{{index}}&lt;/li&gt;
+	&lt;/ul&gt;
+	
+	&lt;!-- 3.遍历字符串(iterable) --&gt;
+	&lt;ul&gt;
+		&lt;li v-for="item in message"&gt;{{item}}&lt;/li&gt;
+	&lt;/ul&gt;
+	
+	&lt;!-- 4.遍历数字 --&gt;
+	&lt;ul&gt;
+		&lt;li v-for="item in 100"&gt;{{item}}&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				message: "Hello Vue",
+				info: { name: "why", age: 18, height: 1.88 }
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="6-3-数组更新检测"><a href="#6-3-数组更新检测" class="headerlink" title="6.3 数组更新检测"></a>6.3 数组更新检测</h3><p>被侦听的数组发生变更，也会触发视图更新</p>
+<p>直接修改原来数组的方法：</p>
+<ul>
+<li>push()</li>
+<li>pop()</li>
+<li>shift()</li>
+<li>unshift()</li>
+<li>splice()</li>
+<li>sort()</li>
+<li>reverse()</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;ul&gt;
+		&lt;li v-for="item in names"&gt;{{ item }}&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;button @click="changeArray"&gt;修改数组&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				names: ["abc", "cba", "nba", "aaa", "ccc"]
+			}
+		},
+		methods: {
+			changeArray() {
+				// 1.直接将数组修改为一个新的数组
+				this.names = ["why", "kobe"]
+				// 2.通过一些数组的方法, 修改数组中的元素
+				this.names.push("why")
+				this.names.pop()
+				this.names.splice(2, 1, "why")
+				this.names.sort()
+				this.names.reverse()
+				// 3.不修改原数组的方法不能侦听(watch)
+				const newNames = this.names.map(item =&gt; item + "why")
+				this.names = newNames
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="6-4-v-for-绑定-key-属性"><a href="#6-4-v-for-绑定-key-属性" class="headerlink" title="6.4 v-for 绑定 key 属性"></a>6.4 v-for 绑定 key 属性</h3><p>在使用v-for进行列表渲染时，我们通常会<strong>给元素或者组件绑定一个key属性</strong>，<strong>key要求是唯一: id</strong></p>
+<h4 id="6-4-1-VNode-虚拟-DOM"><a href="#6-4-1-VNode-虚拟-DOM" class="headerlink" title="6.4.1 VNode &amp; 虚拟 DOM"></a>6.4.1 VNode &amp; 虚拟 DOM</h4><ul>
+<li>VNode的全称是Virtual Node，也就是虚拟节点</li>
+<li>事实上，无论是组件还是元素，它们最终在Vue中表示出来的都是一个个VNode</li>
+<li><strong>VNode的本质是一个JavaScript的对象</strong></li>
+<li>template元素 -&gt;解析成 VNode—&gt;转换为真实DOM元素</li>
+</ul>
+<p><img src="4602df0f56d748098782fd208a5b9500.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>如果我们不只是一个简单的div，而是有一大堆的元素，那么它们应该会形成一个VNode Tree</li>
+<li>template元素—&gt;一个个VNode虚拟节点—&gt;VNode Tree –&gt;虚拟DOM—&gt;真实DOM</li>
+</ul>
+<p><img src="72d7dcb2110e445cb61d4ef36db0fe0c.png" alt="在这里插入图片描述"></p>
+<p>虚拟DOM的一大作用：方便代码<strong>跨平台</strong>运行</p>
+<p><img src="e31f88e7bd524c719b765b61d42a2a8b.png" alt="在这里插入图片描述"></p>
+<h4 id="6-4-2-key-的作用"><a href="#6-4-2-key-的作用" class="headerlink" title="6.4.2 key 的作用"></a>6.4.2 key 的作用</h4><p>案例：点击按钮插入f</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;button @click="insertF"&gt;插入f&lt;/button&gt;
+	&lt;ul&gt;
+		&lt;!-- key要求是唯一: id --&gt;
+		&lt;li v-for="item in letters" :key="item"&gt;{{item}}&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt; 
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				letters: ["a", "b", "c", "d", "e"]
+			}
+		},
+		methods: {
+			insertF() {
+				this.letters.splice(2, 0, "f")
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<ul>
+<li>没有key的操作:<ul>
+<li>diff算法, 后续VNode复用性不强</li>
+</ul>
+</li>
+</ul>
+<p><img src="f74bcb9969db4dc6b96f53f955d296a3.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>有key的操作:<ul>
+<li>根据key找到之前的VNode进行复用;</li>
+<li>没有VNode可以复用, 再创建新的VNode</li>
+</ul>
+</li>
+</ul>
+<p><img src="d6e79ff91701489fab90e9fb03058b13.png" alt="在这里插入图片描述"><br><img src="965272747ed0418ea7670e26eaa518e9.png" alt="在这里插入图片描述"></p>
+<h1 id="三、Options-API"><a href="#三、Options-API" class="headerlink" title="三、Options API"></a>三、Options API</h1><h2 id="1-计算属性-computed"><a href="#1-计算属性-computed" class="headerlink" title="1. 计算属性 computed"></a>1. 计算属性 computed</h2><h3 id="1-1-复杂数据的处理方式"><a href="#1-1-复杂数据的处理方式" class="headerlink" title="1.1 复杂数据的处理方式"></a>1.1 复杂数据的处理方式</h3><p>在某些情况，我们可能需要<strong>对数据进行一些转化</strong>后再显示，或者需要将<strong>多个数据结合起来</strong>进行显示</p>
+<ul>
+<li>mustache插值语法自己写逻辑：在模板中放入太多的逻辑会让<strong>模板过重和难以维护</strong></li>
+<li>methods完成逻辑：所有的data使用过程都会变成了<strong>一个方法的调用</strong></li>
+</ul>
+<h3 id="1-2-computed-用法"><a href="#1-2-computed-用法" class="headerlink" title="1.2 computed 用法"></a>1.2 computed 用法</h3><p>对于任何<strong>包含响应式数据的复杂逻辑</strong>，都应该使用计算属性</p>
+<ul>
+<li><code>computed: { fullname() {} }</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 插值语法表达式直接进行拼接 --&gt;
+	&lt;!-- 1.拼接名字 --&gt;
+	&lt;h2&gt;{{ fullname }}&lt;/h2&gt;
+	
+	&lt;!-- 2.显示分数等级 --&gt;
+	&lt;h2&gt;{{ scoreLevel }}&lt;/h2&gt;
+	
+	&lt;!-- 3.反转单词显示文本 --&gt;
+	&lt;h2&gt;{{ reverseMessage }}&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				// 1.姓名
+				firstName: "kobe",
+				lastName: "bryant",
+				// 2.分数: 及格/不及格
+				score: 80,
+				// 3.一串文本: 对文本中的单词进行反转显示
+				message: "my name is why"
+			}
+		},
+		computed: {
+			// 1.计算属性默认对应的是一个函数
+			fullname() {
+				return this.firstName + " " + this.lastName
+			},
+			scoreLevel() {
+				return this.score &gt;= 60 ? "及格": "不及格"
+			},
+			reverseMessage() {
+				return this.message.split(" ").reverse().join(" ")
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="1-3-computed-和-methods-区别"><a href="#1-3-computed-和-methods-区别" class="headerlink" title="1.3 computed 和 methods 区别"></a>1.3 computed 和 methods 区别</h3><ul>
+<li>computed<strong>底层会缓存, 性能更高</strong><ul>
+<li>计算属性会基于它们的依赖关系进行缓存;</li>
+<li>在数据不发生变化时，计算属性是不需要重新计算的</li>
+<li>但是如果依赖的数据发生变化，在使用时，计算属性依然会重新进行计算</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+&lt;div id="app"&gt;
+	&lt;!-- 1.methods --&gt;
+	&lt;h2&gt;{{ getFullname() }}&lt;/h2&gt;
+	&lt;h2&gt;{{ getFullname() }}&lt;/h2&gt;
+	&lt;h2&gt;{{ getFullname() }}&lt;/h2&gt;
+	&lt;!-- 2.computed --&gt;
+	&lt;h2&gt;{{ fullname }}&lt;/h2&gt;
+	&lt;h2&gt;{{ fullname }}&lt;/h2&gt;
+	&lt;h2&gt;{{ fullname }}&lt;/h2&gt;
+	&lt;!-- 修改name值 --&gt;
+	&lt;button @click="changeLastname"&gt;修改lastname&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				firstName: "kobe",
+				lastName: "bryant"
+			}
+		},
+		methods: {
+			getFullname() {
+				console.log("getFullname-----")
+				return this.firstName + " " + this.lastName
+			},
+			changeLastname() {
+				this.lastName = "why"
+			}
+		},
+		computed: {
+			fullname() {
+				console.log("computed fullname-----")
+				return this.firstName + " " + this.lastName
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+<p><img src="e848a126cda7417aa4ea6c78e09cdfe0.png" alt="在这里插入图片描述"></p>
+<h3 id="1-4-计算属性的-setter-和-getter-了解"><a href="#1-4-计算属性的-setter-和-getter-了解" class="headerlink" title="1.4 计算属性的 setter 和 getter (了解)"></a>1.4 计算属性的 setter 和 getter (了解)</h3><p>计算属性在大多数情况下，<strong>只需要一个getter方法</strong>即可，所以我们会将计算属性直接写成一个函数</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;h2&gt;{{ fullname }}&lt;/h2&gt;
+	&lt;button @click="setFullname"&gt;设置fullname&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				firstname: "coder",
+				lastname: "why"
+			}
+		},
+		computed: {
+			// 语法糖的写法
+			// fullname() {
+			// return this.firstname + " " + this.lastname
+			// },
+			// 完整的写法:
+			fullname: {
+				get: function() {
+					return this.firstname + " " + this.lastname
+				},
+				set: function(value) {
+					const names = value.split(" ")
+					this.firstname = names[0]
+					this.lastname = names[1]
+				}
+			}
+		},
+		methods: {
+			setFullname() {
+				this.fullname = "kobe bryant"
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h2 id="2-侦听器-watch"><a href="#2-侦听器-watch" class="headerlink" title="2. 侦听器 watch"></a>2. 侦听器 watch</h2><p>希望在代码逻辑中<strong>监听某个数据的变化</strong>，这个时候就需要用侦听器watch来完成</p>
+<h3 id="2-1-基本侦听-watch"><a href="#2-1-基本侦听-watch" class="headerlink" title="2.1 基本侦听 watch"></a>2.1 基本侦听 watch</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;h2&gt;{{message}}&lt;/h2&gt;
+	&lt;button @click="changeMessage"&gt;修改message&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				message: "Hello Vue",
+				info: { name: "why", age: 18 }
+			}
+		},
+		methods: {
+			changeMessage() {
+				this.message = "你好啊, 李银河!"
+				this.info = { name: "kobe" }
+			}
+		},
+		watch: {
+			// 1.默认有两个参数: newValue/oldValue
+			message(newValue, oldValue) {
+				console.log("message数据发生了变化:", newValue, oldValue)
+			},
+			info(newValue, oldValue) {
+				// 2.如果是对象类型, 那么拿到的是代理对象 Proxy
+				console.log("info数据发生了变化:", newValue, oldValue)
+				console.log(newValue.name, oldValue.name)
+				// 3.获取原生对象
+				console.log(Vue.toRaw(newValue))
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-2-侦听器-watch-的配置选项"><a href="#2-2-侦听器-watch-的配置选项" class="headerlink" title="2.2 侦听器 watch 的配置选项"></a>2.2 侦听器 watch 的配置选项</h3><p>若修改info.name，用watch侦听info，无法侦听到</p>
+<ul>
+<li>watch<strong>只侦听info的引用变化</strong>，对于内部属性的变化是不会做出响应的</li>
+<li>这个时候我们可以使用一个选项<strong>deep进行更深层的侦听</strong></li>
+<li>还有另外一个属性，是希望<strong>一开始就会立即执行一次</strong><ul>
+<li>使用immediate选项</li>
+<li>无论后面数据是否有变化，侦听的函数都会有限执行一次</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+&lt;div id="app"&gt;
+	&lt;h2&gt;{{ info.name }}&lt;/h2&gt;
+	&lt;button @click="changeInfo"&gt;修改info&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="[../lib/vue.js](../lib/vue.js)"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				info: { name: "why", age: 18 }
+			}
+		},
+		methods: {
+			changeInfo() {
+				// 创建一个新对象, 赋值给info
+				// this.info = { name: "kobe" }
+				
+				// 直接修改原对象某一个属性
+				this.info.name = "kobe"
+			}
+		},
+		watch: {
+			// 默认watch监听不会进行深度监听
+			// info(newValue, oldValue) {
+				// console.log("侦听到info改变:", newValue, oldValue)
+			// }
+			
+			// 进行深度监听
+			info: {
+				handler(newValue, oldValue) {
+					console.log("侦听到info改变:", newValue, oldValue) // 侦听到info改变: Proxy {name: 'kobe', age: 18} Proxy {name: 'kobe', age: 18}
+					console.log(newValue === oldValue)
+				}, // true
+				// 1.info进行深度监听
+				deep: true,
+				// 2.第一次渲染直接执行一次监听器
+				immediate: true
+			},
+			"info.name": function(newValue, oldValue) {
+				console.log("name发生改变:", newValue, oldValue) // name发生改变: kobe why
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-3-其他的写法"><a href="#2-3-其他的写法" class="headerlink" title="2.3 其他的写法"></a>2.3 其他的写法</h3><p>在created的生命周期（后续会讲到）中，使用 this.$watchs 来侦听</p>
+<ul>
+<li>第一个参数是要侦听的源</li>
+<li>第二个参数是侦听的回调函数callback</li>
+<li>第三个参数是额外的其他选项，比如deep、immediate</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;h2&gt;{{message}}&lt;/h2&gt;
+	&lt;button @click="changeMessage"&gt;修改message&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="[../lib/vue.js](../lib/vue.js)"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				message: "Hello Vue"
+			}
+		},
+		methods: {
+			changeMessage() {
+				this.message = "你好啊, 李银河!"
+			}
+		},
+		// 生命周期回调函数: 当前的组件被创建时自动执行
+		// 一般在该函数中, 会进行网络请求
+		created() {
+			// ajax/fetch/axios
+			console.log("created")
+			this.$watch("message", (newValue, oldValue) =&gt; {
+			console.log("message数据变化:", newValue, oldValue)
+}, { deep: true })
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h1 id="四、v-model-双向绑定"><a href="#四、v-model-双向绑定" class="headerlink" title="四、v-model 双向绑定"></a>四、v-model 双向绑定</h1><h2 id="1-v-model-基本使用"><a href="#1-v-model-基本使用" class="headerlink" title="1. v-model 基本使用"></a>1. v-model 基本使用</h2><p>表单提交是开发中非常常见的功能，也是和用户交互的重要手段</p>
+<ul>
+<li>这要求我们可以在代码逻辑中<strong>获取到用户提交的数据</strong>，我们通常会使用v-model指令来完成<ul>
+<li>v-model指令可以在表单 input、textarea以及select元素上创建<strong>双向数据绑定</strong></li>
+<li>v-model 本质上不过是语法糖，它负责监听用户的输入事件来更新数据，并在某种极端场景下进行一些特殊处理</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>v-model的原理</strong>是背后有两个操作：<ul>
+<li>v-bind绑定value属性的值</li>
+<li>v-on绑定input事件监听到函数中，函数会获取最新的值赋值到绑定的属性中</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+&lt;input type="text" :value="message" @input="inputChange"&gt;
+
+等价于
+
+&lt;input type="text" v-model="message"&gt;</code></pre>
+
+<h2 id="2-v-model-绑定其他类型"><a href="#2-v-model-绑定其他类型" class="headerlink" title="2. v-model 绑定其他类型"></a>2. v-model 绑定其他类型</h2><h3 id="2-1-textarea"><a href="#2-1-textarea" class="headerlink" title="2.1 textarea"></a>2.1 textarea</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;textarea cols="30" rows="10" v-model="content"&gt;&lt;/textarea&gt;
+	&lt;p&gt;输入的内容: {{content}}&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				content: ""
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-2-checkbox"><a href="#2-2-checkbox" class="headerlink" title="2.2 checkbox"></a>2.2 checkbox</h3><ul>
+<li>单个勾选框：<ul>
+<li>v-model即为<strong>布尔值</strong>。</li>
+<li>此时input的value属性并不影响v-model的值。</li>
+</ul>
+</li>
+<li>多个复选框：<ul>
+<li>当是多个复选框时，因为可以选中多个，所以对应的data中属性是一个<strong>数组</strong>。</li>
+<li>当选中某一个时，就会将input的value添加到数组中</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+&lt;div id="app"&gt;
+	&lt;!-- 1.checkbox单选框: 绑定到属性中的值是一个Boolean --&gt;
+	&lt;label for="agree"&gt;
+		&lt;input id="agree" type="checkbox" v-model="isAgree"&gt; 同意协议
+	&lt;/label&gt;
+	&lt;h2&gt;单选框: {{isAgree}}&lt;/h2&gt;
+	&lt;hr&gt;
+	
+	&lt;!-- 2.checkbox多选框: 绑定到属性中的值是一个Array --&gt;
+	&lt;!-- 注意: 多选框当中, 必须明确的绑定一个value值 --&gt;
+	&lt;div class="hobbies"&gt;
+		&lt;h2&gt;请选择你的爱好:&lt;/h2&gt;
+		&lt;label for="sing"&gt;
+			&lt;input id="sing" type="checkbox" v-model="hobbies" value="sing"&gt; 唱
+		&lt;/label&gt;
+		&lt;label for="jump"&gt;
+			&lt;input id="jump" type="checkbox" v-model="hobbies" value="jump"&gt; 跳
+		&lt;/label&gt;
+		&lt;h2&gt;爱好: {{hobbies}}&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				isAgree: false,
+				hobbies: []
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-3-radio"><a href="#2-3-radio" class="headerlink" title="2.3 radio"></a>2.3 radio</h3><p>此时不需要通过添加name属性使两选项排他，添加v-model可以自动排他</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;div class="gender"&gt;
+	&lt;label for="male"&gt;
+		&lt;input id="male" type="radio" v-model="gender" value="male"&gt; 男
+	&lt;/label&gt;
+	&lt;label for="female"&gt;
+		&lt;input id="female" type="radio" v-model="gender" value="female"&gt; 女
+	&lt;/label&gt;
+	&lt;h2&gt;性别: {{gender}}&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				gender: "female" // 默认选女
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h3 id="2-4-select"><a href="#2-4-select" class="headerlink" title="2.4 select"></a>2.4 select</h3><ul>
+<li>单选：只能选中一个值<ul>
+<li>v-model绑定的是一个<strong>值</strong></li>
+<li>当我们选中option中的一个时，会将它对应的value赋值到fruit中</li>
+</ul>
+</li>
+<li>多选：可以选中多个值 <ul>
+<li>v-model绑定的是一个<strong>数组</strong></li>
+<li>当选中多个值时，就会将选中的option对应的value添加到数组fruit中</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">```
+```js
+&lt;div id="app"&gt;
+	&lt;!-- select的单选 --&gt;
+	&lt;select v-model="fruit"&gt;
+		&lt;option value="apple"&gt;苹果&lt;/option&gt;
+		&lt;option value="orange"&gt;橘子&lt;/option&gt;
+		&lt;option value="banana"&gt;香蕉&lt;/option&gt;
+	&lt;/select&gt;
+	&lt;h2&gt;单选: {{fruit}}&lt;/h2&gt;
+	&lt;hr&gt;
+	
+	&lt;!-- select的多选 --&gt;
+	&lt;select multiple size="3" v-model="fruits"&gt;
+		&lt;option value="apple"&gt;苹果&lt;/option&gt;
+		&lt;option value="orange"&gt;橘子&lt;/option&gt;
+		&lt;option value="banana"&gt;香蕉&lt;/option&gt;
+	&lt;/select&gt;
+	&lt;h2&gt;多选: {{fruits}}&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				fruit: "orange",
+				fruits: []
+			}
+		},
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h2 id="3-v-model-值绑定"><a href="#3-v-model-值绑定" class="headerlink" title="3. v-model 值绑定"></a>3. v-model 值绑定</h2><p>在真实开发中，我们的<strong>数据可能是来自服务器</strong>的，那么我们就可以先将值请求下来，绑定到data返回的对象中，再通过v-bind来进行值的绑定，这个过程就是值绑定</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&lt;div id="app"&gt;
+	&lt;!-- 1.select的值绑定 --&gt;
+	&lt;select multiple size="3" v-model="fruits"&gt;
+		&lt;option v-for="item in allFruits"
+		:key="item.value"
+		:value="item.value"&gt;
+			{{item.text}}
+		&lt;/option&gt;
+	&lt;/select&gt;
+	
+	&lt;h2&gt;多选: {{fruits}}&lt;/h2&gt;
+	&lt;hr&gt;
+	
+	&lt;!-- 2.checkbox的值绑定 --&gt;
+	&lt;div class="hobbies"&gt;
+		&lt;h2&gt;请选择你的爱好:&lt;/h2&gt;
+		&lt;template v-for="item in allHobbies" :key="item.value"&gt;
+			&lt;label :for="item.value"&gt;
+				&lt;input :id="item.value" type="checkbox" v-model="hobbies" :value="item.value"&gt; {{item.text}}
+			&lt;/label&gt;
+		&lt;/template&gt;
+		
+		&lt;h2&gt;爱好: {{hobbies}}&lt;/h2&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="../lib/vue.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	// 1.创建app
+	const app = Vue.createApp({
+		// data: option api
+		data() {
+			return {
+				// 水果
+				allFruits: [
+					{ value: "apple", text: "苹果" },
+					{ value: "orange", text: "橘子" },
+					{ value: "banana", text: "香蕉" },
+				],
+				fruits: [],
+				// 爱好
+				allHobbies: [
+					{ value: "sing", text: "唱" },
+					{ value: "jump", text: "跳" },
+				],
+				hobbies: []
+			}
+		}
+	})
+	// 2.挂载app
+	app.mount("#app")
+&lt;/script&gt;</code></pre>
+
+<h2 id="4-v-model-修饰符"><a href="#4-v-model-修饰符" class="headerlink" title="4. v-model 修饰符"></a>4. v-model 修饰符</h2><h3 id="4-1-lazy"><a href="#4-1-lazy" class="headerlink" title="4.1 lazy"></a>4.1 lazy</h3><ul>
+<li>默认情况下，v-model在进行双向绑定时，绑定的是input事件，那么会在<strong>每次内容输入后</strong>就将最新的值和绑定的属性进行<strong>同步</strong></li>
+<li>如果我们在v-model后跟上lazy修饰符(<code>v-model.lazy</code>)，那么会将绑定的事件切换为 change 事件，只有<strong>在提交时（比如回车）才会触发</strong></li>
+</ul>
+<h3 id="4-2-number"><a href="#4-2-number" class="headerlink" title="4.2 number"></a>4.2 number</h3><ul>
+<li>v-model绑定后的值总是string类型，即使在我们设置input的type为number也是string类型；</li>
+<li>如果我们希望<strong>转换为数字类型</strong>，那么可以使用 .number 修饰符</li>
+</ul>
+<h3 id="4-3-trim"><a href="#4-3-trim" class="headerlink" title="4.3 trim"></a>4.3 trim</h3><p>如果要自动<strong>过滤用户输入的空白字符</strong>，可以给v-model添加 trim 修饰符</p>
+<p><em><strong>这些修饰符可以叠加使用：<code>v-model.lazy.trim</code></strong></em></p>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">https://nan-ying.github.io/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Vue/">
+              <span class="chip bg-color">Vue</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-01-20T18-56-10',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/01/20/Vue3-%E7%9F%A5%E8%AF%86%E5%A4%A7%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BB%84%E4%BB%B6%E5%8C%96%E5%9F%BA%E7%A1%80/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Vue3 知识大总结（二）组件化基础">
+                        
+                        <span class="card-title">Vue3 知识大总结（二）组件化基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Vue%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    Vue框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/15/JavaScript-%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="JavaScript 高级（六）网络请求和响应">
+                        
+                        <span class="card-title">JavaScript 高级（六）网络请求和响应</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/" class="post-category">
+                                    前端三件套
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >453.3k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>
