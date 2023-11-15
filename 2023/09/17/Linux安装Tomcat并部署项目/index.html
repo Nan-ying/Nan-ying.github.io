@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux安装Tomcat并部署项目, Nan-ying&#39;s Blog">
+    <meta name="description" content="Linux安装关于安装这里就不过多介绍了，安装版本是CentOS 7，选择最小安装即可
+网卡配置由于启动服务器的时候未加载网卡，所以这里我们要手动修改一下配置文件
+
+进入到对应的目录
+
+BASH
+cd /etc/sysconfig/netw">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux安装Tomcat并部署项目 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux安装Tomcat并部署项目</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Linux/">
+              <span class="chip bg-color">Linux</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+              项目
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-09-17
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 5.2k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          20 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h2 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h2><p>关于安装这里就不过多介绍了，安装版本是<code>CentOS 7</code>，选择<code>最小安装</code>即可</p>
+<h3 id="网卡配置"><a href="#网卡配置" class="headerlink" title="网卡配置"></a>网卡配置</h3><p>由于启动服务器的时候未加载网卡，所以这里我们要手动修改一下配置文件</p>
+<ul>
+<li>进入到对应的目录</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+cd /etc/sysconfig/network-scripts</code></pre>
+
+<ul>
+<li>编辑<code>ifcfg-ens33</code>文件</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+vi ifcfg-ens33</code></pre>
+
+<ul>
+<li>输入<code>i</code>进入编辑</li>
+<li>修改<code>ONBOOT=yes</code></li>
+<li>按ESC</li>
+<li>输入<code>:wq</code>保存并退出</li>
+<li>输入<code>ip addr</code>，查看到类似下图的ip地址即可<br><a target="_blank" rel="noopener" href="https://pic1.imgdb.cn/item/634a19f016f2c2beb1a8a501.jpg"><img src="634a19f016f2c2beb1a8a501.jpg" alt="img"></a></li>
+</ul>
+<h3 id="安装SSH连接工具"><a href="#安装SSH连接工具" class="headerlink" title="安装SSH连接工具"></a>安装SSH连接工具</h3><ul>
+<li>为啥要安装这个呢？<ul>
+<li>因为实际工作的时候，Linux操作系统都是安装在物理机上，而不是像我们现在使用的虚拟机</li>
+<li>所以我们需要SSH连接工具，远程连接到物理机上</li>
+</ul>
+</li>
+<li>这里安装的是<code>FinalShell</code>，具体的安装与连接操作，这里就不过多叙述了</li>
+<li>成功连接之后的效果如图<br><a target="_blank" rel="noopener" href="https://pic1.imgdb.cn/item/634a1b3516f2c2beb1aa6c8b.jpg"><img src="634a1b3516f2c2beb1aa6c8b.jpg" alt="img"></a></li>
+</ul>
+<h3 id="Linux的目录结构"><a href="#Linux的目录结构" class="headerlink" title="Linux的目录结构"></a>Linux的目录结构</h3><p><a target="_blank" rel="noopener" href="https://pic1.imgdb.cn/item/634a234916f2c2beb1b6f85c.jpg"><img src="634a234916f2c2beb1b6f85c.jpg" alt="img"></a></p>
+<table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/bin</td>
+<td align="center">存放二进制可执行文件</td>
+</tr>
+<tr>
+<td align="center">/boot</td>
+<td align="center">存放系统引导时使用的各种文件</td>
+</tr>
+<tr>
+<td align="center">/dev</td>
+<td align="center">存放设备文件</td>
+</tr>
+<tr>
+<td align="center">/etc</td>
+<td align="center">存放系统配置文件</td>
+</tr>
+<tr>
+<td align="center">/home</td>
+<td align="center">存放系统用户的文件</td>
+</tr>
+<tr>
+<td align="center">/lib</td>
+<td align="center">存放程序运行所需的共享库和内核模块</td>
+</tr>
+<tr>
+<td align="center">/opt</td>
+<td align="center">额外安装的可选应用程序包所放置的位置</td>
+</tr>
+<tr>
+<td align="center">/root</td>
+<td align="center">超级用户目录</td>
+</tr>
+<tr>
+<td align="center">/sbin</td>
+<td align="center">存放二进制可执行文件，只有root用户才能访问</td>
+</tr>
+<tr>
+<td align="center">/tmp</td>
+<td align="center">存放临时文件</td>
+</tr>
+<tr>
+<td align="center">/usr</td>
+<td align="center">存放系统应用程序</td>
+</tr>
+<tr>
+<td align="center">/var</td>
+<td align="center">存放运行时需要改变数据的文件，例如日志文件</td>
+</tr>
+</tbody></table>
+<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="Linux命令常用技巧"><a href="#Linux命令常用技巧" class="headerlink" title="Linux命令常用技巧"></a>Linux命令常用技巧</h3><ul>
+<li>Tab键自动补全</li>
+<li>连续按两次Tab键，给出操作提示</li>
+<li>使用上下箭头快速调出曾经使用过的命令</li>
+<li>使用Clear命令或者快捷键Ctrl+L实现清屏</li>
+</ul>
+<h3 id="Linux命令格式"><a href="#Linux命令格式" class="headerlink" title="Linux命令格式"></a>Linux命令格式</h3><ul>
+<li>Linux命令格式如下</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+command [-options] [parameter]</code></pre>
+
+<p>说明：</p>
+<ul>
+<li><code>command</code>：命令名</li>
+<li><code>[-options]</code>：选项，可用来对命令进行控制，也可以省略</li>
+<li><code>[parameter]</code>：传给命令的参数，可以是0个，1个或多个</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li><code>[]</code>代表可选命令名</li>
+<li>选项，参数之间需要用空格进行分隔</li>
+</ul>
+<h3 id="文件目录操作命令"><a href="#文件目录操作命令" class="headerlink" title="文件目录操作命令"></a>文件目录操作命令</h3><h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><ul>
+<li>作用：显示指定目录下的内容</li>
+<li>语法：<code>ls [-al] [dir]</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li><code>-a</code>：显示所有文件及目录（以<code>.</code>开头的隐藏文件也会列出）</li>
+<li><code>-l</code>：除文件名外，还会讲文件的形态、权限、拥有者、文件大小等详细信息列出</li>
+</ul>
+<p>注意：由于我们使用<code>ls</code>命令时，经常会加上<code>-l</code>选项，所以Linux很人性化的为我们提供了<code>ll</code>命令来作为<code>ls -l</code>命令的简写，使用<code>ll -a</code>也可以替代<code>ls -al</code></p>
+<h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><ul>
+<li>作用：用户切换当前工作目录，即进入指定目录</li>
+<li>语法<code>cd [dirName]</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li><code>~</code>表示用户的home目录</li>
+<li><code>.</code>表示当前所在的目录</li>
+<li><code>..</code>表示当前位置的上级目录</li>
+</ul>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><ul>
+<li>作用：用于显示文件内容</li>
+<li>语法：<code>cat [-n] fileName</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li><code>-n</code>：由1开始对所有输出的行数编号</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><pre><code>cat /etc/profile
+<pre class="line-numbers language-none"><code class="language-none">
+  - 查看`/etc`目录下的`profile`文件内容
+
+- ```
+  cat -n /etc/profile</code></pre>
+
+- 查看`/etc`目录下的`profile`文件内容，显示行号
+</code></pre>
+</li>
+</ul>
+<h4 id="more"><a href="#more" class="headerlink" title="more"></a>more</h4><ul>
+<li>作用：以分页的形式显示文件内容</li>
+<li>语法：<code>more fileName</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>回车键：向下滚动一行</li>
+<li>空格键：向下滚动一屏</li>
+<li>b：返回上一屏</li>
+<li>q或者Ctrl+C：退出more</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><pre><code>more /etc/profile
+<pre class="line-numbers language-none"><code class="language-none">
+  - 以分页方式显示`/etc`目录下的`profile`文件内容
+
+#### tail
+
+- 作用：查看文件末尾的内容
+- 语法：`tail [-f] fileName`
+
+说明：
+
+- `-f`：动态读取文件末尾内容并显示，通常用于日志文件的内容输出
+
+举例：
+
+- ```
+  tail /etc/profile</code></pre>
+
+- 显示`/etc`目录下的`profile`文件末尾10行的内容
+</code></pre>
+</li>
+<li><pre><code>tail -20 /etc/profile
+<pre class="line-numbers language-none"><code class="language-none">
+  - 显示`/etc`目录下的`profile`文件末尾20行的内容
+
+- ```
+  tail -f /kyle/blog.log</code></pre>
+
+- 动态读取`/kyle`目录下的`blog.log`文件末尾内容并显示
+</code></pre>
+</li>
+</ul>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><ul>
+<li>作用：创建目录</li>
+<li>语法：<code>mkdir[-p] dirName</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li><code>-p</code>：确保目录名称存在，不存在的就创建一个。通过此选项，可以实现多层目录同时创建</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><pre><code>mkdir linuxCast
+<pre class="line-numbers language-none"><code class="language-none">
+  - 在当前目录下，建立一个名为linuxCast的子目录
+
+- ```
+  mkdir-p linuxCast/test</code></pre>
+
+- 在工作目录下的linuxCast目录中建立一个名为test的子目录，若linuxCast目录不存在，则建立一个
+</code></pre>
+</li>
+</ul>
+<h4 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h4><ul>
+<li>作用：删除空目录</li>
+<li>语法：<code>rmdir [-p] dirName</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li><code>-p</code>：当子目录被删除后使父目录为空目录的话，则一并删除</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><code>rmdir linuxCast</code>删除名为linuxCast的空目录</li>
+<li><code>rmdir -p linuxCast/test</code>删除linuxCast目录中名为test的子目录，若test目录删除后linuxCast目录变为空目录，则也被删除</li>
+<li><code>rmdir linuxCast*</code>删除名称以linuxCast开始的空目录</li>
+</ul>
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><ul>
+<li>作用：删除文件或者目录</li>
+<li>语法：<code>rm [-rf] name</code></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li><code>-r</code>：将目录及目录中所有文件（目录）逐一删除，即递归删除</li>
+<li><code>-f</code>：无需确认，直接删除</li>
+<li><code>name</code>：要删除的文件/目录，支持通配符</li>
+</ul>
+<h3 id="拷贝移动命令"><a href="#拷贝移动命令" class="headerlink" title="拷贝移动命令"></a>拷贝移动命令</h3><h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><p>作用：用于复制文件或目录<br>语法：cp [-r] source dest</p>
+<p>说明：</p>
+<ul>
+<li><code>-r</code>：如果复制的是目录需要使用此选项，此时将复制该目录下所有的子目录和文件</li>
+<li><code>source</code>：要复制的资源（文件/目录）</li>
+<li><code>dest</code>：要移动到的位置</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><pre><code>cp hello.txt linuxCast/
+<pre class="line-numbers language-none"><code class="language-none">
+  - 将hello.txt复制到linuxCast目录中
+
+- ```
+  cp hello.txt ./ hi.txt</code></pre>
+
+- 将hello.txt复制到当前目录，并改名为hi.txt
+</code></pre>
+</li>
+<li><p>c</p>
+<pre class="line-numbers language-none"><code class="language-none">p -r linuxCast/ ./blog/</code></pre>
+
+<ul>
+<li>将linuxCast目录和目录下所有文件复制到blog目录下</li>
+</ul>
+</li>
+<li><pre><code>cp -r linuxCast/* ./blog/
+<pre class="line-numbers language-none"><code class="language-none">
+  - 将linuxCast目录下所有文件复制blog目录下
+
+#### mv
+
+作用：为文件或目录改名、或将文件或目录移动到其它位置
+语法：mv source dest
+
+说明：
+
+- `source`：要移动的资源（文件/目录）
+- `dest`：要移动到的位置
+
+举例：
+
+- ```
+  mv hello.txt hi.txt</code></pre>
+
+- 将hello.txt改名为hi.txt
+</code></pre>
+</li>
+<li><pre><code>mv hi.txt blogl
+<pre class="line-numbers language-none"><code class="language-none">
+  - 将文件hi.txt移动到blog目录中
+
+- ```
+  mv hi.txt blog/hello.txt</code></pre>
+
+- 将hi.txt移动到blog目录中，并改名为hello.txt
+</code></pre>
+</li>
+<li><pre><code>mv linuxCast/ blogl
+<pre class="line-numbers language-none"><code class="language-none">
+  - 如果blog目录不存在，将linuxCast目录改名为blog
+
+- ```
+  mv linuxCast/ blogl</code></pre>
+
+- 如果blog目录存在，将linuxCast目录移动到blog目录中
+</code></pre>
+</li>
+</ul>
+<h3 id="打包压缩命令"><a href="#打包压缩命令" class="headerlink" title="打包压缩命令"></a>打包压缩命令</h3><h4 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h4><p>作用：对文件进行打包、解包、压缩、解压<br>语法：<code>tar [-zcxvf] fileName [files]</code><br>包文件后缀为<code>.tar</code>表示只是完成了打包，并没有压缩<br>包文件后缀为<code>.tar.gz</code>表示打包的同时还进行了压缩，也可以用<code>.tgz</code>作为简写</p>
+<p>说明：</p>
+<ul>
+<li><code>-z</code>： 代表的是gzip，通过gzip命令处理文件，gzip可以对文件压缩或者解压</li>
+<li><code>-c</code>： 代表的是create，即创建新的包文件</li>
+<li><code>-x</code>： 代表的是extract，实现从包文件中还原文件</li>
+<li><code>-v</code>： 代表的是verbose，显示命令的执行过程</li>
+<li><code>-f</code>： 代表的是file，用于指定包文件的名称</li>
+<li><code>c</code>和<code>x</code>是互斥的，解压和压缩不能同时进行</li>
+</ul>
+<p>举例 ：</p>
+<ul>
+<li><pre><code>tar -cvf hello.tar ./*
+<pre class="line-numbers language-none"><code class="language-none">
+  - 将当前目录下所有文件打包，打包后的文件名为hello.tar
+
+- ```
+  tar -czvf hello.tar.gz ./*</code></pre>
+
+- 将当前目录下所有文件打包并压缩，打包后的文件名为hello.tar.gz
+</code></pre>
+</li>
+<li><pre><code>tar -zxvf hello.tar.gz
+<pre class="line-numbers language-none"><code class="language-none">
+  - 将`hello.tar.gz`中的文件解压缩
+
+### 文本编辑命令
+
+#### vi
+
+作用：`vi`命令是`Linux`系统提供的一个文本编辑工具，可以对文件内容进行编辑，类似于`windows`中的记事本
+语法：`vi fileName`
+
+说明：
+
+1. `vim`是从`vi`发展来的一个功能更加强大的文本编辑工具，在编辑文件时可以对文本内容进行着色，方便我们对文件进行编辑处理，所以实际工作中`vim`更加常用。
+2. 要使用`vim`命令，需要我们自己完成安装。可以使用下面的命令来完成安装：`yum install vim`
+
+#### vim
+
+作用：对文件内容进行编辑，vim其实就是一个文本编辑器
+语法：`vim fileName`
+
+说明：
+
+1. 在使用vim命令编辑文件时，如果指定的文件存在则直接打开此文件。如果指定的文件不存在则新建文件。
+2. vim在进行文本编辑时共分为三种模式，分别是`命令模式`（Command mode），`插入模式`（Insert mode）和`底行模式`（Last line mode）。这三种模式之间可以相互切换。我们在使用vim时一定要注意我们当前所处的是哪种模式。
+
+针对vim中的三种模式说明如下：
+
+1. 命令模式
+   命令模式下可以查看文件内容、移动光标（上下左右箭头、`gg`(开头)、`G`（末尾））
+   通过vim命令打开文件后，默认进入命令模式
+   另外两种模式需要首先进入命令模式，才能进入彼此
+2. 插入模式
+   插入模式下可以对文件内容进行编辑
+   在命令模式下按下[i,a,o]任意一个，可以进入插入模式。进入插入模式后，下方会出现`INSERT`字样
+   在插入模式下按下ESC键，回到命令模式
+3. 底行模式
+   底行模式下可以通过命令对文件内容进行查找、显示行号、退出等操作
+   在命令模式下按下[:,/]任意一个，可以进入底行模式
+   通过 `/` 方式进入底行模式后，可以对文件内容进行查找
+   通过 `:` 方式进入底行模式后，可以输入`wq`（保存并退出）、`q！`（不保存退出）、`set nu`（显示行号）
+
+### 查找命令
+
+#### find
+
+作用：在指定目录下查找文件
+语法：`find dirName -option fileName`
+
+说明：
+
+- `dirName`：指定目录
+- `-option`：一般指定`-name`（根据文件名称来查找）
+- `fileName`：可以使用通配符的方式
+
+举例：
+
+- ```
+  find / -name helloworld.log</code></pre>
+
+- 在所有文件夹下查找helloworld.log文件
+</code></pre>
+</li>
+<li><pre><code>find . -name "*.java"
+<pre class="line-numbers language-none"><code class="language-none">
+  - 在当前目录及其子目录下查找.java结尾文件
+
+- ```
+  find /linuxCast -name "*.java"</code></pre>
+
+- 在/linuxCast目录及其子目录下查找.java结尾的文件
+</code></pre>
+</li>
+</ul>
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><p>作用：从指定文件中查找指定的文本内容<br>语法：<code>grep word fileName</code></p>
+<p>说明：</p>
+<ul>
+<li><code>word：</code>查找的文本</li>
+<li><code>fileName：</code>从哪个文件中种找</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><pre><code>grep Hello Helloworld.java
+<pre class="line-numbers language-none"><code class="language-none">
+  - 查找Helloworld.java文件中出现的Hello字符串的位置
+
+- ```
+  grep hello *.java</code></pre>
+
+- 查找当前目录中所有.java结尾的文件中包含hello字符串的位置
+</code></pre>
+</li>
+</ul>
+<h2 id="Linux软件安装"><a href="#Linux软件安装" class="headerlink" title="Linux软件安装"></a>Linux软件安装</h2><h3 id="软件安装方式"><a href="#软件安装方式" class="headerlink" title="软件安装方式"></a>软件安装方式</h3><ol>
+<li>二进制发布包安装<ul>
+<li>软件已经针对具体平台编译打包发布，只要解压，修改配置即可</li>
+</ul>
+</li>
+<li>rpm安装<ul>
+<li>软件已经按照redhat的包管理规范进行打包，使用rpm命令进行安装，不能自行解决库依赖问题</li>
+</ul>
+</li>
+<li>yum安装<ul>
+<li>一种在线软件安装方式，本质上还是rpm安装，自动下载安装包并安装，安装过程中自动解决库依赖问题</li>
+</ul>
+</li>
+<li>源码编译安装<ul>
+<li>软件以源码工程的形式发布，需要自己编译打包</li>
+</ul>
+</li>
+</ol>
+<h3 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h3><p>操作步骤：</p>
+<ol>
+<li><p>使用FinalShell自带的上传工具将jdk的二进制发布包上传到Linux</p>
+</li>
+<li><p>解压安装包，命令为</p>
+<pre class="line-numbers language-none"><code class="language-none">tar -zxvf jdk-8u171-linux-x64.tar.gz -C /usr/local</code></pre>
+
+<ul>
+<li>这个解压缩命令在前面也说过了，注意将jdk换成你自己的版本，<code>-C /path</code>是解压到指定目录，不过我们自己安装软件的话，一般都放在<code>/usr/local</code>目录下</li>
+</ul>
+</li>
+<li><p>配置环境变量，使用vim命令修改</p>
+<pre class="line-numbers language-none"><code class="language-none">/etc/profile</code></pre>
+
+<p>文件，或者使用</p>
+<pre class="line-numbers language-none"><code class="language-none">echo</code></pre>
+
+<p>追加文件内容，在文件末尾添加如下配置</p>
+<pre class="line-numbers language-none"><code class="language-none">PROPERTIES
+JAVA_HOME=/usr/local/jdk1.8.0_171
+PATH=$JAVA_HOME/bin:$PATH</code></pre>
+
+<ul>
+<li>追加<ul>
+<li><code>echo 'JAVA_HOME=/usr/local/jdk1.8.0_171' &gt;&gt; /etc/profile</code></li>
+<li><code>echo 'PATH=$JAVA_HOME/bin:$PATH' &gt;&gt; /etc/profile</code></li>
+</ul>
+</li>
+<li>查看<ul>
+<li><code>tail /etc/profile</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>重新加载profile文件，使更改的配置立即生效</p>
+<ul>
+<li>命令为<code>source /etc/profile</code></li>
+</ul>
+</li>
+<li><p>检查安装是否成功</p>
+<ul>
+<li>命令为<code>java -version</code></li>
+</ul>
+</li>
+<li><p>看到jdk版本号则说明安装成功</p>
+</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+[root@localhost local]## java -version
+java version "1.8.0_171"
+Java(TM) SE Runtime Environment (build 1.8.0_171-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)</code></pre>
+
+<h3 id="安装Tomcat"><a href="#安装Tomcat" class="headerlink" title="安装Tomcat"></a>安装Tomcat</h3><p>操作步骤：</p>
+<ol>
+<li><p>使用<code>FinalShell</code>自带的上传工具将<code>Tomcat</code>的二进制发布包上传到Linux</p>
+</li>
+<li><p>解压安装包</p>
+<ul>
+<li>命令为<code>tar -zxvf apache-tomcat-7.0.57.tar.gz-C /usr/local</code></li>
+</ul>
+</li>
+<li><p>进入Tomcat的bin目录启动服务，命令为<code>sh startup.sh</code>或者<code>./startup.sh</code></p>
+</li>
+<li><p>验证Tomcat是否启动成功</p>
+<ul>
+<li><p>查看进程</p>
+<ul>
+<li><code>ps -ef | grep tomcat</code></li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+[root@localhost bin]## ps -ef | grep tomcat
+root      71967      1  4 16:05 pts/0    00:00:02 /usr/local/jdk1.8.0_171/bin/java -Djava.util.logging.config.file=/usr/local/apache-tomcat-7.0.57/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.endorsed.dirs=/usr/local/apache-tomcat-7.0.57/endorsed -classpath /usr/local/apache-tomcat-7.0.57/bin/bootstrap.jar:/usr/local/apache-tomcat-7.0.57/bin/tomcat-juli.jar -Dcatalina.base=/usr/local/apache-tomcat-7.0.57 -Dcatalina.home=/usr/local/apache-tomcat-7.0.57 -Djava.io.tmpdir=/usr/local/apache-tomcat-7.0.57/temp org.apache.catalina.startup.Bootstrap start
+root      73174  42704  0 16:06 pts/0    00:00:00 grep --color=auto tomcat</code></pre>
+</li>
+<li><p>查看日志</p>
+<ul>
+<li><code>more /usr/local/ apache-tomcat-7.0.57/logs/catalina.out</code></li>
+<li><code>tail -50 /usr/local/apache-tomcat-7.0.57/logs/catalina.out</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>停止Tomcat</p>
+<ul>
+<li>运行Tomcat的bin目录中提供的停止服务的脚本文件shutdowno.sh<ul>
+<li><code>./shutdown.sh</code></li>
+<li><code>sh shutdown.sh</code></li>
+</ul>
+</li>
+<li>结束Tomcat进程<ul>
+<li><code>kill -9 71967</code></li>
+<li>注意这里的<code>71967</code>是Tomcat的<code>进程id</code>，是我们上面<code>查看进程</code>查出来的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>虽然Tomcat服务器启动了，但是我们暂时还是无法访问的，因为防火墙是开启的，而且我们也没有开放8080端口，继续往下看</p>
+<h3 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h3><ul>
+<li>查看防火墙状态<ul>
+<li>systemctl status firewalld、 firewall-cmd –state</li>
+</ul>
+</li>
+<li>暂时关闭防火墙<ul>
+<li>systemctl stop firewalld</li>
+</ul>
+</li>
+<li>永久关闭防火墙<ul>
+<li>systemctl disable firewalld</li>
+</ul>
+</li>
+<li>开启防火墙<ul>
+<li>systemctl start firewalld</li>
+</ul>
+</li>
+<li>开放指定端口<ul>
+<li>firewall-cmd –zone=public –add-port=8080/tcp –permanent</li>
+</ul>
+</li>
+<li>关闭指定端口<ul>
+<li>firewall-cmd –zone=public –remove-port=8080/tcp –permanent</li>
+</ul>
+</li>
+<li>立即生效<ul>
+<li>firewall-cmd –reload</li>
+</ul>
+</li>
+<li>查看开放的端口<ul>
+<li>firewall-cmd –zone=public –list-ports</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>systemctl是管理Linux中服务的命令，可以对服务进行启动、停止、重启、查看状态等操作</li>
+<li>firewall-cmd是Linux中专门用于控制防火墙的命令</li>
+<li>为了保证系统安全，服务器的防火墙不建议关闭</li>
+</ol>
+<ul>
+<li>查看防火墙状态，这里是running的</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+[root@localhost ~]## firewall-cmd --state
+running</code></pre>
+
+<ul>
+<li>那我们暂时关闭一下，测试能否访问Tomcat服务器</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+[root@localhost ~]## firewall-cmd --state
+not running</code></pre>
+
+<ul>
+<li>关了之后就能访问了，但是防火墙都没了，不安全<br><a target="_blank" rel="noopener" href="https://pic1.imgdb.cn/item/634a6ddf16f2c2beb1357daf.jpg"><img src="634a6ddf16f2c2beb1357daf.jpg" alt="img"></a></li>
+<li>但是我们可以只开放一个8080端口</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+[root@localhost ~]## firewall-cmd --zone=public --add-port=8080/tcp --permanent
+success</code></pre>
+
+<ul>
+<li>并设置立即生效</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">BASH
+[root@localhost ~]## firewall-cmd --reload
+success</code></pre>
+
+<ul>
+<li>刷新页面，尝试访问Tomcat服务器，依旧可以正常访问</li>
+</ul>
+<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><h4 id="检查冲突"><a href="#检查冲突" class="headerlink" title="检查冲突"></a>检查冲突</h4><p>检测当前系统中是否安装MySQL数据库</p>
+<ul>
+<li><pre><code>rpm -qa
+<pre class="line-numbers language-none"><code class="language-none">
+  - 查询当前系统中安装的所有软件
+
+- ```
+  rpm -qa | grep mysql</code></pre>
+
+- 查询当前系统中安装的名称带mysql的软件
+</code></pre>
+</li>
+<li><pre><code>rpm -qa | grep mariadb
+<pre class="line-numbers language-none"><code class="language-none">
+  - 查询当前系统中安装的名称带mariadb的软件
+
+RPM (Red-Hat Package Manager)RPM软件包管理器，是红帽Linux用于管理和安装软件的工具
+
+如果当前系统中已经安装有MySQL数据库，安装将失败。CentOS7自带mariadb，与MySQL数据库冲突
+
+#### 解决冲突
+
+- 如果发现有
+</code></pre>
+mariadb
+<pre class="line-numbers language-none"><code class="language-none">
+  ，那么我们把它卸载掉
+
+  - `rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64`
+
+- 然后看一下是不是真的卸掉了
+
+  - `rpm -qa | grep mariadb`
+
+#### 解压MySQL
+
+- 先创建要解压到的目录
+  - `mkdir /usr/local/mysql`
+- 随后解压
+  - `tar -zxvf mysql-5.7.25-1.el7.x86_64.rpm-bundle.tar.gz -C /usr/local/mysql`
+- 按顺序安装rpm包
+</code></pre>
+BASH
+rpm -ivh mysql-community-common-5.7.25-1.el7.x86_64.rpm
+rpm -ivh mysql-community-libs-5.7.25-1.el7.x86_64.rpm
+rpm -ivh mysql-community-devel-5.7.25-1.el7.x86_64.rpm
+rpm -ivh mysql-community-libs-compat-5.7.25-1.el7.x86_64.rpm
+rpm -ivh mysql-community-client-5.7.25-1.el7.x86_64.rpm
+yum install net-tools
+rpm -ivh mysql-community-server-5.7.25-1.el7.x86_64.rpm
+<pre class="line-numbers language-none"><code class="language-none">
+#### 启动MySQL
+
+- 查看MySQL服务状态
+  - `systemctl status mysqld`
+- 启动MySQL服务
+  - `system start mysqld`
+- 查看已经启动的服务
+  - `netstat -tunlp`
+  - `netstat -tunlp | grep mysql`
+- 查看MySQL进程
+  - `ps -df | grep mysql`
+
+说明：
+
+- 可以设置开机时自动启动MySQL服务，避免每次开机都要启动MySQL
+  - `systemctl enable mysqld`
+
+#### 登录MySQL
+
+- 查看日志内容中包含password的行信息
+  - `cat /var/log/mysqld.log |grep 'A temporary password is generated'`
+- 根据查询到的密码来登录MySQL
+  - `mysql -uroot -p`
+- 登录成功之后修改密码
+  - 设置密码长度最低位数
+    - `set global validate_password_length=4;`
+  - 设置密码安全等级低，便于密码可修改为root
+    - `set global validate_password_policy=LOW;`
+  - 设置密码为root
+    - `set password = password('root');`
+  - 开启访问权限
+    - `grant all on *.* to 'root'@'%' identified by 'root';`
+  - 刷新权限
+    - `flush privileges;`
+
+#### 外部连接
+
+- 使用Navicat或者SQLyog就可以连接到我们的数据库了，主机名就是ip地址，用户名和密码就是刚刚设置的
+
+如果在查看`MySQL服务状态`时出现了问题，请查看3306端口是否被占用（我找了俩小时才发现原因，呜呜呜）
+
+### 安装 lrzsz
+
+操作步骤
+
+1. 搜索lrzsz安装包
+   - yum list lrzsz
+2. 使用yum命令在线安装
+   - yum install lrzsz.x86_64
+
+Yum(全称为Yellow dog Updater, Modified)是一个在Fedora和RedHat以及Cent05中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
+
+- 安装完后输入 `rz` ，就会跳出一个窗口，选择文件后即可上传
+
+## 项目部署
+
+### 手动部署
+
+操作步骤
+
+1. 在IDEA上将项目打包成jar包
+
+   - 通过IDEA自带的Maven面板的package指令打包即可
+   - 打完的包会放在target目录下
+
+2. 将jar包上传到linux服务器
+
+   - 最好还是创建一个对应的目录
+     - mkdir `/usr/local/app`
+     - cd `/usr/local/app`
+   - 然后使用`rz`命令上传打包好的jar包
+
+3. 启动项目
+
+   - `java -jar [打包好的jar包名]`
+   - 我这里试着上传了前面做的瑞吉外卖的项目
+     - `java -jar reggie-0.0.1-SNAPSHOT.jar`
+
+4. 检查防火墙
+
+   - 确保
+</code></pre>
+   8080
+   <pre class="line-numbers language-none"><code class="language-none">
+和
+</code></pre>
+   3306
+   <pre class="line-numbers language-none"><code class="language-none">
+     端口是开放的
+
+     - `firewall-cmd --zone=public --list-ports`
+
+5. 测试
+
+   - 在浏览器访问`ip:端口/路径`
+
+[![img](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)](https://pic1.imgdb.cn/item/634b61bc16f2c2beb18d3547.jpg)
+
+### 通过Shell脚本自动部署
+
+操作步骤
+
+1. 在Linux安装Git
+
+   - 列出git安装包
+
+     - yum list git
+
+   - 在线安装git
+
+     - yum install git
+
+   - 使用git克隆代码（在此之前随便编写一个boot项目，然后push到仓库里，controller层写一个GetMapping，随便写个方法返回字符串
+</code></pre>
+   Shell脚本部署测试
+   <pre class="line-numbers language-none"><code class="language-none">
+     ，方便我们启动服务器的时候查看）
+
+     - git clone [仓库地址]
+
+2. 在Linux安装Maven
+
+   - 切换到
+</code></pre>
+   /usr/local
+   <pre class="line-numbers language-none"><code class="language-none">
+  目录
+
+  - cd `/usr/local`
+
+- 上传maven的安装包
+
+  - 使用`rz`命令
+
+- 解压到当前位置
+
+  - `tar zxvf apache-maven-3.5.4-bin.tar.gz`
+
+- 编辑配置文件
+</code></pre>
+   /etc/profile
+   <pre class="line-numbers language-none"><code class="language-none">
+  - `vim /etc/profile`
+  - 加入以下两行配置
+
+  &gt; export MAVEN_HOME=/usr/local/apache-maven-3.5.4
+  &gt; export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+
+- 编辑maven的
+</code></pre>
+   settings.xml
+   <pre class="line-numbers language-none"><code class="language-none">
+- 创建目录
+
+  - `mkdir /usr/local/repo`
+
+- 进入到对应目录修改文件
+
+  - ```
+    cd /usr/local/apache-maven-3.5.4/conf</code></pre>
+
+       - `vim settings.xml`
+       - 在`settings`标签下加上这句话设置仓库位置
+
+       &gt; `&lt;localRepository&gt;/usr/local/repo&lt;/localRepository&gt;`
+</code></pre>
+</li>
+</ul>
+<ol start="3">
+<li>编写Shell脚本（拉取代码、编译、打包、启动）<br>这部分暂时不需要我们自己写，体验一下用Shell脚本部署就好了</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">SHELL
+
+#!/bin/sh
+echo =================================
+echo  自动化部署脚本启动
+echo =================================
+ 
+echo 停止原来运行中的工程
+APP_NAME=helloworld
+ 
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ]; then
+    echo 'Stop Process...'
+    kill -15 $tpid
+fi
+sleep 2
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ]; then
+    echo 'Kill Process!'
+    kill -9 $tpid
+else
+    echo 'Stop Success!'
+fi
+ 
+echo 准备从Git仓库拉取最新代码
+cd /usr/local/HelloWorld
+ 
+echo 开始从Git仓库拉取最新代码
+git pull
+echo 代码拉取完成
+ 
+echo 开始打包
+output=`mvn clean package -Dmaven.test.skip=true`
+ 
+cd target
+ 
+echo 启动项目
+nohup java -jar HelloWorld-1.0-SNAPSHOT.jar &amp;&gt; helloworld.log &amp;
+echo 项目启动完成</code></pre>
+
+<ol>
+<li><p>为用户授予执行Shell脚本的权限</p>
+<ul>
+<li>7表示rwx三个权限都有，现在我们把权限都给了方便测试<ul>
+<li><code>chmod 777 bootStart.sh</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>执行Shell脚本</p>
+<ul>
+<li><code>./bootStart.sh</code></li>
+</ul>
+</li>
+<li><p>设置静态ip（可选）</p>
+<ul>
+<li><p>首先进入到对应目录</p>
+<ul>
+<li><code>cd /etc/sysconfig/network-scripts/</code></li>
+</ul>
+</li>
+<li><p>然后编辑</p>
+<pre class="line-numbers language-none"><code class="language-none">ifcfg-ens33</code></pre>
+
+<p>文件</p>
+<ul>
+<li><code>vim ifcfg-ens33</code></li>
+<li>修改添加以下内容（改成你自己的子网IP）</li>
+</ul>
+<blockquote>
+<p>BOOTPROTO=static<br>IPADDR=192.168.28.100<br>NETMASK=255.255.255.0<br>NM_CONTROLLED=no</p>
+<p>DNS1=8.8.8.8<br>DNS2=8.8.4.4</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>重启网络服务</p>
+<ul>
+<li><code>systemctl restart network</code></li>
+</ul>
+</li>
+</ol>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/09/17/Linux%E5%AE%89%E8%A3%85Tomcat%E5%B9%B6%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/">https://nan-ying.github.io/2023/09/17/Linux%E5%AE%89%E8%A3%85Tomcat%E5%B9%B6%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Linux/">
+              <span class="chip bg-color">Linux</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-09-17T19-38-01',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/09/21/%E8%A7%A3%E5%86%B3Linux%E7%B3%BB%E7%BB%9Fgit-clone%E5%A4%B1%E8%B4%A5%E6%88%96%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="解决Linux系统git clone失败或超时问题">
+                        
+                        <span class="card-title">解决Linux系统git clone失败或超时问题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/bug%E8%A7%A3%E5%86%B3/" class="post-category">
+                                    bug解决
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/09/01/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="瑞吉外卖">
+                        
+                        <span class="card-title">瑞吉外卖</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-category">
+                                    项目实战
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                        <span class="chip bg-color">项目</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >458.5k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>
