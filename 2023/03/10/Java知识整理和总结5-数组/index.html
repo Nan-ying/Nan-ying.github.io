@@ -1,0 +1,3216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java知识整理和总结5-数组, Nan-ying&#39;s Blog">
+    <meta name="description" content="第05章_数组本章专题与脉络
+
+1. 数组的概述1.1 为什么需要数组需求分析1：
+需要统计某公司50个员工的工资情况，例如计算平均工资、找到最高工资等。用之前知识，首先需要声明50个变量来分别记录每位员工的工资，这样会很麻烦。因此我们可以">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Java知识整理和总结5-数组 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java知识整理和总结5-数组</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Java/" class="post-category">
+              Java
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-03-10
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 13k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          56 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="第05章-数组"><a href="#第05章-数组" class="headerlink" title="第05章_数组"></a>第05章_数组</h1><h2 id="本章专题与脉络"><a href="#本章专题与脉络" class="headerlink" title="本章专题与脉络"></a>本章专题与脉络</h2><img src="%E7%AC%AC1%E9%98%B6%E6%AE%B5%EF%BC%9AJava%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95-%E7%AC%AC05%E7%AB%A0.png" alt="第1阶段：Java基本语法-第05章" style="zoom:45%;">
+
+<h2 id="1-数组的概述"><a href="#1-数组的概述" class="headerlink" title="1. 数组的概述"></a>1. 数组的概述</h2><h3 id="1-1-为什么需要数组"><a href="#1-1-为什么需要数组" class="headerlink" title="1.1 为什么需要数组"></a>1.1 为什么需要数组</h3><p><strong>需求分析1：</strong></p>
+<p>需要统计某公司50个员工的工资情况，例如计算平均工资、找到最高工资等。用之前知识，首先需要声明<code>50个变量</code>来分别记录每位员工的工资，这样会很麻烦。因此我们可以将所有的数据全部存储到一个容器中统一管理，并使用容器进行计算。</p>
+<p><strong>需求分析2：</strong></p>
+<img src="snipaste_20220317_000101.jpg" alt="snipaste_20220317_000101" style="zoom: 50%;">
+
+<p>容器的概念：</p>
+<ul>
+<li><strong>生活中的容器：</strong>水杯（装水等液体），衣柜（装衣服等物品），集装箱（装货物等）。</li>
+<li><strong>程序中的容器：</strong>将多个数据存储到一起，每个数据称为该容器的元素。</li>
+</ul>
+<h3 id="1-2-数组的概念"><a href="#1-2-数组的概念" class="headerlink" title="1.2 数组的概念"></a>1.2 数组的概念</h3><ul>
+<li><p>数组(Array)，是多个相同类型数据按一定顺序排列的集合，并使用一个名字命名，并通过编号的方式对这些数据进行统一管理。</p>
+</li>
+<li><p>数组中的概念</p>
+<ul>
+<li>数组名</li>
+<li>下标（或索引）</li>
+<li>元素</li>
+<li>数组的长度</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20220317000952499.png" alt="image-20220317000952499"></p>
+<p><strong>数组的特点：</strong></p>
+<ul>
+<li>数组本身是<code>引用数据类型</code>，而数组中的元素可以是<code>任何数据类型</code>，包括基本数据类型和引用数据类型。</li>
+<li>创建数组对象会在内存中开辟一整块<code>连续的空间</code>。占据的空间的大小，取决于数组的长度和数组中元素的类型。</li>
+<li>数组中的元素在内存中是依次紧密排列的，有序的。</li>
+<li>数组，一旦初始化完成，其长度就是确定的。数组的<code>长度一旦确定，就不能修改</code>。</li>
+<li>我们可以直接通过下标(或索引)的方式调用指定位置的元素，速度很快。</li>
+<li>数组名中引用的是这块连续空间的首地址。</li>
+</ul>
+<h3 id="1-3-数组的分类"><a href="#1-3-数组的分类" class="headerlink" title="1.3 数组的分类"></a>1.3 数组的分类</h3><p><strong>1、按照元素类型分：</strong></p>
+<ul>
+<li>基本数据类型元素的数组：每个元素位置存储基本数据类型的值</li>
+<li>引用数据类型元素的数组：每个元素位置存储对象（本质是存储对象的首地址）（在面向对象部分讲解）</li>
+</ul>
+<p><strong>2、按照维度分：</strong></p>
+<ul>
+<li>一维数组：存储一组数据</li>
+<li>二维数组：存储多组数据，相当于二维表，一行代表一组数据，只是这里的二维表每一行长度不要求一样。</li>
+</ul>
+<p><img src="image-20211221164709624.png" alt="image-20211221164709624"></p>
+<h2 id="2-一维数组的使用"><a href="#2-一维数组的使用" class="headerlink" title="2. 一维数组的使用"></a>2. 一维数组的使用</h2><h3 id="2-1-一维数组的声明"><a href="#2-1-一维数组的声明" class="headerlink" title="2.1 一维数组的声明"></a>2.1 一维数组的声明</h3><p><strong>格式：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//推荐
+元素的数据类型[] 一维数组的名称;
+
+//不推荐
+元素的数据类型  一维数组名[];</code></pre>
+
+<p><strong>举例：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] arr;
+int arr1[];
+double[] arr2;
+String[] arr3;  //引用类型变量数组</code></pre>
+
+<p><strong>数组的声明，需要明确：</strong></p>
+<p>（1）数组的维度：在Java中数组的符号是[]，[]表示一维，[][]表示二维。</p>
+<p>（2）数组的元素类型：即创建的数组容器可以存储什么数据类型的数据。元素的类型可以是任意的Java的数据类型。例如：int、String、Student等。</p>
+<p>（3）数组名：就是代表某个数组的标识符，数组名其实也是变量名，按照变量的命名规范来命名。数组名是个引用数据类型的变量，因为它代表一组数据。</p>
+<p><strong>举例：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest1 {
+    public static void main(String[] args) {
+        //比如，要存储一个小组的成绩
+        int[] scores;
+        int grades[];
+//        System.out.println(scores);//未初始化不能使用
+
+        //比如，要存储一组字母
+        char[] letters;
+
+        //比如，要存储一组姓名
+        String[] names;
+
+        //比如，要存储一组价格
+        double[] prices;
+
+    }
+}</code></pre>
+
+<p>注意：Java语言中声明数组时不能指定其长度(数组中元素的个数)。 例如： int a[5]; //非法</p>
+<h3 id="2-2-一维数组的初始化"><a href="#2-2-一维数组的初始化" class="headerlink" title="2.2 一维数组的初始化"></a>2.2 一维数组的初始化</h3><h4 id="2-2-1-静态初始化"><a href="#2-2-1-静态初始化" class="headerlink" title="2.2.1 静态初始化"></a>2.2.1 静态初始化</h4><ul>
+<li><p>如果数组变量的初始化和数组元素的赋值操作同时进行，那就称为静态初始化。</p>
+</li>
+<li><p>静态初始化，本质是用静态数据（编译时已知）为数组初始化。此时数组的长度由静态数据的个数决定。</p>
+</li>
+<li><p><strong>一维数组声明和静态初始化格式1：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">数据类型[] 数组名 = new 数据类型[]{元素1,元素2,元素3,...};
+
+或
+    
+数据类型[] 数组名;
+数组名 = new 数据类型[]{元素1,元素2,元素3,...};</code></pre>
+
+<ul>
+<li>new：关键字，创建数组使用的关键字。因为数组本身是引用数据类型，所以要用new创建数组实体。</li>
+</ul>
+</li>
+</ul>
+<p>例如，定义存储1，2，3，4，5整数的数组容器。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] arr = new int[]{1,2,3,4,5};//正确
+//或
+int[] arr;
+arr = new int[]{1,2,3,4,5};//正确</code></pre>
+
+<ul>
+<li><strong>一维数组声明和静态初始化格式2：</strong></li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">数据类型[] 数组名 = {元素1,元素2,元素3...};//必须在一个语句中完成，不能分成两个语句写</code></pre>
+
+<p>例如，定义存储1，2，3，4，5整数的数组容器</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] arr = {1,2,3,4,5};//正确
+
+int[] arr;
+arr = {1,2,3,4,5};//错误</code></pre>
+
+<p><strong>举例：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest2 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5};//右边不需要写new int[]
+
+        int[] nums;
+        nums = new int[]{10,20,30,40}; //声明和初始化在两个语句完成，就不能使用new int[]
+
+        char[] word = {'h','e','l','l','o'};
+
+        String[] heros = {"袁隆平","邓稼先","钱学森"};
+
+        System.out.println("arr数组：" + arr);//arr数组：[I@1b6d3586
+        System.out.println("nums数组：" + nums);//nums数组：[I@4554617c
+        System.out.println("word数组：" + word);//word数组：[C@74a14482
+        System.out.println("heros数组：" + heros);//heros数组：[Ljava.lang.String;@1540e19d
+    }
+}</code></pre>
+
+<h4 id="2-2-2-动态初始化"><a href="#2-2-2-动态初始化" class="headerlink" title="2.2.2 动态初始化"></a>2.2.2 动态初始化</h4><p>数组变量的初始化和数组元素的赋值操作分开进行，即为动态初始化。</p>
+<p>动态初始化中，只确定了元素的个数（即数组的长度），而元素值此时只是默认值，还并未真正赋自己期望的值。真正期望的数据需要后续单独一个一个赋值。</p>
+<p><strong>格式：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">数组存储的元素的数据类型[] 数组名字 = new 数组存储的元素的数据类型[长度];
+
+或
+
+数组存储的数据类型[] 数组名字;
+数组名字 = new 数组存储的数据类型[长度];</code></pre>
+
+<ul>
+<li><p>[长度]：数组的长度，表示数组容器中可以最多存储多少个元素。</p>
+</li>
+<li><p><strong>注意：数组有定长特性，长度一旦指定，不可更改。</strong>和水杯道理相同，买了一个2升的水杯，总容量就是2升是固定的。</p>
+</li>
+</ul>
+<p><strong>举例1：正确写法</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] arr = new int[5];
+
+int[] arr;
+arr = new int[5];
+</code></pre>
+
+<p><strong>举例2：错误写法</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] arr = new int[5]{1,2,3,4,5};//错误的，后面有{}指定元素列表，就不需要在[]中指定元素个数了。</code></pre>
+
+<h3 id="2-3-一维数组的使用"><a href="#2-3-一维数组的使用" class="headerlink" title="2.3 一维数组的使用"></a>2.3 一维数组的使用</h3><h4 id="2-3-1-数组的长度"><a href="#2-3-1-数组的长度" class="headerlink" title="2.3.1  数组的长度"></a>2.3.1  数组的长度</h4><ul>
+<li>数组的元素总个数，即数组的长度</li>
+<li>每个数组都有一个属性length指明它的长度，例如：arr.length 指明数组arr的长度(即元素个数)</li>
+<li>每个数组都具有长度，而且一旦初始化，其长度就是确定，且是不可变的。</li>
+</ul>
+<h4 id="2-3-2-数组元素的引用"><a href="#2-3-2-数组元素的引用" class="headerlink" title="2.3.2 数组元素的引用"></a>2.3.2 数组元素的引用</h4><p><strong>如何表示数组中的一个元素？</strong></p>
+<p>每一个存储到数组的元素，都会自动的拥有一个编号，从0开始，这个自动编号称为<code>数组索引(index)或下标</code>，可以通过数组的索引/下标访问到数组中的元素。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">数组名[索引/下标]</code></pre>
+
+<p><strong>数组的下标范围？</strong></p>
+<p>Java中数组的下标从[0]开始，下标范围是[0, 数组的长度-1]，即[0, 数组名.length-1]</p>
+<p>数组元素下标可以是整型常量或整型表达式。如a[3] , b[i] , c[6*i];</p>
+<p><strong>举例</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest3 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5};
+
+        System.out.println("arr数组的长度：" + arr.length);
+        System.out.println("arr数组的第1个元素：" + arr[0]);//下标从0开始
+        System.out.println("arr数组的第2个元素：" + arr[1]);
+        System.out.println("arr数组的第3个元素：" + arr[2]);
+        System.out.println("arr数组的第4个元素：" + arr[3]);
+        System.out.println("arr数组的第5个元素：" + arr[4]);
+
+        //修改第1个元素的值
+        //此处arr[0]相当于一个int类型的变量
+        arr[0] = 100;
+        System.out.println("arr数组的第1个元素：" + arr[0]);
+    }
+}</code></pre>
+
+<h3 id="2-4-一维数组的遍历"><a href="#2-4-一维数组的遍历" class="headerlink" title="2.4 一维数组的遍历"></a>2.4 一维数组的遍历</h3><p>将数组中的每个元素分别获取出来，就是<code>遍历</code>。for循环与数组的遍历是绝配。</p>
+<p><strong>举例1</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest4 {
+    public static void main(String[] args) {
+        int[] arr = new int[]{1,2,3,4,5};
+        //打印数组的属性，输出结果是5
+        System.out.println("数组的长度：" + arr.length);
+
+        //遍历输出数组中的元素
+        System.out.println("数组的元素有：");
+        for(int i=0; i&lt;arr.length; i++){
+            System.out.println(arr[i]);
+        }
+    }
+}</code></pre>
+
+<p><strong>举例2</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest5 {
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+
+        System.out.println("arr数组的长度：" + arr.length);
+        System.out.print("存储数据到arr数组之前：[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            if(i==0){
+                System.out.print(arr[i]);
+            }else{
+                System.out.print("," + arr[i]);
+            }
+        }
+        System.out.println("]");
+
+        //初始化
+ 		/* 
+ 		arr[0] = 2;
+        arr[1] = 4;
+        arr[2] = 6;
+        arr[3] = 8;
+        arr[4] = 10;
+        */
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            arr[i] = (i+1) * 2;
+        }
+
+        System.out.print("存储数据到arr数组之后：[");
+        for (int i = 0; i &lt; arr.length; i++) {
+            if(i==0){
+                System.out.print(arr[i]);
+            }else{
+                System.out.print("," + arr[i]);
+            }
+        }
+        System.out.println("]");
+    }
+}</code></pre>
+
+<h3 id="2-5-数组元素的默认值"><a href="#2-5-数组元素的默认值" class="headerlink" title="2.5 数组元素的默认值"></a>2.5 数组元素的默认值</h3><p>数组是引用类型，当我们使用动态初始化方式创建数组时，元素值只是默认值。例如：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest6 {
+	public static void main(String argv[]){
+		int a[]= new int[5]; 
+		System.out.println(a[3]); //a[3]的默认值为0
+	}
+} </code></pre>
+
+<p>对于基本数据类型而言，默认初始化值各有不同。</p>
+<p>对于引用数据类型而言，默认初始化值为null（注意与0不同！)</p>
+<p><img src="1561509460135.png"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest7 {
+    public static void main(String[] args) {
+        //存储26个字母
+        char[] letters = new char[26];
+        System.out.println("letters数组的长度：" + letters.length);
+        System.out.print("存储字母到letters数组之前：[");
+        for (int i = 0; i &lt; letters.length; i++) {
+            if(i==0){
+                System.out.print(letters[i]);
+            }else{
+                System.out.print("," + letters[i]);
+            }
+        }
+        System.out.println("]");
+
+       //存储5个姓名
+        String[] names = new String[5];
+        System.out.println("names数组的长度：" + names.length);
+        System.out.print("存储姓名到names数组之前：[");
+        for (int i = 0; i &lt; names.length; i++) {
+            if(i==0){
+                System.out.print(names[i]);
+            }else{
+                System.out.print("," + names[i]);
+            }
+        }
+        System.out.println("]");
+    }
+}</code></pre>
+
+<h2 id="3-一维数组内存分析"><a href="#3-一维数组内存分析" class="headerlink" title="3. 一维数组内存分析"></a>3. 一维数组内存分析</h2><h3 id="3-1-Java虚拟机的内存划分"><a href="#3-1-Java虚拟机的内存划分" class="headerlink" title="3.1 Java虚拟机的内存划分"></a>3.1 Java虚拟机的内存划分</h3><p>为了提高运算效率，就对空间进行了不同区域的划分，因为每一片区域都有特定的处理数据方式和内存管理方式。</p>
+<p><img src="JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.png" alt="JVM架构-简图"></p>
+<table>
+<thead>
+<tr>
+<th>区域名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>虚拟机栈</code></td>
+<td>用于存储正在执行的每个Java方法的局部变量表等。局部变量表存放了编译期可知长度<br>的各种基本数据类型、对象引用，方法执行完，自动释放。</td>
+</tr>
+<tr>
+<td><code>堆内存</code></td>
+<td>存储对象（包括数组对象），new来创建的，都存储在堆内存。</td>
+</tr>
+<tr>
+<td><code>方法区</code></td>
+<td>存储已被虚拟机加载的类信息、常量、（静态变量）、即时编译器编译后的代码等数据。</td>
+</tr>
+<tr>
+<td>本地方法栈</td>
+<td>当程序中调用了native的本地方法时，本地方法执行期间的内存区域</td>
+</tr>
+<tr>
+<td>程序计数器</td>
+<td>程序计数器是CPU中的寄存器，它包含每一个线程下一条要执行的指令的地址</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-一维数组在内存中的存储"><a href="#3-2-一维数组在内存中的存储" class="headerlink" title="3.2 一维数组在内存中的存储"></a>3.2 一维数组在内存中的存储</h3><h4 id="1、一个一维数组内存图"><a href="#1、一个一维数组内存图" class="headerlink" title="1、一个一维数组内存图"></a>1、一个一维数组内存图</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args) {
+  	int[] arr = new int[3];
+  	System.out.println(arr);//[I@5f150435
+}
+</code></pre>
+
+<p><img src="%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%9B%BE1.jpg"></p>
+<h4 id="2、数组下标为什么是0开始"><a href="#2、数组下标为什么是0开始" class="headerlink" title="2、数组下标为什么是0开始"></a>2、数组下标为什么是0开始</h4><p>因为第一个元素距离数组首地址间隔0个单元格。</p>
+<h4 id="3、两个一维数组内存图"><a href="#3、两个一维数组内存图" class="headerlink" title="3、两个一维数组内存图"></a>3、两个一维数组内存图</h4><p>两个数组独立</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args) {
+    int[] arr = new int[3];
+    int[] arr2 = new int[2];
+    System.out.println(arr);
+    System.out.println(arr2);
+}
+</code></pre>
+
+<img src="%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%9B%BE2.jpg" style="zoom:67%;">
+
+<h4 id="4、两个变量指向一个一维数组"><a href="#4、两个变量指向一个一维数组" class="headerlink" title="4、两个变量指向一个一维数组"></a>4、两个变量指向一个一维数组</h4><p>两个数组变量本质上代表同一个数组。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args) {
+    // 定义数组，存储3个元素
+    int[] arr = new int[3];
+    //数组索引进行赋值
+    arr[0] = 5;
+    arr[1] = 6;
+    arr[2] = 7;
+    //输出3个索引上的元素值
+    System.out.println(arr[0]);
+    System.out.println(arr[1]);
+    System.out.println(arr[2]);
+    //定义数组变量arr2，将arr的地址赋值给arr2
+    int[] arr2 = arr;
+    arr2[1] = 9;
+    System.out.println(arr[1]);
+}</code></pre>
+
+ <img src="%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%9B%BE3.jpg" style="zoom:67%;">
+
+<h2 id="4-一维数组的应用"><a href="#4-一维数组的应用" class="headerlink" title="4. 一维数组的应用"></a>4. 一维数组的应用</h2><p><strong>案例1：</strong>升景坊单间短期出租4个月，550元/月（水电煤公摊，网费35元/月），空调、卫生间、厨房齐全。屋内均是IT行业人士，喜欢安静。所以要求来租者最好是同行或者刚毕业的年轻人，爱干净、安静。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTest {
+      public static void main(String[] args) {
+      int[] arr = new int[]{8,2,1,0,3};
+      int[] index = new int[]{2,0,3,2,4,0,1,3,2,3,3};
+      String tel = "";
+      for(int i = 0;i &lt; index.length;i++){
+            tel += arr[index[i]];
+      }
+      System.out.println("联系方式：" + tel);
+      }
+}
+</code></pre>
+
+<p>案例2：输出英文星期几</p>
+<p>用一个数组，保存星期一到星期天的7个英语单词，从键盘输入1-7，显示对应的单词<br>{“Monday”,”Tuesday”,”Wednesday”,”Thursday”,”Friday”,”Saturday”,”Sunday”}</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">import java.util.Scanner;
+
+/**
+ * @author 尚硅谷-宋红康
+ * @create 14:37
+ */
+public class WeekArrayTest {
+    public static void main(String[] args) {
+
+        //1. 声明并初始化星期的数组
+        String[] weeks = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+
+        //2. 使用Scanner从键盘获取1-7范围的整数
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入[1-7]范围的整数：");
+        int number = scanner.nextInt();
+
+        if(number &lt; 1 || number &gt; 7){
+            System.out.println("你输入的输入非法");
+        }else{
+
+            //3. 根据输入的整数，到数组中相应的索引位置获取指定的元素（即：星期几）
+            System.out.println("对应的星期为：" + weeks[number - 1]);
+
+        }
+        
+        scanner.close();
+
+    }
+}</code></pre>
+
+<p><strong>案例3：</strong>从键盘读入学生成绩，找出最高分，并输出学生成绩等级。</p>
+<ul>
+<li><p>成绩&gt;=最高分-10  等级为’A’  </p>
+</li>
+<li><p>成绩&gt;=最高分-20  等级为’B’</p>
+</li>
+<li><p>成绩&gt;=最高分-30  等级为’C’  </p>
+</li>
+<li><p>其余            等级为’D’</p>
+</li>
+</ul>
+<p>提示：先读入学生人数，根据人数创建int数组，存放学生成绩。</p>
+<img src="image-20220317004637748.png" alt="image-20220317004637748" style="zoom:80%;">
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 14:55
+ */
+public class ScoreTest1 {
+    public static void main(String[] args) {
+
+        //1. 根据提示，获取学生人数
+        System.out.print("请输入学生人数：");
+        Scanner scanner = new Scanner(System.in);
+        int count = scanner.nextInt();
+
+        //2. 根据学生人数，创建指定长度的数组 (使用动态初始化)
+        int[] scores = new int[count];
+
+        //3. 使用循环，依次给数组的元素赋值
+        int maxScore = 0; //记录最高分
+        System.out.println("请输入" + count + "个成绩");
+        for (int i = 0; i &lt; scores.length; i++) {
+            scores[i] = scanner.nextInt();
+            //4. 获取数组中元素的最大值，即为最高分
+            if(maxScore &lt; scores[i]){
+                maxScore = scores[i];
+            }
+        }
+
+        System.out.println("最高分是：" + maxScore);
+
+        //5. 遍历数组元素，输出各自的分数，并根据其分数与最高分的差值，获取各自的等级
+        char grade;
+        for (int i = 0; i &lt; scores.length; i++) {
+
+            if(scores[i] &gt;= maxScore - 10){
+                grade = 'A';
+            }else if(scores[i] &gt;= maxScore - 20){
+                grade = 'B';
+            }else if(scores[i] &gt;= maxScore - 30){
+                grade = 'C';
+            }else{
+                grade = 'D';
+            }
+            System.out.println("student " + i + " socre is " + scores[i] + ", grade is " + grade);
+        }
+        //关闭资源
+        scanner.close();
+
+    }
+}</code></pre>
+
+<h2 id="5-多维数组的使用"><a href="#5-多维数组的使用" class="headerlink" title="5. 多维数组的使用"></a>5. 多维数组的使用</h2><h3 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h3><ul>
+<li><p>Java 语言里提供了支持多维数组的语法。</p>
+</li>
+<li><p>如果说可以把一维数组当成几何中的<code>线性图形</code>，那么二维数组就相当于是<code>一个表格</code>，像Excel中的表格、围棋棋盘一样。</p>
+<img src="image-20220317004810263.png" alt="image-20220317004810263" style="zoom:80%;">
+</li>
+<li><p><strong>应用举例1：</strong></p>
+<p>某公司2022年全年各个月份的销售额进行登记。按月份存储，可以使用一维数组。如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[] monthData = new int[]{23,43,22,34,55,65,44,67,45,78,67,66};</code></pre>
+
+<p>如果改写为按<code>季度</code>为单位存储怎么办呢？</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[][] quarterData = new int[][]{{23,43,22},{34,55,65},{44,67,45},{78,67,66}};</code></pre>
+
+
+<ul>
+<li><strong>应用举例2：</strong></li>
+</ul>
+</li>
+</ul>
+<p>高一年级三个班级均由多个学生姓名构成一个个数组。如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">String[] class1 = new String[]{"段誉","令狐冲","任我行"};
+
+String[] class2 = new String[]{"张三丰","周芷若"};
+
+String[] class3 = new String[]{"赵敏","张无忌","韦小宝","杨过"};
+</code></pre>
+
+<p>那从整个年级看，我们可以声明一个二维数组。如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">String[][] grade = new String[][]{{"段誉","令狐冲","任我行"},{"张三丰","周芷若"},{"赵敏","张无忌","韦小宝","杨过"}};</code></pre>
+
+
+<ul>
+<li><strong>应用举例3：</strong></li>
+</ul>
+<p>  <img src="image-20220516095701345.png" alt="image-20220516095701345"></p>
+<p>蓝框的几个元素，可以使用一维数组来存储。但现在发现每个元素下还有下拉框，其内部还有元素，那就需要使用二维数组来存储：</p>
+<p>  <img src="image-20220516095829526.png" alt="image-20220516095829526"></p>
+<ul>
+<li><p>使用说明</p>
+<p><img src="1561524724397-1647707344971.png" alt="1561524724397"></p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>对于二维数组的理解，可以看成是一维数组array1又作为另一个一维数组array2的元素而存在。</li>
+<li>其实，从数组底层的运行机制来看，其实没有多维数组。</li>
+</ul>
+</blockquote>
+<h3 id="5-2-声明与初始化"><a href="#5-2-声明与初始化" class="headerlink" title="5.2 声明与初始化"></a>5.2 声明与初始化</h3><h4 id="5-2-1-声明"><a href="#5-2-1-声明" class="headerlink" title="5.2.1 声明"></a>5.2.1 声明</h4><p>二维数组声明的语法格式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//推荐
+元素的数据类型[][] 二维数组的名称;
+
+//不推荐
+元素的数据类型  二维数组名[][];
+//不推荐
+元素的数据类型[]  二维数组名[];</code></pre>
+
+<p>例如：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test20TwoDimensionalArrayDefine {
+    public static void main(String[] args) {
+        //存储多组成绩
+        int[][] grades;
+
+        //存储多组姓名
+        String[][] names;
+    }
+}</code></pre>
+
+<p>面试：</p>
+<pre class="line-numbers language-none"><code class="language-none">int[] x, y[];
+//x是一维数组，y是二维数组</code></pre>
+
+<h4 id="5-2-2-静态初始化"><a href="#5-2-2-静态初始化" class="headerlink" title="5.2.2 静态初始化"></a>5.2.2 静态初始化</h4><p><strong>格式：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[][] arr = new int[][]{{3,8,2},{2,7},{9,0,1,6}};</code></pre>
+
+<p>定义一个名称为arr的二维数组，二维数组中有三个一维数组</p>
+<ul>
+<li>每一个一维数组中具体元素也都已初始化<ul>
+<li>第一个一维数组 arr[0] = {3,8,2};</li>
+<li>第二个一维数组 arr[1] = {2,7};</li>
+<li>第三个一维数组 arr[2] = {9,0,1,6};</li>
+</ul>
+</li>
+<li>第三个一维数组的长度表示方式：arr[2].length;</li>
+</ul>
+<blockquote>
+<ul>
+<li>注意特殊写法情况：int[] x,y[]; x是一维数组，y是二维数组。</li>
+</ul>
+</blockquote>
+<ul>
+<li>举例1：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[][] arr = {{1,2,3},{4,5,6},{7,8,9,10}};//声明与初始化必须在一句完成
+
+int[][] arr = new int[][]{{1,2,3},{4,5,6},{7,8,9,10}};
+
+int[][] arr;
+arr = new int[][]{{1,2,3},{4,5,6},{7,8,9,10}};
+
+arr = new int[3][3]{{1,2,3},{4,5,6},{7,8,9,10}};//错误，静态初始化右边new 数据类型[][]中不能写数字</code></pre>
+
+<ul>
+<li>举例2：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TwoDimensionalArrayInitialize {
+    public static void main(String[] args) {
+        //存储多组成绩
+        int[][] grades = {
+                    {89,75,99,100},
+                    {88,96,78,63,100,86},
+                    {56,63,58},
+                    {99,66,77,88}
+                };
+
+        //存储多组姓名
+        String[][] names = {
+            {"张三","李四", "王五", "赵六"},
+            {"刘备","关羽","张飞","诸葛亮","赵云","马超"},
+            {"曹丕","曹植","曹冲"},
+            {"孙权","周瑜","鲁肃","黄盖"}
+        };
+    }
+}</code></pre>
+
+<h4 id="5-2-3-动态初始化"><a href="#5-2-3-动态初始化" class="headerlink" title="5.2.3 动态初始化"></a>5.2.3 动态初始化</h4><p>如果二维数组的每一个数据，甚至是每一行的列数，需要后期单独确定，那么就只能使用动态初始化方式了。动态初始化方式分为两种格式：</p>
+<p><strong>格式1：规则二维表：每一行的列数是相同的</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//（1）确定行数和列数
+元素的数据类型[][] 二维数组名 = new 元素的数据类型[m][n];
+	//其中，m:表示这个二维数组有多少个一维数组。或者说一共二维表有几行
+	//其中，n:表示每一个一维数组的元素有多少个。或者说每一行共有一个单元格
+
+//此时创建完数组，行数、列数确定，而且元素也都有默认值
+
+//（2）再为元素赋新值
+二维数组名[行下标][列下标] = 值;</code></pre>
+
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[][] arr = new int[3][2];</code></pre>
+
+<ul>
+<li><p>定义了名称为arr的二维数组</p>
+</li>
+<li><p>二维数组中有3个一维数组</p>
+</li>
+<li><p>每一个一维数组中有2个元素</p>
+</li>
+<li><p>一维数组的名称分别为arr[0], arr[1], arr[2]</p>
+</li>
+<li><p>给第一个一维数组1脚标位赋值为78写法是：<code>arr[0][1] = 78;</code></p>
+</li>
+</ul>
+<p><strong>格式2：不规则：每一行的列数不一样</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//（1）先确定总行数
+元素的数据类型[][] 二维数组名 = new 元素的数据类型[总行数][];
+
+//此时只是确定了总行数，每一行里面现在是null
+
+//（2）再确定每一行的列数，创建每一行的一维数组
+二维数组名[行下标] = new 元素的数据类型[该行的总列数];
+
+//此时已经new完的行的元素就有默认值了，没有new的行还是null
+
+//(3)再为元素赋值
+二维数组名[行下标][列下标] = 值;</code></pre>
+
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[][] arr = new int[3][];</code></pre>
+
+<ul>
+<li>二维数组中有3个一维数组。</li>
+<li>每个一维数组都是默认初始化值null (注意：区别于格式1）</li>
+<li>可以对这个三个一维数组分别进行初始化：arr[0] = new int[3];    arr[1] = new int[1];   arr[2] = new int[2];</li>
+<li>注：<code>int[][]arr = new int[][3]; </code> //非法</li>
+</ul>
+<p>练习：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/*
+ 1
+ 2 2
+ 3 3 3
+ 4 4 4 4
+ 5 5 5 5 5
+ */
+public class Test25DifferentElementCount {
+    public static void main(String[] args){
+        //1、声明一个二维数组，并且确定行数
+        //因为每一行的列数不同，这里无法直接确定列数
+        int[][]  arr = new int[5][];
+
+        //2、确定每一行的列数
+        for(int i=0; i&lt;arr.length; i++){
+			/*
+			arr[0] 的列数是1
+			arr[1] 的列数是2
+			arr[2] 的列数是3
+			arr[3] 的列数是4
+			arr[4] 的列数是5
+			*/
+            arr[i] = new int[i+1];
+        }
+
+        //3、确定元素的值
+        for(int i=0; i&lt;arr.length; i++){
+            for(int j=0; j&lt;arr[i].length; j++){
+                arr[i][j] = i+1;
+            }
+        }
+
+        //4、遍历显示
+        for(int i=0; i&lt;arr.length; i++){
+            for(int j=0; j&lt;arr[i].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+}</code></pre>
+
+<h3 id="5-3-数组的长度和角标"><a href="#5-3-数组的长度和角标" class="headerlink" title="5.3 数组的长度和角标"></a>5.3 数组的长度和角标</h3><ul>
+<li>二维数组的长度/行数：二维数组名.length</li>
+<li>二维数组的某一行：二维数组名[行下标]，此时相当于获取其中一组数据。它本质上是一个一维数组。行下标的范围：[0, 二维数组名.length-1]。此时把二维数组看成一维数组的话，元素是行对象。</li>
+<li>某一行的列数：二维数组名[行下标].length，因为二维数组的每一行是一个一维数组。</li>
+<li>某一个元素：二维数组名[行下标][列下标]，即先确定行/组，再确定列。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test22TwoDimensionalArrayUse {
+    public static void main(String[] args){
+        //存储3个小组的学员的成绩，分开存储，使用二维数组。
+		/*
+		int[][] scores1;
+		int scores2[][];
+		int[] scores3[];*/
+
+        int[][] scores = {
+                {85,96,85,75},
+                {99,96,74,72,75},
+                {52,42,56,75}
+        };
+
+        System.out.println(scores);//[[I@15db9742
+        System.out.println("一共有" + scores.length +"组成绩.");
+
+        //[[：代表二维数组，I代表元素类型是int
+        System.out.println(scores[0]);//[I@6d06d69c
+        //[：代表一维数组，I代表元素类型是int
+        System.out.println(scores[1]);//[I@7852e922
+        System.out.println(scores[2]);//[I@4e25154f
+        //System.out.println(scores[3]);//ArrayIndexOutOfBoundsException: 3
+
+        System.out.println("第1组有" + scores[0].length +"个学员.");
+        System.out.println("第2组有" + scores[1].length +"个学员.");
+        System.out.println("第3组有" + scores[2].length +"个学员.");
+
+        System.out.println("第1组的每一个学员成绩如下：");
+        //第一行的元素
+        System.out.println(scores[0][0]);//85
+        System.out.println(scores[0][1]);//96
+        System.out.println(scores[0][2]);//85
+        System.out.println(scores[0][3]);//75
+        //System.out.println(scores[0][4]);//java.lang.ArrayIndexOutOfBoundsException: 4
+    }
+}</code></pre>
+
+<h3 id="5-4-二维数组的遍历"><a href="#5-4-二维数组的遍历" class="headerlink" title="5.4 二维数组的遍历"></a>5.4 二维数组的遍历</h3><ul>
+<li>格式：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">for(int i=0; i&lt;二维数组名.length; i++){ //二维数组对象.length
+    for(int j=0; j&lt;二维数组名[i].length; j++){//二维数组行对象.length
+        System.out.print(二维数组名[i][j]);
+    }
+    System.out.println();
+}</code></pre>
+
+<ul>
+<li>举例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test23TwoDimensionalArrayIterate {
+    public static void main(String[] args) {
+        //存储3个小组的学员的成绩，分开存储，使用二维数组。
+        int[][] scores = {
+                {85,96,85,75},
+                {99,96,74,72,75},
+                {52,42,56,75}
+        };
+
+        System.out.println("一共有" + scores.length +"组成绩.");
+        for (int i = 0; i &lt; scores.length; i++) {
+            System.out.print("第" + (i+1) +"组有" + scores[i].length + "个学员，成绩如下：");
+            for (int j = 0; j &lt; scores[i].length; j++) {
+                System.out.print(scores[i][j]+"\t");
+            }
+            System.out.println();
+        }
+    }
+}</code></pre>
+
+<h3 id="5-5-内存解析"><a href="#5-5-内存解析" class="headerlink" title="5.5 内存解析"></a>5.5 内存解析</h3><p>二维数组本质上是元素类型是一维数组的一维数组。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int[][] arr = {
+    {1},
+    {2,2},
+    {3,3,3},
+    {4,4,4,4},
+    {5,5,5,5,5}
+};</code></pre>
+
+<p><img src="1562112672215.png" alt="1562112672215"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//1、声明二维数组，并确定行数和列数
+int[][] arr = new int[4][5];
+
+//2、确定元素的值
+for (int i = 0; i &lt; arr.length; i++) {
+    for (int j = 0; j &lt; arr.length; j++) {
+        arr[i][j] = i + 1;
+    }
+}</code></pre>
+
+<p><img src="1562113179785.png" alt="1562113179785"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//1、声明一个二维数组，并且确定行数
+//因为每一行的列数不同，这里无法直接确定列数
+int[][]  arr = new int[5][];
+
+//2、确定每一行的列数
+for(int i=0; i&lt;arr.length; i++){
+    /*
+			arr[0] 的列数是1
+			arr[1] 的列数是2
+			arr[2] 的列数是3
+			arr[3] 的列数是4
+			arr[4] 的列数是5
+			*/
+    arr[i] = new int[i+1];
+}
+
+//3、确定元素的值
+for(int i=0; i&lt;arr.length; i++){
+    for(int j=0; j&lt;arr[i].length; j++){
+        arr[i][j] = i+1;
+    }
+}</code></pre>
+
+<p><img src="1562113981079.png" alt="1562113981079"></p>
+<h3 id="5-6-应用举例"><a href="#5-6-应用举例" class="headerlink" title="5.6 应用举例"></a>5.6 应用举例</h3><p><strong>案例1：</strong>获取arr数组中所有元素的和。</p>
+<p>提示：使用for的嵌套循环即可。</p>
+<p><img src="image-20220317005436209.png" alt="image-20220317005436209"></p>
+<p><strong>案例2：</strong>声明：int[] x,y[]; 在给x,y变量赋值以后，以下选项允许通过编译的是： </p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">声明：int[] x,y[]; 在给x,y变量赋值以后，以下选项允许通过编译的是：
+a)    x[0] = y;                 //no
+b)    y[0] = x;                 //yes
+c)    y[0][0] = x;              //no
+d)    x[0][0] = y;              //no
+e)    y[0][0] = x[0];           //yes
+f)    x = y;                    //no
+
+提示：
+一维数组：int[] x  或者int x[]   
+二维数组：int[][] y 或者  int[] y[]  或者 int  y[][]
+</code></pre>
+
+<p><strong>案例3：</strong>使用二维数组打印一个 10 行杨辉三角。</p>
+<p>提示：</p>
+<ol>
+<li><p>第一行有 1 个元素, 第 n 行有 n 个元素</p>
+</li>
+<li><p>每一行的第一个元素和最后一个元素都是 1</p>
+</li>
+<li><p>从第三行开始, 对于非第一个元素和最后一个元素的元素。即：</p>
+<pre class="line-numbers language-none"><code class="language-none">yanghui[i][j] = yanghui[i-1][j-1] + yanghui[i-1][j];</code></pre></li>
+</ol>
+<p><img src="image-20220317005549522.png" alt="image-20220317005549522"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 10:11
+ */
+public class YangHuiTest {
+    public static void main(String[] args) {
+
+        //1. 动态初始化的方式创建二维数组
+        int[][] yangHui = new int[10][];
+
+        for (int i = 0; i &lt; yangHui.length; i++) {
+            yangHui[i] = new int[i + 1];
+
+            //2. 给数组元素赋值
+            // 2.1 给外层数组元素中的首元素和末元素赋值
+            yangHui[i][0] = yangHui[i][i] = 1;
+
+            //2.2 给外层数组元素中的非首元素和非末元素赋值（难）
+            //if(i &gt; 1){ //从 i == 2 开始执行
+                for(int j = 1;j &lt; yangHui[i].length - 1;j++){ //非首元素和非末元素的角标范围
+                    yangHui[i][j] = yangHui[i-1][j-1] + yangHui[i-1][j];
+
+                }
+            //}
+        }
+
+
+
+        //3. 遍历二维数组
+        for (int i = 0; i &lt; yangHui.length; i++) {
+            for (int j = 0; j &lt; yangHui[i].length; j++) {
+                System.out.print(yangHui[i][j] + "\t");
+            }
+
+            System.out.println();
+        }
+
+    }
+}</code></pre>
+
+<h2 id="6-数组的常见算法"><a href="#6-数组的常见算法" class="headerlink" title="6. 数组的常见算法"></a>6. 数组的常见算法</h2><h3 id="6-1-数值型数组特征值统计"><a href="#6-1-数值型数组特征值统计" class="headerlink" title="6.1 数值型数组特征值统计"></a>6.1 数值型数组特征值统计</h3><ul>
+<li>这里的特征值涉及到：平均值、最大值、最小值、总和等</li>
+</ul>
+<p><strong>举例1：</strong>数组统计：求总和、均值</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayElementSum {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9};
+        //求总和、均值
+        int sum = 0;//因为0加上任何数都不影响结果
+        for(int i=0; i&lt;arr.length; i++){
+            sum += arr[i];
+        }
+        double avg = (double)sum/arr.length;
+
+        System.out.println("sum = " + sum);
+        System.out.println("avg = " + avg);
+    }
+}</code></pre>
+
+<p><strong>举例2：</strong>求数组元素的总乘积</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayElementMul {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9};
+
+        //求总乘积
+        long result = 1;//因为1乘以任何数都不影响结果
+        for(int i=0; i&lt;arr.length; i++){
+            result *= arr[i];
+        }
+
+        System.out.println("result = " + result);
+    }
+}</code></pre>
+
+<p><strong>举例3：</strong>求数组元素中偶数的个数</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayElementEvenCount {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9};
+        //统计偶数个数
+        int evenCount = 0;
+        for(int i=0; i&lt;arr.length; i++){
+            if(arr[i]%2==0){
+                evenCount++;
+            }
+        }
+
+        System.out.println("evenCount = " + evenCount);
+    }
+}</code></pre>
+
+<p><strong>举例4：</strong>求数组元素的最大值</p>
+<p><img src="1574577970893.png" alt="1574577970893"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayMax {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9};
+        //找最大值
+        int max = arr[0];
+        for(int i=1; i&lt;arr.length; i++){//此处i从1开始，是max不需要与arr[0]再比较一次了
+            if(arr[i] &gt; max){
+                max = arr[i];
+            }
+        }
+
+        System.out.println("max = " + max);
+    }
+}</code></pre>
+
+<p><strong>举例5：</strong>找最值及其第一次出现的下标</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestMaxIndex {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9};
+        //找最大值以及第一个最大值下标
+        int max = arr[0];
+        int index = 0;
+        for(int i=1; i&lt;arr.length; i++){
+            if(arr[i] &gt; max){
+                max = arr[i];
+                index = i;
+            }
+        }
+
+        System.out.println("max = " + max);
+        System.out.println("index = " + index);
+    }
+}</code></pre>
+
+<p><strong>举例6：</strong>找最值及其所有最值的下标</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test13AllMaxIndex {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9,9,3};
+        //找最大值
+        int max = arr[0];
+        for(int i=1; i&lt;arr.length; i++){
+            if(arr[i] &gt; max){
+                max = arr[i];
+            }
+        }
+        System.out.println("最大值是：" + max);
+        System.out.print("最大值的下标有：");
+
+        //遍历数组，看哪些元素和最大值是一样的
+        for(int i=0; i&lt;arr.length; i++){
+            if(max == arr[i]){
+                System.out.print(i+"\t");
+            }
+        }
+        System.out.println();
+    }
+}</code></pre>
+
+<p>优化</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test13AllMaxIndex2 {
+    public static void main(String[] args) {
+        int[] arr = {4,5,6,1,9,9,3};
+        //找最大值
+        int max = arr[0];
+        String index = "0";
+        for(int i=1; i&lt;arr.length; i++){
+            if(arr[i] &gt; max){
+                max = arr[i];
+                index = i + "";
+            }else if(arr[i] == max){
+                index += "," + i;
+            }
+        }
+
+        System.out.println("最大值是" + max);
+        System.out.println("最大值的下标是[" + index+"]");
+    }
+}</code></pre>
+
+<p><strong>举例7(难)：</strong>输入一个整形数组，数组里有正数也有负数。数组中连续的一个或多个整数组成一个子数组，每个子数组都有一个和。求所有子数组的和的最大值。要求时间复杂度为O(n)。<br>例如：输入的数组为1, -2, 3, -10, -4, 7, 2, -5，和最大的子数组为3, 10, -4, 7, 2，因此输出为该子数组的和18。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test5 {
+	public static void main(String[] args) {
+		int[] arr = new int[]{1, -2, 3, 10, -4, 7, 2, -5};
+		int i = getGreatestSum(arr);
+		System.out.println(i);
+	}
+	
+	public static int getGreatestSum(int[] arr){
+		int greatestSum = 0;
+		if(arr == null || arr.length == 0){
+			return 0;
+		}
+		int temp = greatestSum;
+		for(int i = 0;i &lt; arr.length;i++){
+			temp += arr[i];
+			
+			if(temp &lt; 0){
+				temp = 0;
+			}
+			
+			if(temp &gt; greatestSum){
+				greatestSum = temp;
+			}
+		}
+		if(greatestSum == 0){
+			greatestSum = arr[0];
+			for(int i = 1;i &lt; arr.length;i++){
+				if(greatestSum &lt; arr[i]){
+					greatestSum = arr[i];
+				}
+			}
+		}
+		return greatestSum;
+	}
+}</code></pre>
+
+<p><strong>举例8：评委打分</strong></p>
+<p>分析以下需求，并用代码实现：</p>
+<p>（1）在编程竞赛中，有10位评委为参赛的选手打分，分数分别为：5，4，6，8，9，0，1，2，7，3</p>
+<p>（2）求选手的最后得分（去掉一个最高分和一个最低分后其余8位评委打分的平均值）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 10:03
+ */
+public class ArrayExer {
+    public static void main(String[] args) {
+        int[] scores = {5,4,6,8,9,0,1,2,7,3};
+
+        int max = scores[0];
+        int min = scores[0];
+        int sum = 0;
+        for(int i = 0;i &lt; scores.length;i++){
+            if(max &lt; scores[i]){
+                max = scores[i];
+            }
+
+            if(min &gt; scores[i]){
+                min = scores[i];
+            }
+
+            sum += scores[i];
+        }
+
+        double avg = (double)(sum - max - min) / (scores.length - 2);
+
+        System.out.println("选手去掉最高分和最低分之后的平均分为：" + avg);
+    }
+}</code></pre>
+
+<h3 id="6-2-数组元素的赋值与数组复制"><a href="#6-2-数组元素的赋值与数组复制" class="headerlink" title="6.2 数组元素的赋值与数组复制"></a>6.2 数组元素的赋值与数组复制</h3><p><strong>举例1：</strong>杨辉三角（见二维数组课后案例）</p>
+<p><strong>举例2：</strong>使用简单数组</p>
+<p>(1)创建一个名为ArrayTest的类，在main()方法中声明array1和array2两个变量，他们是int[]类型的数组。</p>
+<p>(2)使用大括号{}，把array1初始化为8个素数：2,3,5,7,11,13,17,19。</p>
+<p>(3)显示array1的内容。</p>
+<p>(4)赋值array2变量等于array1，修改array2中的偶索引元素，使其等于索引值(如array[0]=0,array[2]=2)。打印出array1。  array2 = array1;</p>
+<blockquote>
+<p><strong>思考：</strong>array1和array2是什么关系？</p>
+<p><strong>拓展：</strong>修改题目，实现array2对array1数组的复制</p>
+</blockquote>
+<p><img src="snipaste_20220317_225346.jpg" alt="snipaste_20220317_225346" style="zoom:80%;"><img src="/../../../../Java%25E5%2590%258E%25E7%25AB%25AF%25E8%25AF%25BE%25E7%25A8%258B/%25E5%25AE%258B%25E7%25BA%25A2%25E5%25BA%25B7Java/01_%25E8%25AF%25BE%25E4%25BB%25B6%25E4%25B8%258E%25E7%2594%25B5%25E5%25AD%2590%25E6%2595%2599%25E6%259D%2590/01_%25E8%25AF%25BE%25E4%25BB%25B6%25E4%25B8%258E%25E7%2594%25B5%25E5%25AD%2590%25E6%2595%2599%25E6%259D%2590/%25E5%25B0%259A%25E7%25A1%2585%25E8%25B0%25B7_%25E7%25AC%25AC05%25E7%25AB%25A0_%25E6%2595%25B0%25E7%25BB%2584/images/snipaste_20220317_225359.jpg" alt="snipaste_20220317_225359"></p>
+<p><strong>举例3：</strong>一个数组，让数组的每个元素去除第一个元素，得到的商作为被除数所在位置的新值。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test3 {
+	public static void main(String[] args) {
+		int[] arr = new int[]{12,43,65,3,-8,64,2};
+		
+//		for(int i = 0;i &lt; arr.length;i++){
+//			arr[i] = arr[i] / arr[0];
+//		}
+		for(int i = arr.length -1;i &gt;= 0;i--){
+			arr[i] = arr[i] / arr[0];
+		}
+		//遍历arr
+		for(int i = 0;i &lt; arr.length;i++){
+			System.out.print(arr[i] + " ");
+		}
+	}
+}</code></pre>
+
+<p><strong>举例4：</strong>创建一个长度为6的int型数组，要求数组元素的值都在1-30之间，且是随机赋值。同时，要求元素的值各不相同。 </p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test4 {
+	// 5-67 Math.random() * 63 + 5;
+	@Test
+	public void test1() {
+		int[] arr = new int[6];
+		for (int i = 0; i &lt; arr.length; i++) {// [0,1) [0,30) [1,31)
+			arr[i] = (int) (Math.random() * 30) + 1;
+
+			boolean flag = false;
+			while (true) {
+				for (int j = 0; j &lt; i; j++) {
+					if (arr[i] == arr[j]) {
+						flag = true;
+						break;
+					}
+				}
+				if (flag) {
+					arr[i] = (int) (Math.random() * 30) + 1;
+					flag = false;
+					continue;
+				}
+				break;
+			}
+		}
+
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+	//更优的方法
+	@Test
+	public void test2(){
+		int[] arr = new int[6];
+		for (int i = 0; i &lt; arr.length; i++) {// [0,1) [0,30) [1,31)
+			arr[i] = (int) (Math.random() * 30) + 1;
+			
+				for (int j = 0; j &lt; i; j++) {
+					if (arr[i] == arr[j]) {
+						i--;
+						break;
+					}
+				}
+			}
+
+		for (int i = 0; i &lt; arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}</code></pre>
+
+<p><strong>举例5：</strong>扑克牌</p>
+<p>案例：遍历扑克牌</p>
+<p>遍历扑克牌，效果如图所示：</p>
+<p><img src="1659199523932.png" alt="1659199523932"></p>
+<p>提示：使用两个字符串数组，分别保存花色和点数，再用一个字符串数组保存最后的扑克牌。<br>String[] hua = {“黑桃”,”红桃”,”梅花”,”方片”};<br>String[] dian = {“A”,”2”,”3”,”4”,”5”,”6”,”7”,”8”,”9”,”10”,”J”,”Q”,”K”};</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu3.common_algorithm.exer5;
+
+/**
+ * @author 尚硅谷-宋红康
+ * @create 17:16
+ */
+public class ArrayExer05 {
+    public static void main(String[] args) {
+        String[] hua = {"黑桃","红桃","梅花","方片"};
+        String[] dian = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+
+
+        String[] pai = new String[hua.length * dian.length];
+        int k = 0;
+        for(int i = 0;i &lt; hua.length;i++){
+            for(int j = 0;j &lt; dian.length;j++){
+                pai[k++] = hua[i] + dian[j];
+            }
+        }
+
+        for (int i = 0; i &lt; pai.length; i++) {
+            System.out.print(pai[i] + "  ");
+            if(i % 13 == 12){
+                System.out.println();
+            }
+        }
+
+    }
+}
+</code></pre>
+
+
+<p>拓展：在上述基础上，增加大王、小王。</p>
+<p><strong>举例6：</strong>回形数</p>
+<p>从键盘输入一个整数（1~20） ，则以该数字为矩阵的大小，把1,2,3…n*n 的数字按照顺时针螺旋的形式填入其中。</p>
+<p>例如： 输入数字2，则程序输出：<br>1 2<br>4 3 </p>
+<p>输入数字3，则程序输出：<br>1 2 3<br>8 9 4<br>7 6 5<br>输入数字4， 则程序输出：<br>1    2    3    4<br>12  13  14  5<br>11  16  15  6<br>10   9   8    7</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//方式1
+public class RectangleTest {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("输入一个数字");
+		int len = scanner.nextInt();
+		int[][] arr = new int[len][len];
+		
+		int s = len * len;
+		/*
+		 * k = 1:向右
+		 * k = 2:向下
+		 * k = 3:向左
+		 * k = 4:向上
+		 */
+		int k = 1;
+		int i = 0,j = 0;
+		for(int m = 1;m &lt;= s;m++){
+			if(k == 1){
+				if(j &lt; len &amp;&amp; arr[i][j] == 0){
+					arr[i][j++] = m;
+				}else{
+					k = 2;
+					i++;  
+					j--;
+					m--;
+				}
+			}else if(k == 2){
+				if(i &lt; len &amp;&amp; arr[i][j] == 0){
+					arr[i++][j] = m;
+				}else{
+					k = 3;
+					i--;
+					j--;
+					m--;
+				}
+			}else if(k == 3){
+				if(j &gt;= 0 &amp;&amp; arr[i][j] == 0){
+					arr[i][j--] = m;
+				}else{
+					k = 4;
+					i--;
+					j++;
+					m--;
+				}
+			}else if(k == 4){
+				if(i &gt;= 0 &amp;&amp; arr[i][j] == 0){
+					arr[i--][j] = m;
+				}else{
+					k = 1;
+					i++;
+					j++;
+					m--;
+				}
+			}
+		}
+		
+		//遍历
+		for(int m = 0;m &lt; arr.length;m++){
+			for(int n = 0;n &lt; arr[m].length;n++){
+				System.out.print(arr[m][n] + "\t");
+			}
+			System.out.println();
+		}
+	}
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//方式2
+/*
+	01 02 03 04 05 06 07 
+	24 25 26 27 28 29 08 
+	23 40 41 42 43 30 09 
+	22 39 48 49 44 31 10 
+	21 38 47 46 45 32 11 
+	20 37 36 35 34 33 12 
+	19 18 17 16 15 14 13 
+ */
+public class RectangleTest1 {
+
+	public static void main(String[] args) {
+		int n = 7;
+		int[][] arr = new int[n][n];
+		
+		int count = 0; //要显示的数据
+		int maxX = n-1; //x轴的最大下标
+		int maxY = n-1; //Y轴的最大下标
+		int minX = 0; //x轴的最小下标
+		int minY = 0; //Y轴的最小下标
+		while(minX&lt;=maxX) {
+			for(int x=minX;x&lt;=maxX;x++) {
+				arr[minY][x] = ++count;
+			}
+			minY++;
+			for(int y=minY;y&lt;=maxY;y++) {
+				arr[y][maxX] = ++count;
+			}
+			maxX--;
+			for(int x=maxX;x&gt;=minX;x--) {
+				arr[maxY][x] = ++count;
+			}
+			maxY--;
+			for(int y=maxY;y&gt;=minY;y--) {
+				arr[y][minX] = ++count;
+			}
+			minX++;
+		}
+		
+		
+		for(int i=0;i&lt;arr.length;i++) {
+			for(int j=0;j&lt;arr.length;j++) {
+				String space = (arr[i][j]+"").length()==1 ? "0":"";
+				System.out.print(space+arr[i][j]+" ");
+			}
+			System.out.println();
+		}
+	}
+}</code></pre>
+
+<h3 id="6-3-数组元素的反转"><a href="#6-3-数组元素的反转" class="headerlink" title="6.3 数组元素的反转"></a>6.3 数组元素的反转</h3><p><strong>实现思想：</strong>数组对称位置的元素互换。</p>
+<img src="image-20221117195931777.png" alt="image-20221117195931777" style="zoom:67%;">
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayReverse1 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5};
+        System.out.println("反转之前：");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+
+        //反转
+         /*
+        思路：首尾对应位置的元素交换
+        （1）确定交换几次
+           次数 = 数组.length / 2
+        （2）谁和谁交换
+        for(int i=0; i&lt;次数; i++){
+             int temp = arr[i];
+             arr[i] = arr[arr.length-1-i];
+             arr[arr.length-1-i] = temp;
+        }
+         */
+        for(int i=0; i&lt;arr.length/2; i++){
+            int temp = arr[i];
+            arr[i] = arr[arr.length-1-i];
+            arr[arr.length-1-i] = temp;
+        }
+
+        System.out.println("反转之后：");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+
+}</code></pre>
+
+<p>或</p>
+<p><img src="1561469087319.png" alt="1561469087319"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayReverse2 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5};
+        System.out.println("反转之前：");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+
+        //反转
+        //左右对称位置交换
+        for(int left=0,right=arr.length-1; left&lt;right; left++,right--){
+            //首  与  尾交换
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+        }
+
+        System.out.println("反转之后：");
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+}</code></pre>
+
+<h3 id="6-4-数组的扩容与缩容"><a href="#6-4-数组的扩容与缩容" class="headerlink" title="6.4 数组的扩容与缩容"></a>6.4 数组的扩容与缩容</h3><p><strong>数组的扩容</strong></p>
+<p>题目：现有数组 int[] arr = new int[]{1,2,3,4,5}; ，现将数组长度扩容1倍，并将10,20,30三个数据添加到arr数组中，如何操作？</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrTest1 {
+    public static void main(String[] args) {
+
+        int[] arr = new int[]{1,2,3,4,5};
+        int[] newArr = new int[arr.length &lt;&lt; 1];
+
+        for(int i = 0;i &lt; arr.length;i++){
+            newArr[i] = arr[i];
+        }
+
+        newArr[arr.length] = 10;
+        newArr[arr.length + 1] = 20;
+        newArr[arr.length + 2] = 30;
+
+        arr = newArr;
+
+        //遍历arr
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+}</code></pre>
+
+<p><strong>数组的缩容</strong></p>
+<p>题目：现有数组 int[] arr={1,2,3,4,5,6,7}。现需删除数组中索引为4的元素。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrTest2 {
+    public static void main(String[] args) {
+
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        //删除数组中索引为4的元素
+        int delIndex = 4;
+        //方案1：
+        /*//创建新数组
+        int[] newArr = new int[arr.length - 1];
+
+        for (int i = 0; i &lt; delIndex; i++) {
+            newArr[i] = arr[i];
+        }
+        for (int i = delIndex + 1; i &lt; arr.length; i++) {
+            newArr[i - 1] = arr[i];
+        }
+
+        arr = newArr;
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }*/
+
+        //方案2：
+        for (int i = delIndex; i &lt; arr.length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr[arr.length - 1] = 0;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+}</code></pre>
+
+<h3 id="6-5-数组的元素查找"><a href="#6-5-数组的元素查找" class="headerlink" title="6.5 数组的元素查找"></a>6.5 数组的元素查找</h3><p><strong>1、顺序查找</strong></p>
+<p>顺序查找：挨个查看</p>
+<p>要求：对数组元素的顺序没要求</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayOrderSearch {
+    //查找value第一次在数组中出现的index
+    public static void main(String[] args){
+        int[] arr = {4,5,6,1,9};
+        int value = 1;
+        int index = -1;
+
+        for(int i=0; i&lt;arr.length; i++){
+            if(arr[i] == value){
+                index = i;
+                break;
+            }
+        }
+
+        if(index==-1){
+            System.out.println(value + "不存在");
+        }else{
+            System.out.println(value + "的下标是" + index);
+        }
+    }
+}</code></pre>
+
+<p><strong>2、二分查找</strong></p>
+<p>举例：</p>
+<p><img src="image-20220317230955644.png" alt="image-20220317230955644"></p>
+<p>实现步骤：</p>
+<img src="image-20220623210601915.png" alt="image-20220623210601915" style="zoom:67%;">
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//二分法查找：要求此数组必须是有序的。
+int[] arr3 = new int[]{-99,-54,-2,0,2,33,43,256,999};
+boolean isFlag = true;
+int value = 256;
+//int value = 25;
+int head = 0;//首索引位置
+int end = arr3.length - 1;//尾索引位置
+while(head &lt;= end){
+    int middle = (head + end) / 2;
+    if(arr3[middle] == value){
+        System.out.println("找到指定的元素，索引为：" + middle);
+        isFlag = false;
+        break;
+    }else if(arr3[middle] &gt; value){
+        end = middle - 1;
+    }else{//arr3[middle] &lt; value
+        head = middle + 1;
+    }
+}
+
+if(isFlag){
+    System.out.println("未找打指定的元素");
+}
+</code></pre>
+
+<h3 id="6-6-数组元素排序"><a href="#6-6-数组元素排序" class="headerlink" title="6.6 数组元素排序"></a>6.6 数组元素排序</h3><h4 id="6-6-1-算法概述"><a href="#6-6-1-算法概述" class="headerlink" title="6.6.1 算法概述"></a>6.6.1 算法概述</h4><ul>
+<li><p><strong>定义</strong></p>
+<ul>
+<li>排序：假设含有n个记录的序列为{R1，R2，…,Rn},其相应的关键字序列为{K1，K2，…,Kn}。将这些记录重新排序为{Ri1,Ri2,…,Rin},使得相应的关键字值满足条Ki1&lt;=Ki2&lt;=…&lt;=Kin,这样的一种操作称为排序。</li>
+<li>通常来说，排序的目的是快速查找。</li>
+</ul>
+</li>
+<li><p><strong>衡量排序算法的优劣：</strong></p>
+<ul>
+<li><p><code>时间复杂度</code>：分析关键字的比较次数和记录的移动次数</p>
+</li>
+<li><p>常见的算法时间复杂度由小到大依次为：Ο(1)＜Ο(log2n)＜Ο(n)＜Ο(nlog2n)＜Ο(n<sup>2</sup>)＜Ο(n<sup>3</sup>)＜…＜Ο(2<sup>n</sup>)＜Ο(n!)&lt;O(n<sup>n</sup>)</p>
+</li>
+<li><p><code>空间复杂度</code>：分析排序算法中需要多少辅助内存</p>
+<pre class="line-numbers language-none"><code class="language-none">一个算法的空间复杂度S(n)定义为该算法所耗费的存储空间，它也是问题规模n的函数。</code></pre>
+</li>
+<li><p><code>稳定性</code>：若两个记录A和B的关键字值相等，但排序后A、B的先后次序保持不变，则称这种排序算法是稳定的。</p>
+<p><img src="image-20211222113701365.png" alt="image-20211222113701365"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-6-2-排序算法概述"><a href="#6-6-2-排序算法概述" class="headerlink" title="6.6.2 排序算法概述"></a>6.6.2 排序算法概述</h4><ul>
+<li><p><strong>排序算法分类：内部排序和外部排序</strong></p>
+<ul>
+<li><code>内部排序</code>：整个排序过程不需要借助于外部存储器（如磁盘等），所有排序操作都在内存中完成。</li>
+<li><code>外部排序</code>：参与排序的数据非常多，数据量非常大，计算机无法把整个排序过程放在内存中完成，必须借助于外部存储器（如磁盘）。外部排序最常见的是多路归并排序。可以认为外部排序是由多次内部排序组成。</li>
+</ul>
+</li>
+<li><p><strong>十大内部排序算法</strong></p>
+</li>
+</ul>
+<p>​       数组的排序算法很多，实现方式各不相同，时间复杂度、空间复杂度、稳定性也各不相同：</p>
+<p><img src="image-20211222111142684.png" alt="image-20211222111142684"></p>
+<p>常见时间复杂度所消耗的时间从小到大排序：</p>
+<p><strong>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</strong></p>
+<p>注意，经常将以2为底n的对数简写成logn。</p>
+<p><img src="image-20220824003440106.png" alt="image-20220824003440106"></p>
+<h4 id="6-6-3-冒泡排序（Bubble-Sort）"><a href="#6-6-3-冒泡排序（Bubble-Sort）" class="headerlink" title="6.6.3 冒泡排序（Bubble Sort）"></a>6.6.3 冒泡排序（Bubble Sort）</h4><img src="image-20220516094637228.png" alt="image-20220516094637228" style="zoom:67%;">
+
+<p><strong>排序思想：</strong></p>
+<ol>
+<li><p>比较相邻的元素。如果第一个比第二个大（升序），就交换他们两个。</p>
+</li>
+<li><p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+</li>
+<li><p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+</li>
+<li><p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较为止。</p>
+</li>
+</ol>
+<p><img src="BubbleSort.png" alt="BubbleSort"></p>
+<p><strong>动态演示：</strong><a target="_blank" rel="noopener" href="https://visualgo.net/zh/sorting">https://visualgo.net/zh/sorting</a></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/*
+1、冒泡排序（最经典）
+思想：每一次比较“相邻（位置相邻）”元素，如果它们不符合目标顺序（例如：从小到大），
+     就交换它们，经过多轮比较，最终实现排序。
+	 （例如：从小到大）	 每一轮可以把最大的沉底，或最小的冒顶。
+	 
+过程：arr{6,9,2,9,1}  目标：从小到大
+
+第一轮：
+	第1次，arr[0]与arr[1]，6&gt;9不成立，满足目标要求，不交换
+	第2次，arr[1]与arr[2]，9&gt;2成立，不满足目标要求，交换arr[1]与arr[2] {6,2,9,9,1}
+	第3次，arr[2]与arr[3]，9&gt;9不成立，满足目标要求，不交换
+	第4次，arr[3]与arr[4]，9&gt;1成立，不满足目标要求，交换arr[3]与arr[4] {6,2,9,1,9}
+	第一轮所有元素{6,9,2,9,1}已经都参与了比较，结束。
+	第一轮的结果：第“一”最大值9沉底（本次是后面的9沉底），即到{6,2,9,1,9}元素的最右边
+
+第二轮：
+	第1次，arr[0]与arr[1]，6&gt;2成立，不满足目标要求，交换arr[0]与arr[1] {2,6,9,1,9}
+	第2次，arr[1]与arr[2]，6&gt;9不成立，满足目标要求，不交换
+	第3次：arr[2]与arr[3]，9&gt;1成立，不满足目标要求，交换arr[2]与arr[3] {2,6,1,9,9}
+	第二轮未排序的所有元素 {6,2,9,1}已经都参与了比较，结束。
+	第二轮的结果：第“二”最大值9沉底（本次是前面的9沉底），即到{2,6,1,9}元素的最右边
+第三轮：
+	第1次，arr[0]与arr[1]，2&gt;6不成立，满足目标要求，不交换
+	第2次，arr[1]与arr[2]，6&gt;1成立，不满足目标要求，交换arr[1]与arr[2] {2,1,6,9,9}
+	第三轮未排序的所有元素{2,6,1}已经都参与了比较，结束。
+	第三轮的结果：第三最大值6沉底，即到 {2,1,6}元素的最右边
+第四轮：
+	第1次，arr[0]与arr[1]，2&gt;1成立，不满足目标要求，交换arr[0]与arr[1] {1,2,6,9,9}
+	第四轮未排序的所有元素{2,1}已经都参与了比较，结束。
+	第四轮的结果：第四最大值2沉底，即到{1,2}元素的最右边
+
+*/
+public class Test19BubbleSort{
+    public static void main(String[] args){
+        int[] arr = {6,9,2,9,1};
+
+        //目标：从小到大
+        //冒泡排序的轮数 = 元素的总个数 - 1
+        //轮数是多轮，每一轮比较的次数是多次，需要用到双重循环，即循环嵌套
+        //外循环控制 轮数，内循环控制每一轮的比较次数和过程
+        for(int i=1; i&lt;arr.length; i++){ //循环次数是arr.length-1次/轮
+			/*
+			假设arr.length=5
+			i=1,第1轮，比较4次
+				arr[0]与arr[1]
+				arr[1]与arr[2]
+				arr[2]与arr[3]
+				arr[3]与arr[4]
+				
+				arr[j]与arr[j+1]，int j=0;j&lt;4; j++
+				
+			i=2,第2轮，比较3次
+				arr[0]与arr[1]
+				arr[1]与arr[2]
+				arr[2]与arr[3]
+				
+				arr[j]与arr[j+1]，int j=0;j&lt;3; j++
+				
+			i=3,第3轮，比较2次
+				arr[0]与arr[1]
+				arr[1]与arr[2]
+				
+				arr[j]与arr[j+1]，int j=0;j&lt;2; j++
+			i=4,第4轮，比较1次
+				arr[0]与arr[1]
+			
+				arr[j]与arr[j+1]，int j=0;j&lt;1; j++
+				
+				int j=0; j&lt;arr.length-i; j++
+			*/
+            for(int j=0; j&lt;arr.length-i; j++){
+                //希望的是arr[j] &lt; arr[j+1]
+                if(arr[j] &gt; arr[j+1]){
+                    //交换arr[j]与arr[j+1]
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+
+        //完成排序，遍历结果
+        for(int i=0; i&lt;arr.length; i++){
+            System.out.print(arr[i]+"  ");
+        }
+    }
+}</code></pre>
+
+<p><strong>冒泡排序优化（选讲）</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/*
+思考：冒泡排序是否可以优化
+*/
+class Test19BubbleSort2{
+	public static void main(String[] args) {
+        int[] arr = {1, 3, 5, 7, 9};
+
+        //从小到大排序
+        for (int i = 0; i &lt; arr.length - 1; i++) {
+            boolean flag = true;//假设数组已经是有序的
+            for (int j = 0; j &lt; arr.length - 1 - i; j++) {
+                //希望的是arr[j] &lt; arr[j+1]
+                if (arr[j] &gt; arr[j + 1]) {
+                    //交换arr[j]与arr[j+1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+
+                    flag = false;//如果元素发生了交换，那么说明数组还没有排好序
+                }
+            }
+            if (flag) {
+                break;
+            }
+        }
+
+        //完成排序，遍历结果
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.print(arr[i] + "  ");
+        }
+    }
+}</code></pre>
+
+<h4 id="6-6-4-快速排序"><a href="#6-6-4-快速排序" class="headerlink" title="6.6.4 快速排序"></a>6.6.4 快速排序</h4><p>快速排序（Quick Sort）由<code>图灵奖</code>获得者<code>Tony Hoare</code>发明，被列为<code>20世纪十大算法之一</code>，是迄今为止所有内排序算法中速度最快的一种，快速排序的时间复杂度为O(nlog(n))。</p>
+<p>快速排序通常明显比同为O(nlogn)的其他算法更快，因此常被采用，而且快排采用了分治法的思想，所以在很多笔试面试中能经常看到快排的影子。</p>
+<p>排序思想：</p>
+<ol>
+<li><p>从数列中挑出一个元素，称为”基准”（pivot），</p>
+</li>
+<li><p>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。</p>
+</li>
+<li><p>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+</li>
+<li><p>递归的最底部情形，是数列的大小是零或一，也就是永远都已经被排序好了。虽然一直递归下去，但是这个算法总会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。</p>
+</li>
+</ol>
+<p><strong>动态演示：</strong><a target="_blank" rel="noopener" href="https://visualgo.net/zh/sorting">https://visualgo.net/zh/sorting</a></p>
+<p>图示1：</p>
+<p><img src="image-20220317235922776.png" alt="image-20220317235922776"></p>
+<p>图示2：</p>
+<p>第一轮操作：</p>
+<p><img src="image-20221117205612230.png" alt="image-20221117205612230"></p>
+<p>第二轮操作：</p>
+<p><img src="image-20221117205719427.png" alt="image-20221117205719427"></p>
+<h4 id="6-6-5-内部排序性能比较与选择"><a href="#6-6-5-内部排序性能比较与选择" class="headerlink" title="6.6.5 内部排序性能比较与选择"></a>6.6.5 内部排序性能比较与选择</h4><ul>
+<li><p>性能比较</p>
+<ul>
+<li><strong>从平均时间而言</strong>：快速排序最佳。但在最坏情况下时间性能不如堆排序和归并排序。</li>
+<li><strong>从算法简单性看</strong>：由于直接选择排序、直接插入排序和冒泡排序的算法比较简单，将其认为是简单算法。对于Shell排序、堆排序、快速排序和归并排序算法，其算法比较复杂，认为是复杂排序。</li>
+<li><strong>从稳定性看</strong>：直接插入排序、冒泡排序和归并排序时稳定的；而直接选择排序、快速排序、 Shell排序和堆排序是不稳定排序</li>
+<li><strong>从待排序的记录数n的大小看</strong>，n较小时，宜采用简单排序；而n较大时宜采用改进排序。</li>
+</ul>
+</li>
+<li><p>选择</p>
+<ul>
+<li>若n较小(如n≤50)，可采用直接插入或直接选择排序。<br>当记录规模较小时，直接插入排序较好；否则因为直接选择移动的记录数少于直接插入，应选直接选择排序为宜。</li>
+<li>若文件初始状态基本有序(指正序)，则应选用直接插入、冒泡或随机的快速排序为宜；</li>
+<li>若n较大，则应采用时间复杂度为O(nlgn)的排序方法：快速排序、堆排序或归并排序。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-Arrays工具类的使用"><a href="#7-Arrays工具类的使用" class="headerlink" title="7. Arrays工具类的使用"></a>7. Arrays工具类的使用</h2><p>java.util.Arrays类即为操作数组的工具类，包含了用来操作数组（比如排序和搜索）的各种方法。 比如：</p>
+<ul>
+<li><code>数组元素拼接</code><ul>
+<li>static String toString(int[] a) ：字符串表示形式由数组的元素列表组成，括在方括号（”[]”）中。相邻元素用字符 “, “（逗号加空格）分隔。形式为：[元素1，元素2，元素3。。。]</li>
+<li>static String toString(Object[] a) ：字符串表示形式由数组的元素列表组成，括在方括号（”[]”）中。相邻元素用字符 “, “（逗号加空格）分隔。元素将自动调用自己从Object继承的toString方法将对象转为字符串进行拼接，如果没有重写，则返回类型@hash值，如果重写则按重写返回的字符串进行拼接。</li>
+</ul>
+</li>
+<li><code>数组排序</code><ul>
+<li>static void sort(int[] a) ：将a数组按照从小到大进行排序</li>
+<li>static void sort(int[] a, int fromIndex, int toIndex) ：将a数组的[fromIndex, toIndex)部分按照升序排列</li>
+<li>static void sort(Object[] a) ：根据元素的自然顺序对指定对象数组按升序进行排序。</li>
+<li>static <t> void sort(T[] a, Comparator&lt;? super T&gt; c) ：根据指定比较器产生的顺序对指定对象数组进行排序。</t></li>
+</ul>
+</li>
+<li><code>数组元素的二分查找</code><ul>
+<li>static int binarySearch(int[] a, int key)  、static int binarySearch(Object[] a, Object key) ：要求数组有序，在数组中查找key是否存在，如果存在返回第一次找到的下标，不存在返回负数。</li>
+</ul>
+</li>
+<li><code>数组的复制</code><ul>
+<li>static int[] copyOf(int[] original, int newLength)  ：根据original原数组复制一个长度为newLength的新数组，并返回新数组</li>
+<li>static <t> T[] copyOf(T[] original,int newLength)：根据original原数组复制一个长度为newLength的新数组，并返回新数组</t></li>
+<li>static int[] copyOfRange(int[] original, int from, int to) ：复制original原数组的[from,to)构成新数组，并返回新数组</li>
+<li>static <t> T[] copyOfRange(T[] original,int from,int to)：复制original原数组的[from,to)构成新数组，并返回新数组</t></li>
+</ul>
+</li>
+<li><code>比较两个数组是否相等</code><ul>
+<li>static boolean equals(int[] a, int[] a2) ：比较两个数组的长度、元素是否完全相同</li>
+<li>static boolean equals(Object[] a,Object[] a2)：比较两个数组的长度、元素是否完全相同</li>
+</ul>
+</li>
+<li><code>填充数组</code><ul>
+<li>static void fill(int[] a, int val) ：用val值填充整个a数组</li>
+<li>static void fill(Object[] a,Object val)：用val对象填充整个a数组</li>
+<li>static void fill(int[] a, int fromIndex, int toIndex, int val)：将a数组[fromIndex,toIndex)部分填充为val值</li>
+<li>static void fill(Object[] a, int fromIndex, int toIndex, Object val) ：将a数组[fromIndex,toIndex)部分填充为val对象</li>
+</ul>
+</li>
+</ul>
+<p>举例：java.util.Arrays类的sort()方法提供了数组元素排序功能：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">import java.util.Arrays;
+public class SortTest {
+	public static void main(String[] args) {
+		int[] arr = {3, 2, 5, 1, 6};
+        System.out.println("排序前" + Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println("排序后" + Arrays.toString(arr));
+	}
+}
+</code></pre>
+
+<h2 id="8-数组中的常见异常"><a href="#8-数组中的常见异常" class="headerlink" title="8. 数组中的常见异常"></a>8. 数组中的常见异常</h2><h3 id="8-1-数组角标越界异常"><a href="#8-1-数组角标越界异常" class="headerlink" title="8.1 数组角标越界异常"></a>8.1 数组角标越界异常</h3><p>当访问数组元素时，下标指定超出[0, 数组名.length-1]的范围时，就会报数组下标越界异常：ArrayIndexOutOfBoundsException。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestArrayIndexOutOfBoundsException {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3};
+       // System.out.println("最后一个元素：" + arr[3]);//错误，下标越界
+      //  System.out.println("最后一个元素：" + arr[arr.length]);//错误，下标越界
+        System.out.println("最后一个元素：" + arr[arr.length-1]);//对
+    }
+}
+</code></pre>
+
+<p>创建数组，赋值3个元素，数组的索引就是0，1，2，没有3索引，因此我们不能访问数组中不存在的索引，程序运行后，将会抛出 <code>ArrayIndexOutOfBoundsException</code>  数组越界异常。在开发中，数组的越界异常是<strong>不能出现</strong>的，一旦出现了，就必须要修改我们编写的代码。</p>
+<p><img src="%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%BC%82%E5%B8%B8.jpg"></p>
+<h3 id="8-2-空指针异常"><a href="#8-2-空指针异常" class="headerlink" title="8.2 空指针异常"></a>8.2 空指针异常</h3><p>观察一下代码，运行后会出现什么结果。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestNullPointerException {
+    public static void main(String[] args) {
+        //定义数组
+        int[][] arr = new int[3][];
+
+        System.out.println(arr[0][0]);//NullPointerException
+    }
+}</code></pre>
+
+<p>因为此时数组的每一行还未分配具体存储元素的空间，此时arr[0]是null，此时访问arr[0][0]会抛出<code>NullPointerException</code> 空指针异常。</p>
+<p><img src="%E7%A9%BA%E6%8C%87%E9%92%88%E5%BC%82%E5%B8%B8-1647708157677.jpg"></p>
+<p><strong>空指针异常在内存图中的表现</strong></p>
+<p><img src="1572338767825-1647708157678.png" alt="1572338767825"></p>
+<p><strong>小结：空指针异常情况</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">		//举例一：
+//		int[] arr1 = new int[10];
+//		arr1 = null;
+//		System.out.println(arr1[9]);
+		
+		//举例二：
+//		int[][] arr2 = new int[5][];
+//		//arr2[3] = new int[10];
+//		System.out.println(arr2[3][3]);
+		
+		//举例三：
+		String[] arr3 = new String[10];
+		System.out.println(arr3[2].toString());</code></pre>
+
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/03/10/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%935-%E6%95%B0%E7%BB%84/">https://nan-ying.github.io/2023/03/10/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%935-%E6%95%B0%E7%BB%84/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-03-10T11-13-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/14/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%936-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%9F%BA%E7%A1%80/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Java知识整理和总结6-面向对象编程-基础">
+                        
+                        <span class="card-title">Java知识整理和总结6-面向对象编程-基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/07/IDEA-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%B8%80%E8%A7%88%E8%A1%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="IDEA 常用快捷键一览表">
+                        
+                        <span class="card-title">IDEA 常用快捷键一览表</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" class="post-category">
+                                    效率提升
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/IDEA/">
+                        <span class="chip bg-color">IDEA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >698.4k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

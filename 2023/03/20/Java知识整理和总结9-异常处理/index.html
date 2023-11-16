@@ -1,0 +1,2330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java知识整理和总结9-异常处理, Nan-ying&#39;s Blog">
+    <meta name="description" content="第09章_异常处理本章专题与脉络
+
+1. 异常概述1.1 什么是生活的异常男主角小明每天开车上班，正常车程1小时。但是，不出意外的话，可能会出现意外。
+
+出现意外，即为异常情况。我们会做相应的处理。如果不处理，到不了公司。处理完了，就可以正">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Java知识整理和总结9-异常处理 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java知识整理和总结9-异常处理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Java/" class="post-category">
+              Java
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-03-20
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 7k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          28 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="第09章-异常处理"><a href="#第09章-异常处理" class="headerlink" title="第09章_异常处理"></a>第09章_异常处理</h1><h2 id="本章专题与脉络"><a href="#本章专题与脉络" class="headerlink" title="本章专题与脉络"></a>本章专题与脉络</h2><img src="%E7%AC%AC3%E9%98%B6%E6%AE%B5%EF%BC%9AJava%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8-%E7%AC%AC09%E7%AB%A0.png" alt="第3阶段：Java高级应用-第09章" style="zoom: 50%;">
+
+<h2 id="1-异常概述"><a href="#1-异常概述" class="headerlink" title="1. 异常概述"></a>1. 异常概述</h2><h3 id="1-1-什么是生活的异常"><a href="#1-1-什么是生活的异常" class="headerlink" title="1.1 什么是生活的异常"></a>1.1 什么是生活的异常</h3><p>男主角小明每天开车上班，正常车程1小时。但是，不出意外的话，可能会出现意外。</p>
+<p><img src="image-20220814203918560.png" alt="image-20220814203918560"></p>
+<p>出现意外，即为异常情况。我们会做相应的处理。如果不处理，到不了公司。处理完了，就可以正常开车去公司。</p>
+<img src="image-20220520210320301.png" alt="image-20220520210320301" style="zoom:70%;">
+
+<h3 id="1-2-什么是程序的异常"><a href="#1-2-什么是程序的异常" class="headerlink" title="1.2 什么是程序的异常"></a>1.2 什么是程序的异常</h3><p>在使用计算机语言进行项目开发的过程中，即使程序员把代码写得<code>尽善尽美</code>，在系统的运行过程中仍然会遇到一些问题，因为很多问题不是靠代码能够避免的，比如：<code>客户输入数据的格式问题</code>，<code>读取文件是否存在</code>，<code>网络是否始终保持通畅</code>等等。</p>
+<ul>
+<li><strong>异常</strong> ：指的是程序在执行过程中，出现的非正常情况，如果不处理最终会导致JVM的非正常停止。</li>
+</ul>
+<blockquote>
+<p>异常指的并不是语法错误和逻辑错误。语法错了，编译不通过，不会产生字节码文件，根本不能运行。</p>
+<p>代码逻辑错误，只是没有得到想要的结果，例如：求a与b的和，你写成了a-b</p>
+</blockquote>
+<h3 id="1-3-异常的抛出机制"><a href="#1-3-异常的抛出机制" class="headerlink" title="1.3 异常的抛出机制"></a>1.3 异常的抛出机制</h3><p>Java中是如何表示不同的异常情况，又是如何让程序员得知，并处理异常的呢？</p>
+<p>Java中把不同的异常用不同的类表示，一旦发生某种异常，就<code>创建该异常类型的对象</code>，并且抛出（throw）。然后程序员可以捕获(catch)到这个异常对象，并处理；如果没有捕获(catch)这个异常对象，那么这个异常对象将会导致程序终止。</p>
+<p>举例：</p>
+<p>运行下面的程序，程序会产生一个数组角标越界异常<code>ArrayIndexOfBoundsException</code>。我们通过图解来解析下异常产生和抛出的过程。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ArrayTools {
+    // 对给定的数组通过给定的角标获取元素。
+    public static int getElement(int[] arr, int index) {
+        int element = arr[index];
+        return element;
+    }
+}</code></pre>
+
+<p> 测试类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ExceptionDemo {
+    public static void main(String[] args) {
+        int[] arr = { 34, 12, 67 };
+        intnum = ArrayTools.getElement(arr, 4)
+        System.out.println("num=" + num);
+        System.out.println("over");
+    }
+}</code></pre>
+
+<p>上述程序执行过程图解：</p>
+<p><img src="%E5%BC%82%E5%B8%B8%E4%BA%A7%E7%94%9F%E8%BF%87%E7%A8%8B.png"></p>
+<h3 id="1-4-如何对待异常"><a href="#1-4-如何对待异常" class="headerlink" title="1.4 如何对待异常"></a>1.4 如何对待异常</h3><p> 对于程序出现的异常，一般有两种解决方法：一是遇到错误就终止程序的运行。另一种方法是程序员在编写程序时，就充分考虑到各种可能发生的异常和错误，极力预防和避免。实在无法避免的，要编写相应的代码进行异常的检测、以及<code>异常的处理</code>，保证代码的<code>健壮性</code>。</p>
+<h2 id="2-Java异常体系"><a href="#2-Java异常体系" class="headerlink" title="2. Java异常体系"></a>2. Java异常体系</h2><h3 id="2-1-Throwable"><a href="#2-1-Throwable" class="headerlink" title="2.1 Throwable"></a>2.1 Throwable</h3><p><code>java.lang.Throwable</code> 类是Java程序执行过程中发生的异常事件对应的类的根父类。</p>
+<p><strong>Throwable中的常用方法：</strong></p>
+<ul>
+<li><p><code>public void printStackTrace()</code>：打印异常的详细信息。</p>
+<p>包含了异常的类型、异常的原因、异常出现的位置、在开发和调试阶段都得使用printStackTrace。</p>
+</li>
+<li><p><code>public String getMessage()</code>：获取发生异常的原因。</p>
+</li>
+</ul>
+<h3 id="2-2-Error-和-Exception"><a href="#2-2-Error-和-Exception" class="headerlink" title="2.2 Error 和 Exception"></a>2.2 Error 和 Exception</h3><p>Throwable可分为两类：Error和Exception。分别对应着<code>java.lang.Error</code>与<code>java.lang.Exception</code>两个类。</p>
+<p><strong>Error：</strong>Java虚拟机无法解决的严重问题。如：JVM系统内部错误、资源耗尽等严重情况。一般不编写针对性的代码进行处理。</p>
+<ul>
+<li>例如：StackOverflowError（栈内存溢出）和OutOfMemoryError（堆内存溢出，简称OOM）。</li>
+</ul>
+<p><strong>Exception:</strong> 其它因编程错误或偶然的外在因素导致的一般性问题，需要使用针对性的代码进行处理，使程序继续运行。否则一旦发生异常，程序也会挂掉。例如：</p>
+<ul>
+<li>空指针访问</li>
+<li>试图读取不存在的文件</li>
+<li>网络连接中断</li>
+<li>数组角标越界</li>
+</ul>
+<blockquote>
+<p>说明：</p>
+<ol>
+<li>无论是Error还是Exception，还有很多子类，异常的类型非常丰富。当代码运行出现异常时，特别是我们不熟悉的异常时，不要紧张，把异常的简单类名，拷贝到API中去查去认识它即可。</li>
+<li>我们本章讲的异常处理，其实针对的就是Exception。</li>
+</ol>
+</blockquote>
+<img src="image-20220511161910951.png" alt="image-20220511161910951" style="zoom:67%;">
+
+<h3 id="2-3-编译时异常和运行时异常"><a href="#2-3-编译时异常和运行时异常" class="headerlink" title="2.3 编译时异常和运行时异常"></a>2.3 编译时异常和运行时异常</h3><p>Java程序的执行分为编译时过程和运行时过程。有的错误只有在<code>运行时</code>才会发生。比如：除数为0，数组下标越界等。</p>
+<img src="image-20220330002449526.png" alt="image-20220330002449526" style="zoom:80%;">
+
+<p>因此，根据异常可能出现的阶段，可以将异常分为：</p>
+<ul>
+<li><strong>编译时期异常</strong>（即checked异常、受检异常）：在代码编译阶段，编译器就能明确<code>警示</code>当前代码<code>可能发生（不是一定发生）</code>xx异常，并<code>明确督促</code>程序员提前编写处理它的代码。如果程序员<code>没有编写</code>对应的异常处理代码，则编译器就会直接判定编译失败，从而不能生成字节码文件。通常，这类异常的发生不是由程序员的代码引起的，或者不是靠加简单判断就可以避免的，例如：FileNotFoundException（文件找不到异常）。</li>
+<li><strong>运行时期异常</strong>（即runtime异常、unchecked异常、非受检异常）：在代码编译阶段，编译器完全不做任何检查，无论该异常是否会发生，编译器都不给出任何提示。只有等代码运行起来并确实发生了xx异常，它才能被发现。通常，这类异常是由程序员的代码编写不当引起的，只要稍加判断，或者细心检查就可以避免。<ul>
+<li><strong>java.lang.RuntimeException</strong>类及它的子类都是运行时异常。比如：ArrayIndexOutOfBoundsException数组下标越界异常，ClassCastException类型转换异常。</li>
+</ul>
+</li>
+</ul>
+<p><img src="1562771528807.png" alt="1562771528807"></p>
+<h2 id="3-常见的错误和异常"><a href="#3-常见的错误和异常" class="headerlink" title="3. 常见的错误和异常"></a>3. 常见的错误和异常</h2><h3 id="3-1-Error"><a href="#3-1-Error" class="headerlink" title="3.1 Error"></a>3.1 Error</h3><p>最常见的就是VirtualMachineError，它有两个经典的子类：StackOverflowError、OutOfMemoryError。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.exception;
+
+import org.junit.Test;
+
+public class TestStackOverflowError {
+    @Test
+    public void test01(){
+        //StackOverflowError
+        recursion();
+    }
+
+    public void recursion(){ //递归方法
+        recursion(); 
+    }
+}
+</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.exception;
+
+import org.junit.Test;
+
+public class TestOutOfMemoryError {
+    @Test
+    public void test02(){
+        //OutOfMemoryError
+        //方式一：
+        int[] arr = new int[Integer.MAX_VALUE];
+    }
+    @Test
+    public void test03(){
+        //OutOfMemoryError
+        //方式二：
+        StringBuilder s = new StringBuilder();
+        while(true){
+            s.append("atguigu");
+        }
+    }
+}
+</code></pre>
+
+<h3 id="3-2-运行时异常"><a href="#3-2-运行时异常" class="headerlink" title="3.2 运行时异常"></a>3.2 运行时异常</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.exception;
+
+import org.junit.Test;
+
+import java.util.Scanner;
+
+public class TestRuntimeException {
+    @Test
+    public void test01(){
+        //NullPointerException
+        int[][] arr = new int[3][];
+        System.out.println(arr[0].length);
+    }
+
+    @Test
+    public void test02(){
+        //ClassCastException
+        Object obj = 15;
+        String str = (String) obj;
+    }
+
+    @Test
+    public void test03(){
+        //ArrayIndexOutOfBoundsException
+        int[] arr = new int[5];
+        for (int i = 1; i &lt;= 5; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+
+    @Test
+    public void test04(){
+        //InputMismatchException
+        Scanner input = new Scanner(System.in);
+        System.out.print("请输入一个整数：");//输入非整数
+        int num = input.nextInt();
+        input.close();
+    }
+
+    @Test
+    public void test05(){
+        int a = 1;
+        int b = 0;
+        //ArithmeticException
+        System.out.println(a/b);
+    }
+}
+</code></pre>
+
+<h3 id="3-3-编译时异常"><a href="#3-3-编译时异常" class="headerlink" title="3.3 编译时异常"></a>3.3 编译时异常</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.exception;
+
+import org.junit.Test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class TestCheckedException {
+    @Test
+    public void test06() {
+        Thread.sleep(1000);//休眠1秒  InterruptedException
+    }
+
+    @Test
+    public void test07(){
+        Class c = Class.forName("java.lang.String");//ClassNotFoundException
+    }
+
+    @Test
+    public void test08() {
+        Connection conn = DriverManager.getConnection("....");  //SQLException
+    }
+    @Test
+    public void test09()  {
+        FileInputStream fis = new FileInputStream("尚硅谷Java秘籍.txt"); //FileNotFoundException
+    }
+    @Test
+    public void test10() {
+        File file = new File("尚硅谷Java秘籍.txt");
+		FileInputStream fis = new FileInputStream(file);//FileNotFoundException
+		int b = fis.read();//IOException
+		while(b != -1){
+			System.out.print((char)b);
+			b = fis.read();//IOException
+		}
+		
+		fis.close();//IOException
+    }
+}</code></pre>
+
+<h2 id="4-异常的处理"><a href="#4-异常的处理" class="headerlink" title="4. 异常的处理"></a>4. 异常的处理</h2><h3 id="4-1-异常处理概述"><a href="#4-1-异常处理概述" class="headerlink" title="4.1 异常处理概述"></a>4.1 异常处理概述</h3><p>在编写程序时，经常要在可能出现错误的地方加上检测的代码，如进行x/y运算时，要<code>检测分母为0</code>，<code>数据为空</code>，<code>输入的不是数据而是字符</code>等。过多的if-else分支会导致程序的<code>代码加长</code>、<code>臃肿</code>，<code>可读性差</code>，程序员需要花很大的精力“<code>堵漏洞</code>”。因此采用异常处理机制。</p>
+<p><strong>Java异常处理</strong></p>
+<p>Java采用的异常处理机制，是<code>将异常处理的程序代码集中在一起</code>，与正常的程序代码分开，使得程序简洁、优雅，并易于维护。</p>
+<p><strong>Java异常处理的方式：</strong></p>
+<p>方式一：try-catch-finally</p>
+<p>方式二：throws + 异常类型</p>
+<p><img src="image-20220331111051496.png" alt="image-20220331111051496"></p>
+<h3 id="4-2-方式1：捕获异常（try-catch-finally）"><a href="#4-2-方式1：捕获异常（try-catch-finally）" class="headerlink" title="4.2 方式1：捕获异常（try-catch-finally）"></a>4.2 方式1：捕获异常（try-catch-finally）</h3><p>Java提供了异常处理的<strong>抓抛模型</strong>。</p>
+<ul>
+<li>前面提到，Java程序的执行过程中如出现异常，会生成一个异常类对象，该异常对象将被提交给Java运行时系统，这个过程称为<code>抛出(throw)异常</code>。</li>
+<li>如果一个方法内抛出异常，该异常对象会被抛给调用者方法中处理。如果异常没有在调用者方法中处理，它继续被抛给这个调用方法的上层方法。这个过程将一直继续下去，直到异常被处理。这一过程称为<code>捕获(catch)异常</code>。</li>
+<li>如果一个异常回到main()方法，并且main()也不处理，则程序运行终止。</li>
+</ul>
+<h4 id="4-2-1-try-catch-finally基本格式"><a href="#4-2-1-try-catch-finally基本格式" class="headerlink" title="4.2.1 try-catch-finally基本格式"></a>4.2.1 try-catch-finally基本格式</h4><p>捕获异常语法如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">try{
+	......	//可能产生异常的代码
+}
+catch( 异常类型1 e ){
+	......	//当产生异常类型1型异常时的处置措施
+}
+catch( 异常类型2 e ){
+	...... 	//当产生异常类型2型异常时的处置措施
+}  
+finally{
+	...... //无论是否发生异常，都无条件执行的语句
+} 
+</code></pre>
+
+<p><strong>1、整体执行过程：</strong></p>
+<p>当某段代码可能发生异常，不管这个异常是编译时异常（受检异常）还是运行时异常（非受检异常），我们都可以使用try块将它括起来，并在try块下面编写catch分支尝试捕获对应的异常对象。</p>
+<ul>
+<li>如果在程序运行时，try块中的代码没有发生异常，那么catch所有的分支都不执行。</li>
+<li>如果在程序运行时，try块中的代码发生了异常，根据异常对象的类型，将从上到下选择第一个匹配的catch分支执行。此时try中发生异常的语句下面的代码将不执行，而整个try…catch之后的代码可以继续运行。</li>
+<li>如果在程序运行时，try块中的代码发生了异常，但是所有catch分支都无法匹配（捕获）这个异常，那么JVM将会终止当前方法的执行，并把异常对象“抛”给调用者。如果调用者不处理，程序就挂了。</li>
+</ul>
+<img src="image-20220503122722605.png" alt="image-20220503122722605" style="zoom:67%;">
+
+<p><strong>2、try</strong></p>
+<ul>
+<li>捕获异常的第一步是用<code>try{…}语句块</code>选定捕获异常的范围，将可能出现异常的业务逻辑代码放在try语句块中。</li>
+</ul>
+<p><strong>3、catch (Exceptiontype e)</strong></p>
+<ul>
+<li><p>catch分支，分为两个部分，catch()中编写异常类型和异常参数名，{}中编写如果发生了这个异常，要做什么处理的代码。</p>
+</li>
+<li><p>如果明确知道产生的是何种异常，可以用该异常类作为catch的参数；也可以用其父类作为catch的参数。</p>
+<p>比如：可以用ArithmeticException类作为参数的地方，就可以用RuntimeException类作为参数，或者用所有异常的父类Exception类作为参数。但不能是与ArithmeticException类无关的异常，如NullPointerException（catch中的语句将不会执行）。</p>
+</li>
+<li><p>每个try语句块可以伴随一个或多个catch语句，用于处理可能产生的不同类型的异常对象。</p>
+</li>
+<li><p>如果有多个catch分支，并且多个异常类型有父子类关系，必须保证小的子异常类型在上，大的父异常类型在下。否则，报错。</p>
+</li>
+<li><p>catch中常用异常处理的方式</p>
+<ul>
+<li><p><code>public String getMessage()</code>：获取异常的描述信息，返回字符串</p>
+</li>
+<li><p><code>public void printStackTrace()</code>：打印异常的跟踪栈信息并输出到控制台。包含了异常的类型、异常的原因、还包括异常出现的位置，在开发和调试阶段，都得使用printStackTrace()。</p>
+</li>
+</ul>
+<img src="image-20220331180736381.png" alt="image-20220331180736381" style="zoom:80%;"></li>
+</ul>
+<h4 id="4-2-2-使用举例"><a href="#4-2-2-使用举例" class="headerlink" title="4.2.2 使用举例"></a>4.2.2 使用举例</h4><p>举例1：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class IndexOutExp {
+    public static void main(String[] args) {
+        String friends[] = { "lisa", "bily", "kessy" };
+        try {
+            for (int i = 0; i &lt; 5; i++) {
+            System.out.println(friends[i]);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("index err");
+        }
+        System.out.println("\nthis is the end");
+    }
+}
+</code></pre>
+
+<p>举例2：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class DivideZero1 {
+    int x;
+    public static void main(String[] args) {
+        int y;
+        DivideZero1 c = new DivideZero1();
+        try {
+            y = 3 / c.x;
+        } catch (ArithmeticException e) {
+            System.out.println("divide by zero error!");
+        }
+        System.out.println("program ends ok!");
+    }
+}
+</code></pre>
+
+<p>举例3：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@Test
+public void test1(){
+	try{
+		String str1 = "atguigu.com";
+		str1 = null;
+		System.out.println(str1.charAt(0));
+	}catch(NullPointerException e){
+		//异常的处理方式1
+		System.out.println("不好意思，亲~出现了小问题，正在加紧解决...");	
+	}catch(ClassCastException e){
+		//异常的处理方式2
+		System.out.println("出现了类型转换的异常");
+	}catch(RuntimeException e){
+		//异常的处理方式3
+		System.out.println("出现了运行时异常");
+	}
+	//此处的代码，在异常被处理了以后，是可以正常执行的
+	System.out.println("hello");
+}</code></pre>
+
+<p>举例4：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"></code></pre>
+
+<h4 id="4-2-3-finally使用及举例"><a href="#4-2-3-finally使用及举例" class="headerlink" title="4.2.3 finally使用及举例"></a>4.2.3 finally使用及举例</h4><img src="image-20220331215517077.png" alt="image-20220331215517077" style="zoom: 80%;">
+
+<ul>
+<li><p>因为异常会引发程序跳转，从而会导致有些语句执行不到。而程序中有一些特定的代码无论异常是否发生，都<code>需要执行</code>。例如，数据库连接、输入流输出流、Socket连接、Lock锁的关闭等，这样的代码通常就会放到finally块中。所以，我们通常将一定要被执行的代码声明在finally中。</p>
+<ul>
+<li>唯一的例外，使用 System.exit(0) 来终止当前正在运行的 Java 虚拟机。</li>
+</ul>
+</li>
+<li><p>不论在try代码块中是否发生了异常事件，catch语句是否执行，catch语句是否有异常，catch语句中是否有return，finally块中的语句都会被执行。</p>
+</li>
+<li><p>finally语句和catch语句是可选的，但finally不能单独使用。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">try{
+     
+}finally{
+    
+} </code></pre></li>
+</ul>
+<p>举例1：确保资源关闭</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class TestFinally {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        try {
+            System.out.print("请输入第一个整数：");
+            int a = input.nextInt();
+            System.out.print("请输入第二个整数：");
+            int b = input.nextInt();
+            int result = a/b;
+            System.out.println(a + "/" + b +"=" + result);
+        } catch (InputMismatchException e) {
+            System.out.println("数字格式不正确，请输入两个整数");
+        }catch (ArithmeticException e){
+            System.out.println("第二个整数不能为0");
+        } finally {
+            System.out.println("程序结束，释放资源");
+            input.close();
+        }
+    }
+    
+    @Test
+    public void test1(){
+        FileInputStream fis = null;
+        try{
+            File file = new File("hello1.txt");
+            fis = new FileInputStream(file);//FileNotFoundException
+            int b = fis.read();//IOException
+            while(b != -1){
+                System.out.print((char)b);
+                b = fis.read();//IOException
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            try {
+                if(fis != null)
+                    fis.close();//IOException
+            } catch (IOException e) {
+                e.printStackTrace();
+            }	
+        }
+    }
+}</code></pre>
+
+<p>举例2：从try回来</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class FinallyTest1 {
+    public static void main(String[] args) {
+        int result = test("12");
+        System.out.println(result);
+    }
+
+    public static int test(String str){
+        try{
+            Integer.parseInt(str);
+            return 1;
+        }catch(NumberFormatException e){
+            return -1;
+        }finally{
+            System.out.println("test结束");
+        }
+    }
+}</code></pre>
+
+<p>举例3：从catch回来</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class FinallyTest2 {
+    public static void main(String[] args) {
+        int result = test("a");
+        System.out.println(result);
+    }
+
+    public static int test(String str) {
+        try {
+            Integer.parseInt(str);
+            return 1;
+        } catch (NumberFormatException e) {
+            return -1;
+        } finally {
+            System.out.println("test结束");
+        }
+    }
+}</code></pre>
+
+<p>举例4：从finally回来</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class FinallyTest3 {
+    public static void main(String[] args) {
+        int result = test("a");
+        System.out.println(result);
+    }
+
+    public static int test(String str) {
+        try {
+            Integer.parseInt(str);
+            return 1;
+        } catch (NumberFormatException e) {
+            return -1;
+        } finally {
+            System.out.println("test结束");
+            return 0;
+        }
+    }
+}</code></pre>
+
+<p>笔试题：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ExceptionTest {
+    public static void main(String[] args) {
+        int result = test();
+        System.out.println(result); //100
+    }
+
+    public static int test(){
+        int i = 100;
+        try {
+            return i;
+        } finally {
+            i++;
+        }
+    }
+}</code></pre>
+
+<blockquote>
+<p>笔试题：final、finally、finalize有什么区别？</p>
+</blockquote>
+<h4 id="4-2-4-练习"><a href="#4-2-4-练习" class="headerlink" title="4.2.4 练习"></a>4.2.4 练习</h4><p>编写一个类ExceptionTest，在main方法中使用try、catch、finally，要求：</p>
+<ul>
+<li><p>在try块中，编写被零除的代码。</p>
+</li>
+<li><p>在catch块中，捕获被零除所产生的异常，并且打印异常信息</p>
+</li>
+<li><p>在finally块中，打印一条语句。</p>
+</li>
+</ul>
+<h4 id="4-2-5-异常处理的体会"><a href="#4-2-5-异常处理的体会" class="headerlink" title="4.2.5 异常处理的体会"></a>4.2.5 异常处理的体会</h4><ul>
+<li><p>前面使用的异常都是<code>RuntimeException类</code>或是它的<code>子类</code>，这些类的异常的特点是：即使没有使用try和catch捕获，Java自己也能捕获，并且编译通过 ( 但运行时会发生异常使得程序运行终止 )。所以，对于这类异常，可以不作处理，因为这类异常很普遍，若全处理可能会对程序的可读性和运行效率产生影响。</p>
+</li>
+<li><p>如果抛出的异常是IOException等类型的<code>非运行时异常</code>，则必须捕获，否则<code>编译错误</code>。也就是说，我们必须处理编译时异常，将异常进行捕捉，转化为运行时异常。</p>
+</li>
+</ul>
+<h3 id="4-3-方式2：声明抛出异常类型（throws）"><a href="#4-3-方式2：声明抛出异常类型（throws）" class="headerlink" title="4.3 方式2：声明抛出异常类型（throws）"></a>4.3 方式2：声明抛出异常类型（throws）</h3><ul>
+<li><p>如果在编写方法体的代码时，某句代码可能发生某个<code>编译时异常</code>，不处理编译不通过，但是在当前方法体中可能<code>不适合处理</code>或<code>无法给出合理的处理方式</code>，则此方法应<code>显示地</code>声明抛出异常，表明该方法将不对这些异常进行处理，而由该方法的调用者负责处理。</p>
+<img src="image-20220331112000671.png" alt="image-20220331112000671" style="zoom:67%;">
+</li>
+<li><p>具体方式：在方法声明中用<code>throws语句</code>可以声明抛出异常的列表，throws后面的异常类型可以是方法中产生的异常类型，也可以是它的父类。</p>
+</li>
+</ul>
+<h4 id="4-3-1-throws基本格式"><a href="#4-3-1-throws基本格式" class="headerlink" title="4.3.1 throws基本格式"></a>4.3.1 throws基本格式</h4><p><strong>声明异常格式：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">修饰符 返回值类型 方法名(参数) throws 异常类名1,异常类名2…{   }	</code></pre>
+
+<p>在throws后面可以写多个异常类型，用逗号隔开。</p>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public void readFile(String file)  throws FileNotFoundException,IOException {
+	...
+	// 读文件的操作可能产生FileNotFoundException或IOException类型的异常
+	FileInputStream fis = new FileInputStream(file);
+    //...
+}
+</code></pre>
+
+<h4 id="4-3-2-throws-使用举例"><a href="#4-3-2-throws-使用举例" class="headerlink" title="4.3.2 throws 使用举例"></a>4.3.2 throws 使用举例</h4><p><strong>举例：针对于编译时异常</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class TestThrowsCheckedException {
+    public static void main(String[] args) {
+        System.out.println("上课.....");
+        try {
+            afterClass();//换到这里处理异常
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("准备提前上课");
+        }
+        System.out.println("上课.....");
+    }
+
+    public static void afterClass() throws InterruptedException {
+        for(int i=10; i&gt;=1; i--){
+            Thread.sleep(1000);//本来应该在这里处理异常
+            System.out.println("距离上课还有：" + i + "分钟");
+        }
+    }
+}
+</code></pre>
+
+<p><strong>举例：针对于运行时异常：</strong></p>
+<p>throws后面也可以写运行时异常类型，只是运行时异常类型，写或不写对于编译器和程序执行来说都没有任何区别。如果写了，唯一的区别就是调用者调用该方法后，使用try…catch结构时，IDEA可以获得更多的信息，需要添加哪种catch分支。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class TestThrowsRuntimeException {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        try {
+            System.out.print("请输入第一个整数：");
+            int a = input.nextInt();
+            System.out.print("请输入第二个整数：");
+            int b = input.nextInt();
+            int result = divide(a,b);
+            System.out.println(a + "/" + b +"=" + result);
+        } catch (ArithmeticException | InputMismatchException e) {
+            e.printStackTrace();
+        } finally {
+            input.close();
+        }
+    }
+
+    public static int divide(int a, int b)throws ArithmeticException{
+        return a/b;
+    }
+}
+</code></pre>
+
+<h4 id="4-3-3-方法重写中throws的要求"><a href="#4-3-3-方法重写中throws的要求" class="headerlink" title="4.3.3 方法重写中throws的要求"></a>4.3.3 方法重写中throws的要求</h4><p>方法重写时，对于方法签名是有严格要求的。复习：</p>
+<pre class="line-numbers language-none"><code class="language-none">（1）方法名必须相同
+（2）形参列表必须相同
+（3）返回值类型
+	- 基本数据类型和void：必须相同
+	- 引用数据类型：&lt;=
+（4）权限修饰符：&gt;=，而且要求父类被重写方法在子类中是可见的
+（5）不能是static，final修饰的方法</code></pre>
+
+<p>此外，对于throws异常列表要求：</p>
+<ul>
+<li>如果父类被重写方法的方法签名后面没有 “throws  编译时异常类型”，那么重写方法时，方法签名后面也不能出现“throws  编译时异常类型”。</li>
+<li>如果父类被重写方法的方法签名后面有 “<code>throws  编译时异常类型</code>”，那么重写方法时，throws的编译时异常类型必须 &lt;= 被重写方法throws的编译时异常类型，或者不throws编译时异常。</li>
+<li>方法重写，对于“<code>throws 运行时异常类型</code>”没有要求。因为子类对象只会在运行时被调用，对编译是否报错没有影响。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+import java.io.IOException;
+
+public class OverrideTest {
+    public static void main(String[] args) {
+        Father f = new Son();
+        try {
+            f.method1(); 
+        } catch (Exception e) { //编译时运行的是Father的方法，需要捕获Father的异常
+            e.printStackTrace();
+        }
+    }
+}
+
+class Father{
+    public void method()throws Exception{
+        System.out.println("Father.method");
+    }
+}
+class Son extends Father{
+    @Override
+    public void method() throws IOException,ClassCastException { //异常需为父对象异常的子类，否则运行时无法捕获
+        System.out.println("Son.method");
+    }
+}</code></pre>
+
+<h3 id="4-4-两种异常处理方式的选择"><a href="#4-4-两种异常处理方式的选择" class="headerlink" title="4.4 两种异常处理方式的选择"></a>4.4 两种异常处理方式的选择</h3><p>前提：对于异常，使用相应的处理方式。此时的异常，主要指的是编译时异常。</p>
+<ul>
+<li>如果程序代码中，涉及到<strong>资源的调用</strong>（流、数据库连接、网络连接等），则必须考虑使用try-catch-finally来处理，保证不出现内存泄漏。</li>
+<li>如果父类被重写的方法没有throws异常类型，则子类重写的方法中如果出现异常，只能考虑使用try-catch-finally进行处理，不能throws。</li>
+<li>开发中，方法a中依次调用了方法b,c,d等方法，方法b,c,d之间是递进关系。此时，如果方法b,c,d中有异常，我们通常选择使用throws，而方法a中通常选择使用try-catch-finally。</li>
+</ul>
+<h2 id="5-手动抛出异常对象：throw"><a href="#5-手动抛出异常对象：throw" class="headerlink" title="5. 手动抛出异常对象：throw"></a>5. 手动抛出异常对象：throw</h2><p>Java 中异常对象的生成有两种方式：</p>
+<ul>
+<li><p>由虚拟机<strong>自动生成</strong>：程序运行过程中，虚拟机检测到程序发生了问题，那么针对当前代码，就会在后台自动创建一个对应异常类的实例对象并抛出。</p>
+</li>
+<li><p>由开发人员<strong>手动创建</strong>：<code>new 异常类型([实参列表]);</code>，如果创建好的异常对象不抛出对程序没有任何影响，和创建一个普通对象一样，但是一旦throw抛出，就会对程序运行产生影响了。</p>
+</li>
+</ul>
+<h3 id="5-1-使用格式"><a href="#5-1-使用格式" class="headerlink" title="5.1 使用格式"></a>5.1 使用格式</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">throw new 异常类名(参数);</code></pre>
+
+<p>throw语句抛出的异常对象，和JVM自动创建和抛出的异常对象一样。</p>
+<ul>
+<li><p>如果是编译时异常类型的对象，同样需要使用throws或者try…catch处理，否则编译不通过。</p>
+</li>
+<li><p>如果是运行时异常类型的对象，编译器不提示。</p>
+</li>
+<li><p>可以抛出的异常必须是Throwable或其子类的实例。下面的语句在编译时将会产生语法错误：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">throw new String("want to throw");</code></pre></li>
+</ul>
+<h3 id="5-2-使用注意点："><a href="#5-2-使用注意点：" class="headerlink" title="5.2 使用注意点："></a>5.2 使用注意点：</h3><p>无论是编译时异常类型的对象，还是运行时异常类型的对象，如果没有被try..catch合理的处理，都会导致程序崩溃。</p>
+<p>throw语句会导致程序执行流程被改变，throw语句是明确抛出一个异常对象，因此它<code>下面的代码将不会执行</code>。</p>
+<p>如果当前方法没有try…catch处理这个异常对象，throw语句就会<code>代替return语句</code>提前终止当前方法的执行，并返回一个异常对象给调用者。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ThrowTest {
+    public static void main(String[] args) {
+        Student stu = new Student();
+        stu.regist(10);
+        stu.regist(-10);
+
+        System.out.println(stu);
+    }
+}
+
+class Student {
+    int id;
+    public void regist(int id) {
+        if (id &gt; 0) {
+            this.id = id;
+        } else {
+            throw new RuntimeException("id有误");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                '}';
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class TestThrow {
+    public static void main(String[] args) {
+        try {
+            System.out.println(max(4,2,31,1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println(max(4));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println(max());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int max(int... nums){
+        if(nums == null || nums.length==0){
+            throw new IllegalArgumentException("没有传入任何整数，无法获取最大值");
+        }
+        int max = nums[0];
+        for (int i = 1; i &lt; nums.length; i++) {
+            if(nums[i] &gt; max){
+                max = nums[i];
+            }
+        }
+        return max;
+    }
+}
+</code></pre>
+
+
+
+<h2 id="6-自定义异常"><a href="#6-自定义异常" class="headerlink" title="6. 自定义异常"></a>6. 自定义异常</h2><h3 id="6-1-为什么需要自定义异常类"><a href="#6-1-为什么需要自定义异常类" class="headerlink" title="6.1 为什么需要自定义异常类"></a>6.1 为什么需要自定义异常类</h3><p>Java中不同的异常类，分别表示着某一种具体的异常情况。那么在开发中总是有些异常情况是核心类库中没有定义好的，此时我们需要根据自己业务的异常情况来定义异常类。例如年龄负数问题，考试成绩负数问题，某员工已在团队中等。</p>
+<h3 id="6-2-如何自定义异常类"><a href="#6-2-如何自定义异常类" class="headerlink" title="6.2 如何自定义异常类"></a>6.2 如何自定义异常类</h3><p>（1）要继承一个异常类型</p>
+<p>​			自定义一个编译时异常类型：自定义类继承<code>java.lang.Exception</code>。</p>
+<p>​			自定义一个运行时异常类型：自定义类继承<code>java.lang.RuntimeException</code>。</p>
+<p>（2）建议大家提供至少两个构造器，一个是无参构造，一个是(String message)构造器。</p>
+<p>（3）自定义异常需要提供<code>serialVersionUID</code></p>
+<h3 id="6-3-注意点"><a href="#6-3-注意点" class="headerlink" title="6.3 注意点"></a>6.3 注意点</h3><ol>
+<li><p>自定义的异常只能通过throw抛出。</p>
+</li>
+<li><p>自定义异常最重要的是异常类的名字和message属性。当异常出现时，可以根据名字判断异常类型。比如：<code>TeamException("成员已满，无法添加"); </code>、 <code>TeamException("该员工已是某团队成员");</code></p>
+</li>
+<li><p>自定义异常对象只能手动抛出。抛出后由try..catch处理，也可以甩锅throws给调用者处理。</p>
+</li>
+</ol>
+<h3 id="6-4-举例"><a href="#6-4-举例" class="headerlink" title="6.4 举例"></a>6.4 举例</h3><p>举例1：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class MyException extends Exception {
+    static final long serialVersionUID = 23423423435L;
+    private int idnumber;
+
+    public MyException(String message, int id) {
+        super(message);
+        this.idnumber = id;
+    }
+
+    public int getId() {
+        return idnumber;
+    }
+}
+</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class MyExpTest {
+    public void regist(int num) throws MyException {
+        if (num &lt; 0)
+            throw new MyException("人数为负值，不合理", 3);
+        else
+            System.out.println("登记人数" + num);
+    }
+    public void manager() {
+        try {
+            regist(100);
+        } catch (MyException e) {
+            System.out.print("登记失败，出错种类" + e.getId());
+        }
+        System.out.print("本次登记操作结束");
+    }
+    public static void main(String args[]) {
+        MyExpTest t = new MyExpTest();
+        t.manager();
+    }
+}
+</code></pre>
+
+<p>举例2：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.define;
+//自定义异常：
+public class NotTriangleException extends Exception{
+    static final long serialVersionUID = 13465653435L;
+
+    public NotTriangleException() {
+    }
+
+    public NotTriangleException(String message) {
+        super(message);
+    }
+}
+</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.define;
+
+public class Triangle {
+    private double a;
+    private double b;
+    private double c;
+
+    public Triangle(double a, double b, double c) throws NotTriangleException {
+        if(a&lt;=0 || b&lt;=0 || c&lt;=0){
+            throw new NotTriangleException("三角形的边长必须是正数");
+        }
+        if(a+b&lt;=c || b+c&lt;=a || a+c&lt;=b){
+            throw new NotTriangleException(a+"," + b +"," + c +"不能构造三角形，三角形任意两边之后必须大于第三边");
+        }
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public void setA(double a) throws NotTriangleException{
+        if(a&lt;=0){
+            throw new NotTriangleException("三角形的边长必须是正数");
+        }
+        if(a+b&lt;=c || b+c&lt;=a || a+c&lt;=b){
+            throw new NotTriangleException(a+"," + b +"," + c +"不能构造三角形，三角形任意两边之后必须大于第三边");
+        }
+        this.a = a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) throws NotTriangleException {
+        if(b&lt;=0){
+            throw new NotTriangleException("三角形的边长必须是正数");
+        }
+        if(a+b&lt;=c || b+c&lt;=a || a+c&lt;=b){
+            throw new NotTriangleException(a+"," + b +"," + c +"不能构造三角形，三角形任意两边之后必须大于第三边");
+        }
+        this.b = b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public void setC(double c) throws NotTriangleException {
+        if(c&lt;=0){
+            throw new NotTriangleException("三角形的边长必须是正数");
+        }
+        if(a+b&lt;=c || b+c&lt;=a || a+c&lt;=b){
+            throw new NotTriangleException(a+"," + b +"," + c +"不能构造三角形，三角形任意两边之后必须大于第三边");
+        }
+        this.c = c;
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                '}';
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.define;
+
+public class TestTriangle {
+    public static void main(String[] args) {
+        Triangle t = null;
+        try {
+            t = new Triangle(2,2,3);
+            System.out.println("三角形创建成功：");
+            System.out.println(t);
+        } catch (NotTriangleException e) {
+            System.err.println("三角形创建失败");
+            e.printStackTrace();
+        }
+
+        try {
+            if(t != null) {
+                t.setA(1);
+            }
+            System.out.println("三角形边长修改成功");
+        } catch (NotTriangleException e) {
+            System.out.println("三角形边长修改失败");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
+<h2 id="7-练习"><a href="#7-练习" class="headerlink" title="7. 练习"></a>7. 练习</h2><p><strong>练习1：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ReturnExceptionDemo {
+    static void methodA() {
+        try {
+            System.out.println("进入方法A");
+            throw new RuntimeException("制造异常");
+        }finally {
+            System.out.println("用A方法的finally");
+        }
+    }
+
+    static void methodB() {
+        try {
+            System.out.println("进入方法B");
+            return;
+        } finally {
+            System.out.println("调用B方法的finally");
+        }
+    }
+	public static void main(String[] args) {
+    	try {
+    	    methodA();
+   		} catch (Exception e) {
+    	  	System.out.println(e.getMessage());
+    	}
+    	methodB();
+  	}
+}
+</code></pre>
+
+<p><strong>练习2：</strong></p>
+<p>从键盘接收学生成绩，成绩必须在0~100之间。</p>
+<p>自定义成绩无效异常。</p>
+<p>编写方法接收成绩并返回该成绩，如果输入无效，则抛出自定义异常。</p>
+<p><strong>练习3：</strong></p>
+<p>编写应用程序EcmDef.java，接收命令行的两个参数，要求不能输入负数，计算两数相除。<br>对数据类型不一致(NumberFormatException)、缺少命令行参数(ArrayIndexOutOfBoundsException、<br>除0(ArithmeticException)及输入负数(EcDef 自定义的异常)进行异常处理。</p>
+<p>提示：<br>(1)在主类(EcmDef)中定义异常方法(ecm)完成两数相除功能。</p>
+<p>(2)在main()方法中使用异常处理语句进行异常处理。</p>
+<p>(3)在程序中，自定义对应输入负数的异常类(EcDef)。</p>
+<p>(4)运行时接受参数 java EcmDef 20 10   //args[0]=“20” args[1]=“10”</p>
+<p>(5)Interger类的static方法parseInt(String s)将s转换成对应的int值。<br>     如：int a=Interger.parseInt(“314”);	//a=314;</p>
+<h2 id="8-小结与小悟"><a href="#8-小结与小悟" class="headerlink" title="8. 小结与小悟"></a>8. 小结与小悟</h2><h3 id="8-1-小结：异常处理5个关键字"><a href="#8-1-小结：异常处理5个关键字" class="headerlink" title="8.1 小结：异常处理5个关键字"></a>8.1 小结：异常处理5个关键字</h3><img src="image-20220330003738109.png" alt="image-20220330003738109" style="zoom: 67%;">
+
+<blockquote>
+<p>类比：上游排污，下游治污</p>
+</blockquote>
+<h3 id="8-2-感悟"><a href="#8-2-感悟" class="headerlink" title="8.2 感悟"></a>8.2 感悟</h3><p><strong>小哲理：</strong></p>
+<p>世界上最遥远的<code>距离</code>，是我在<code>if</code>里你在<code>else</code>里，似乎一直相伴又永远分离；</p>
+<p>世界上最痴心的<code>等待</code>，是我当<code>case</code>你是<code>switch</code>，或许永远都选不上自己；</p>
+<p>世界上最真情的<code>相依</code>，是你在<code>try</code>我在<code>catch</code>。无论你发神马脾气，我都默默承受，静静处理。到那时，再来期待我们的<code>finally</code>。</p>
+<p><strong>歌词：</strong></p>
+<img src="image-20220511163035280.png" alt="image-20220511163035280" style="zoom:67%;">
+
+<p><img src="/images/try.png" alt="try"></p>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/03/20/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%939-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">https://nan-ying.github.io/2023/03/20/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%939-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-03-20T11-19-59',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/25/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%9310-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Java知识整理和总结10-多线程">
+                        
+                        <span class="card-title">Java知识整理和总结10-多线程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/17/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%938-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E9%AB%98%E7%BA%A7/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Java知识整理和总结8-面向对象编程-高级">
+                        
+                        <span class="card-title">Java知识整理和总结8-面向对象编程-高级</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >698.4k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

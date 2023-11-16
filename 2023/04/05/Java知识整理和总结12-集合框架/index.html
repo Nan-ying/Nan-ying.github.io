@@ -1,0 +1,3920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java知识整理和总结12-集合框架, Nan-ying&#39;s Blog">
+    <meta name="description" content="第12章_集合框架本章专题与脉络
+
+
+1. 集合框架概述1.1 生活中的容器
+
+1.2 数组的特点与弊端
+一方面，面向对象语言对事物的体现都是以对象的形式，为了方便对多个对象的操作，就要对对象进行存储。
+另一方面，使用数组存储对象方面具有一">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Java知识整理和总结12-集合框架 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java知识整理和总结12-集合框架</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Java/" class="post-category">
+              Java
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-04-05
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 14.5k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          65 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="第12章-集合框架"><a href="#第12章-集合框架" class="headerlink" title="第12章_集合框架"></a>第12章_集合框架</h1><h2 id="本章专题与脉络"><a href="#本章专题与脉络" class="headerlink" title="本章专题与脉络"></a>本章专题与脉络</h2><img src="%E7%AC%AC3%E9%98%B6%E6%AE%B5%EF%BC%9AJava%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8-%E7%AC%AC12%E7%AB%A0.png" alt="第3阶段：Java高级应用-第12章" style="zoom:50%;">
+
+<hr>
+<h2 id="1-集合框架概述"><a href="#1-集合框架概述" class="headerlink" title="1. 集合框架概述"></a>1. 集合框架概述</h2><h3 id="1-1-生活中的容器"><a href="#1-1-生活中的容器" class="headerlink" title="1.1 生活中的容器"></a>1.1 生活中的容器</h3><img src="image-20220523190743146.png" alt="image-20220523190743146" style="zoom: 67%;">
+
+<h3 id="1-2-数组的特点与弊端"><a href="#1-2-数组的特点与弊端" class="headerlink" title="1.2 数组的特点与弊端"></a>1.2 数组的特点与弊端</h3><ul>
+<li>一方面，面向对象语言对事物的体现都是以对象的形式，为了方便对多个对象的操作，就要对对象进行存储。</li>
+<li>另一方面，使用数组存储对象方面具有<code>一些弊端</code>，而Java 集合就像一种容器，可以<code>动态地</code>把多个对象的引用放入容器中。</li>
+<li>数组在内存存储方面的<code>特点</code>：<ul>
+<li>数组初始化以后，长度就确定了。</li>
+<li>数组中的添加的元素是依次紧密排列的，有序的，可以重复的。</li>
+<li>数组声明的类型，就决定了进行元素初始化时的类型。不是此类型的变量，就不能添加。</li>
+<li>可以存储基本数据类型值，也可以存储引用数据类型的变量</li>
+</ul>
+</li>
+<li>数组在存储数据方面的<code>弊端</code>：<ul>
+<li>数组初始化以后，长度就不可变了，不便于扩展</li>
+<li>数组中提供的属性和方法少，不便于进行添加、删除、插入、获取元素个数等操作，且效率不高。</li>
+<li>数组存储数据的特点单一，只能存储有序的、可以重复的数据</li>
+</ul>
+</li>
+<li>Java 集合框架中的类可以用于存储多个<code>对象</code>，还可用于保存具有<code>映射关系</code>的关联数组。</li>
+</ul>
+<h3 id="1-3-Java集合框架体系"><a href="#1-3-Java集合框架体系" class="headerlink" title="1.3 Java集合框架体系"></a>1.3 Java集合框架体系</h3><p>Java 集合可分为 Collection 和 Map 两大体系：</p>
+<ul>
+<li><p>Collection接口：用于存储一个一个的数据，也称<code>单列数据集合</code>。</p>
+<ul>
+<li>List子接口：用来存储<strong>有序的、可以重复的</strong>数据（主要用来替换数组，”动态”数组）<ul>
+<li>实现类：ArrayList(主要实现类)、LinkedList、Vector</li>
+</ul>
+</li>
+<li>Set子接口：用来存储<strong>无序的、不可重复的</strong>数据（类似于高中讲的”集合”）<ul>
+<li>实现类：HashSet(主要实现类)、LinkedHashSet、TreeSet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Map接口：用于存储具有映射关系“key-value对”的集合，即<strong>一对一对</strong>的数据，也称<code>双列数据集合</code>。(类似于高中的函数、映射。(x1,y1),(x2,y2) —&gt; y = f(x) )</p>
+<ul>
+<li>HashMap(主要实现类)、LinkedHashMap、TreeMap、Hashtable、Properties</li>
+</ul>
+</li>
+<li><p>JDK提供的集合API位于java.util包内</p>
+</li>
+<li><p>图示：集合框架全图</p>
+</li>
+</ul>
+<p><img src="%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%85%A8%E5%9B%BE.png" alt="集合框架全图.png"></p>
+<ul>
+<li>简图1：<strong>Collection接口继承树</strong></li>
+</ul>
+<img src="image-20220407203244029.png" alt="image-20220407203244029" style="zoom: 67%;">
+
+<ul>
+<li>简图2：<strong>Map接口继承树</strong></li>
+</ul>
+<img src="image-20220407203412665.png" alt="image-20220407203412665" style="zoom: 67%;">
+
+<h3 id="1-4-集合的使用场景"><a href="#1-4-集合的使用场景" class="headerlink" title="1.4 集合的使用场景"></a>1.4 集合的使用场景</h3><p><img src="image-20220407202630027.png" alt="image-20220407202630027"></p>
+<p><img src="%E7%AC%AC12%E7%AB%A0_%E9%9B%86%E5%90%88%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF.png" alt="第12章_集合的使用场景"></p>
+<h2 id="2-Collection接口及方法"><a href="#2-Collection接口及方法" class="headerlink" title="2. Collection接口及方法"></a>2. Collection接口及方法</h2><ul>
+<li>JDK不提供此接口的任何直接实现，而是提供更具体的子接口（如：Set和List）去实现。</li>
+<li>Collection 接口是 List和Set接口的父接口，该接口里定义的方法既可用于操作 Set 集合，也可用于操作 List 集合。方法如下：</li>
+</ul>
+<h3 id="2-1-添加"><a href="#2-1-添加" class="headerlink" title="2.1 添加"></a>2.1 添加</h3><p>（1）add(E obj)：添加元素对象到当前集合中<br>（2）addAll(Collection other)：添加other集合中的所有元素对象到当前集合中，即this = this ∪ other</p>
+<p>注意：add和addAll的区别</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.collection;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class TestCollectionAdd {
+    @Test
+    public void testAdd(){
+        //ArrayList是Collection的子接口List的实现类之一。
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        System.out.println(coll);
+    }
+
+    @Test
+    public void testAddAll(){
+        Collection c1 = new ArrayList();
+        c1.add(1);
+        c1.add(2);
+        System.out.println("c1集合元素的个数：" + c1.size());//2
+        System.out.println("c1 = " + c1);
+
+        Collection c2 = new ArrayList();
+        c2.add(1);
+        c2.add(2);
+        System.out.println("c2集合元素的个数：" + c2.size());//2
+        System.out.println("c2 = " + c2);
+
+        Collection other = new ArrayList();
+        other.add(1);
+        other.add(2);
+        other.add(3);
+        System.out.println("other集合元素的个数：" + other.size());//3
+        System.out.println("other = " + other);
+        System.out.println();
+
+        c1.addAll(other);
+        System.out.println("c1集合元素的个数：" + c1.size());//5
+        System.out.println("c1.addAll(other) = " + c1);
+
+        c2.add(other);
+        System.out.println("c2集合元素的个数：" + c2.size());//3
+        System.out.println("c2.add(other) = " + c2);
+    }
+}</code></pre>
+
+<blockquote>
+<p>注意：coll.addAll(other);与coll.add(other);</p>
+</blockquote>
+<p><img src="1563548078274.png"></p>
+<h3 id="2-2-判断"><a href="#2-2-判断" class="headerlink" title="2.2 判断"></a>2.2 判断</h3><p>（3）int size()：获取当前集合中实际存储的元素个数<br>（4）boolean isEmpty()：判断当前集合是否为空集合<br>（5）boolean contains(Object obj)：判断当前集合中是否存在一个与obj对象<strong>equals返回true</strong>的元素<br>（6）boolean containsAll(Collection coll)：判断coll集合中的元素是否在当前集合中都存在。即coll集合是否是当前集合的“子集”<br>（7）boolean equals(Object obj)：判断当前集合与obj是否相等</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.collection;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
+public class TestCollectionContains {
+    @Test
+    public void test01() {
+        Collection coll = new ArrayList();
+        System.out.println("coll在添加元素之前，isEmpty = " + coll.isEmpty());
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+        System.out.println("coll的元素个数" + coll.size());
+
+        System.out.println("coll在添加元素之后，isEmpty = " + coll.isEmpty());
+    }
+
+    @Test
+    public void test02() {
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+        System.out.println("coll = " + coll);
+        System.out.println("coll是否包含“小李广” = " + coll.contains("小李广"));
+        System.out.println("coll是否包含“宋红康” = " + coll.contains("宋红康"));
+
+        Collection other = new ArrayList();
+        other.add("小李广");
+        other.add("扫地僧");
+        other.add("尚硅谷");
+        System.out.println("other = " + other);
+
+        System.out.println("coll.containsAll(other) = " + coll.containsAll(other));
+    }
+
+    @Test
+    public void test03(){
+        Collection c1 = new ArrayList();
+        c1.add(1);
+        c1.add(2);
+        System.out.println("c1集合元素的个数：" + c1.size());//2
+        System.out.println("c1 = " + c1);
+
+        Collection c2 = new ArrayList();
+        c2.add(1);
+        c2.add(2);
+        System.out.println("c2集合元素的个数：" + c2.size());//2
+        System.out.println("c2 = " + c2);
+
+        Collection other = new ArrayList();
+        other.add(1);
+        other.add(2);
+        other.add(3);
+        System.out.println("other集合元素的个数：" + other.size());//3
+        System.out.println("other = " + other);
+        System.out.println();
+
+        c1.addAll(other);
+        System.out.println("c1集合元素的个数：" + c1.size());//5
+        System.out.println("c1.addAll(other) = " + c1);
+        System.out.println("c1.contains(other) = " + c1.contains(other));
+        System.out.println("c1.containsAll(other) = " + c1.containsAll(other));
+        System.out.println();
+
+        c2.add(other);
+        System.out.println("c2集合元素的个数：" + c2.size());
+        System.out.println("c2.add(other) = " + c2);
+        System.out.println("c2.contains(other) = " + c2.contains(other));
+        System.out.println("c2.containsAll(other) = " + c2.containsAll(other));
+    }
+
+}</code></pre>
+
+<h3 id="2-3-删除"><a href="#2-3-删除" class="headerlink" title="2.3 删除"></a>2.3 删除</h3><p>（8）void clear()：清空集合元素<br>（9） boolean remove(Object obj) ：从当前集合中删除第一个找到的与obj对象<strong>equals返回true</strong>的元素。<br>（10）boolean removeAll(Collection coll)：从当前集合中删除所有与coll集合中相同的元素。即this = this - this ∩ coll<br>（11）boolean retainAll(Collection coll)：从当前集合中删除两个集合中不同的元素，使得当前集合仅保留与coll集合中的元素相同的元素，即当前集合中仅保留两个集合的<strong>交集</strong>，即this  = this ∩ coll；</p>
+<p>注意几种删除方法的区别</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.collection;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Predicate;
+
+public class TestCollectionRemove {
+    @Test
+    public void test01(){
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+        System.out.println("coll = " + coll);
+
+        coll.remove("小李广");
+        System.out.println("删除元素\"小李广\"之后coll = " + coll);
+        
+        coll.clear();
+        System.out.println("coll清空之后，coll = " + coll);
+    }
+
+    @Test
+    public void test02() {
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+        System.out.println("coll = " + coll);
+
+        Collection other = new ArrayList();
+        other.add("小李广");
+        other.add("扫地僧");
+        other.add("尚硅谷");
+        System.out.println("other = " + other);
+
+        coll.removeAll(other);
+        System.out.println("coll.removeAll(other)之后，coll = " + coll);
+        System.out.println("coll.removeAll(other)之后，other = " + other);
+    }
+
+    @Test
+    public void test03() {
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+        System.out.println("coll = " + coll);
+
+        Collection other = new ArrayList();
+        other.add("小李广");
+        other.add("扫地僧");
+        other.add("尚硅谷");
+        System.out.println("other = " + other);
+
+        coll.retainAll(other);
+        System.out.println("coll.retainAll(other)之后，coll = " + coll);
+        System.out.println("coll.retainAll(other)之后，other = " + other);
+    }
+
+}</code></pre>
+
+<h3 id="2-4-其它"><a href="#2-4-其它" class="headerlink" title="2.4 其它"></a>2.4 其它</h3><p>（12）Object[] toArray()：返回包含当前集合中所有元素的数组<br>（13）hashCode()：获取集合对象的哈希值<br>（14）iterator()：返回迭代器对象，用于集合遍历</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestCollectionContains {
+    @Test
+    public void test01() {
+        Collection coll = new ArrayList();
+
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+		//集合转换为数组：集合的toArray()方法
+        Object[] objects = coll.toArray();
+        System.out.println("用数组返回coll中所有元素：" + Arrays.toString(objects));
+		
+        //对应的，数组转换为集合：调用Arrays的asList(Object ...objs)
+        Object[] arr1 = new Object[]{123,"AA","CC"};
+        Collection list = Arrays.asList(arr1);
+        System.out.println(list);
+    }
+}</code></pre>
+
+<h2 id="3-Iterator-迭代器-接口"><a href="#3-Iterator-迭代器-接口" class="headerlink" title="3. Iterator(迭代器)接口"></a>3. Iterator(迭代器)接口</h2><h3 id="3-1-Iterator接口"><a href="#3-1-Iterator接口" class="headerlink" title="3.1 Iterator接口"></a>3.1 Iterator接口</h3><ul>
+<li><p>在程序开发中，经常需要遍历集合中的所有元素。针对这种需求，JDK专门提供了一个接口<code>java.util.Iterator</code>。<code>Iterator</code>接口也是Java集合中的一员，但它与<code>Collection</code>、<code>Map</code>接口有所不同。</p>
+<ul>
+<li>Collection接口与Map接口主要用于<code>存储</code>元素</li>
+<li><code>Iterator</code>，被称为迭代器接口，本身并不提供存储对象的能力，主要用于<code>遍历</code>Collection中的元素</li>
+</ul>
+</li>
+<li><p>Collection接口继承了java.lang.Iterable接口，该接口有一个iterator()方法，那么所有实现了Collection接口的集合类都有一个iterator()方法，用以返回一个实现了Iterator接口的对象。</p>
+<ul>
+<li><code>public Iterator iterator()</code>: 获取集合对应的迭代器，用来遍历集合中的元素的。</li>
+<li>集合对象每次调用iterator()方法都得到一个全新的迭代器对象，默认游标都在集合的第一个元素之前。</li>
+</ul>
+</li>
+<li><p>Iterator接口的常用方法如下：</p>
+<ul>
+<li><code>public E next()</code>:返回迭代的下一个元素。</li>
+<li><code>public boolean hasNext()</code>:如果仍有元素可以迭代，则返回 true。</li>
+</ul>
+</li>
+<li><p>注意：在调用it.next()方法之前必须要调用it.hasNext()进行检测。若不调用，且下一条记录无效，直接调用it.next()会抛出<code>NoSuchElementException异常</code>。</p>
+</li>
+</ul>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.iterator;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class TestIterator {
+    @Test
+    public void test01(){
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+
+        Iterator iterator = coll.iterator();
+        System.out.println(iterator.next());
+        System.out.println(iterator.next());
+        System.out.println(iterator.next());
+        System.out.println(iterator.next()); //报NoSuchElementException异常
+    }
+
+    @Test
+    public void test02(){
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+
+        Iterator iterator = coll.iterator();//获取迭代器对象
+        while(iterator.hasNext()) {//判断是否还有元素可迭代
+            System.out.println(iterator.next());//取出下一个元素
+        }
+    }
+}
+</code></pre>
+
+<h3 id="3-2-迭代器的执行原理"><a href="#3-2-迭代器的执行原理" class="headerlink" title="3.2 迭代器的执行原理"></a>3.2 迭代器的执行原理</h3><p>Iterator迭代器对象在遍历集合时，内部采用指针的方式来跟踪集合中的元素，接下来通过一个图例来演示Iterator对象迭代元素的过程：</p>
+<p><img src="image-20220407235130988.png" alt="image-20220407235130988"></p>
+<p>使用Iterator迭代器删除元素：java.util.Iterator迭代器中有一个方法：void remove() ;</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Iterator iter = coll.iterator();//回到起点
+while(iter.hasNext()){
+    Object obj = iter.next();
+    if(obj.equals("Tom")){
+        iter.remove();
+    }
+}</code></pre>
+
+<p>注意：</p>
+<ul>
+<li><p>Iterator可以删除集合的元素，但是遍历过程中通过迭代器对象的remove方法，不是集合对象的remove方法。</p>
+</li>
+<li><p>如果还未调用next()或在上一次调用 next() 方法之后已经调用了 remove() 方法，再调用remove()都会报IllegalStateException。</p>
+</li>
+<li><p>Collection已经有remove(xx)方法了，为什么Iterator迭代器还要提供删除方法呢？因为迭代器的remove()可以按指定的条件进行删除。</p>
+</li>
+</ul>
+<p>例如：要删除以下集合元素中的偶数</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.iterator;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class TestIteratorRemove {
+    @Test
+    public void test01(){
+        Collection coll = new ArrayList();
+        coll.add(1);
+        coll.add(2);
+        coll.add(3);
+        coll.add(4);
+        coll.add(5);
+        coll.add(6);
+
+        Iterator iterator = coll.iterator();
+        while(iterator.hasNext()){
+            Integer element = (Integer) iterator.next();
+            if(element % 2 == 0){
+                iterator.remove();
+            }
+        }
+        System.out.println(coll);
+    }
+}
+</code></pre>
+
+<p>在JDK8.0时，Collection接口有了removeIf 方法，即可以根据条件删除。（第18章中再讲）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.collection;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Predicate;
+
+public class TestCollectionRemoveIf {
+    @Test
+    public void test01(){
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+        coll.add("佛地魔");
+        System.out.println("coll = " + coll);
+
+        coll.removeIf(new Predicate() {
+            @Override
+            public boolean test(Object o) {
+                String str = (String) o;
+                return str.contains("地");
+            }
+        });
+        System.out.println("删除包含\"地\"字的元素之后coll = " + coll);
+    }
+}</code></pre>
+
+<h3 id="3-3-foreach循环"><a href="#3-3-foreach循环" class="headerlink" title="3.3 foreach循环"></a>3.3 foreach循环</h3><ul>
+<li><p>foreach循环（也称增强for循环）是 JDK5.0 中定义的一个高级for循环，专门用来<code>遍历数组和集合</code>的。</p>
+</li>
+<li><p>foreach循环的语法格式：</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">for(元素的数据类型 局部变量 : Collection集合或数组){ 
+  	//操作局部变量的输出操作
+}
+//这里局部变量就是一个临时变量，自己命名就可以</code></pre>
+
+<ul>
+<li>举例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.iterator;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class TestForeach {
+    @Test
+    public void test01(){
+        Collection coll = new ArrayList();
+        coll.add("小李广");
+        coll.add("扫地僧");
+        coll.add("石破天");
+		//foreach循环其实就是使用Iterator迭代器来完成元素的遍历的。
+        for (Object o : coll) {
+            System.out.println(o);
+        }
+    }
+    @Test
+    public void test02(){
+        int[] nums = {1,2,3,4,5};
+        for (int num : nums) {
+            System.out.println(num);
+        }
+        System.out.println("-----------------");
+        String[] names = {"张三","李四","王五"};
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+}</code></pre>
+
+<ul>
+<li>对于集合的遍历，增强for的内部原理其实是个Iterator迭代器。如下图。</li>
+</ul>
+<p><img src="image-20220128010114124.png" alt="image-20220128010114124"></p>
+<ul>
+<li>它用于遍历Collection和数组。通常只进行遍历元素，不要在遍历的过程中对集合元素进行增删操作。<ul>
+<li>练习：判断输出结果为何？</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ForTest {
+    public static void main(String[] args) {
+        String[] str = new String[5];
+        for (String myStr : str) {
+            myStr = "atguigu";
+            System.out.println(myStr);
+        }
+        for (int i = 0; i &lt; str.length; i++) {
+            System.out.println(str[i]);
+        }
+    }
+}
+</code></pre>
+
+<h2 id="4-Collection子接口1：List"><a href="#4-Collection子接口1：List" class="headerlink" title="4. Collection子接口1：List"></a>4. Collection子接口1：List</h2><h3 id="4-1-List接口特点"><a href="#4-1-List接口特点" class="headerlink" title="4.1 List接口特点"></a>4.1 List接口特点</h3><ul>
+<li><p>鉴于Java中数组用来存储数据的局限性，我们通常使用<code>java.util.List</code>替代数组</p>
+</li>
+<li><p>List集合类中<code>元素有序</code>、且<code>可重复</code>，集合中的<strong>每个元素都有其对应的顺序索引</strong>。</p>
+<ul>
+<li>举例：List集合存储数据，就像银行门口客服，给每一个来办理业务的客户分配序号：第一个来的是“张三”，客服给他分配的是0；第二个来的是“李四”，客服给他分配的1；以此类推，最后一个序号应该是“总人数-1”。</li>
+</ul>
+</li>
+</ul>
+<p><img src="1563549818689.png" alt="1563549818689"></p>
+<ul>
+<li>JDK API中List接口的实现类常用的有：<code>ArrayList</code>、<code>LinkedList</code>和<code>Vector</code>。</li>
+</ul>
+<h3 id="4-2-List接口方法"><a href="#4-2-List接口方法" class="headerlink" title="4.2 List接口方法"></a>4.2 List接口方法</h3><p>List除了从Collection集合继承的方法外，List 集合里添加了一些<code>根据索引</code>来操作集合元素的方法。</p>
+<ul>
+<li>插入元素<ul>
+<li><code>void add(int index, Object ele)</code>:在index位置插入ele元素</li>
+<li>boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来</li>
+</ul>
+</li>
+<li>获取元素<ul>
+<li><code>Object get(int index)</code>:获取指定index位置的元素</li>
+<li>List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的子集合</li>
+</ul>
+</li>
+<li>获取元素索引<ul>
+<li>int indexOf(Object obj):返回obj在集合中首次出现的位置</li>
+<li>int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置</li>
+</ul>
+</li>
+<li>删除和替换元素<ul>
+<li><p><code>Object remove(int index)</code>:移除指定index位置的元素，并返回此元素</p>
+</li>
+<li><p><code>Object set(int index, Object ele)</code>:设置指定index位置的元素为ele</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.list;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestListMethod {
+    public static void main(String[] args) {
+        // 创建List集合对象
+        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+
+        // 往 尾部添加 指定元素
+        list.add("图图");
+        list.add("小美");
+        list.add("不高兴");
+
+        System.out.println(list);
+        // add(int index,String s) 往指定位置添加
+        list.add(1,"没头脑");
+
+        System.out.println(list);
+        // String remove(int index) 删除指定位置元素  返回被删除元素
+        // 删除索引位置为2的元素
+        System.out.println("删除索引位置为2的元素");
+        System.out.println(list.remove(2));
+
+        System.out.println(list);
+
+        // String set(int index,String s)
+        // 在指定位置 进行 元素替代（改）
+        // 修改指定位置元素
+        list.set(0, "三毛");
+        System.out.println(list);
+
+        // String get(int index)  获取指定位置元素
+        // 跟size() 方法一起用  来 遍历的
+        for(int i = 0;i&lt;list.size();i++){
+            System.out.println(list.get(i));
+        }
+        //还可以使用增强for
+        for (String string : list) {
+            System.out.println(string);
+        }
+    }
+}</code></pre>
+
+<blockquote>
+<p>注意：在JavaSE中List名称的类型有两个，一个是java.util.List集合接口，一个是java.awt.List图形界面的组件，别导错包了。</p>
+</blockquote>
+<h3 id="4-3-List接口主要实现类：ArrayList"><a href="#4-3-List接口主要实现类：ArrayList" class="headerlink" title="4.3 List接口主要实现类：ArrayList"></a>4.3 List接口主要实现类：ArrayList</h3><ul>
+<li><p>ArrayList 是 List 接口的<code>主要实现类</code></p>
+</li>
+<li><p>本质上，ArrayList是对象引用的一个”变长”数组</p>
+</li>
+<li><p>Arrays.asList(…) 方法返回的 List 集合，既不是 ArrayList 实例，也不是 Vector 实例。 Arrays.asList(…) 返回值是一个固定长度的 List 集合</p>
+<p><img src="image-20220408210743342.png" alt="image-20220408210743342"></p>
+</li>
+</ul>
+<h3 id="4-4-List的实现类之二：LinkedList"><a href="#4-4-List的实现类之二：LinkedList" class="headerlink" title="4.4 List的实现类之二：LinkedList"></a>4.4 List的实现类之二：LinkedList</h3><ul>
+<li>对于频繁的插入或删除元素的操作，建议使用LinkedList类，效率较高。这是由底层采用链表（双向链表）结构存储数据决定的。</li>
+</ul>
+<p><img src="image-20220408225615829.png" alt="image-20220408225615829"></p>
+<ul>
+<li>特有方法：<ul>
+<li>void addFirst(Object obj)</li>
+<li>void addLast(Object obj)	</li>
+<li>Object getFirst()</li>
+<li>Object getLast()</li>
+<li>Object removeFirst()</li>
+<li>Object removeLast()</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-5-List的实现类之三：Vector"><a href="#4-5-List的实现类之三：Vector" class="headerlink" title="4.5 List的实现类之三：Vector"></a>4.5 List的实现类之三：Vector</h3><ul>
+<li>Vector 是一个<code>古老</code>的集合，JDK1.0就有了。大多数操作与ArrayList相同，区别之处在于Vector是<code>线程安全</code>的。</li>
+<li>在各种List中，最好把<code>ArrayList作为默认选择</code>。当插入、删除频繁时，使用LinkedList；Vector总是比ArrayList慢，所以尽量避免使用。</li>
+<li>特有方法：<ul>
+<li>void addElement(Object obj)</li>
+<li>void insertElementAt(Object obj,int index)</li>
+<li>void setElementAt(Object obj,int index)</li>
+<li>void removeElement(Object obj)</li>
+<li>void removeAllElements()</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-6-练习"><a href="#4-6-练习" class="headerlink" title="4.6 练习"></a>4.6 练习</h3><p><strong>面试题：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@Test
+public void testListRemove() {
+    List list = new ArrayList();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    updateList(list);
+    System.out.println(list);//[1,2]
+}
+
+private static void updateList(List list) {
+    list.remove(2);  
+}
+</code></pre>
+
+<p><strong>练习1：</strong></p>
+<ul>
+<li>定义学生类，属性为姓名、年龄，提供必要的getter、setter方法，构造器，toString()，equals()方法。</li>
+<li>使用ArrayList集合，保存录入的多个学生对象。</li>
+<li>循环录入的方式，1：继续录入，0：结束录入。</li>
+<li>录入结束后，用foreach遍历集合。</li>
+</ul>
+<ul>
+<li><p>代码实现，效果如图所示：</p>
+<p><img src="1559890098509.png" alt="1559890098509"></p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.test01;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentTest {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        ArrayList stuList = new ArrayList();
+
+        for (;;) {
+
+            System.out.println("选择（录入 1 ；结束 0）");
+            int x = scanner.nextInt();//根据x的值，判断是否需要继续循环
+
+            if (x == 1) {
+                System.out.println("姓名");
+                String name = scanner.next();
+                System.out.println("年龄");
+                int age = scanner.nextInt();
+                Student stu = new Student(age, name);
+                stuList.add(stu);
+
+            } else if (x == 0) {
+                break;
+
+            } else {
+
+                System.out.println("输入有误，请重新输入");
+            }
+        }
+
+        for (Object stu : stuList) {
+            System.out.println(stu);
+        }
+    }
+}
+
+public class Student {
+
+    private int age;
+    private String name;
+
+    public Student() {
+    }
+
+    
+    public Student(int age, String name) {
+		super();
+		this.age = age;
+		this.name = name;
+	}
+
+
+	public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+
+    }
+
+	@Override
+	public String toString() {
+		return "Student [age=" + age + ", name=" + name + "]";
+	}
+
+}</code></pre>
+
+<p><strong>练习2：</strong></p>
+<p>​	1、请定义方法public static int listTest(Collection list,String s)统计集合中指定元素出现的次数</p>
+<p>​	2、创建集合，集合存放随机生成的30个小写字母</p>
+<p>​	3、用listTest统计，a、b、c、x元素的出现次数</p>
+<p>​	4、效果如下</p>
+<p><img src="1559896150606.png" alt="1559896150606"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.test02;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
+
+public class Test02 {
+	public static void main(String[] args) {
+		Collection list = new ArrayList();
+		Random rand = new Random();
+		for (int i = 0; i &lt; 30; i++) {
+			list.add((char)(rand.nextInt(26)+97)+"");
+		}
+		System.out.println(list);
+		System.out.println("a:"+listTest(list, "a"));	
+		System.out.println("b:"+listTest(list, "b"));	
+		System.out.println("c:"+listTest(list, "c"));
+		System.out.println("x:"+listTest(list, "x"));	
+	}
+
+	public static int listTest(Collection list, String string) {
+		int count = 0;
+		for (Object object : list) {
+			if(string.equals(object)){
+				count++;
+			}
+		}
+		return count;
+	}
+}
+</code></pre>
+
+<p><strong>练习3：KTV点歌系统</strong></p>
+<p><strong>描述</strong></p>
+<p>分别使用ArrayList和LinkedList集合，编写一个**<code>KTV点歌系统</code>**的程序。在程序中：</p>
+<ul>
+<li>指令1代表添加歌曲</li>
+<li>指令2代表将所选歌曲置顶</li>
+<li>指令3代表将所选歌曲提前一位</li>
+<li>指令4代表退出该系统</li>
+</ul>
+<p>要求根据用户输入的指令和歌曲名展现歌曲列表。例如输入指令1，输入歌曲名”爱你一万年”，则输出“当前歌曲列表：[爱你一万年]”。</p>
+<p><strong>提示</strong></p>
+<ul>
+<li><p>为了指引用户操作，首先要将各个指令所表示的含义打印到控制台</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">System.out.println("-------------欢迎来到点歌系统------------");
+System.out.println("1.添加歌曲至列表");
+System.out.println("2.将歌曲置顶");
+System.out.println("3.将歌曲前移一位");
+System.out.println("4.退出");</code></pre>
+</li>
+<li><p>程序中需要创建一个集合作为歌曲列表，并向其添加一部分歌曲</p>
+</li>
+<li><p>通过ArrayList或LinkedList集合定义的方法操作歌曲列表</p>
+</li>
+</ul>
+<p><strong>代码</strong></p>
+<ul>
+<li><p>使用ArrayList集合模拟点歌系统的实现代码，如下所示：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 20:26
+ */
+public class KTVByArrayList {
+    private static ArrayList musicList = new ArrayList();// 创建歌曲列表
+    private static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        addMusicList();// 添加一部分歌曲至歌曲列表
+        boolean flag = true;
+        while (flag) {
+            System.out.println("当前歌曲列表：" + musicList);
+            System.out.println("-------------欢迎来到点歌系统------------");
+            System.out.println("1.添加歌曲至列表");
+            System.out.println("2.将歌曲置顶");
+            System.out.println("3.将歌曲前移一位");
+            System.out.println("4.退出");
+            System.out.print("请输入操作序号：");
+            int key = sc.nextInt();// //接收键盘输入的功能选项序号
+            // 执行序号对应的功能
+            switch (key) {
+                case 1:// 添加歌曲至列表
+                    addMusic();
+                    break;
+                case 2:// 将歌曲置顶
+                    setTop();
+                    break;
+                case 3:// 将歌曲前移一位
+                    setBefore();
+                    break;
+                case 4:// 退出
+                    System.out.println("----------------退出---------------");
+                    System.out.println("您已退出系统");
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("----------------------------------");
+                    System.out.println("功能选择有误，请输入正确的功能序号!");
+                    break;
+            }
+
+        }
+    }
+
+    // 初始时添加歌曲名称
+    private static void addMusicList() {
+        musicList.add("本草纲目");
+        musicList.add("你是我的眼");
+        musicList.add("老男孩");
+        musicList.add("白月光与朱砂痣");
+        musicList.add("不谓侠");
+        musicList.add("爱你");
+    }
+
+    // 执行添加歌曲
+    private static void addMusic() {
+        System.out.print("请输入要添加的歌曲名称：");
+        String musicName = sc.next();// 获取键盘输入内容
+        musicList.add(musicName);// 添加歌曲到列表的最后
+        System.out.println("已添加歌曲：" + musicName);
+    }
+
+    // 执行将歌曲置顶
+    private static void setTop() {
+        System.out.print("请输入要置顶的歌曲名称：");
+        String musicName = sc.next();// 获取键盘输入内容
+        int musicIndex = musicList.indexOf(musicName);// 查找指定歌曲位置
+        if (musicIndex &lt; 0) {// 判断输入歌曲是否存在
+            System.out.println("当前列表中没有输入的歌曲！");
+        }else if(musicIndex == 0){
+            System.out.println("当前歌曲默认已置顶！");
+        }else {
+            musicList.remove(musicName);// 移除指定的歌曲
+            musicList.add(0, musicName);// 将指定的歌曲放到第一位
+            System.out.println("已将歌曲《" + musicName + "》置顶");
+        }
+    }
+
+    // 执行将歌曲置前一位
+    private static void setBefore() {
+        System.out.print("请输入要置前的歌曲名称：");
+        String musicName = sc.next();// 获取键盘输入内容
+        int musicIndex = musicList.indexOf(musicName);// 查找指定歌曲位置
+        if (musicIndex &lt; 0) {// 判断输入歌曲是否存在
+            System.out.println("当前列表中没有输入的歌曲！");
+        } else if (musicIndex == 0) {// 判断歌曲是否已在第一位
+            System.out.println("当前歌曲已在最顶部！");
+        } else {
+            musicList.remove(musicName);// 移除指定的歌曲
+            musicList.add(musicIndex - 1, musicName);// 将指定的歌曲放到前一位
+            System.out.println("已将歌曲《" + musicName + "》置前一位");
+        }
+    }
+}</code></pre></li>
+</ul>
+<h2 id="5-Collection子接口2：Set"><a href="#5-Collection子接口2：Set" class="headerlink" title="5. Collection子接口2：Set"></a>5. Collection子接口2：Set</h2><h3 id="5-1-Set接口概述"><a href="#5-1-Set接口概述" class="headerlink" title="5.1 Set接口概述"></a>5.1 Set接口概述</h3><ul>
+<li>Set接口是Collection的子接口，Set接口相较于Collection接口没有提供额外的方法</li>
+<li>Set 集合不允许包含相同的元素，如果试把两个相同的元素加入同一个 Set 集合中，则添加操作失败。</li>
+<li>Set集合支持的遍历方式和Collection集合一样：foreach和Iterator。</li>
+<li>Set的常用实现类有：HashSet、TreeSet、LinkedHashSet。</li>
+</ul>
+<h3 id="5-2-Set主要实现类：HashSet"><a href="#5-2-Set主要实现类：HashSet" class="headerlink" title="5.2 Set主要实现类：HashSet"></a>5.2 Set主要实现类：HashSet</h3><h4 id="5-2-1-HashSet概述"><a href="#5-2-1-HashSet概述" class="headerlink" title="5.2.1 HashSet概述"></a>5.2.1 HashSet概述</h4><ul>
+<li><p>HashSet 是 Set 接口的主要实现类，大多数时候使用 Set 集合时都使用这个实现类。</p>
+</li>
+<li><p>HashSet 按 Hash 算法来存储集合中的元素，因此具有很好的存储、查找、删除性能。</p>
+</li>
+<li><p>HashSet 具有以下<code>特点</code>：</p>
+<ul>
+<li>不能保证元素的排列顺序</li>
+<li>HashSet 不是线程安全的</li>
+<li>集合元素可以是 null</li>
+</ul>
+</li>
+<li><p>HashSet 集合<code>判断两个元素相等的标准</code>：两个对象通过 <code>hashCode()</code> 方法得到的哈希值相等，并且两个对象的 <code>equals() </code>方法返回值为true。</p>
+</li>
+<li><p>对于存放在Set容器中的对象，<strong>对应的类一定要重写hashCode()和equals(Object obj)方法</strong>，以实现对象相等规则。即：“相等的对象必须具有相等的散列码”。</p>
+</li>
+<li><p>HashSet集合中元素的无序性，不等同于随机性。这里的无序性与元素的添加位置有关。具体来说：我们在添加每一个元素到数组中时，具体的存储位置是由元素的hashCode()调用后返回的hash值决定的。导致在数组中每个元素不是依次紧密存放的，表现出一定的无序性。</p>
+</li>
+</ul>
+<h4 id="5-2-2-HashSet中添加元素的过程："><a href="#5-2-2-HashSet中添加元素的过程：" class="headerlink" title="5.2.2 HashSet中添加元素的过程："></a>5.2.2 HashSet中添加元素的过程：</h4><ul>
+<li><p>第1步：当向 HashSet 集合中存入一个元素时，HashSet 会调用该对象的 hashCode() 方法得到该对象的 hashCode值，然后根据 hashCode值，通过某个散列函数决定该对象在 HashSet 底层数组中的存储位置。</p>
+</li>
+<li><p>第2步：如果要在数组中存储的位置上没有元素，则直接添加成功。</p>
+</li>
+<li><p>第3步：如果要在数组中存储的位置上有元素，则继续比较：</p>
+<ul>
+<li><strong>如果两个元素的hashCode值不相等，则添加成功；</strong></li>
+<li><strong>如果两个元素的hashCode()值相等，则会继续调用equals()方法：</strong><ul>
+<li>如果equals()方法结果为false，则添加成功。</li>
+<li>如果equals()方法结果为true，则添加失败。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>第2步添加成功，元素会保存在底层数组中。</p>
+<p>第3步两种添加成功的操作，由于该底层数组的位置已经有元素了，则会通过<code>链表</code>的方式继续链接，存储。</p>
+</blockquote>
+</li>
+</ul>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.set;
+
+import java.util.Objects;
+
+public class MyDate {
+    private int year;
+    private int month;
+    private int day;
+
+    public MyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyDate myDate = (MyDate) o;
+        return year == myDate.year &amp;&amp;
+                month == myDate.month &amp;&amp;
+                day == myDate.day;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(year, month, day);
+    }
+
+    @Override
+    public String toString() {
+        return "MyDate{" +
+                "year=" + year +
+                ", month=" + month +
+                ", day=" + day +
+                '}';
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.set;
+
+import org.junit.Test;
+
+import java.util.HashSet;
+
+public class TestHashSet {
+    @Test
+    public void test01(){
+        HashSet set = new HashSet();
+        set.add("张三");
+        set.add("张三");
+        set.add("李四");
+        set.add("王五");
+        set.add("王五");
+        set.add("赵六");
+
+        System.out.println("set = " + set);//不允许重复，无序
+    }
+
+    @Test
+    public void test02(){
+        HashSet set = new HashSet();
+        set.add(new MyDate(2021,1,1));
+        set.add(new MyDate(2021,1,1));
+        set.add(new MyDate(2022,2,4));
+        set.add(new MyDate(2022,2,4));
+
+
+        System.out.println("set = " + set);//不允许重复，无序
+    }
+}</code></pre>
+
+<h4 id="5-2-3-重写-hashCode-方法的基本原则"><a href="#5-2-3-重写-hashCode-方法的基本原则" class="headerlink" title="5.2.3 重写 hashCode() 方法的基本原则"></a>5.2.3 重写 hashCode() 方法的基本原则</h4><ul>
+<li>在程序运行时，同一个对象多次调用 hashCode() 方法应该返回相同的值。</li>
+<li>当两个对象的 equals() 方法比较返回 true 时，这两个对象的 hashCode() 方法的返回值也应相等。</li>
+<li>对象中用作 equals() 方法比较的 Field，都应该用来计算 hashCode 值。</li>
+</ul>
+<blockquote>
+<p>注意：如果两个元素的 equals() 方法返回 true，但它们的 hashCode() 返回值不相等，hashSet 将会把它们存储在不同的位置，但依然可以添加成功。</p>
+</blockquote>
+<h4 id="5-2-4-重写equals-方法的基本原则"><a href="#5-2-4-重写equals-方法的基本原则" class="headerlink" title="5.2.4 重写equals()方法的基本原则"></a>5.2.4 重写equals()方法的基本原则</h4><ul>
+<li><p>重写equals方法的时候一般都需要同时复写hashCode方法。通常参与计算hashCode的对象的属性也应该参与到equals()中进行计算。</p>
+</li>
+<li><p>推荐：开发中直接调用Eclipse/IDEA里的快捷键自动重写equals()和hashCode()方法即可。</p>
+<ul>
+<li>为什么用Eclipse/IDEA复写hashCode方法，有31这个数字？</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">首先，选择系数的时候要选择尽量大的系数。因为如果计算出来的hash地址越大，所谓的“冲突”就越少，查找起来效率也会提高。（减少冲突）
+
+其次，31只占用5bits,相乘造成数据溢出的概率较小。
+
+再次，31可以 由i*31== (i&lt;&lt;5)-1来表示,现在很多虚拟机里面都有做相关优化。（提高算法效率）
+
+最后，31是一个素数，素数作用就是如果我用一个数字来乘以这个素数，那么最终出来的结果只能被素数本身和被乘数还有1来整除！(减少冲突)</code></pre></li>
+</ul>
+<h4 id="5-2-5-练习"><a href="#5-2-5-练习" class="headerlink" title="5.2.5 练习"></a>5.2.5 练习</h4><p><strong>练习1：</strong>在List内去除重复数字值，要求尽量简单</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static List duplicateList(List list) {
+      HashSet set = new HashSet();
+      set.addAll(list);
+      return new ArrayList(set);
+}
+public static void main(String[] args) {
+      List list = new ArrayList();
+      list.add(new Integer(1));
+      list.add(new Integer(2));
+      list.add(new Integer(2));
+      list.add(new Integer(4));
+      list.add(new Integer(4));
+      List list2 = duplicateList(list);
+      for (Object integer : list2) {
+          System.out.println(integer);
+      }
+}
+</code></pre>
+
+<p><strong>练习2：</strong>获取随机数</p>
+<p>编写一个程序，获取10个1至20的随机数，要求随机数不能重复。并把最终的随机数输出到控制台。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * 
+ * @Description 
+ * @author 尚硅谷-宋红康
+ * @date 2022年5月7日上午12:43:01
+ *
+ */
+public class RandomValueTest {
+	public static void main(String[] args) {
+		HashSet hs = new HashSet(); // 创建集合对象
+		Random r = new Random();
+		while (hs.size() &lt; 10) {
+			int num = r.nextInt(20) + 1; // 生成1到20的随机数
+			hs.add(num);
+		}
+
+		for (Integer integer : hs) { // 遍历集合
+			System.out.println(integer); // 打印每一个元素
+		}
+	}
+}
+</code></pre>
+
+<p><strong>练习3：</strong>去重</p>
+<p>使用Scanner从键盘读取一行输入，去掉其中重复字符，打印出不同的那些字符。比如：aaaabbbcccddd</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * 
+ * @Description 
+ * @author 尚硅谷-宋红康
+ * @date 2022年5月7日上午12:44:01
+ *
+ */
+public class DistinctTest {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in); // 创建键盘录入对象
+		System.out.println("请输入一行字符串:");
+		String line = sc.nextLine(); // 将键盘录入的字符串存储在line中
+		char[] arr = line.toCharArray(); // 将字符串转换成字符数组
+        
+		HashSet hs = new HashSet(); // 创建HashSet集合对象
+
+		for (Object c : arr) { // 遍历字符数组
+			hs.add(c); // 将字符数组中的字符添加到集合中
+		}
+
+		for (Object ch : hs) { // 遍历集合
+			System.out.print(ch);
+		}
+	}
+}
+</code></pre>
+
+<p><strong>练习4：</strong>面试题</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">HashSet set = new HashSet();
+Person p1 = new Person(1001,"AA");
+Person p2 = new Person(1002,"BB");
+
+set.add(p1);
+set.add(p2);
+p1.name = "CC";
+set.remove(p1);
+System.out.println(set);
+
+set.add(new Person(1001,"CC"));
+System.out.println(set);
+
+set.add(new Person(1001,"AA"));
+System.out.println(set);
+
+//其中Person类中重写了hashCode()和equal()方法
+</code></pre>
+
+<h3 id="5-3-Set实现类之二：LinkedHashSet"><a href="#5-3-Set实现类之二：LinkedHashSet" class="headerlink" title="5.3 Set实现类之二：LinkedHashSet"></a>5.3 Set实现类之二：LinkedHashSet</h3><ul>
+<li><p>LinkedHashSet 是 HashSet 的子类，不允许集合元素重复。</p>
+</li>
+<li><p>LinkedHashSet 根据元素的 hashCode 值来决定元素的存储位置，但它同时使用<code>双向链表</code>维护元素的次序，<strong>这使得元素看起来是以<code>添加顺序</code>保存的</strong>。</p>
+</li>
+<li><p>LinkedHashSet<code>插入性能略低</code>于 HashSet，但在<code>迭代访问</code> Set 里的全部元素时有很好的性能。</p>
+</li>
+</ul>
+<img src="image-20220408235936404.png" alt="image-20220408235936404" style="zoom:67%;">
+
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.set;
+
+import org.junit.Test;
+
+import java.util.LinkedHashSet;
+
+public class TestLinkedHashSet {
+    @Test
+    public void test01(){
+        LinkedHashSet set = new LinkedHashSet();
+        set.add("张三");
+        set.add("张三");
+        set.add("李四");
+        set.add("王五");
+        set.add("王五");
+        set.add("赵六");
+
+        System.out.println("set = " + set);//不允许重复，体现添加顺序
+    }
+}</code></pre>
+
+<h3 id="5-4-Set实现类之三：TreeSet"><a href="#5-4-Set实现类之三：TreeSet" class="headerlink" title="5.4 Set实现类之三：TreeSet"></a>5.4 Set实现类之三：TreeSet</h3><h4 id="5-4-1-TreeSet概述"><a href="#5-4-1-TreeSet概述" class="headerlink" title="5.4.1 TreeSet概述"></a>5.4.1 TreeSet概述</h4><ul>
+<li>TreeSet 是 SortedSet 接口的实现类，TreeSet 可以<strong>按照添加的元素的指定的属性的大小顺序进行遍历</strong>。</li>
+<li>TreeSet底层使用<code>红黑树</code>结构存储数据</li>
+<li>新增的方法如下： (了解)<ul>
+<li>Comparator comparator()</li>
+<li>Object first()</li>
+<li>Object last()</li>
+<li>Object lower(Object e)</li>
+<li>Object higher(Object e)</li>
+<li>SortedSet subSet(fromElement, toElement)</li>
+<li>SortedSet headSet(toElement)</li>
+<li>SortedSet tailSet(fromElement)</li>
+</ul>
+</li>
+<li>TreeSet特点：不允许重复、实现排序（自然排序或定制排序）</li>
+<li>TreeSet 两种排序方法：<code>自然排序</code>和<code>定制排序</code>。默认情况下，TreeSet 采用自然排序。<ul>
+<li><code>自然排序</code>：TreeSet 会调用集合元素的 compareTo(Object obj) 方法来<strong>比较元素之间的大小关系</strong>，然后将集合元素<strong>按升序(默认情况)排列</strong>。<ul>
+<li>如果试图把一个对象添加到 TreeSet 时，则该对象的类必须实现 Comparable 接口。</li>
+<li>实现 Comparable 的类必须实现 compareTo(Object obj) 方法，两个对象即通过 compareTo(Object obj) 方法的返回值来比较大小。</li>
+</ul>
+</li>
+<li><code>定制排序</code>：如果元素所属的类没有实现Comparable接口，或不希望按照升序(默认情况)的方式排列元素或希望按照其它属性大小进行排序，则考虑使用定制排序。定制排序，通过Comparator接口来实现。需要重写compare(T o1,T o2)方法。<ul>
+<li>利用int compare(T o1,T o2)方法，比较o1和o2的大小：如果方法返回正整数，则表示o1大于o2；如果返回0，表示相等；返回负整数，表示o1小于o2。</li>
+<li>要实现定制排序，需要将实现Comparator接口的实例作为形参传递给TreeSet的构造器。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>因为只有相同类的两个实例才会比较大小，所以向 TreeSet 中添加的应该是<code>同一个类的对象</code>。</li>
+<li>对于 TreeSet 集合而言，它判断<code>两个对象是否相等的唯一标准</code>是：两个对象通过 <code>compareTo(Object obj) 或compare(Object o1,Object o2)</code>方法比较返回值。返回值为0，则认为两个对象相等。</li>
+</ul>
+<h4 id="5-4-2-举例"><a href="#5-4-2-举例" class="headerlink" title="5.4.2 举例"></a>5.4.2 举例</h4><p>举例1：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.set;
+
+
+import org.junit.Test;
+import java.util.Iterator;
+import java.util.TreeSet;
+
+/**
+ * @author 尚硅谷-宋红康
+ * @create 14:22
+ */
+public class TreeSetTest {
+    /*
+    * 自然排序：针对String类的对象
+    * */
+    @Test
+    public void test1(){
+        TreeSet set = new TreeSet();
+
+        set.add("MM");
+        set.add("CC");
+        set.add("AA");
+        set.add("DD");
+        set.add("ZZ");
+        //set.add(123);  //报ClassCastException的异常
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+    /*
+    * 自然排序：针对User类的对象
+    * */
+    @Test
+    public void test2(){
+        TreeSet set = new TreeSet();
+
+        set.add(new User("Tom",12));
+        set.add(new User("Rose",23));
+        set.add(new User("Jerry",2));
+        set.add(new User("Eric",18));
+        set.add(new User("Tommy",44));
+        set.add(new User("Jim",23));
+        set.add(new User("Maria",18));
+        //set.add("Tom");
+
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+        System.out.println(set.contains(new User("Jack", 23))); //true
+    }
+}</code></pre>
+
+<p>其中，User类定义如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 14:22
+ */
+public class User implements Comparable{
+    String name;
+    int age;
+    
+	public User() {
+    }
+    
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+    /*
+    举例：按照age从小到大的顺序排列，如果age相同，则按照name从大到小的顺序排列
+    * */
+    public int compareTo(Object o) {
+        if(this == o){
+            return 0;
+        }
+
+        if(o instanceof User){
+            User user = (User)o;
+            int value = this.age - user.age;
+            if(value != 0){
+                return value;
+            }
+            return -this.name.compareTo(user.name);
+        }
+        throw new RuntimeException("输入的类型不匹配");
+    }
+}
+</code></pre>
+
+<p>举例2：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/*
+ * 定制排序
+ * */
+@Test
+public void test3(){
+    //按照User的姓名的从小到大的顺序排列
+    Comparator comparator = new Comparator() {
+        @Override
+        public int compare(Object o1, Object o2) {
+            if(o1 instanceof User &amp;&amp; o2 instanceof User){
+                User u1 = (User)o1;
+                User u2 = (User)o2;
+
+                return u1.name.compareTo(u2.name);
+            }
+            throw new RuntimeException("输入的类型不匹配");
+        }
+    };
+    TreeSet set = new TreeSet(comparator);
+
+    set.add(new User("Tom",12));
+    set.add(new User("Rose",23));
+    set.add(new User("Jerry",2));
+    set.add(new User("Eric",18));
+    set.add(new User("Tommy",44));
+    set.add(new User("Jim",23));
+    set.add(new User("Maria",18));
+    //set.add(new User("Maria",28));
+
+    Iterator iterator = set.iterator();
+    while(iterator.hasNext()){
+        System.out.println(iterator.next());
+    }
+}</code></pre>
+
+<h4 id="5-4-3-练习"><a href="#5-4-3-练习" class="headerlink" title="5.4.3 练习"></a>5.4.3 练习</h4><p><strong>练习1：</strong>在一个List集合中存储了多个无大小顺序并且有重复的字符串，定义一个方法，让其有序(从小到大排序)，并且不能去除重复元素。</p>
+<p>提示：考查ArrayList、TreeSet</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * 
+ * @Description
+ * @author 尚硅谷-宋红康
+ * @date 2022年4月7日上午12:50:46
+ *
+ */
+public class SortTest {
+	public static void main(String[] args) {
+		ArrayList list = new ArrayList();
+		list.add("ccc");
+		list.add("ccc");
+		list.add("aaa");
+		list.add("aaa");
+		list.add("bbb");
+		list.add("ddd");
+		list.add("ddd");
+		sort(list);
+		System.out.println(list);
+	}
+
+	/*
+	 * 对集合中的元素排序,并保留重复
+	 */
+	public static void sort(List list) {
+		TreeSet ts = new TreeSet(new Comparator() { 
+			@Override
+			public int compare(Object o1, Object o2) { // 重写compare方法
+                String s1 = (String)o1;
+                String s2 = (String)o2;
+				int num = s1.compareTo(s2); // 比较内容
+				return num == 0 ? 1 : num; // 如果内容一样返回一个不为0的数字即可
+			}
+		});
+
+		ts.addAll(list); // 将list集合中的所有元素添加到ts中
+		list.clear(); // 清空list
+		list.addAll(ts); // 将ts中排序并保留重复的结果在添加到list中
+	}
+}
+</code></pre>
+
+<p><strong>练习2：</strong>TreeSet的自然排序和定制排序</p>
+<ol>
+<li><p>定义一个Employee类。<br>该类包含：private成员变量name,age,birthday，其中 birthday 为 MyDate 类的对象；<br>并为每一个属性定义 getter, setter 方法；<br>并重写 toString 方法输出 name, age, birthday</p>
+</li>
+<li><p>MyDate类包含:<br>private成员变量year,month,day；并为每一个属性定义 getter, setter 方法；</p>
+</li>
+<li><p>创建该类的 5 个对象，并把这些对象放入 TreeSet 集合中（下一章：TreeSet 需使用泛型来定义）</p>
+</li>
+<li><p>分别按以下两种方式对集合中的元素进行排序，并遍历输出：</p>
+<p>1). 使Employee 实现 Comparable 接口，并按 name 排序<br>2). 创建 TreeSet 时传入 Comparator对象，按生日日期的先后排序。</p>
+</li>
+</ol>
+<p>代码实现：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class MyDate implements Comparable{
+    private int year;
+    private int month;
+    private int day;
+
+    public MyDate() {
+    }
+
+    public MyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    @Override
+    public String toString() {
+//        return "MyDate{" +
+//                "year=" + year +
+//                ", month=" + month +
+//                ", day=" + day +
+//                '}';
+        return year + "年" + month + "月" + day + "日";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(this == o){
+            return 0;
+        }
+        if(o instanceof MyDate){
+            MyDate myDate = (MyDate) o;
+            int yearDistance = this.getYear() - myDate.getYear();
+            if(yearDistance != 0){
+                return yearDistance;
+            }
+            int monthDistance = this.getMonth() - myDate.getMonth();
+            if(monthDistance != 0){
+                return monthDistance;
+            }
+
+            return this.getDay() - myDate.getDay();
+        }
+        throw new RuntimeException("输入的类型不匹配");
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Employee implements Comparable{
+    private String name;
+    private int age;
+    private MyDate birthday;
+
+
+    public Employee() {
+    }
+
+    public Employee(String name, int age, MyDate birthday) {
+        this.name = name;
+        this.age = age;
+        this.birthday = birthday;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public MyDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(MyDate birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o == this){
+            return 0;
+        }
+        if(o instanceof Employee){
+            Employee emp = (Employee) o;
+            return this.name.compareTo(emp.name);
+        }
+        throw new RuntimeException("传入的类型不匹配");
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class EmployeeTest {
+    /*
+    自然排序：
+    创建该类的 5 个对象，并把这些对象放入 TreeSet 集合中
+    * 需求1：使Employee 实现 Comparable 接口，并按 name 排序
+    * */
+    @Test
+    public void test1(){
+        TreeSet set = new TreeSet();
+
+        Employee e1 = new Employee("Tom",23,new MyDate(1999,7,9));
+        Employee e2 = new Employee("Rose",43,new MyDate(1999,7,19));
+        Employee e3 = new Employee("Jack",54,new MyDate(1998,12,21));
+        Employee e4 = new Employee("Jerry",12,new MyDate(2002,4,21));
+        Employee e5 = new Employee("Tony",22,new MyDate(2001,9,12));
+
+        set.add(e1);
+        set.add(e2);
+        set.add(e3);
+        set.add(e4);
+        set.add(e5);
+
+        //遍历
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+    /*
+    * 定制排序：
+    * 创建 TreeSet 时传入 Comparator对象，按生日日期的先后排序。
+    * */
+    @Test
+    public void test2(){
+        Comparator comparator = new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                if(o1 instanceof Employee &amp;&amp; o2 instanceof Employee){
+                    Employee e1 = (Employee) o1;
+                    Employee e2 = (Employee) o2;
+                    //对比两个employee的生日的大小
+                    MyDate birth1 = e1.getBirthday();
+                    MyDate birth2 = e2.getBirthday();
+                    //方式1：
+//                    int yearDistance = birth1.getYear() - birth2.getYear();
+//                    if(yearDistance != 0){
+//                        return yearDistance;
+//                    }
+//                    int monthDistance = birth1.getMonth() - birth2.getMonth();
+//                    if(monthDistance != 0){
+//                        return monthDistance;
+//                    }
+//
+//                    return birth1.getDay() - birth2.getDay();
+
+                    //方式2：
+                    return birth1.compareTo(birth2);
+                }
+
+                throw new RuntimeException("输入的类型不匹配");
+
+            }
+        };
+        TreeSet set = new TreeSet(comparator);
+
+        Employee e1 = new Employee("Tom",23,new MyDate(1999,7,9));
+        Employee e2 = new Employee("Rose",43,new MyDate(1999,7,19));
+        Employee e3 = new Employee("Jack",54,new MyDate(1998,12,21));
+        Employee e4 = new Employee("Jerry",12,new MyDate(2002,4,21));
+        Employee e5 = new Employee("Tony",22,new MyDate(2001,9,12));
+
+        set.add(e1);
+        set.add(e2);
+        set.add(e3);
+        set.add(e4);
+        set.add(e5);
+
+        //遍历
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+    }
+}</code></pre>
+
+<h2 id="6-Map接口"><a href="#6-Map接口" class="headerlink" title="6. Map接口"></a>6. Map接口</h2><p>现实生活与开发中，我们常会看到这样的一类集合：用户ID与账户信息、学生姓名与考试成绩、IP地址与主机名等，这种一一对应的关系，就称作映射。Java提供了专门的集合框架用来存储这种映射关系的对象，即<code>java.util.Map</code>接口。</p>
+<h3 id="6-1-Map接口概述"><a href="#6-1-Map接口概述" class="headerlink" title="6.1 Map接口概述"></a>6.1 Map接口概述</h3><ul>
+<li><p>Map与Collection并列存在。用于保存具有<code>映射关系</code>的数据：key-value</p>
+<ul>
+<li><code>Collection</code>集合称为单列集合，元素是孤立存在的（理解为单身）。</li>
+<li><code>Map</code>集合称为双列集合，元素是成对存在的(理解为夫妻)。</li>
+</ul>
+</li>
+<li><p>Map 中的 key 和  value 都可以是任何引用类型的数据。但常用String类作为Map的“键”。</p>
+</li>
+<li><p>Map接口的常用实现类：<code>HashMap</code>、<code>LinkedHashMap</code>、<code>TreeMap</code>和``Properties<code>。其中，HashMap是 Map 接口使用</code>频率最高`的实现类。</p>
+<img src="image-20220409001015034.png" alt="image-20220409001015034" style="zoom:67%;"></li>
+</ul>
+<h3 id="6-2-Map中key-value特点"><a href="#6-2-Map中key-value特点" class="headerlink" title="6.2 Map中key-value特点"></a>6.2 Map中key-value特点</h3><p>这里主要以HashMap为例说明。HashMap中存储的key、value的特点如下：</p>
+<img src="image-20220409001213720.png" alt="image-20220409001213720" style="zoom:67%;">
+
+<ul>
+<li><p>Map 中的 <code>key用Set来存放</code>，<code>不允许重复</code>，即同一个 Map 对象所对应的类，须重写hashCode()和equals()方法</p>
+<img src="image-20220514190412763.png" alt="image-20220514190412763" style="zoom:67%;">
+</li>
+<li><p>key 和 value 之间存在单向一对一关系，即通过指定的 key 总能找到唯一的、确定的 value，不同key对应的<code>value可以重复</code>。value所在的类要重写equals()方法。</p>
+</li>
+<li><p>key和value构成一个entry。所有的entry彼此之间是<code>无序的</code>、<code>不可重复的</code>。</p>
+</li>
+</ul>
+<h3 id="6-2-Map接口的常用方法"><a href="#6-2-Map接口的常用方法" class="headerlink" title="6.2 Map接口的常用方法"></a>6.2 Map接口的常用方法</h3><ul>
+<li><strong>添加、修改操作：</strong><ul>
+<li>Object put(Object key,Object value)：将指定key-value添加到(或修改)当前map对象中</li>
+<li>void putAll(Map m):将m中的所有key-value对存放到当前map中</li>
+</ul>
+</li>
+<li><strong>删除操作：</strong><ul>
+<li>Object remove(Object key)：移除指定key的key-value对，并返回value</li>
+<li>void clear()：清空当前map中的所有数据</li>
+</ul>
+</li>
+<li><strong>元素查询的操作：</strong><ul>
+<li>Object get(Object key)：获取指定key对应的value</li>
+<li>boolean containsKey(Object key)：是否包含指定的key</li>
+<li>boolean containsValue(Object value)：是否包含指定的value</li>
+<li>int size()：返回map中key-value对的个数</li>
+<li>boolean isEmpty()：判断当前map是否为空</li>
+<li>boolean equals(Object obj)：判断当前map和参数对象obj是否相等</li>
+</ul>
+</li>
+<li><strong>元视图操作的方法：</strong><ul>
+<li>Set keySet()：返回所有key构成的Set集合</li>
+<li>Collection values()：返回所有value构成的Collection集合</li>
+<li>Set entrySet()：返回所有key-value对构成的Set集合</li>
+</ul>
+</li>
+</ul>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.map;
+
+import java.util.HashMap;
+
+public class TestMapMethod {
+    public static void main(String[] args) {
+        //创建 map对象
+        HashMap map = new HashMap();
+
+        //添加元素到集合
+        map.put("黄晓明", "杨颖");
+        map.put("李晨", "李小璐");
+        map.put("李晨", "范冰冰");
+        map.put("邓超", "孙俪");
+        System.out.println(map);
+
+        //删除指定的key-value
+        System.out.println(map.remove("黄晓明"));
+        System.out.println(map);
+
+        //查询指定key对应的value
+        System.out.println(map.get("邓超"));
+        System.out.println(map.get("黄晓明"));
+
+    }
+}</code></pre>
+
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args) {
+    HashMap map = new HashMap();
+    map.put("许仙", "白娘子");
+    map.put("董永", "七仙女");
+    map.put("牛郎", "织女");
+    map.put("许仙", "小青");
+
+    System.out.println("所有的key:");
+    Set keySet = map.keySet();
+    for (Object key : keySet) {
+        System.out.println(key);
+    }
+
+    System.out.println("所有的value:");
+    Collection values = map.values();
+    for (Object value : values) {
+        System.out.println(value);
+    }
+
+    System.out.println("所有的映射关系:");
+    Set entrySet = map.entrySet();
+    for (Object mapping : entrySet) {
+        //System.out.println(entry);
+        Map.Entry entry = (Map.Entry) mapping;
+        System.out.println(entry.getKey() + "-&gt;" + entry.getValue());
+    }
+}</code></pre>
+
+<h3 id="6-3-Map的主要实现类：HashMap"><a href="#6-3-Map的主要实现类：HashMap" class="headerlink" title="6.3 Map的主要实现类：HashMap"></a>6.3 Map的主要实现类：HashMap</h3><h4 id="6-3-1-HashMap概述"><a href="#6-3-1-HashMap概述" class="headerlink" title="6.3.1 HashMap概述"></a>6.3.1 HashMap概述</h4><ul>
+<li>HashMap是 Map 接口<code>使用频率最高</code>的实现类。</li>
+<li>HashMap是线程不安全的。允许添加 null 键和 null 值。</li>
+<li>存储数据采用的哈希表结构，底层使用<code>一维数组</code>+<code>单向链表</code>+<code>红黑树</code>进行key-value数据的存储。与HashSet一样，<strong>元素的存取顺序不能保证一致</strong>。</li>
+<li>HashMap <code>判断两个key相等的标准</code>是：两个 key 的hashCode值相等，通过 equals() 方法返回 true。</li>
+<li>HashMap <code>判断两个value相等的标准</code>是：两个 value 通过 equals() 方法返回 true。</li>
+</ul>
+<h4 id="6-3-2-练习"><a href="#6-3-2-练习" class="headerlink" title="6.3.2 练习"></a>6.3.2 练习</h4><p><strong>练习1：</strong>添加你喜欢的歌手以及你喜欢他唱过的歌曲</p>
+<p>例如：</p>
+<p><img src="image-20220914190805362.png" alt="image-20220914190805362"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//方式1
+/**
+ * @author 尚硅谷-宋红康
+ * @create 9:03
+ */
+public class SingerTest1 {
+    public static void main(String[] args) {
+
+        //创建一个HashMap用于保存歌手和其歌曲集
+
+        HashMap singers = new HashMap();
+        //声明一组key,value
+        String singer1 = "周杰伦";
+
+        ArrayList songs1 = new ArrayList();
+        songs1.add("双节棍");
+        songs1.add("本草纲目");
+        songs1.add("夜曲");
+        songs1.add("稻香");
+        //添加到map中
+        singers.put(singer1,songs1);
+        //声明一组key,value
+        String singer2 = "陈奕迅";
+        List songs2 = Arrays.asList("浮夸", "十年", "红玫瑰", "好久不见", "孤勇者");
+        //添加到map中
+        singers.put(singer2,songs2);
+
+        //遍历map
+        Set entrySet = singers.entrySet();
+        for(Object obj : entrySet){
+            Map.Entry entry = (Map.Entry)obj;
+            String singer = (String) entry.getKey();
+            List songs = (List) entry.getValue();
+
+            System.out.println("歌手：" + singer);
+            System.out.println("歌曲有：" + songs);
+        }
+
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//方式2：改为HashSet实现
+public class SingerTest2 {
+	@Test
+	public void test1() {
+
+		Singer singer1 = new Singer("周杰伦");
+		Singer singer2 = new Singer("陈奕迅");
+
+		Song song1 = new Song("双节棍");
+		Song song2 = new Song("本草纲目");
+		Song song3 = new Song("夜曲");
+		Song song4 = new Song("浮夸");
+		Song song5 = new Song("十年");
+		Song song6 = new Song("孤勇者");
+
+		HashSet h1 = new HashSet();// 放歌手一的歌曲
+		h1.add(song1);
+		h1.add(song2);
+		h1.add(song3);
+
+		HashSet h2 = new HashSet();// 放歌手二的歌曲
+		h2.add(song4);
+		h2.add(song5);
+		h2.add(song6);
+
+		HashMap hashMap = new HashMap();// 放歌手和他对应的歌曲
+		hashMap.put(singer1, h1);
+		hashMap.put(singer2, h2);
+
+		for (Object obj : hashMap.keySet()) {
+			System.out.println(obj + "=" + hashMap.get(obj));
+		}
+
+	}
+}
+
+//歌曲
+public class Song implements Comparable{
+	private String songName;//歌名
+
+	public Song() {
+		super();
+	}
+
+	public Song(String songName) {
+		super();
+		this.songName = songName;
+	}
+
+	public String getSongName() {
+		return songName;
+	}
+
+	public void setSongName(String songName) {
+		this.songName = songName;
+	}
+
+	@Override
+	public String toString() {
+		return "《" + songName + "》";
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if(o == this){
+			return 0;
+		}
+		if(o instanceof Song){
+			Song song = (Song)o;
+			return songName.compareTo(song.getSongName());
+		}
+		return 0;
+	}
+	
+	
+}
+//歌手
+public class Singer implements Comparable{
+	private String name;
+	private Song song;
+	
+	public Singer() {
+		super();
+	}
+
+	public Singer(String name) {
+		super();
+		this.name = name;
+		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Song getSong() {
+		return song;
+	}
+
+	public void setSong(Song song) {
+		this.song = song;
+	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if(o == this){
+			return 0;
+		}
+		if(o instanceof Singer){
+			Singer singer = (Singer)o;
+			return name.compareTo(singer.getName());
+		}
+		return 0;
+	}
+}</code></pre>
+
+<p><strong>练习2</strong>：二级联动</p>
+<p>将省份和城市的名称保存在集合中，当用户选择省份以后，二级联动，显示对应省份的地级市供用户选择。</p>
+<p>效果演示：</p>
+<p><img src="clip_image001.png" alt="img"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * 
+ * @Description 
+ * @author 尚硅谷-宋红康  Email:shkstart@126.com
+ * @version 
+ * @date 2021年5月7日上午12:26:59
+ *
+ */
+class CityMap{
+	
+	public static Map model = new HashMap();
+	
+	static {
+		model.put("北京", new String[] {"北京"});
+		model.put("上海", new String[] {"上海"});
+		model.put("天津", new String[] {"天津"});
+		model.put("重庆", new String[] {"重庆"});
+		model.put("黑龙江", new String[] {"哈尔滨","齐齐哈尔","牡丹江","大庆","伊春","双鸭山","绥化"});
+		model.put("吉林", new String[] {"长春","延边","吉林","白山","白城","四平","松原"});
+		model.put("河北", new String[] {"石家庄","张家口","邯郸","邢台","唐山","保定","秦皇岛"});
+	}
+	
+}
+
+public class ProvinceTest {
+	public static void main(String[] args) {
+		
+		Set keySet = CityMap.model.keySet();
+		for(Object s : keySet) {
+			System.out.print(s + "\t");
+		}
+		System.out.println();
+		System.out.println("请选择你所在的省份：");
+		Scanner scan = new Scanner(System.in);
+		String province = scan.next();
+		
+		String[] citys = (String[])CityMap.model.get(province);
+		for(String city : citys) {
+			System.out.print(city + "\t");
+		}
+		System.out.println();
+		System.out.println("请选择你所在的城市：");
+		String city = scan.next();
+		
+		System.out.println("信息登记完毕");
+	}
+	
+}
+</code></pre>
+
+<p><strong>练习3</strong>：WordCount统计</p>
+<p>需求：统计字符串中每个字符出现的次数</p>
+<p>String str = “aaaabbbcccccccccc”;</p>
+<p>提示：</p>
+<p>char[] arr = str.toCharArray();   //将字符串转换成字符数组</p>
+<p>HashMap hm = new HashMap();   //创建双列集合存储键和值，键放字符，值放次数</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * 
+ * @author 尚硅谷-宋红康 
+ * @date 2022年5月7日上午12:26:59
+ *
+ */
+public class WordCountTest {
+	public static void main(String[] args) {
+        String str = "aaaabbbcccccccccc";
+        char[] arr = str.toCharArray(); // 将字符串转换成字符数组
+        HashMap map = new HashMap(); // 创建双列集合存储键和值
+
+        for (char c : arr) { // 遍历字符数组
+            if (!map.containsKey(c)) { // 如果不包含这个键
+                map.put(c, 1); // 就将键和值为1添加
+            } else { // 如果包含这个键
+                map.put(c, (int)map.get(c) + 1); // 就将键和值再加1添加进来
+            }
+
+        }
+
+        for (Object key : map.keySet()) { // 遍历双列集合
+            System.out.println(key + "=" + map.get(key));
+        }
+
+    }
+}
+</code></pre>
+
+<h3 id="6-4-Map实现类之二：LinkedHashMap"><a href="#6-4-Map实现类之二：LinkedHashMap" class="headerlink" title="6.4 Map实现类之二：LinkedHashMap"></a>6.4 Map实现类之二：LinkedHashMap</h3><ul>
+<li>LinkedHashMap 是 HashMap 的子类</li>
+<li>存储数据采用的哈希表结构+链表结构，在HashMap存储结构的基础上，使用了一对<code>双向链表</code>来<code>记录添加元素的先后顺序</code>，可以保证遍历元素时，与添加的顺序一致。</li>
+<li>通过哈希表结构可以保证键的唯一、不重复，需要键所在类重写hashCode()方法、equals()方法。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestLinkedHashMap {
+    public static void main(String[] args) {
+        LinkedHashMap map = new LinkedHashMap();
+        map.put("王五", 13000.0);
+        map.put("张三", 10000.0);
+        //key相同，新的value会覆盖原来的value
+        //因为String重写了hashCode和equals方法
+        map.put("张三", 12000.0);
+        map.put("李四", 14000.0);
+        //HashMap支持key和value为null值
+        String name = null;
+        Double salary = null;
+        map.put(name, salary);
+
+        Set entrySet = map.entrySet();
+        for (Object obj : entrySet) {
+        	Map.Entry entry = (Map.Entry)obj;
+            System.out.println(entry);
+        }
+    }
+}</code></pre>
+
+<h3 id="6-5-Map实现类之三：TreeMap"><a href="#6-5-Map实现类之三：TreeMap" class="headerlink" title="6.5 Map实现类之三：TreeMap"></a>6.5 Map实现类之三：TreeMap</h3><ul>
+<li>TreeMap存储 key-value 对时，需要根据 key-value 对进行排序。TreeMap 可以保证所有的 key-value 对处于<code>有序状态</code>。</li>
+<li>TreeSet底层使用<code>红黑树</code>结构存储数据</li>
+<li>TreeMap 的 Key 的排序：<ul>
+<li><code>自然排序</code>：TreeMap 的所有的 Key 必须实现 Comparable 接口，而且所有的 Key 应该是同一个类的对象，否则将会抛出 ClasssCastException</li>
+<li><code>定制排序</code>：创建 TreeMap 时，构造器传入一个 Comparator 对象，该对象负责对 TreeMap 中的所有 key 进行排序。此时不需要 Map 的 Key 实现 Comparable 接口</li>
+</ul>
+</li>
+<li>TreeMap判断<code>两个key相等的标准</code>：两个key通过compareTo()方法或者compare()方法返回0。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 1:23
+ */
+public class TestTreeMap {
+    /*
+    * 自然排序举例
+    * */
+    @Test
+    public void test1(){
+        TreeMap map = new TreeMap();
+
+        map.put("CC",45);
+        map.put("MM",78);
+        map.put("DD",56);
+        map.put("GG",89);
+        map.put("JJ",99);
+
+        Set entrySet = map.entrySet();
+        for(Object entry : entrySet){
+            System.out.println(entry);
+        }
+
+    }
+
+    /*
+    * 定制排序
+    *
+    * */
+    @Test
+    public void test2(){
+        //按照User的姓名的从小到大的顺序排列
+
+        TreeMap map = new TreeMap(new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                if(o1 instanceof User &amp;&amp; o2 instanceof User){
+                    User u1 = (User)o1;
+                    User u2 = (User)o2;
+
+                    return u1.name.compareTo(u2.name);
+                }
+                throw new RuntimeException("输入的类型不匹配");
+            }
+        });
+
+        map.put(new User("Tom",12),67);
+        map.put(new User("Rose",23),"87");
+        map.put(new User("Jerry",2),88);
+        map.put(new User("Eric",18),45);
+        map.put(new User("Tommy",44),77);
+        map.put(new User("Jim",23),88);
+        map.put(new User("Maria",18),34);
+
+        Set entrySet = map.entrySet();
+        for(Object entry : entrySet){
+            System.out.println(entry);
+        }
+    }
+}
+
+class User implements Comparable{
+    String name;
+    int age;
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+    /*
+    举例：按照age从小到大的顺序排列，如果age相同，则按照name从大到小的顺序排列
+    * */
+    @Override
+    public int compareTo(Object o) {
+        if(this == o){
+            return 0;
+        }
+
+        if(o instanceof User){
+            User user = (User)o;
+            int value = this.age - user.age;
+            if(value != 0){
+                return value;
+            }
+            return -this.name.compareTo(user.name);
+        }
+        throw new RuntimeException("输入的类型不匹配");
+    }
+}</code></pre>
+
+<h3 id="6-6-Map实现类之四：Hashtable"><a href="#6-6-Map实现类之四：Hashtable" class="headerlink" title="6.6 Map实现类之四：Hashtable"></a>6.6 Map实现类之四：Hashtable</h3><ul>
+<li>Hashtable是Map接口的<code>古老实现类</code>，JDK1.0就提供了。不同于HashMap，Hashtable是线程安全的。</li>
+<li>Hashtable实现原理和HashMap相同，功能相同。底层都使用哈希表结构（数组+单向链表），查询速度快。</li>
+<li>与HashMap一样，Hashtable 也不能保证其中 Key-Value 对的顺序</li>
+<li>Hashtable判断两个key相等、两个value相等的标准，与HashMap一致。</li>
+<li>与HashMap不同，Hashtable 不允许使用 null 作为 key 或 value。</li>
+</ul>
+<p>面试题：Hashtable和HashMap的区别</p>
+<pre class="line-numbers language-none"><code class="language-none">HashMap:底层是一个哈希表（jdk7:数组+链表;jdk8:数组+链表+红黑树）,是一个线程不安全的集合,执行效率高
+Hashtable:底层也是一个哈希表（数组+链表）,是一个线程安全的集合,执行效率低
+
+HashMap集合:可以存储null的键、null的值
+Hashtable集合,不能存储null的键、null的值
+
+Hashtable和Vector集合一样,在jdk1.2版本之后被更先进的集合(HashMap,ArrayList)取代了。所以HashMap是Map的主要实现类，Hashtable是Map的古老实现类。
+
+Hashtable的子类Properties（配置文件）依然活跃在历史舞台
+Properties集合是一个唯一和IO流相结合的集合</code></pre>
+
+
+
+<h3 id="6-7-Map实现类之五：Properties"><a href="#6-7-Map实现类之五：Properties" class="headerlink" title="6.7 Map实现类之五：Properties"></a>6.7 Map实现类之五：Properties</h3><ul>
+<li><p>Properties 类是 Hashtable 的子类，该对象用于处理属性文件</p>
+</li>
+<li><p>由于属性文件里的 key、value 都是字符串类型，所以 Properties 中要求 key 和 value 都是字符串类型</p>
+</li>
+<li><p>存取数据时，建议使用setProperty(String key,String value)方法和getProperty(String key)方法</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@Test
+public void test01() {
+    Properties properties = System.getProperties();
+    String fileEncoding = properties.getProperty("file.encoding");//当前源文件字符编码
+    System.out.println("fileEncoding = " + fileEncoding);
+}
+@Test
+public void test02() {
+    Properties properties = new Properties();
+    properties.setProperty("user","songhk");
+    properties.setProperty("password","123456");
+    System.out.println(properties);
+}
+
+@Test
+public void test03() throws IOException {
+    Properties pros = new Properties();
+    pros.load(new FileInputStream("jdbc.properties"));
+    String user = pros.getProperty("user");
+    System.out.println(user);
+}</code></pre>
+
+<h2 id="7-Collections工具类"><a href="#7-Collections工具类" class="headerlink" title="7. Collections工具类"></a>7. Collections工具类</h2><p>参考操作数组的工具类 Arrays，Collections 是一个<strong>操作 Set、List 和 Map 等集合的工具类</strong>。</p>
+<h3 id="7-1-常用方法"><a href="#7-1-常用方法" class="headerlink" title="7.1 常用方法"></a>7.1 常用方法</h3><p>Collections 中提供了一系列静态的方法对集合元素进行排序、查询和修改等操作，还提供了对集合对象设置不可变、对集合对象实现同步控制等方法（均为static方法）：</p>
+<p><strong>排序操作：</strong></p>
+<ul>
+<li>reverse(List)：反转 List 中元素的顺序</li>
+<li>shuffle(List)：对 List 集合元素进行随机排序</li>
+<li>sort(List)：根据元素的自然顺序对指定 List 集合元素按升序排序</li>
+<li>sort(List，Comparator)：根据指定的 Comparator 产生的顺序对 List 集合元素进行排序</li>
+<li>swap(List，int， int)：将指定 list 集合中的 i 处元素和 j 处元素进行交换</li>
+</ul>
+<p><strong>查找</strong></p>
+<ul>
+<li>Object max(Collection)：根据元素的自然顺序，返回给定集合中的最大元素==（最右边的元素）==</li>
+<li>Object max(Collection，Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最大元素。==ps：程序的默认排序始终是从小到大（升序）==</li>
+<li>Object min(Collection)：根据元素的自然顺序，返回给定集合中的最小元素</li>
+<li>Object min(Collection，Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最小元素</li>
+<li>int binarySearch(List list,T key)在List集合中查找某个元素的下标，但是List的元素必须是T或T的子类对象，而且必须是可比较大小的，即支持自然排序的。而且集合也事先必须是有序的，否则结果不确定。</li>
+<li>int binarySearch(List list,T key,Comparator c)在List集合中查找某个元素的下标，但是List的元素必须是T或T的子类对象，而且集合也事先必须是按照c比较器规则进行排序过的，否则结果不确定。</li>
+<li>int frequency(Collection c，Object o)：返回指定集合中指定元素的出现次数</li>
+</ul>
+<p><strong>复制、替换</strong></p>
+<ul>
+<li>void copy(List dest,List src)：将src中的内容复制到dest中</li>
+<li>boolean replaceAll(List list，Object oldVal，Object newVal)：使用新值替换 List 对象的所有旧值</li>
+<li>提供了多个unmodifiableXxx()方法，该方法返回指定 Xxx的不可修改的视图。</li>
+</ul>
+<p><strong>添加</strong></p>
+<ul>
+<li>boolean addAll(Collection  c,T… elements)将所有指定元素添加到指定 collection 中。</li>
+</ul>
+<p><strong>同步</strong></p>
+<ul>
+<li>Collections 类中提供了多个 synchronizedXxx() 方法，该方法可使将指定集合包装成线程同步的集合，从而可以解决多线程并发访问集合时的线程安全问题：</li>
+</ul>
+<p><img src="image-20220409003002526.png" alt="image-20220409003002526"></p>
+<h3 id="7-2-举例"><a href="#7-2-举例" class="headerlink" title="7.2 举例"></a>7.2 举例</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.collections;
+
+import org.junit.Test;
+
+import java.text.Collator;
+import java.util.*;
+
+public class TestCollections {
+    @Test
+    public void test01(){
+        /*
+        public static &lt;T&gt; boolean addAll(Collection&lt;? super T&gt; c,T... elements)
+        将所有指定元素添加到指定 collection 中。Collection的集合的元素类型必须&gt;=T类型
+        */
+        Collection&lt;Object&gt; coll = new ArrayList&lt;&gt;();
+        Collections.addAll(coll, "hello","java");
+        Collections.addAll(coll, 1,2,3,4);
+
+        Collection&lt;String&gt; coll2 = new ArrayList&lt;&gt;();
+        Collections.addAll(coll2, "hello","java");
+        //Collections.addAll(coll2, 1,2,3,4);//String和Integer之间没有父子类关系
+    }
+
+	@Test
+    public void test02(){
+/*
+ * public static &lt;T extends Object &amp; Comparable&lt;? super T&gt;&gt; T max(Collection&lt;? extends T&gt; coll)
+ * 在coll集合中找出最大的元素，集合中的对象必须是T或T的子类对象，而且支持自然排序
+*  
+*  public static &lt;T&gt; T max(Collection&lt;? extends T&gt; coll,Comparator&lt;? super T&gt; comp)
+*  在coll集合中找出最大的元素，集合中的对象必须是T或T的子类对象，按照比较器comp找出最大者
+*
+*/
+        List&lt;Man&gt; list = new ArrayList&lt;&gt;();
+        list.add(new Man("张三",23));
+        list.add(new Man("李四",24));
+        list.add(new Man("王五",25));
+
+        /*
+         * Man max = Collections.max(list);//要求Man实现Comparable接口，或者父类实现
+         * System.out.println(max);
+         */
+
+        Man max = Collections.max(list, new Comparator&lt;Man&gt;() {
+            @Override
+            public int compare(Man o1, Man o2) {
+                return o2.getAge()-o2.getAge();
+            }
+        });
+        System.out.println(max);
+    }
+
+	@Test
+    public void test03(){
+        /*
+         * public static void reverse(List&lt;?&gt; list)
+         * 反转指定列表List中元素的顺序。
+         */
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+        Collections.addAll(list,"hello","java","world");
+        System.out.println(list);
+
+        Collections.reverse(list);
+        System.out.println(list);
+    }
+	@Test
+    public void test04(){
+        /*
+         * public static void shuffle(List&lt;?&gt; list) 
+         * List 集合元素进行随机排序，类似洗牌，打乱顺序
+         */
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+        Collections.addAll(list,"hello","java","world");
+
+        Collections.shuffle(list);
+        System.out.println(list);
+    }
+	@Test
+    public void test05() {
+        /*
+         * public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(List&lt;T&gt; list)
+         * 根据元素的自然顺序对指定 List 集合元素按升序排序
+         *
+         * public static &lt;T&gt; void sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)
+         * 根据指定的 Comparator 产生的顺序对 List 集合元素进行排序
+         */
+        List&lt;Man&gt; list = new ArrayList&lt;&gt;();
+        list.add(new Man("张三",23));
+        list.add(new Man("李四",24));
+        list.add(new Man("王五",25));
+
+        Collections.sort(list);
+        System.out.println(list);
+
+        Collections.sort(list, new Comparator&lt;Man&gt;() {
+            @Override
+            public int compare(Man o1, Man o2) {
+                return Collator.getInstance(Locale.CHINA).compare(o1.getName(),o2.getName());
+            }
+        });
+        System.out.println(list);
+    }
+	@Test
+    public void test06(){
+        /*
+         * public static void swap(List&lt;?&gt; list,int i,int j)
+         * 将指定 list 集合中的 i 处元素和 j 处元素进行交换
+         */
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+        Collections.addAll(list,"hello","java","world");
+
+        Collections.swap(list,0,2);
+        System.out.println(list);
+    }
+	@Test
+    public void test07(){
+        /*
+         * public static int frequency(Collection&lt;?&gt; c,Object o)
+         * 返回指定集合中指定元素的出现次数
+         */
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+        Collections.addAll(list,"hello","java","world","hello","hello");
+        int count = Collections.frequency(list, "hello");
+        System.out.println("count = " + count);
+    }
+	@Test
+    public void test08(){
+        /*
+         * public static &lt;T&gt; void copy(List&lt;? super T&gt; dest,List&lt;? extends T&gt; src)
+         * 将src中的内容复制到dest中
+         */
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        for(int i=1; i&lt;=5; i++){//1-5
+            list.add(i);
+        }
+
+        List&lt;Integer&gt; list2 = new ArrayList&lt;&gt;();
+        for(int i=11; i&lt;=13; i++){//11-13
+            list2.add(i);
+        }
+
+        Collections.copy(list, list2);
+        System.out.println(list);
+
+        List&lt;Integer&gt; list3 = new ArrayList&lt;&gt;();
+        for(int i=11; i&lt;=20; i++){//11-20
+            list3.add(i);
+        }
+		//java.lang.IndexOutOfBoundsException: Source does not fit in dest
+        //Collections.copy(list, list3);
+        //System.out.println(list);
+
+    }
+	
+	@Test
+    public void test09(){
+        /*
+         * public static &lt;T&gt; boolean replaceAll(List&lt;T&gt; list，T oldVal，T newVal)
+         * 使用新值替换 List 对象的所有旧值
+         */
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+        Collections.addAll(list,"hello","java","world","hello","hello");
+
+        Collections.replaceAll(list, "hello","song");
+        System.out.println(list);
+    }
+}
+</code></pre>
+
+
+
+<h3 id="7-3-练习"><a href="#7-3-练习" class="headerlink" title="7.3 练习"></a>7.3 练习</h3><p><strong>练习1：</strong></p>
+<p>请从键盘随机输入10个整数保存到List中，并按倒序、从大到小的顺序显示出来</p>
+<p><strong>练习2：</strong>模拟斗地主洗牌和发牌，牌没有排序</p>
+<p>效果演示：</p>
+<p><img src="image-20220409011625061.png" alt="image-20220409011625061"></p>
+<p>提示：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">String[] num = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+
+String[] color = {"方片","梅花","红桃","黑桃"};
+
+ArrayList&lt;String&gt; poker = new ArrayList&lt;&gt;();</code></pre>
+
+<p>代码示例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * 
+ * @author 尚硅谷-宋红康
+ * @date 2022年5月7日上午12:26:59
+ *
+ */
+public class PokerTest {
+	
+	public static void main(String[] args) {
+		String[] num = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+		String[] color = {"方片","梅花","红桃","黑桃"};
+		ArrayList poker = new ArrayList();
+		//1. 生成54张扑克牌
+		for (String s1 : color) {
+			for (String s2 : num) {
+				poker.add(s1.concat(" " + s2));
+			}
+		}
+
+		poker.add("小王");
+		poker.add("大王");
+		//2. 洗牌
+		Collections.shuffle(poker);
+		//3. 发牌
+		ArrayList tomCards = new ArrayList();
+        ArrayList jerryCards = new ArrayList();
+        ArrayList meCards = new ArrayList();
+        ArrayList lastCards = new ArrayList();
+
+        for (int i = 0; i &lt; poker.size(); i++) {
+
+            if(i &gt;= poker.size() - 3){
+                lastCards.add(poker.get(i));
+            }else if(i % 3 == 0){
+                tomCards.add(poker.get(i));
+            }else if(i % 3 == 1){
+                jerryCards.add(poker.get(i));
+            }else {
+                meCards.add(poker.get(i));
+            }
+
+        }
+
+		//4. 看牌
+		System.out.println("Tom:\n" + tomCards);
+        System.out.println("Jerry:\n" + jerryCards);
+        System.out.println("me:\n" + meCards);
+        System.out.println("底牌:\n" + lastCards);
+	}
+}
+</code></pre>
+
+<p><strong>练习3：</strong>模拟斗地主洗牌和发牌并对牌进行排序的代码实现。</p>
+<p><img src="image-20220915002714578.png" alt="image-20220915002714578"></p>
+<p>提示：考查HashMap、TreeSet、ArrayList、Collections</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 0:23
+ */
+public class PokerTest1 {
+    public static void main(String[] args) {
+        String[] num = {"3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"};
+        String[] color = {"方片", "梅花", "红桃", "黑桃"};
+        HashMap map = new HashMap(); // 存储索引和扑克牌
+        ArrayList list = new ArrayList(); // 存储索引
+        int index = 0; // 索引的开始值
+        for (String s1 : num) {
+            for (String s2 : color) {
+                map.put(index, s2.concat(s1)); // 将索引和扑克牌添加到HashMap中
+                list.add(index); // 将索引添加到ArrayList集合中
+                index++;
+            }
+        }
+        map.put(index, "小王");
+        list.add(index);
+        index++;
+        map.put(index, "大王");
+        list.add(index);
+        // 洗牌
+        Collections.shuffle(list);
+        // 发牌
+        TreeSet Tom = new TreeSet();
+        TreeSet Jerry = new TreeSet();
+        TreeSet me = new TreeSet();
+        TreeSet lastCards = new TreeSet();
+
+        for (int i = 0; i &lt; list.size(); i++) {
+            if (i &gt;= list.size() - 3) {
+                lastCards.add(list.get(i)); // 将list集合中的索引添加到TreeSet集合中会自动排序
+            } else if (i % 3 == 0) {
+                Tom.add(list.get(i));
+            } else if (i % 3 == 1) {
+                Jerry.add(list.get(i));
+            } else {
+                me.add(list.get(i));
+            }
+        }
+
+        // 看牌
+        lookPoker("Tom", Tom, map);
+        lookPoker("Jerry", Jerry, map);
+        lookPoker("康师傅", me, map);
+        lookPoker("底牌", lastCards, map);
+
+    }
+
+    public static void lookPoker(String name, TreeSet ts, HashMap map) {
+        System.out.println(name + "的牌是:");
+        for (Object index : ts) {
+            System.out.print(map.get(index) + " ");
+        }
+
+        System.out.println();
+    }
+}</code></pre>
+
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/04/05/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%9312-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">https://nan-ying.github.io/2023/04/05/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%9312-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-04-05T12-18-06',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/04/10/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%9313-%E6%B3%9B%E5%9E%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Java知识整理和总结13-泛型">
+                        
+                        <span class="card-title">Java知识整理和总结13-泛型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/04/01/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%9311-%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%92%8C%E5%9F%BA%E7%A1%80API/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Java知识整理和总结11-常用类和基础API">
+                        
+                        <span class="card-title">Java知识整理和总结11-常用类和基础API</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >698.4k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

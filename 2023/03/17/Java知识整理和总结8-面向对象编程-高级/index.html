@@ -1,0 +1,4382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java知识整理和总结8-面向对象编程-高级, Nan-ying&#39;s Blog">
+    <meta name="description" content="第08章_面向对象编程(高级)本章专题与脉络
+
+1. 关键字：static回顾类中的实例变量（即非static的成员变量）
+class Circle{
+	private double radius;
+	public Circle(doubl">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Java知识整理和总结8-面向对象编程-高级 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java知识整理和总结8-面向对象编程-高级</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/Java/" class="post-category">
+              Java
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-03-17
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 21k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          85 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="第08章-面向对象编程-高级"><a href="#第08章-面向对象编程-高级" class="headerlink" title="第08章_面向对象编程(高级)"></a>第08章_面向对象编程(高级)</h1><h2 id="本章专题与脉络"><a href="#本章专题与脉络" class="headerlink" title="本章专题与脉络"></a>本章专题与脉络</h2><img src="%E7%AC%AC2%E9%98%B6%E6%AE%B5%EF%BC%9AJava%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%AC%AC08%E7%AB%A0.png" alt="第2阶段：Java面向对象编程-第08章" style="zoom: 40%;">
+
+<h2 id="1-关键字：static"><a href="#1-关键字：static" class="headerlink" title="1. 关键字：static"></a>1. 关键字：static</h2><p><strong>回顾类中的实例变量（即非static的成员变量）</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Circle{
+	private double radius;
+	public Circle(double radius){
+        this.radius=radius;
+	}
+	public double findArea(){
+        return Math.PI*radius*radius;
+    }
+}</code></pre>
+
+<p>创建两个Circle对象：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Circle c1=new Circle(2.0);	//c1.radius=2.0
+Circle c2=new Circle(3.0);	//c2.radius=3.0</code></pre>
+
+<p>Circle类中的变量radius是一个实例变量(instance variable)，它属于类的每一个对象，c1中的radius变化不会影响c2的radius，反之亦然。</p>
+<p><strong>如果想让一个成员变量被类的所有实例所共享，就用static修饰即可，称为类变量（或类属性）！</strong></p>
+<h3 id="1-1-类属性、类方法的设计思想"><a href="#1-1-类属性、类方法的设计思想" class="headerlink" title="1.1 类属性、类方法的设计思想"></a>1.1 类属性、类方法的设计思想</h3><p>当我们编写一个类时，其实就是在描述其对象的属性和行为，而并没有产生实质上的对象，只有通过new关键字才会产出对象，这时系统才会分配内存空间给对象，其方法才可以供外部调用。我们有时候希望无论是否产生了对象或无论产生了多少对象的情况下，<code>某些特定的数据在内存空间里只有一份</code>。例如，所有的中国人都有个国家名称，每一个中国人都共享这个国家名称，不必在每一个中国人的实例对象中都单独分配一个用于代表国家名称的变量。</p>
+<p><img src="image-20220325213629311.png" alt="image-20220325213629311"></p>
+<p>此外，在类中声明的实例方法，在类的外面必须要先创建对象，才能调用。但是有些方法的调用者和当前类的对象无关，这样的方法通常被声明为<code>类方法</code>，由于不需要创建对象就可以调用类方法，从而简化了方法的调用。</p>
+<p>这里的类变量、类方法，只需要使用<code>static</code>修饰即可。所以也称为静态变量、静态方法。</p>
+<h3 id="1-2-static关键字"><a href="#1-2-static关键字" class="headerlink" title="1.2 static关键字"></a>1.2 static关键字</h3><ul>
+<li><p>使用范围：</p>
+<ul>
+<li>在Java类中，可用static修饰属性、方法、代码块、内部类</li>
+</ul>
+</li>
+<li><p>被修饰后的成员具备以下特点：</p>
+<ul>
+<li>随着类的加载而加载</li>
+<li>优先于对象存在</li>
+<li>修饰的成员，被所有对象所共享</li>
+<li>访问权限允许时，可不创建对象，直接被类调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-静态变量"><a href="#1-3-静态变量" class="headerlink" title="1.3 静态变量"></a>1.3 静态变量</h3><h4 id="1-3-1-语法格式"><a href="#1-3-1-语法格式" class="headerlink" title="1.3.1 语法格式"></a>1.3.1 语法格式</h4><p>使用static修饰的成员变量就是静态变量（或类变量、类属性）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">[修饰符] class 类{
+	[其他修饰符] static 数据类型 变量名;
+}</code></pre>
+
+<h4 id="1-3-2-静态变量的特点"><a href="#1-3-2-静态变量的特点" class="headerlink" title="1.3.2 静态变量的特点"></a>1.3.2 静态变量的特点</h4><ul>
+<li><p>静态变量的默认值规则和实例变量一样。</p>
+</li>
+<li><p>静态变量值是所有对象共享。</p>
+</li>
+<li><p>静态变量在本类中，可以在任意方法、代码块、构造器中直接使用。</p>
+</li>
+<li><p>如果权限修饰符允许，在其他类中可以通过“<code>类名.静态变量</code>”直接访问，也可以通过“<code>对象.静态变量</code>”的方式访问（但是更推荐使用类名.静态变量的方式）。</p>
+</li>
+<li><p>静态变量的get/set方法也静态的，当局部变量与静态变量<code>重名时</code>，使用“<code>类名.静态变量</code>”进行区分。</p>
+</li>
+</ul>
+<h4 id="1-3-3-举例"><a href="#1-3-3-举例" class="headerlink" title="1.3.3 举例"></a>1.3.3 举例</h4><p>举例1：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Chinese{
+    //实例变量
+    String name;
+    int age;
+    //类变量
+    static String nation;//国籍
+
+    public Chinese() {
+    }
+
+    public Chinese(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Chinese{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", nation='" + nation + '\'' +
+                '}';
+    }
+}
+public class StaticTest {
+    public static void main(String[] args) {
+        Chinese c1 = new Chinese("康师傅",36);
+        c1.nation = "中华人民共和国";
+
+        Chinese c2 = new Chinese("老干妈",66);
+
+        System.out.println(c1);
+        System.out.println(c2);
+
+        System.out.println(Chinese.nation);
+    }
+}</code></pre>
+
+<p>对应的内存结构：（以经典的JDK6内存解析为例，此时静态变量存储在方法区）</p>
+<img src="image-20220514183814514.png" alt="image-20220514183814514" style="zoom:67%;">
+
+<p>举例2：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class Employee {
+    private static int total;//这里私有化，在类的外面必须使用get/set方法的方式来访问静态变量
+    static String company; //这里缺省权限修饰符，是为了方便类外以“类名.静态变量”的方式访问
+    private int id;
+    private String name;
+
+    public Employee() {
+        total++;
+        id = total;//这里使用total静态变量的值为id属性赋值
+    }
+
+    public Employee(String name) {
+        this();
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static int getTotal() {
+        return total;
+    }
+
+    public static void setTotal(int total) {
+        Employee.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{company = " + company + ",id = " + id + " ,name=" + name +"}";
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class TestStaticVariable {
+    public static void main(String[] args) {
+        //静态变量total的默认值是0
+        System.out.println("Employee.total = " + Employee.getTotal());
+
+        Employee e1 = new Employee("张三");
+        Employee e2 = new Employee("李四");
+        System.out.println(e1);//静态变量company的默认值是null
+        System.out.println(e2);//静态变量company的默认值是null
+        System.out.println("Employee.total = " + Employee.getTotal());//静态变量total值是2
+
+        Employee.company = "尚硅谷";
+        System.out.println(e1);//静态变量company的值是尚硅谷
+        System.out.println(e2);//静态变量company的值是尚硅谷
+
+        //只要权限修饰符允许,虽然不推荐，但是也可以通过“对象.静态变量”的形式来访问
+        e1.company = "超级尚硅谷";
+
+        System.out.println(e1);//静态变量company的值是超级尚硅谷
+        System.out.println(e2);//静态变量company的值是超级尚硅谷
+    }
+}</code></pre>
+
+<h4 id="1-3-4-内存解析"><a href="#1-3-4-内存解析" class="headerlink" title="1.3.4 内存解析"></a>1.3.4 内存解析</h4><p><img src="image-20220104100145059.png" alt="image-20220104100145059"></p>
+<h3 id="1-4-静态方法"><a href="#1-4-静态方法" class="headerlink" title="1.4 静态方法"></a>1.4 静态方法</h3><h4 id="1-4-1-语法格式"><a href="#1-4-1-语法格式" class="headerlink" title="1.4.1 语法格式"></a>1.4.1 语法格式</h4><p>用static修饰的成员方法就是静态方法。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">[修饰符] class 类{
+	[其他修饰符] static 返回值类型 方法名(形参列表){
+        方法体
+    }
+}</code></pre>
+
+<h4 id="1-4-2-静态方法的特点"><a href="#1-4-2-静态方法的特点" class="headerlink" title="1.4.2 静态方法的特点"></a>1.4.2 静态方法的特点</h4><ul>
+<li>静态方法在本类的任意方法、代码块、构造器中都可以直接被调用。</li>
+<li>只要权限修饰符允许，静态方法在其他类中可以通过“类名.静态方法“的方式调用。也可以通过”对象.静态方法“的方式调用（但是更推荐使用类名.静态方法的方式）。</li>
+<li>在static方法内部<strong>只能访问类的static修饰的属性或方法</strong>，不能访问类的非static的结构。</li>
+<li>静态方法可以被子类继承，但不能被子类重写。</li>
+<li>静态方法的调用都只看编译时类型。</li>
+<li>因为不需要实例就可以访问static方法，因此static方法内部不能有this，也不能有super。如果有重名问题，使用“类名.”进行区别。</li>
+</ul>
+<h4 id="1-4-3-举例"><a href="#1-4-3-举例" class="headerlink" title="1.4.3 举例"></a>1.4.3 举例</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class Father {
+    public static void method(){
+        System.out.println("Father.method");
+    }
+
+    public static void fun(){
+        System.out.println("Father.fun");
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class Son extends Father{
+//    @Override //尝试重写静态方法，加上@Override编译报错，去掉Override不报错，但是也不是重写
+    public static void fun(){
+        System.out.println("Son.fun");
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class TestStaticMethod {
+    public static void main(String[] args) {
+        Father.method();
+        Son.method();//继承静态方法
+
+        Father f = new Son();
+        f.method();//执行Father类中的method
+    }
+}</code></pre>
+
+<h3 id="1-5-练习"><a href="#1-5-练习" class="headerlink" title="1.5 练习"></a>1.5 练习</h3><p>笔试题：如下程序执行会不会报错</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * @author 尚硅谷-宋红康
+ * @create 14:30
+ */
+public class StaticTest {
+    public static void main(String[] args) {
+        Demo test = null;
+        test.hello();
+    }
+}
+
+class Demo{
+    public static void hello(){
+        System.out.println("hello!");
+    }
+}</code></pre>
+
+<p>练习：</p>
+<p>编写一个类实现银行账户的概念，包含的属性有“帐号”、“密码”、“存款余额”、“利率”、“最小余额”，定义封装这些属性的方法。<code>账号要自动生成。</code></p>
+<p>编写主类，使用银行账户类，输入、输出3个储户的上述信息。</p>
+<p>考虑：哪些属性可以设计成static属性。</p>
+<h2 id="2-单例-Singleton-设计模式"><a href="#2-单例-Singleton-设计模式" class="headerlink" title="2. 单例(Singleton)设计模式"></a>2. 单例(Singleton)设计模式</h2><h3 id="2-1-设计模式概述"><a href="#2-1-设计模式概述" class="headerlink" title="2.1 设计模式概述"></a>2.1 设计模式概述</h3><p><strong>设计模式</strong>是在大量的<code>实践中总结</code>和<code>理论化</code>之后优选的代码结构、编程风格、以及解决问题的思考方式。设计模式免去我们自己再思考和摸索。就像是经典的棋谱，不同的棋局，我们用不同的棋谱。”套路”</p>
+<p>经典的设计模式共有23种。每个设计模式均是特定环境下特定问题的处理方法。</p>
+<img src="image-20220520174508815.png" alt="image-20220520174508815" style="zoom: 80%;">
+
+<blockquote>
+<p>简单工厂模式并不是23中经典模式的一种，是其中工厂方法模式的简化版</p>
+</blockquote>
+<blockquote>
+<p>对软件设计模式的研究造就了一本可能是面向对象设计方面最有影响的书籍：《设计模式》：《Design Patterns: Elements of Reusable Object-Oriented Software》（即后述《设计模式》一书），由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides 合著（Addison-Wesley，1995）。这几位作者常被称为”四人组（Gang of Four）”，而这本书也就被称为”四人组（或 GoF）”书。</p>
+</blockquote>
+<h3 id="2-2-何为单例模式"><a href="#2-2-何为单例模式" class="headerlink" title="2.2 何为单例模式"></a>2.2 何为单例模式</h3><p>所谓类的单例设计模式，就是采取一定的方法保证在整个的软件系统中，对某个类<strong>只能存在一个对象实例</strong>，并且该类只提供一个取得其对象实例的方法。</p>
+<h3 id="2-3-实现思路"><a href="#2-3-实现思路" class="headerlink" title="2.3 实现思路"></a>2.3 实现思路</h3><p>如果我们要让类在一个虚拟机中只能产生一个对象，我们首先必须将<code>类的构造器的访问权限设置为private</code>，这样，就不能用new操作符在类的外部产生类的对象了，但在类内部仍可以产生该类的对象。因为在类的外部开始还无法得到类的对象，<code>只能调用该类的某个静态方法</code>以返回类内部创建的对象，静态方法只能访问类中的静态成员变量，所以，指向类内部产生的<code>该类对象的变量也必须定义成静态的</code>。</p>
+<h3 id="2-4-单例模式的两种实现方式"><a href="#2-4-单例模式的两种实现方式" class="headerlink" title="2.4 单例模式的两种实现方式"></a>2.4 单例模式的两种实现方式</h3><h4 id="2-4-1-饿汉式"><a href="#2-4-1-饿汉式" class="headerlink" title="2.4.1 饿汉式"></a>2.4.1 饿汉式</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">class Singleton {
+    // 1.私有化构造器
+    private Singleton() {
+    }
+
+    // 2.内部提供一个当前类的实例
+    // 4.此实例也必须静态化
+    private static Singleton single = new Singleton();
+
+    // 3.提供公共的静态的方法，返回当前类的对象
+    public static Singleton getInstance() {
+        return single;
+    }
+}
+</code></pre>
+
+<h4 id="2-4-2-懒汉式"><a href="#2-4-2-懒汉式" class="headerlink" title="2.4.2 懒汉式"></a>2.4.2 懒汉式</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">class Singleton {
+    // 1.私有化构造器
+    private Singleton() {
+    }
+    // 2.内部提供一个当前类的实例
+    // 4.此实例也必须静态化
+    private static Singleton single;
+    // 3.提供公共的静态的方法，返回当前类的对象
+    public static Singleton getInstance() {
+        if(single == null) {
+            single = new Singleton();
+        }
+        return single;
+    }
+}
+</code></pre>
+
+<h4 id="2-4-3-饿汉式-vs-懒汉式"><a href="#2-4-3-饿汉式-vs-懒汉式" class="headerlink" title="2.4.3 饿汉式 vs 懒汉式"></a>2.4.3 饿汉式 vs 懒汉式</h4><p>饿汉式：</p>
+<ul>
+<li>特点：<code>立即加载</code>，即在使用类的时候已经将对象创建完毕。</li>
+<li>优点：实现起来<code>简单</code>；没有多线程安全问题。</li>
+<li>缺点：当类被加载的时候，会初始化static的实例，静态变量被创建并分配内存空间，从这以后，这个static的实例便一直占着这块内存，直到类被卸载时，静态变量被摧毁，并释放所占有的内存。因此在某些特定条件下会<code>耗费内存</code>。</li>
+</ul>
+<p>懒汉式：</p>
+<ul>
+<li>特点：<code>延迟加载</code>，即在调用静态方法时实例才被创建。</li>
+<li>优点：实现起来比较简单；当类被加载的时候，static的实例未被创建并分配内存空间，当静态方法第一次被调用时，初始化实例变量，并分配内存，因此在某些特定条件下会<code>节约内存</code>。</li>
+<li>缺点：在多线程环境中，这种实现方法是完全错误的，<code>线程不安全</code>，根本不能保证单例的唯一性。<ul>
+<li>说明：在多线程章节，会将懒汉式改造成线程安全的模式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-单例模式的优点及应用场景"><a href="#2-5-单例模式的优点及应用场景" class="headerlink" title="2.5 单例模式的优点及应用场景"></a>2.5 单例模式的优点及应用场景</h3><p>由于单例模式只生成一个实例，减少了<code>系统性能开销</code>，当一个对象的产生需要比较多的资源时，如读取配置、产生其他依赖对象时，则可以通过在应用启动时直接产生一个单例对象，然后永久驻留内存的方式来解决。</p>
+<p>举例：</p>
+<img src="image-20220325222541203.png" alt="image-20220325222541203" style="zoom:67%;">
+
+<p><strong>应用场景</strong></p>
+<ul>
+<li><p>Windows的Task Manager (任务管理器)就是很典型的单例模式</p>
+</li>
+<li><p>Windows的Recycle Bin (回收站)也是典型的单例应用。在整个系统运行过程中，回收站一直维护着仅有的一个实例。</p>
+</li>
+<li><p>Application 也是单例的典型应用</p>
+</li>
+<li><p>应用程序的日志应用，一般都使用单例模式实现，这一般是由于共享的日志文件一直处于打开状态，因为只</p>
+<p>能有一个实例去操作，否则内容不好追加。</p>
+</li>
+<li><p>数据库连接池的设计一般也是采用单例模式，因为数据库连接是一种数据库资源。</p>
+</li>
+</ul>
+<h2 id="3-理解main方法的语法"><a href="#3-理解main方法的语法" class="headerlink" title="3. 理解main方法的语法"></a>3. 理解main方法的语法</h2><p>由于JVM需要调用类的main()方法，所以该方法的访问权限必须是public，又因为JVM在执行main()方法时不必创建对象，所以该方法必须是static的，该方法接收一个String类型的数组参数，该数组中保存执行Java命令时传递给所运行的类的参数。 </p>
+<p>又因为main() 方法是静态的，我们不能直接访问该类中的非静态成员，必须创建该类的一个实例对象后，才能通过这个对象去访问类中的非静态成员，这种情况，我们在之前的例子中多次碰到。</p>
+<p><strong>命令行参数用法举例</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class CommandPara {
+    public static void main(String[] args) {
+        for (int i = 0; i &lt; args.length; i++) {
+            System.out.println("args[" + i + "] = " + args[i]);
+        }
+    }
+}
+</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//运行程序CommandPara.java
+java CommandPara "Tom" "Jerry" "Shkstart"</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//输出结果
+args[0] = Tom
+args[1] = Jerry
+args[2] = Shkstart
+</code></pre>
+
+<p><img src="image-20220325223215924.png" alt="image-20220325223215924"></p>
+<p>IDEA工具：</p>
+<p>（1）配置运行参数</p>
+<img src="image-20211228101828718.png" alt="image-20211228101828718" style="zoom: 80%;">
+
+<img src="image-20211228102022216.png" alt="image-20211228102022216" style="zoom:67%;">
+
+<p>（2）运行程序</p>
+<img src="image-20211228102059327.png" alt="image-20211228102059327" style="zoom: 80%;">
+
+<p>笔试题：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//此处，Something类的文件名叫OtherThing.java
+class Something {
+    public static void main(String[] something_to_do) {        
+        System.out.println("Do something ...");
+    }
+}
+
+
+//上述程序是否可以正常编译、运行？ 
+</code></pre>
+
+<h2 id="4-类的成员之四：代码块"><a href="#4-类的成员之四：代码块" class="headerlink" title="4. 类的成员之四：代码块"></a>4. 类的成员之四：代码块</h2><p>如果成员变量想要初始化的值不是一个硬编码的常量值，而是需要通过复杂的计算或读取文件、或读取运行环境信息等方式才能获取的一些值，该怎么办呢？此时，可以考虑代码块（或初始化块）。</p>
+<ul>
+<li><p>代码块(或初始化块)的<code>作用</code>：</p>
+</li>
+<li><p>对Java类或对象进行初始化</p>
+</li>
+<li><p>代码块(或初始化块)的<code>分类</code>：</p>
+<ul>
+<li><p>一个类中代码块若有修饰符，则只能被static修饰，称为静态代码块(static block)</p>
+</li>
+<li><p>没有使用static修饰的，为非静态代码块。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-1-静态代码块"><a href="#4-1-静态代码块" class="headerlink" title="4.1 静态代码块"></a>4.1 静态代码块</h3><p>如果想要为静态变量初始化，可以直接在静态变量的声明后面直接赋值，也可以使用静态代码块。</p>
+<h4 id="4-1-1-语法格式"><a href="#4-1-1-语法格式" class="headerlink" title="4.1.1 语法格式"></a>4.1.1 语法格式</h4><p>在代码块的前面加static，就是静态代码块。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">【修饰符】 class 类{
+	static{
+        静态代码块
+    }
+}</code></pre>
+
+<h4 id="4-1-2-静态代码块的特点"><a href="#4-1-2-静态代码块的特点" class="headerlink" title="4.1.2 静态代码块的特点"></a>4.1.2 静态代码块的特点</h4><ol>
+<li><p>可以有输出语句。</p>
+</li>
+<li><p>可以对类的属性、类的声明进行初始化操作。</p>
+</li>
+<li><p>不可以对非静态的属性初始化。即：不可以调用非静态的属性和方法。</p>
+</li>
+<li><p>若有多个静态的代码块，那么按照从上到下的顺序依次执行。</p>
+</li>
+<li><p>静态代码块的执行要先于非静态代码块。</p>
+</li>
+<li><p>静态代码块<strong>随着类的加载而加载，且只执行一次。</strong></p>
+</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class Chinese {
+//    private static String country = "中国";
+
+    private static String country;
+    private String name;
+
+    {
+        System.out.println("非静态代码块，country = " + country);
+    }
+
+    static {
+        country = "中国";
+        System.out.println("静态代码块");
+    }
+
+    public Chinese(String name) {
+        this.name = name;
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.keyword;
+
+public class TestStaticBlock {
+    public static void main(String[] args) {
+        Chinese c1 = new Chinese("张三");
+        Chinese c2 = new Chinese("李四");
+    }
+}
+</code></pre>
+
+<h3 id="4-2-非静态代码块"><a href="#4-2-非静态代码块" class="headerlink" title="4.2 非静态代码块"></a>4.2 非静态代码块</h3><h4 id="4-2-1-语法格式"><a href="#4-2-1-语法格式" class="headerlink" title="4.2.1 语法格式"></a>4.2.1 语法格式</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">【修饰符】 class 类{
+    {
+        非静态代码块
+    }
+    【修饰符】 构造器名(){
+    	// 实例初始化代码
+    }
+    【修饰符】 构造器名(参数列表){
+        // 实例初始化代码
+    }
+}</code></pre>
+
+<h4 id="4-2-2-非静态代码块的作用"><a href="#4-2-2-非静态代码块的作用" class="headerlink" title="4.2.2 非静态代码块的作用"></a>4.2.2 非静态代码块的作用</h4><p>和构造器一样，也是用于实例变量的初始化等操作。</p>
+<h4 id="4-2-3-非静态代码块的意义"><a href="#4-2-3-非静态代码块的意义" class="headerlink" title="4.2.3 非静态代码块的意义"></a>4.2.3 非静态代码块的意义</h4><p>如果多个重载的构造器有公共代码，并且这些代码都是先于构造器其他代码执行的，那么可以将这部分代码抽取到非静态代码块中，减少冗余代码。</p>
+<h4 id="4-2-4-非静态代码块的执行特点"><a href="#4-2-4-非静态代码块的执行特点" class="headerlink" title="4.2.4 非静态代码块的执行特点"></a>4.2.4 非静态代码块的执行特点</h4><ol>
+<li><p>可以有输出语句。</p>
+</li>
+<li><p>可以对类的属性、类的声明进行初始化操作。</p>
+</li>
+<li><p>除了调用非静态的结构外，还可以调用静态的变量或方法。</p>
+</li>
+<li><p>若有多个非静态的代码块，那么按照从上到下的顺序依次执行。</p>
+</li>
+<li><p>每次创建对象的时候，都会执行一次。且先于构造器执行。</p>
+</li>
+</ol>
+<h3 id="4-3-举例"><a href="#4-3-举例" class="headerlink" title="4.3 举例"></a>4.3 举例</h3><p><strong>举例1：</strong></p>
+<p>（1）声明User类，</p>
+<ul>
+<li><p>包含属性：username（String类型），password（String类型），registrationTime（long类型），私有化</p>
+</li>
+<li><p>包含get/set方法，其中registrationTime没有set方法</p>
+</li>
+<li><p>包含无参构造，</p>
+<ul>
+<li>输出“新用户注册”，</li>
+<li>registrationTime赋值为当前系统时间，</li>
+<li>username就默认为当前系统时间值，</li>
+<li>password默认为“123456”</li>
+</ul>
+</li>
+<li><p>包含有参构造(String username, String password)，</p>
+<ul>
+<li>输出“新用户注册”，</li>
+<li>registrationTime赋值为当前系统时间，</li>
+<li>username和password由参数赋值</li>
+</ul>
+</li>
+<li><p>包含public String getInfo()方法，返回：“用户名：xx，密码：xx，注册时间：xx”</p>
+</li>
+</ul>
+<p>（2）编写测试类，测试类main方法的代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args) {
+    User u1 = new User();
+    System.out.println(u1.getInfo());
+
+    User u2 = new User("song","8888");
+    System.out.println(u2.getInfo());
+}</code></pre>
+
+<p>如果不用非静态代码块，User类是这样的：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.block.no;
+
+public class User {
+    private String username;
+    private String password;
+    private long registrationTime;
+
+    public User() {
+        System.out.println("新用户注册");
+        registrationTime = System.currentTimeMillis();
+        username = registrationTime+"";
+        password = "123456";
+    }
+
+    public User(String username,String password) {
+        System.out.println("新用户注册");
+        registrationTime = System.currentTimeMillis();
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long getRegistrationTime() {
+        return registrationTime;
+    }
+    public String getInfo(){
+        return "用户名：" + username + "，密码：" + password + "，注册时间：" + registrationTime;
+    }
+}</code></pre>
+
+<p>如果提取构造器公共代码到非静态代码块，User类是这样的：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.block.use;
+
+public class User {
+    private String username;
+    private String password;
+    private long registrationTime;
+
+    {
+        System.out.println("新用户注册");
+        registrationTime = System.currentTimeMillis();
+    }
+
+    public User() {
+        username = registrationTime+"";
+        password = "123456";
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long getRegistrationTime() {
+        return registrationTime;
+    }
+    public String getInfo(){
+        return "用户名：" + username + "，密码：" + password + "，注册时间：" + registrationTime;
+    }
+}</code></pre>
+
+<p><strong>举例2：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">private static DataSource dataSource = null;
+
+static{
+	InputStream is = null;
+	try {
+		is = DBCPTest.class.getClassLoader().getResourceAsStream("dbcp.properties");
+		Properties pros = new Properties();
+		pros.load(is);
+		//调用BasicDataSourceFactory的静态方法，获取数据源。
+		dataSource = BasicDataSourceFactory.createDataSource(pros);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}finally{
+		if(is != null){
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}		
+		}		
+	}		
+}</code></pre>
+
+<h3 id="4-4-小结：实例变量赋值顺序"><a href="#4-4-小结：实例变量赋值顺序" class="headerlink" title="4.4 小结：实例变量赋值顺序"></a>4.4 小结：实例变量赋值顺序</h3><img src="image-20220325230208941.png" alt="image-20220325230208941" style="zoom:67%;">
+
+<h3 id="4-5-练习"><a href="#4-5-练习" class="headerlink" title="4.5 练习"></a>4.5 练习</h3><p>练习1：分析加载顺序</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Root{
+	static{
+		System.out.println("Root的静态初始化块");
+	}
+	{
+		System.out.println("Root的普通初始化块");
+	}
+	public Root(){
+		System.out.println("Root的无参数的构造器");
+	}
+}
+class Mid extends Root{
+	static{
+		System.out.println("Mid的静态初始化块");
+	}
+	{
+		System.out.println("Mid的普通初始化块");
+	}
+	public Mid(){
+		System.out.println("Mid的无参数的构造器");
+	}
+	public Mid(String msg){
+		//通过this调用同一类中重载的构造器
+		this();
+		System.out.println("Mid的带参数构造器，其参数值："
+			+ msg);
+	}
+}
+class Leaf extends Mid{
+	static{
+		System.out.println("Leaf的静态初始化块");
+	}
+	{
+		System.out.println("Leaf的普通初始化块");
+	}	
+	public Leaf(){
+		//通过super调用父类中有一个字符串参数的构造器
+		super("尚硅谷");
+		System.out.println("Leaf的构造器");
+	}
+}
+public class LeafTest{
+	public static void main(String[] args){
+		new Leaf(); 
+		//new Leaf();
+	}
+}</code></pre>
+
+<p>练习2：分析加载顺序</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Father {
+	static {
+		System.out.println("11111111111");
+	}
+	{
+		System.out.println("22222222222");
+	}
+
+	public Father() {
+		System.out.println("33333333333");
+
+	}
+
+}
+
+public class Son extends Father {
+	static {
+		System.out.println("44444444444");
+	}
+	{
+		System.out.println("55555555555");
+	}
+	public Son() {
+		System.out.println("66666666666");
+	}
+
+
+	public static void main(String[] args) { 
+		System.out.println("77777777777");
+		System.out.println("************************");
+		new Son();
+		System.out.println("************************");
+
+		new Son();
+		System.out.println("************************");
+		new Father();
+	}
+
+}
+</code></pre>
+
+<p>练习3：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu05.field.interview;
+
+/**
+ * @author 尚硅谷-宋红康
+ * @create 16:04
+ */
+public class Test04 {
+    public static void main(String[] args) {
+        Zi zi = new Zi();
+    }
+}
+class Fu{
+    private static int i = getNum("（1）i");
+    private int j = getNum("（2）j");
+    static{
+        print("（3）父类静态代码块");
+    }
+    {
+        print("（4）父类非静态代码块，又称为构造代码块");
+    }
+    Fu(){
+        print("（5）父类构造器");
+    }
+    public static void print(String str){
+        System.out.println(str + "-&gt;" + i);
+    }
+    public static int getNum(String str){
+        print(str);
+        return ++i;
+    }
+}
+class Zi extends Fu{
+    private static int k = getNum("（6）k");
+    private int h = getNum("（7）h");
+    static{
+        print("（8）子类静态代码块");
+    }
+    {
+        print("（9）子类非静态代码块，又称为构造代码块");
+    }
+    Zi(){
+        print("（10）子类构造器");
+    }
+    public static void print(String str){
+        System.out.println(str + "-&gt;" + k);
+    }
+    public static int getNum(String str){
+        print(str);
+        return ++k;
+    }
+}
+</code></pre>
+
+
+
+<h2 id="5-final关键字"><a href="#5-final关键字" class="headerlink" title="5. final关键字"></a>5. final关键字</h2><h3 id="5-1-final的意义"><a href="#5-1-final的意义" class="headerlink" title="5.1 final的意义"></a>5.1 final的意义</h3><p>final：最终的，不可更改的</p>
+<h3 id="5-2-final的使用"><a href="#5-2-final的使用" class="headerlink" title="5.2 final的使用"></a>5.2 final的使用</h3><h4 id="5-2-1-final修饰类"><a href="#5-2-1-final修饰类" class="headerlink" title="5.2.1 final修饰类"></a>5.2.1 final修饰类</h4><p>表示这个类不能被继承，没有子类。提高安全性，提高程序的可读性。</p>
+<p>例如：String类、System类、StringBuffer类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">final class Eunuch{//太监类
+	
+}
+class Son extends Eunuch{//错误
+	
+}</code></pre>
+
+<h4 id="5-2-2-final修饰方法"><a href="#5-2-2-final修饰方法" class="headerlink" title="5.2.2 final修饰方法"></a>5.2.2 final修饰方法</h4><p>表示这个方法不能被子类重写。</p>
+<p>例如：Object类中的getClass()</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Father{
+	public final void method(){
+		System.out.println("father");
+	}
+}
+class Son extends Father{
+	public void method(){//错误
+		System.out.println("son");
+	}
+}</code></pre>
+
+<h4 id="5-2-3-final修饰变量"><a href="#5-2-3-final修饰变量" class="headerlink" title="5.2.3 final修饰变量"></a>5.2.3 final修饰变量</h4><p>final修饰某个变量（成员变量或局部变量），一旦赋值，它的值就不能被修改，即常量，常量名建议使用大写字母。</p>
+<p>例如：final double MY_PI = 3.14;</p>
+<blockquote>
+<p>如果某个成员变量用final修饰后，没有set方法，并且必须初始化（可以显式赋值、或在初始化块赋值、实例变量还可以在构造器中赋值）</p>
+</blockquote>
+<ul>
+<li>修饰成员变量</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public final class Test {
+    public static int totalNumber = 5;
+    public final int ID;
+
+    public Test() {
+        ID = ++totalNumber; // 可在构造器中给final修饰的“变量”赋值
+    }
+    public static void main(String[] args) {
+        Test t = new Test();
+        System.out.println(t.ID);
+    }
+}
+</code></pre>
+
+<ul>
+<li>修饰局部变量：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestFinal {
+    public static void main(String[] args){
+        final int MIN_SCORE ;
+        MIN_SCORE = 0;
+        final int MAX_SCORE = 100;
+        MAX_SCORE = 200; //非法
+    }
+}</code></pre>
+
+<ul>
+<li>错误演示：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class A {
+    private final String INFO = "atguigu";  //声明常量
+
+    public void print() {
+        //The final field A.INFO cannot be  assigned
+        //INFO = "尚硅谷"; 
+    }
+}
+</code></pre>
+
+<h3 id="5-3-笔试题"><a href="#5-3-笔试题" class="headerlink" title="5.3 笔试题"></a>5.3 笔试题</h3><p>题1：排错</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Something {
+    public int addOne(final int x) {
+        return ++x;
+        // return x + 1;
+    }
+}</code></pre>
+
+<p>题2：排错</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Something {
+    public static void main(String[] args) {
+        Other o = new Other();
+        new Something().addOne(o);
+    }
+    public void addOne(final Other o) {
+        // o = new Other();
+        o.i++;
+    }
+}
+class Other {
+    public int i;
+}
+</code></pre>
+
+<h2 id="6-抽象类与抽象方法-或abstract关键字"><a href="#6-抽象类与抽象方法-或abstract关键字" class="headerlink" title="6. 抽象类与抽象方法(或abstract关键字)"></a>6. 抽象类与抽象方法(或abstract关键字)</h2><h3 id="6-1-由来"><a href="#6-1-由来" class="headerlink" title="6.1 由来"></a>6.1 由来</h3><p>举例1：</p>
+<p>随着继承层次中一个个新子类的定义，类变得越来越具体，而父类则更一般，更通用。类的设计应该保证父类和子类能够共享特征。有时将一个父类设计得非常抽象，以至于它没有具体的实例，这样的类叫做抽象类。</p>
+<p><img src="image-20220325231608838.png" alt="image-20220325231608838"></p>
+<p>举例2：</p>
+<p>我们声明一些几何图形类：圆、矩形、三角形类等，发现这些类都有共同特征：求面积、求周长。那么这些共同特征应该抽取到一个共同父类：几何图形类中。但是这些方法在父类中又<code>无法给出具体的实现</code>，而是应该交给子类各自具体实现。那么父类在声明这些方法时，<code>就只有方法签名，没有方法体</code>，我们把没有方法体的方法称为<strong>抽象方法</strong>。Java语法规定，包含抽象方法的类必须是<strong>抽象类</strong>。</p>
+<h3 id="6-2-语法格式"><a href="#6-2-语法格式" class="headerlink" title="6.2 语法格式"></a>6.2 语法格式</h3><ul>
+<li><strong>抽象类</strong>：被abstract修饰的类。</li>
+<li><strong>抽象方法</strong>：被abstract修饰没有方法体的方法。</li>
+</ul>
+<p>抽象类的语法格式</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">[权限修饰符] abstract class 类名{
+    
+}
+[权限修饰符] abstract class 类名 extends 父类{
+    
+}</code></pre>
+
+<p>抽象方法的语法格式</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">[其他修饰符] abstract 返回值类型 方法名([形参列表]);</code></pre>
+
+<blockquote>
+<p>注意：抽象方法没有方法体</p>
+</blockquote>
+<p><img src="image-20220517204707255.png" alt="image-20220517204707255"></p>
+<p>代码举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public abstract class Animal {
+    public abstract void eat();
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Cat extends Animal {
+    public void eat (){
+      	System.out.println("小猫吃鱼和猫粮"); 
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class CatTest {
+ 	 public static void main(String[] args) {
+        // 创建子类对象
+        Cat c = new Cat(); 
+       
+        // 调用eat方法
+        c.eat();
+  	}
+}</code></pre>
+
+<p>此时的方法重写，是子类对父类抽象方法的完成实现，我们将这种方法重写的操作，也叫做<strong>实现方法</strong>。</p>
+<h3 id="6-3-使用说明"><a href="#6-3-使用说明" class="headerlink" title="6.3 使用说明"></a>6.3 使用说明</h3><ol>
+<li><p>抽象类<strong>不能创建对象</strong>，如果创建，编译无法通过而报错。只能创建其非抽象子类的对象。</p>
+<blockquote>
+<p>理解：假设创建了抽象类的对象，调用抽象的方法，而抽象方法没有具体的方法体，没有意义。</p>
+<p>抽象类是用来被继承的，抽象类的子类必须重写父类的抽象方法，并提供方法体。若没有重写全部的抽象方法，仍为抽象类。</p>
+</blockquote>
+</li>
+<li><p>抽象类中，也<strong>有构造方法</strong>，是供子类创建对象时，初始化父类成员变量使用的。</p>
+<blockquote>
+<p>理解：子类的构造方法中，有默认的super()或手动的super(实参列表)，需要访问父类构造方法。</p>
+</blockquote>
+</li>
+<li><p>抽象类中，不一定包含抽象方法，但是有抽象方法的类必定是抽象类。</p>
+<blockquote>
+<p>理解：未包含抽象方法的抽象类，目的就是不想让调用者创建该类对象，通常用于某些特殊的类结构设计。</p>
+</blockquote>
+</li>
+<li><p>抽象类的子类，必须重写抽象父类中<strong>所有的</strong>抽象方法，否则，编译无法通过而报错。除非该子类也是抽象类。 </p>
+<blockquote>
+<p>理解：假设不重写所有抽象方法，则类中可能包含抽象方法。那么创建对象后，调用抽象的方法，没有意义。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="6-4-注意事项"><a href="#6-4-注意事项" class="headerlink" title="6.4 注意事项"></a>6.4 注意事项</h3><ul>
+<li><p>不能用abstract修饰变量、代码块、构造器；</p>
+</li>
+<li><p>不能用abstract修饰私有方法、静态方法、final的方法、final的类。</p>
+</li>
+</ul>
+<h3 id="6-5-应用举例1"><a href="#6-5-应用举例1" class="headerlink" title="6.5 应用举例1"></a>6.5 应用举例1</h3><p><img src="image-20220325232847872.png" alt="image-20220325232847872"></p>
+<p>在航运公司系统中，Vehicle类需要定义两个方法分别<code>计算运输工具的燃料效率</code>和<code>行驶距离</code>。</p>
+<p><strong>问题：</strong>卡车(Truck)和驳船(RiverBarge)的燃料效率和行驶距离的计算方法完全不同。Vehicle类不能提供计算方法，但子类可以。</p>
+<p><strong>解决方案：</strong>Java允许类设计者指定：超类声明一个方法但不提供实现，该方法的实现由子类提供。这样的方法称为抽象方法。有一个或更多抽象方法的类称为抽象类。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//Vehicle是一个抽象类，有两个抽象方法。
+public abstract class Vehicle{
+	public abstract double calcFuelEfficiency();	//计算燃料效率的抽象方法
+	public abstract double calcTripDistance();	//计算行驶距离的抽象方法
+}
+public class Truck extends Vehicle{
+	public double calcFuelEfficiency( )   { //写出计算卡车的燃料效率的具体方法   }
+	public double calcTripDistance( )    {  //写出计算卡车行驶距离的具体方法   }
+}
+public class RiverBarge extends Vehicle{
+	 public double calcFuelEfficiency( ) { //写出计算驳船的燃料效率的具体方法  }
+	 public double calcTripDistance( )  {  //写出计算驳船行驶距离的具体方法}
+}
+</code></pre>
+
+<h3 id="6-6-应用举例2：模板方法设计模式-TemplateMethod"><a href="#6-6-应用举例2：模板方法设计模式-TemplateMethod" class="headerlink" title="6.6 应用举例2：模板方法设计模式(TemplateMethod)"></a>6.6 应用举例2：模板方法设计模式(TemplateMethod)</h3><p>抽象类体现的就是一种模板模式的设计，抽象类作为多个子类的通用模板，子类在抽象类的基础上进行扩展、改造，但子类总体上会保留抽象类的行为方式。</p>
+<p><strong>解决的问题</strong>：</p>
+<ul>
+<li><p>当功能内部一部分实现是确定的，另一部分实现是不确定的。这时可以把不确定的部分暴露出去，让子类去实现。</p>
+</li>
+<li><p>换句话说，在软件开发中实现一个算法时，整体步骤很固定、通用，这些步骤已经在父类中写好了。但是某些部分易变，易变部分可以抽象出来，供不同子类实现。这就是一种模板模式。</p>
+</li>
+</ul>
+<p><strong>类比举例：</strong>英语六级模板</p>
+<img src="image-20220503145003315.png" alt="image-20220503145003315" style="zoom: 80%;">
+
+<p>制作月饼的模板：</p>
+<img src="image-20220517205013997.png" alt="image-20220517205013997" style="zoom: 50%;">
+
+<p>举例1：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">abstract class Template {
+    public final void getTime() {
+        long start = System.currentTimeMillis();
+        code();
+        long end = System.currentTimeMillis();
+        System.out.println("执行时间是：" + (end - start));
+    }
+
+    public abstract void code();
+}
+
+class SubTemplate extends Template {
+    public void code() {
+        for (int i = 0; i &lt; 10000; i++) {
+            System.out.println(i);
+        }
+    }
+}
+</code></pre>
+
+<p>举例2：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.java;
+//抽象类的应用：模板方法的设计模式
+public class TemplateMethodTest {
+
+	public static void main(String[] args) {
+		BankTemplateMethod btm = new DrawMoney();
+		btm.process();
+
+		BankTemplateMethod btm2 = new ManageMoney();
+		btm2.process();
+	}
+}
+abstract class BankTemplateMethod {
+	// 具体方法
+	public void takeNumber() {
+		System.out.println("取号排队");
+	}
+
+	public abstract void transact(); // 办理具体的业务 //钩子方法
+
+	public void evaluate() {
+		System.out.println("反馈评分");
+	}
+
+	// 模板方法，把基本操作组合到一起，子类一般不能重写
+	public final void process() {
+		this.takeNumber();
+
+		this.transact();// 像个钩子，具体执行时，挂哪个子类，就执行哪个子类的实现代码
+
+		this.evaluate();
+	}
+}
+
+class DrawMoney extends BankTemplateMethod {
+	public void transact() {
+		System.out.println("我要取款！！！");
+	}
+}
+
+class ManageMoney extends BankTemplateMethod {
+	public void transact() {
+		System.out.println("我要理财！我这里有2000万美元!!");
+	}
+}
+</code></pre>
+
+<p>模板方法设计模式是编程中经常用得到的模式。各个框架、类库中都有他的影子，比如常见的有：</p>
+<ul>
+<li><p>数据库访问的封装</p>
+</li>
+<li><p>Junit单元测试</p>
+</li>
+<li><p>JavaWeb的Servlet中关于doGet/doPost方法调用</p>
+</li>
+<li><p>Hibernate中模板程序</p>
+</li>
+<li><p>Spring中JDBCTemlate、HibernateTemplate等</p>
+</li>
+</ul>
+<h3 id="6-7-思考与练习"><a href="#6-7-思考与练习" class="headerlink" title="6.7 思考与练习"></a>6.7 思考与练习</h3><p><strong>思考：</strong></p>
+<p>问题1：为什么抽象类不可以使用final关键字声明？</p>
+<p>问题2：一个抽象类中可以定义构造器吗？</p>
+<p>问题3：是否可以这样理解：抽象类就是比普通类多定义了抽象方法，除了不能直接进行类的实例化操作之外，并没有任何的不同？</p>
+<p><strong>练习1：</strong></p>
+<p>编写一个Employee类，声明为抽象类，包含如下三个属性：name，id，salary。提供必要的构造器和抽象方法：work()。</p>
+<p>对于Manager类来说，他既是员工，还具有奖金(bonus)的属性。</p>
+<p>请使用继承的思想，设计CommonEmployee类和Manager类，要求类中提供必要的方法进行属性访问。</p>
+<p><strong>练习2：软件外包公司外派管理</strong></p>
+<p>有一家软件外包公司，可以外派开发人员，该公司有两个角色：普通开发人员Developer和项目经理Manager。他们的关系如下图：</p>
+<p><img src="image-20220504164925878.png" alt="image-20220504164925878"></p>
+<p>普通开发人员的工作内容是“开发项目”，项目经理的工作内容是“项目管理”。对外的报价是普通开发人员每天500,元，超过60天每天400元。项目经理每天800元，超过60天每天700元。</p>
+<p>有一家银行需要1名项目经理、2名开发人员，现场开发90天，计算银行需要付给软件公司的总金额。</p>
+<p>提示：创建数组 Employee[] emps = new Employee[3]。其中存储驻场的3名员工。</p>
+<p><strong>练习3：</strong></p>
+<p>创建父类Shape，包含绘制形状的抽象方法draw()。</p>
+<p>创建Shape的子类Circle和Rectangle，重写draw()方法，绘制圆形和矩形。</p>
+<p>绘制多个圆形和矩形。</p>
+<p><strong>练习4：</strong></p>
+<p>1、声明抽象父类Person，包含抽象方法public abstract void eat();<br>2、声明子类中国人Chinese，重写抽象方法，打印用筷子吃饭<br>3、声明子类美国人American，重写抽象方法，打印用刀叉吃饭<br>4、声明子类印度人Indian，重写抽象方法，打印用手抓饭<br>5、声明测试类PersonTest，创建Person数组，存储各国人对象，并遍历数组，调用eat()方法</p>
+<p><strong>练习5：工资系统设计</strong></p>
+<p>编写工资系统，实现不同类型员工(多态)的按月发放工资。如果当月出现某个Employee对象的生日，则将该雇员的工资增加100元。</p>
+<p>实验说明：</p>
+<p>（1）定义一个Employee类，该类包含：</p>
+<p>private成员变量name,number,birthday，其中birthday 为MyDate类的对象；</p>
+<p>abstract方法earnings()；</p>
+<p>toString()方法输出对象的name,number和birthday。</p>
+<p>（2）MyDate类包含:</p>
+<p>private成员变量year,month,day ；</p>
+<p>toDateString()方法返回日期对应的字符串：xxxx年xx月xx日</p>
+<p>（3）定义SalariedEmployee类继承Employee类，实现按月计算工资的员工处理。该类包括：private成员变量monthlySalary；</p>
+<p>实现父类的抽象方法earnings(),该方法返回monthlySalary值；toString()方法输出员工类型信息及员工的name，number,birthday。</p>
+<p>（4）参照SalariedEmployee类定义HourlyEmployee类，实现按小时计算工资的员工处理。该类包括：</p>
+<p>private成员变量wage和hour；</p>
+<p>实现父类的抽象方法earnings(),该方法返回wage*hour值；</p>
+<p>toString()方法输出员工类型信息及员工的name，number,birthday。</p>
+<p>（5）定义PayrollSystem类，创建Employee变量数组并初始化，该数组存放各类雇员对象的引用。利用循环结构遍历数组元素，输出各个对象的类型,name,number,birthday,以及该对象生日。当键盘输入本月月份值时，如果本月是某个Employee对象的生日，还要输出增加工资信息。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//提示：
+//定义People类型的数组People c1[]=new People[10];
+//数组元素赋值
+c1[0]=new People("John","0001",20);
+c1[1]=new People("Bob","0002",19);
+//若People有两个子类Student和Officer，则数组元素赋值时，可以使父类类型的数组元素指向子类。
+c1[0]=new Student("John","0001",20,85.0);
+c1[1]=new Officer("Bob","0002",19,90.5);
+</code></pre>
+
+<h2 id="7-接口-interface"><a href="#7-接口-interface" class="headerlink" title="7. 接口(interface)"></a>7. 接口(interface)</h2><h3 id="7-1-类比"><a href="#7-1-类比" class="headerlink" title="7.1 类比"></a>7.1 类比</h3><p>生活中大家每天都在用USB接口，那么USB接口与我们今天要学习的接口有什么相同点呢？</p>
+<pre><code> USB，（Universal Serial Bus，通用串行总线）是Intel公司开发的总线架构，使得在计算机上添加串行设备（鼠标、键盘、打印机、扫描仪、摄像头、充电器、MP3机、手机、数码相机、移动硬盘等）非常容易。
+</code></pre>
+<p>其实，不管是电脑上的USB插口，还是其他设备上的USB插口都只是<code>遵循了USB规范</code>的一种具体设备而已。</p>
+<p><img src="bbcc80f541000c71b81650cfaa770c86.png" alt="bbcc80f541000c71b81650cfaa770c86"></p>
+<p>只要设备遵循USB规范的，那么就可以与电脑互联，并正常通信。至于这个设备、电脑是哪个厂家制造的，内部是如何实现的，我们都无需关心。</p>
+<p>Java的软件系统会有很多模块组成，那么各个模块之间也应该采用这种<code>面向接口</code>的<code>低耦合</code>，为系统提供更好的可扩展性和可维护性。</p>
+<h3 id="7-2-概述"><a href="#7-2-概述" class="headerlink" title="7.2 概述"></a>7.2 概述</h3><p>接口就是规范，定义的是一组规则，体现了现实世界中“如果你是/要…则必须能…”的思想。继承是一个”是不是”的is-a关系，而接口实现则是 “能不能”的<code>has-a</code>关系。</p>
+<ul>
+<li>例如：电脑都预留了可以插入USB设备的USB接口，USB接口具备基本的数据传输的开启功能和关闭功能。你能不能用USB进行连接，或是否具备USB通信功能，就看你能否遵循USB接口规范</li>
+</ul>
+<img src="image-20220517211517846.png" alt="image-20220517211517846" style="zoom:67%;">
+
+<ul>
+<li>例如：Java程序是否能够连接使用某种数据库产品，那么要看该数据库产品能否实现Java设计的JDBC规范</li>
+</ul>
+<img src="image-20220325235434103.png" alt="image-20220325235434103" style="zoom:67%;">
+
+
+
+<blockquote>
+<p>接口的本质是契约、标准、规范，就像我们的法律一样。制定好后大家都要遵守。</p>
+</blockquote>
+<h3 id="7-3-定义格式"><a href="#7-3-定义格式" class="headerlink" title="7.3 定义格式"></a>7.3 定义格式</h3><p>接口的定义，它与定义类方式相似，但是使用 <code>interface</code> 关键字。它也会被编译成.class文件，但一定要明确它并不是类，而是另外一种引用数据类型。</p>
+<blockquote>
+<p>引用数据类型：数组，类，枚举，接口，注解。</p>
+</blockquote>
+<h4 id="7-3-1-接口的声明格式"><a href="#7-3-1-接口的声明格式" class="headerlink" title="7.3.1 接口的声明格式"></a>7.3.1 接口的声明格式</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">[修饰符] interface 接口名{
+    //接口的成员列表：
+    // 公共的静态常量 public static final
+    // 公共的抽象方法 public abstract
+    
+    // 公共的默认方法（JDK1.8以上）public default
+    // 公共的静态方法（JDK1.8以上）public static
+    // 私有方法（JDK1.9以上）private
+}</code></pre>
+
+<p>示例代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface USB3{
+    //静态常量
+    long MAX_SPEED = 500*1024*1024;//500MB/s
+
+    //抽象方法
+    void in();
+    void out();
+
+    //默认方法
+    default void start(){
+        System.out.println("开始");
+    }
+    default void stop(){
+        System.out.println("结束");
+    }
+
+    //静态方法
+    static void show(){
+        System.out.println("USB 3.0可以同步全速地进行读写操作");
+    }
+}</code></pre>
+
+<h4 id="7-3-2-接口的成员说明"><a href="#7-3-2-接口的成员说明" class="headerlink" title="7.3.2 接口的成员说明"></a>7.3.2 接口的成员说明</h4><p><strong>在JDK8.0 之前</strong>，接口中只允许出现：</p>
+<p>（1）公共的静态的常量：其中<code>public static final</code>可以省略</p>
+<p>（2）公共的抽象的方法：其中<code>public abstract</code>可以省略</p>
+<blockquote>
+<p>理解：接口是从多个相似类中抽象出来的规范，不需要提供具体实现</p>
+</blockquote>
+<p><strong>在JDK8.0 时</strong>，接口中允许声明<code>默认方法</code>和<code>静态方法</code>：</p>
+<p>（3）公共的默认的方法：其中public 可以省略，建议保留，但是default不能省略</p>
+<p>（4）公共的静态的方法：其中public 可以省略，建议保留，但是static不能省略</p>
+<p><strong>在JDK9.0 时</strong>，接口又增加了：</p>
+<p>（5）私有方法</p>
+<p>除此之外，接口中没有构造器，没有初始化块，因为接口中没有成员变量需要动态初始化。</p>
+<h3 id="7-4-接口的使用规则"><a href="#7-4-接口的使用规则" class="headerlink" title="7.4 接口的使用规则"></a>7.4 接口的使用规则</h3><p><strong>1、类实现接口（implements）</strong></p>
+<p>接口<strong>不能创建对象</strong>，但是可以被类实现（<code>implements</code> ，类似于被继承）。</p>
+<p>类与接口的关系为实现关系，即<strong>类实现接口</strong>，该类可以称为接口的实现类。实现的动作类似继承，格式相仿，只是关键字不同，实现使用 <code> implements</code>关键字。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">【修饰符】 class 实现类  implements 接口{
+	// 重写接口中抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}
+
+【修饰符】 class 实现类 extends 父类 implements 接口{
+    // 重写接口中抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}</code></pre>
+
+<img src="image-20220514163212312.png" alt="image-20220514163212312" style="zoom:80%;">
+
+<p>注意：</p>
+<ol>
+<li><p>如果接口的实现类是非抽象类，那么必须<code>重写接口中所有抽象方法</code>。</p>
+</li>
+<li><p>默认方法可以选择保留，也可以重写。</p>
+<blockquote>
+<p>重写时，default单词就不要再写了，它只用于在接口中表示默认方法，到类中就没有默认方法的概念了</p>
+</blockquote>
+</li>
+<li><p>接口中的静态方法不能被继承也不能被重写</p>
+</li>
+</ol>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface USB{		// 
+	public void start() ;
+	public void stop() ;	
+}
+class Computer{
+	public static void show(USB usb){	
+		usb.start() ;
+		System.out.println("=========== USB 设备工作 ========") ;
+		usb.stop() ;
+	}
+};
+class Flash implements USB{
+	public void start(){	// 重写方法
+		System.out.println("U盘开始工作。") ;
+	}
+	public void stop(){		// 重写方法
+		System.out.println("U盘停止工作。") ;
+	}
+};
+class Print implements USB{
+	public void start(){	// 重写方法
+		System.out.println("打印机开始工作。") ;
+	}
+	public void stop(){		// 重写方法
+		System.out.println("打印机停止工作。") ;
+	}
+};
+public class InterfaceDemo{
+	public static void main(String args[]){
+		Computer.show(new Flash()) ;
+		Computer.show(new Print()) ;
+
+		c.show(new USB(){
+			public void start(){
+				System.out.println("移动硬盘开始运行");
+			}
+			public void stop(){
+				System.out.println("移动硬盘停止运行");
+			}
+		});
+	}
+};</code></pre>
+
+<p><strong>2、接口的多实现（implements）</strong></p>
+<p>之前学过，在继承体系中，一个类只能继承一个父类。而对于接口而言，一个类是可以实现多个接口的，这叫做接口的<code>多实现</code>。并且，一个类能继承一个父类，同时实现多个接口。</p>
+<p>实现格式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">【修饰符】 class 实现类  implements 接口1，接口2，接口3。。。{
+	// 重写接口中所有抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}
+
+【修饰符】 class 实现类 extends 父类 implements 接口1，接口2，接口3。。。{
+    // 重写接口中所有抽象方法【必须】，当然如果实现类是抽象类，那么可以不重写
+  	// 重写接口中默认方法【可选】
+}</code></pre>
+
+<blockquote>
+<p>接口中，有多个抽象方法时，实现类必须重写所有抽象方法。<strong>如果抽象方法有重名的，只需要重写一次</strong>。</p>
+</blockquote>
+<p>举例：</p>
+<img src="image-20220514163311418.png" alt="image-20220514163311418" style="zoom:80%;">
+
+<img src="image-20220325235321778.png" alt="image-20220325235321778" style="zoom:67%;">
+
+<p><img src="1562216188519.png" alt="1562216188519"></p>
+<p>定义多个接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface A {
+    void showA();
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface B {
+    void showB();
+}</code></pre>
+
+<p>定义实现类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class C implements A,B {
+    @Override
+    public void showA() {
+        System.out.println("showA");
+    }
+
+    @Override
+    public void showB() {
+        System.out.println("showB");
+    }
+}
+</code></pre>
+
+<p>测试类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TestC {
+    public static void main(String[] args) {
+        C c = new C();
+        c.showA();
+        c.showB();
+    }
+}</code></pre>
+
+<p><strong>3、接口的多继承(extends)</strong></p>
+<p>一个接口能继承另一个或者多个接口，接口的继承也使用 <code>extends</code> 关键字，子接口继承父接口的方法。</p>
+<p>定义父接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface Chargeable {
+    void charge();
+    void in();
+    void out();
+}</code></pre>
+
+<p>定义子接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface UsbC extends Chargeable,USB3 {
+    void reverse();
+}</code></pre>
+
+<p>定义子接口的实现类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TypeCConverter implements UsbC {
+    @Override
+    public void reverse() {
+        System.out.println("正反面都支持");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println("可充电");
+    }
+
+    @Override
+    public void in() {
+        System.out.println("接收数据");
+    }
+
+    @Override
+    public void out() {
+        System.out.println("输出数据");
+    }
+}</code></pre>
+
+<blockquote>
+<p>所有父接口的抽象方法都有重写。</p>
+<p>方法签名相同的抽象方法只需要实现一次。</p>
+</blockquote>
+<p><strong>4、接口与实现类对象构成多态引用</strong></p>
+<p>实现类实现接口，类似于子类继承父类，因此，接口类型的变量与实现类的对象之间，也可以构成多态引用。通过接口类型的变量调用方法，最终<strong>执行的是你new的实现类对象实现的方法体</strong>。</p>
+<p>接口的不同实现类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class Mouse implements USB3 {
+    @Override
+    public void out() {
+        System.out.println("发送脉冲信号");
+    }
+
+    @Override
+    public void in() {
+        System.out.println("不接收信号");
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class KeyBoard implements USB3{
+    @Override
+    public void in() {
+        System.out.println("不接收信号");
+    }
+
+    @Override
+    public void out() {
+        System.out.println("发送按键信号");
+    }
+}
+</code></pre>
+
+<p>测试类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TestComputer {
+    public static void main(String[] args) {
+        Computer computer = new Computer();
+        USB3 usb = new Mouse();
+        computer.setUsb(usb);
+        usb.start();
+        usb.out();
+        usb.in();
+        usb.stop();
+        System.out.println("--------------------------");
+
+        usb = new KeyBoard();
+        computer.setUsb(usb);
+        usb.start();
+        usb.out();
+        usb.in();
+        usb.stop();
+        System.out.println("--------------------------");
+
+        usb = new MobileHDD();
+        computer.setUsb(usb);
+        usb.start();
+        usb.out();
+        usb.in();
+        usb.stop();
+    }
+}</code></pre>
+
+<p><strong>5、使用接口的静态成员</strong></p>
+<p>接口不能直接创建对象，但是可以通过接口名直接调用接口的静态方法和静态常量。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TestUSB3 {
+    public static void main(String[] args) {
+        //通过“接口名.”调用接口的静态方法 (JDK8.0才能开始使用)
+        USB3.show();
+        //通过“接口名.”直接使用接口的静态常量
+        System.out.println(USB3.MAX_SPEED);
+    }
+}</code></pre>
+
+<p><strong>6、使用接口的非静态方法</strong></p>
+<ul>
+<li>对于接口的<strong>静态方法</strong>，直接使用“<code>接口名.</code>”进行调用即可<ul>
+<li>也<strong>只能使用“接口名.”进行调用</strong>，不能通过实现类的对象进行调用</li>
+</ul>
+</li>
+<li>对于接口的抽象方法、默认方法，只能通过实现类对象才可以调用<ul>
+<li>接口不能直接创建对象，只能创建实现类的对象</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TestMobileHDD {
+    public static void main(String[] args) {
+        //创建实现类对象
+        MobileHDD b = new MobileHDD();
+
+        //通过实现类对象调用重写的抽象方法，以及接口的默认方法，如果实现类重写了就执行重写的默认方法，如果没有重写，就执行接口中的默认方法
+        b.start();
+        b.in();
+        b.stop();
+
+        //通过接口名调用接口的静态方法
+//        MobileHDD.show();
+//        b.show();
+        Usb3.show();
+    }
+}</code></pre>
+
+<h3 id="7-5-JDK8中相关冲突问题"><a href="#7-5-JDK8中相关冲突问题" class="headerlink" title="7.5 JDK8中相关冲突问题"></a>7.5 JDK8中相关冲突问题</h3><h4 id="7-5-1-默认方法冲突问题"><a href="#7-5-1-默认方法冲突问题" class="headerlink" title="7.5.1 默认方法冲突问题"></a>7.5.1 默认方法冲突问题</h4><p><strong>（1）类优先原则</strong></p>
+<p>当一个类，既继承一个父类，又实现若干个接口时，父类中的成员方法与接口中的抽象方法重名，子类就近选择执行父类的成员方法。代码如下：</p>
+<p>定义接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface Friend {
+    default void date(){//约会
+        System.out.println("吃喝玩乐");
+    }
+}</code></pre>
+
+<p>定义父类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class Father {
+    public void date(){//约会
+        System.out.println("爸爸约吃饭");
+    }
+}</code></pre>
+
+<p>定义子类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class Son extends Father implements Friend {
+    @Override
+    public void date() {
+        //(1)不重写默认保留父类的
+        //(2)调用父类被重写的
+//        super.date();
+        //(3)保留父接口的
+//        Friend.super.date();
+        //(4)完全重写
+        System.out.println("跟康师傅学Java");
+    }
+}</code></pre>
+
+<p>定义测试类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TestSon {
+    public static void main(String[] args) {
+        Son s = new Son();
+        s.date();
+    }
+}</code></pre>
+
+<p><strong>（2）接口冲突（左右为难）</strong></p>
+<ul>
+<li>当一个类同时实现了多个父接口，而多个父接口中包含方法签名相同的默认方法时，怎么办呢？</li>
+</ul>
+<p><img src="%E9%80%89%E6%8B%A9%E5%9B%B0%E9%9A%BE.jpg"></p>
+<p>无论你多难抉择，最终都是要做出选择的。</p>
+<p>声明接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface BoyFriend {
+    default void date(){//约会
+        System.out.println("神秘约会");
+    }
+}</code></pre>
+
+<p>选择保留其中一个，通过“<code>接口名.super.方法名</code>“的方法选择保留哪个接口的默认方法。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class Girl implements Friend,BoyFriend{
+
+    @Override
+    public void date() {
+        //(1)保留其中一个父接口的
+//        Friend.super.date();
+//        BoyFriend.super.date();
+        //(2)完全重写
+        System.out.println("跟康师傅学Java");
+    }
+
+}</code></pre>
+
+<p>测试类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class TestGirl {
+    public static void main(String[] args) {
+        Girl girl = new Girl();
+        girl.date();
+    }
+}</code></pre>
+
+<ul>
+<li>当一个子接口同时继承了多个接口，而多个父接口中包含方法签名相同的默认方法时，怎么办呢？</li>
+</ul>
+<p>另一个父接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface USB2 {
+    //静态常量
+    long MAX_SPEED = 60*1024*1024;//60MB/s
+
+    //抽象方法
+    void in();
+    void out();
+
+    //默认方法
+    public default void start(){
+        System.out.println("开始");
+    }
+    public default void stop(){
+        System.out.println("结束");
+    }
+
+    //静态方法
+    public static void show(){
+        System.out.println("USB 2.0可以高速地进行读写操作");
+    }
+}</code></pre>
+
+<p>子接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface USB extends USB2,USB3 {
+    @Override
+    default void start() {
+        System.out.println("Usb.start");
+    }
+
+    @Override
+    default void stop() {
+        System.out.println("Usb.stop");
+    }
+}
+</code></pre>
+
+<blockquote>
+<p>小贴士：</p>
+<p>子接口重写默认方法时，default关键字可以保留。</p>
+<p>子类重写默认方法时，default关键字不可以保留。</p>
+</blockquote>
+<h4 id="7-5-2-常量冲突问题"><a href="#7-5-2-常量冲突问题" class="headerlink" title="7.5.2 常量冲突问题"></a>7.5.2 常量冲突问题</h4><ul>
+<li>当子类继承父类又实现父接口，而父类中存在与父接口常量同名的成员变量，并且该成员变量名在子类中仍然可见。</li>
+<li>当子类同时实现多个接口，而多个接口存在相同同名常量。</li>
+</ul>
+<p>此时在子类中想要引用父类或父接口的同名的常量或成员变量时，就会有冲突问题。</p>
+<p>父类和父接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class SuperClass {
+    int x = 1;
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface SuperInterface {
+    int x = 2;
+    int y = 2;
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public interface MotherInterface {
+    int x = 3;
+}</code></pre>
+
+<p>子类：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.interfacetype;
+
+public class SubClass extends SuperClass implements SuperInterface,MotherInterface {
+    public void method(){
+//        System.out.println("x = " + x);//模糊不清
+        System.out.println("super.x = " + super.x);
+        System.out.println("SuperInterface.x = " + SuperInterface.x);
+        System.out.println("MotherInterface.x = " + MotherInterface.x);
+        System.out.println("y = " + y);//没有重名问题，可以直接访问
+    }
+}</code></pre>
+
+<h3 id="7-6-接口的总结与面试题"><a href="#7-6-接口的总结与面试题" class="headerlink" title="7.6 接口的总结与面试题"></a>7.6 接口的总结与面试题</h3><ul>
+<li>接口本身不能创建对象，只能创建接口的实现类对象，接口类型的变量可以与实现类对象构成多态引用。</li>
+<li>声明接口用interface，接口的成员声明有限制：<ul>
+<li>（1）公共的静态常量</li>
+<li>（2）公共的抽象方法</li>
+<li>（3）公共的默认方法（JDK8.0 及以上）</li>
+<li>（4）公共的静态方法（JDK8.0 及以上）</li>
+<li>（5）私有方法（JDK9.0 及以上）</li>
+</ul>
+</li>
+<li>类可以实现接口，关键字是implements，而且支持多实现。如果实现类不是抽象类，就必须实现接口中所有的抽象方法。如果实现类既要继承父类又要实现父接口，那么继承（extends）在前，实现（implements）在后。</li>
+<li>接口可以继承接口，关键字是extends，而且支持多继承。</li>
+<li>接口的默认方法可以选择重写或不重写。如果有冲突问题，另行处理。子类重写父接口的默认方法，要去掉default，子接口重写父接口的默认方法，不要去掉default。</li>
+<li>接口的静态方法不能被继承，也不能被重写。接口的静态方法只能通过“接口名.静态方法名”进行调用。</li>
+</ul>
+<p><strong>面试题</strong></p>
+<p><strong>1、为什么接口中只能声明公共的静态的常量？</strong></p>
+<p>因为接口是标准规范，那么在规范中需要声明一些底线边界值，当实现者在实现这些规范时，不能去随意修改和触碰这些底线，否则就有“危险”。</p>
+<p>例如：USB1.0规范中规定最大传输速率是1.5Mbps，最大输出电流是5V/500mA</p>
+<p>​           USB3.0规范中规定最大传输速率是5Gbps(500MB/s)，最大输出电流是5V/900mA</p>
+<p>例如：尚硅谷学生行为规范中规定学员，早上8:25之前进班，晚上21:30之后离开等等。</p>
+<p><strong>2、为什么JDK8.0 之后允许接口定义静态方法和默认方法呢？因为它违反了接口作为一个抽象标准定义的概念。</strong></p>
+<p><code>静态方法</code>：因为之前的标准类库设计中，有很多Collection/Colletions或者Path/Paths这样成对的接口和类，后面的类中都是静态方法，而这些静态方法都是为前面的接口服务的，那么这样设计一对API，不如把静态方法直接定义到接口中使用和维护更方便。</p>
+<p><code>默认方法</code>：（1）我们要在已有的老版接口中提供新方法时，如果添加抽象方法，就会涉及到原来使用这些接口的类就会有问题，那么为了保持与旧版本代码的兼容性，只能允许在接口中定义默认方法实现。比如：Java8中对Collection、List、Comparator等接口提供了丰富的默认方法。（2）当我们接口的某个抽象方法，在很多实现类中的实现代码是一样的，此时将这个抽象方法设计为默认方法更为合适，那么实现类就可以选择重写，也可以选择不重写。</p>
+<p><strong>3、为什么JDK1.9要允许接口定义私有方法呢？因为我们说接口是规范，规范是需要公开让大家遵守的。</strong></p>
+<p><strong>私有方法</strong>：因为有了默认方法和静态方法这样具有具体实现的方法，那么就可能出现多个方法由共同的代码可以抽取，而这些共同的代码抽取出来的方法又只希望在接口内部使用，所以就增加了私有方法。</p>
+<h3 id="7-7-接口与抽象类之间的对比"><a href="#7-7-接口与抽象类之间的对比" class="headerlink" title="7.7 接口与抽象类之间的对比"></a>7.7 接口与抽象类之间的对比</h3><p><img src="image-20220328002053452.png" alt="image-20220328002053452"></p>
+<blockquote>
+<p>在开发中，常看到一个类不是去继承一个已经实现好的类，而是要么继承抽象类，要么实现接口。</p>
+</blockquote>
+<h3 id="7-8-练习"><a href="#7-8-练习" class="headerlink" title="7.8 练习"></a>7.8 练习</h3><p><strong>笔试题：</strong>排错</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface A {
+    int x = 0;
+}
+class B {
+    int x = 1;
+}
+class C extends B implements A {
+    public void pX() {
+        System.out.println(x);
+    }
+    public static void main(String[] args) {
+        new C().pX();
+    }
+}
+</code></pre>
+
+<p><strong>笔试题：</strong>排错</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface Playable {
+    void play();
+}
+
+interface Bounceable {
+    void play();
+}
+
+interface Rollable extends Playable, Bounceable {
+    Ball ball = new Ball("PingPang");
+
+}
+
+class Ball implements Rollable {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public Ball(String name) {
+        this.name = name;
+    }
+
+    public void play() {
+        ball = new Ball("Football");
+        System.out.println(ball.getName());
+    }
+}
+</code></pre>
+
+<p><strong>练习1：</strong></p>
+<p>定义一个接口用来实现两个对象的比较。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface CompareObject{
+	//若返回值是 0 , 代表相等; 若为正数，代表当前对象大；负数代表当前对象小
+	public int compareTo(Object o);  
+}</code></pre>
+
+<p>定义一个Circle类，声明redius属性，提供getter和setter方法</p>
+<p>定义一个ComparableCircle类，继承Circle类并且实现CompareObject接口。在ComparableCircle类中给出接口中方法compareTo的实现体，用来比较两个圆的半径大小。</p>
+<p>定义一个测试类InterfaceTest，创建两个ComparableCircle对象，调用compareTo方法比较两个类的半径大小。</p>
+<p>思考：参照上述做法定义矩形类Rectangle和ComparableRectangle类，在ComparableRectangle类中给出compareTo方法的实现，比较两个矩形的面积大小。</p>
+<p><strong>练习2：交通工具案例</strong></p>
+<p>阿里的一个工程师，声明的属性和方法如下：</p>
+<p><img src="image-20220504172547709.png" alt="image-20220504172547709"></p>
+<p>其中，有一个乘坐交通工具的方法takingVehicle()，在此方法中调用交通工具的run()。为了出行方便，他买了一辆捷安特自行车、一辆雅迪电动车和一辆奔驰轿车。这里涉及到的相关类及接口关系如下：</p>
+<p><img src="image-20220504172918861.png" alt="image-20220504172918861"></p>
+<p>其中，电动车增加动力的方式是充电，轿车增加动力的方式是加油。在具体交通工具的run()中调用其所在类的相关属性信息。</p>
+<p>请编写相关代码，并测试。</p>
+<p>提示：创建Vehicle[]数组，保存阿里工程师的三辆交通工具，并分别在工程师的takingVehicle()中调用。</p>
+<h2 id="8-内部类（InnerClass"><a href="#8-内部类（InnerClass" class="headerlink" title="8. 内部类（InnerClass)"></a>8. 内部类（InnerClass)</h2><h3 id="8-1-概述"><a href="#8-1-概述" class="headerlink" title="8.1 概述"></a>8.1 概述</h3><h4 id="8-1-1-什么是内部类"><a href="#8-1-1-什么是内部类" class="headerlink" title="8.1.1 什么是内部类"></a>8.1.1 什么是内部类</h4><p>将一个类A定义在另一个类B里面，里面的那个类A就称为<code>内部类（InnerClass）</code>，类B则称为<code>外部类（OuterClass）</code>。</p>
+<h4 id="8-1-2-为什么要声明内部类呢"><a href="#8-1-2-为什么要声明内部类呢" class="headerlink" title="8.1.2 为什么要声明内部类呢"></a>8.1.2 为什么要声明内部类呢</h4><p>具体来说，当一个事物A的内部，还有一个部分需要一个完整的结构B进行描述，而这个内部的完整的结构B又只为外部事物A提供服务，不在其他地方单独使用，那么整个内部的完整结构B最好使用内部类。</p>
+<p>总的来说，遵循<code>高内聚、低耦合</code>的面向对象开发原则。</p>
+<h4 id="8-1-3-内部类的分类"><a href="#8-1-3-内部类的分类" class="headerlink" title="8.1.3 内部类的分类"></a>8.1.3 内部类的分类</h4><p>根据内部类声明的位置（如同变量的分类），我们可以分为：</p>
+<p><img src="image-20221124223912529.png" alt="image-20221124223912529"></p>
+<h3 id="8-2-成员内部类"><a href="#8-2-成员内部类" class="headerlink" title="8.2 成员内部类"></a>8.2 成员内部类</h3><h4 id="8-2-1-概述"><a href="#8-2-1-概述" class="headerlink" title="8.2.1 概述"></a>8.2.1 概述</h4><p>如果成员内部类中不使用外部类的非静态成员，那么通常将内部类声明为静态内部类，否则声明为非静态内部类。</p>
+<p><strong>语法格式：</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">[修饰符] class 外部类{
+    [其他修饰符] [static] class 内部类{
+    }
+}</code></pre>
+
+<p><strong>成员内部类的使用特征，概括来讲有如下两种角色：</strong></p>
+<ul>
+<li>成员内部类作为<code>类的成员的角色</code>：<ul>
+<li>和外部类不同，Inner class还可以声明为private或protected；</li>
+<li>可以调用外部类的结构。（注意：在静态内部类中不能使用外部类的非静态成员）</li>
+<li>Inner class 可以声明为static的，但此时就不能再使用外层类的非static的成员变量；</li>
+</ul>
+</li>
+<li>成员内部类作为<code>类的角色</code>：<ul>
+<li>可以在内部定义属性、方法、构造器等结构</li>
+<li>可以继承自己的想要继承的父类，实现自己想要实现的父接口们，和外部类的父类和父接口无关</li>
+<li>可以声明为abstract类 ，因此可以被其它的内部类继承</li>
+<li>可以声明为final的，表示不能被继承</li>
+<li>编译以后生成OuterClass$InnerClass.class字节码文件（也适用于局部内部类）</li>
+</ul>
+</li>
+</ul>
+<p>注意点：</p>
+<ol start="2">
+<li><p>外部类访问成员内部类的成员，需要“内部类.成员”或“内部类对象.成员”的方式</p>
+</li>
+<li><p>成员内部类可以直接使用外部类的所有成员，包括私有的数据</p>
+</li>
+<li><p>当想要在外部类的静态成员部分使用内部类时，可以考虑内部类声明为静态的</p>
+</li>
+</ol>
+<h4 id="8-2-2-创建成员内部类对象"><a href="#8-2-2-创建成员内部类对象" class="headerlink" title="8.2.2 创建成员内部类对象"></a>8.2.2 创建成员内部类对象</h4><ul>
+<li>实例化静态内部类</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">外部类名.静态内部类名 变量 = 外部类名.静态内部类名();
+变量.非静态方法();</code></pre>
+
+<ul>
+<li>实例化非静态内部类</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">外部类名 变量1 = new 外部类();
+外部类名.非静态内部类名 变量2 = 变量1.new 非静态内部类名();
+变量2.非静态方法();</code></pre>
+
+<h4 id="8-2-3-举例"><a href="#8-2-3-举例" class="headerlink" title="8.2.3 举例"></a>8.2.3 举例</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestMemberInnerClass {
+    public static void main(String[] args) {
+        //创建静态内部类实例，并调用方法
+        Outer.StaticInner inner = new Outer.StaticInner();
+        inner.inFun();
+        //调用静态内部类静态方法
+        Outer.StaticInner.inMethod();
+
+        System.out.println("*****************************");
+        
+        //创建非静态内部类实例（方式1），并调用方法
+        Outer outer = new Outer();
+        Outer.NoStaticInner inner1 = outer.new NoStaticInner();
+        inner1.inFun();
+
+        //创建非静态内部类实例（方式2）
+        Outer.NoStaticInner inner2 = outer.getNoStaticInner();
+        inner1.inFun();
+    }
+}
+class Outer{
+    private static String a = "外部类的静态a";
+    private static String b  = "外部类的静态b";
+    private String c = "外部类对象的非静态c";
+    private String d = "外部类对象的非静态d";
+
+    static class StaticInner{
+        private static String a ="静态内部类的静态a";
+        private String c = "静态内部类对象的非静态c";
+        public static void inMethod(){
+            System.out.println("Inner.a = " + a);
+            System.out.println("Outer.a = " + Outer.a);
+            System.out.println("b = " + b);
+        }
+        public void inFun(){
+            System.out.println("Inner.inFun");
+            System.out.println("Outer.a = " + Outer.a);//"外部类的静态a"
+            System.out.println("Inner.a = " + a);//"静态内部类的静态a"
+            System.out.println("b = " + b);//"外部类的静态b"
+            System.out.println("c = " + c);//"静态内部类对象的非静态c"
+//            System.out.println("d = " + d);//不能访问外部类的非静态成员
+        }
+    }
+
+    class NoStaticInner{
+        private String a = "非静态内部类对象的非静态a";
+        private String c = "非静态内部类对象的非静态c";
+
+        public void inFun(){
+            System.out.println("NoStaticInner.inFun");
+            System.out.println("Outer.a = " + Outer.a);
+            System.out.println("a = " + a);
+            System.out.println("b = " + b);
+            System.out.println("Outer.c = " + Outer.this.c);
+            System.out.println("c = " + c);
+            System.out.println("d = " + d);
+        }
+    }
+
+
+    public NoStaticInner getNoStaticInner(){
+        return new NoStaticInner();
+    }
+}</code></pre>
+
+<h3 id="8-3-局部内部类"><a href="#8-3-局部内部类" class="headerlink" title="8.3 局部内部类"></a>8.3 局部内部类</h3><h4 id="8-3-1-非匿名局部内部类"><a href="#8-3-1-非匿名局部内部类" class="headerlink" title="8.3.1 非匿名局部内部类"></a>8.3.1 非匿名局部内部类</h4><p>语法格式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">[修饰符] class 外部类{
+    [修饰符] 返回值类型  方法名(形参列表){
+            [final/abstract] class 内部类{
+    	}
+    }    
+}</code></pre>
+
+<ul>
+<li>编译后有自己的独立的字节码文件，只不过在内部类名前面冠以外部类名、$符号、编号。<ul>
+<li>这里有编号是因为同一个外部类中，不同的方法中存在相同名称的局部内部类</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>和成员内部类不同的是，它前面不能有权限修饰符等</li>
+<li>局部内部类如同局部变量一样，有作用域</li>
+<li>局部内部类中是否能访问外部类的非静态的成员，取决于所在的方法</li>
+</ul>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">/**
+ * ClassName: TestLocalInner
+ * @Author 尚硅谷-宋红康
+ * @Create 17:19
+ * @Version 1.0
+ */
+public class TestLocalInner {
+    public static void main(String[] args) {
+        Outer.outMethod();
+        System.out.println("-------------------");
+
+        Outer out = new Outer();
+        out.outTest();
+        System.out.println("-------------------");
+
+        Runner runner = Outer.getRunner();
+        runner.run();
+
+    }
+}
+class Outer{
+
+    public static void outMethod(){
+        System.out.println("Outer.outMethod");
+        final String c = "局部变量c";
+        class Inner{
+            public void inMethod(){
+                System.out.println("Inner.inMethod");
+                System.out.println(c);
+            }
+        }
+
+        Inner in = new Inner();
+        in.inMethod();
+    }
+
+    public void outTest(){
+        class Inner{
+            public void inMethod1(){
+                System.out.println("Inner.inMethod1");
+            }
+        }
+
+        Inner in = new Inner();
+        in.inMethod1();
+    }
+
+    public static Runner getRunner(){
+        class LocalRunner implements Runner{
+            @Override
+            public void run() {
+                System.out.println("LocalRunner.run");
+            }
+        }
+        return new LocalRunner();
+    }
+
+}
+interface Runner{
+    void run();
+}</code></pre>
+
+<h4 id="8-3-2-匿名内部类"><a href="#8-3-2-匿名内部类" class="headerlink" title="8.3.2 匿名内部类"></a>8.3.2 匿名内部类</h4><p>因为考虑到这个<strong>子类或实现类是一次性</strong>的，那么我们“费尽心机”的给它取名字，就显得多余。那么我们完全可以使用匿名内部类的方式来实现，避免给类命名的问题。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">new 父类([实参列表]){
+    重写方法...
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">new 父接口(){
+    重写方法...
+}</code></pre>
+
+<p>举例1：使用匿名内部类的对象直接调用方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface A{
+	void a();
+}
+public class Test{
+    public static void main(String[] args){
+    	new A(){
+			@Override
+			public void a() {
+				System.out.println("aaaa");
+			}
+    	}.a();
+    }
+}</code></pre>
+
+<p>举例2：通过父类或父接口的变量多态引用匿名内部类的对象</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface A{
+	void a();
+}
+public class Test{
+    public static void main(String[] args){
+    	A obj = new A(){
+			@Override
+			public void a() {
+				System.out.println("aaaa");
+			}
+    	};
+    	obj.a();
+    }
+}</code></pre>
+
+<p>举例3：匿名内部类的对象作为实参</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface A{
+	void method();
+}
+public class Test{
+    public static void test(A a){
+    	a.method();
+    }
+    
+    public static void main(String[] args){
+    	test(new A(){
+
+			@Override
+			public void method() {
+				System.out.println("aaaa");
+			}
+    	});
+    }   
+}</code></pre>
+
+<h3 id="8-4-练习"><a href="#8-4-练习" class="headerlink" title="8.4 练习"></a>8.4 练习</h3><p>练习：判断输出结果为何？</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Test {
+    public Test() {
+        Inner s1 = new Inner();
+        s1.a = 10;
+        Inner s2 = new Inner();
+        s2.a = 20;
+        Test.Inner s3 = new Test.Inner();
+        System.out.println(s3.a);
+    }
+    class Inner {
+        public int a = 5;
+    }
+    public static void main(String[] args) {
+        Test t = new Test();
+        Inner r = t.new Inner();
+        System.out.println(r.a);
+    }
+}
+</code></pre>
+
+<p>练习2：</p>
+<p>编写一个匿名内部类，它继承Object，并在匿名内部类中，声明一个方法public void test()打印尚硅谷。</p>
+<p>请编写代码调用这个方法。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.test01;
+
+public class Test01 {
+	public static void main(String[] args) {
+		new Object(){
+			public void test(){
+				System.out.println("尚硅谷");
+			}
+		}.test();
+	}
+}
+</code></pre>
+
+<h2 id="9-枚举类"><a href="#9-枚举类" class="headerlink" title="9. 枚举类"></a>9. 枚举类</h2><h3 id="9-1-概述"><a href="#9-1-概述" class="headerlink" title="9.1 概述"></a>9.1 概述</h3><ul>
+<li><p>枚举类型本质上也是一种类，只不过是这个类的对象是有限的、固定的几个，不能让用户随意创建。</p>
+</li>
+<li><p>枚举类的例子举不胜举：</p>
+<ul>
+<li><code>星期</code>：Monday(星期一)……Sunday(星期天)</li>
+<li><code>性别</code>：Man(男)、Woman(女)</li>
+<li><code>月份</code>：January(1月)……December(12月)</li>
+<li><code>季节</code>：Spring(春节)……Winter(冬天)</li>
+<li><code>三原色</code>：red(红色)、green(绿色)、blue(蓝色)</li>
+<li><code>支付方式</code>：Cash（现金）、WeChatPay（微信）、Alipay(支付宝)、BankCard(银行卡)、CreditCard(信用卡)</li>
+<li><code>就职状态</code>：Busy(忙碌)、Free(空闲)、Vocation(休假)、Dimission(离职)</li>
+<li><code>订单状态</code>：Nonpayment（未付款）、Paid（已付款）、Fulfilled（已配货）、Delivered（已发货）、Checked（已确认收货）、Return（退货）、Exchange（换货）、Cancel（取消）</li>
+<li><code>线程状态</code>：创建、就绪、运行、阻塞、死亡</li>
+</ul>
+</li>
+<li><p><strong>若枚举只有一个对象, 则可以作为一种单例模式的实现方式。</strong></p>
+</li>
+<li><p>枚举类的实现：</p>
+<ul>
+<li>在JDK5.0 之前，需要程序员自定义枚举类型。</li>
+<li>在JDK5.0 之后，Java支持<code>enum</code>关键字来快速定义枚举类型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-2-定义枚举类（JDK5-0-之前）"><a href="#9-2-定义枚举类（JDK5-0-之前）" class="headerlink" title="9.2 定义枚举类（JDK5.0 之前）"></a>9.2 定义枚举类（JDK5.0 之前）</h3><p>在JDK5.0 之前如何声明枚举类呢？</p>
+<ul>
+<li><code>私有化</code>类的构造器，保证不能在类的外部创建其对象</li>
+<li>在类的内部创建枚举类的实例。声明为：<code>public static final</code> ，对外暴露这些常量对象</li>
+<li>对象如果有<code>实例变量</code>，应该声明为<code>private final</code>（建议，不是必须），并在构造器中初始化</li>
+</ul>
+<p>示例代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Season{
+    private final String SEASONNAME;//季节的名称
+    private final String SEASONDESC;//季节的描述
+    private Season(String seasonName,String seasonDesc){
+        this.SEASONNAME = seasonName;
+        this.SEASONDESC = seasonDesc;
+    }
+    public static final Season SPRING = new Season("春天", "春暖花开");
+    public static final Season SUMMER = new Season("夏天", "夏日炎炎");
+    public static final Season AUTUMN = new Season("秋天", "秋高气爽");
+    public static final Season WINTER = new Season("冬天", "白雪皑皑");
+
+    @Override
+    public String toString() {
+        return "Season{" +
+                "SEASONNAME='" + SEASONNAME + '\'' +
+                ", SEASONDESC='" + SEASONDESC + '\'' +
+                '}';
+    }
+}
+class SeasonTest{
+    public static void main(String[] args) {
+        System.out.println(Season.AUTUMN);
+    }
+}</code></pre>
+
+<h3 id="9-3-定义枚举类（JDK5-0-之后）"><a href="#9-3-定义枚举类（JDK5-0-之后）" class="headerlink" title="9.3 定义枚举类（JDK5.0 之后）"></a>9.3 定义枚举类（JDK5.0 之后）</h3><h4 id="9-3-1-enum关键字声明枚举"><a href="#9-3-1-enum关键字声明枚举" class="headerlink" title="9.3.1 enum关键字声明枚举"></a>9.3.1 enum关键字声明枚举</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">【修饰符】 enum 枚举类名{
+    常量对象列表
+}
+
+【修饰符】 enum 枚举类名{
+    常量对象列表;
+    
+    对象的实例变量列表;
+}</code></pre>
+
+<p>举例1：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.enumeration;
+
+public enum Week {
+    MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY;
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestEnum {
+	public static void main(String[] args) {
+		Season spring = Season.SPRING;
+		System.out.println(spring);
+	}
+}</code></pre>
+
+<h4 id="9-3-2-enum方式定义的要求和特点"><a href="#9-3-2-enum方式定义的要求和特点" class="headerlink" title="9.3.2 enum方式定义的要求和特点"></a>9.3.2 enum方式定义的要求和特点</h4><ul>
+<li>枚举类的常量对象列表必须在枚举类的首行，因为是常量，所以建议大写。</li>
+<li>列出的实例系统会自动添加 public static final 修饰。</li>
+<li>如果常量对象列表后面没有其他代码，那么“；”可以省略，否则不可以省略“；”。</li>
+<li>编译器给枚举类默认提供的是private的无参构造，如果枚举类需要的是无参构造，就不需要声明，写常量对象列表时也不用加参数</li>
+<li>如果枚举类需要的是有参构造，需要手动定义，有参构造的private可以省略，调用有参构造的方法就是在常量对象名后面加(实参列表)就可以。</li>
+<li>枚举类默认继承的是java.lang.Enum类，因此不能再继承其他的类型。</li>
+<li>JDK5.0 之后switch，提供支持枚举类型，case后面可以写枚举常量名，无需添加枚举类作为限定。</li>
+</ul>
+<p>举例2：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public enum SeasonEnum {
+    SPRING("春天","春风又绿江南岸"),
+    SUMMER("夏天","映日荷花别样红"),
+    AUTUMN("秋天","秋水共长天一色"),
+    WINTER("冬天","窗含西岭千秋雪");
+
+    private final String seasonName;
+    private final String seasonDesc;
+    
+    private SeasonEnum(String seasonName, String seasonDesc) {
+        this.seasonName = seasonName;
+        this.seasonDesc = seasonDesc;
+    }
+    public String getSeasonName() {
+        return seasonName;
+    }
+    public String getSeasonDesc() {
+        return seasonDesc;
+    }
+}
+</code></pre>
+
+<p>举例3：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.enumeration;
+
+public enum Week {
+    MONDAY("星期一"),
+    TUESDAY("星期二"),
+    WEDNESDAY("星期三"),
+    THURSDAY("星期四"),
+    FRIDAY("星期五"),
+    SATURDAY("星期六"),
+    SUNDAY("星期日");
+
+    private final String description;
+
+    private Week(String description){
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +":"+ description;
+    }
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.enumeration;
+
+public class TestWeek {
+    public static void main(String[] args) {
+        Week week = Week.MONDAY;
+        System.out.println(week);
+
+        switch (week){
+            case MONDAY:
+                System.out.println("怀念周末，困意很浓");break;
+            case TUESDAY:
+                System.out.println("进入学习状态");break;
+            case WEDNESDAY:
+                System.out.println("死撑");break;
+            case THURSDAY:
+                System.out.println("小放松");break;
+            case FRIDAY:
+                System.out.println("又信心满满");break;
+            case SATURDAY:
+                System.out.println("开始盼周末，无心学习");break;
+            case SUNDAY:
+                System.out.println("一觉到下午");break;
+        }
+    }
+}</code></pre>
+
+<blockquote>
+<p>经验之谈：</p>
+<p>开发中，当需要定义一组常量时，强烈建议使用枚举类。</p>
+</blockquote>
+<h3 id="9-4-enum中常用方法"><a href="#9-4-enum中常用方法" class="headerlink" title="9.4 enum中常用方法"></a>9.4 enum中常用方法</h3><pre class="line-numbers language-none"><code class="language-none">String toString(): 默认返回的是常量名（对象名），可以继续手动重写该方法！
+    
+static 枚举类型[] values():返回枚举类型的对象数组。该方法可以很方便地遍历所有的枚举值，是一个静态方法
+    
+static 枚举类型 valueOf(String objName)：返回当前枚举类中名称为objName的枚举类对象。如果枚举类中不存在objName名称的对象，则会有运行时异常：IllegalArgumentException。
+    
+String name():得到当前枚举常量的名称。建议优先使用toString()。
+    
+int ordinal():返回当前枚举常量的次序号，默认从0开始
+</code></pre>
+
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.enumeration;
+
+import java.util.Scanner;
+
+public class TestEnumMethod {
+    public static void main(String[] args) {
+        //values()
+        Week[] values = Week.values();
+        for (int i = 0; i &lt; values.length; i++) {
+            //ordinal()、name()
+            System.out.println((values[i].ordinal()+1) + "-&gt;" + values[i].name());
+        }
+        System.out.println("------------------------");
+
+        Scanner input = new Scanner(System.in);
+        System.out.print("请输入星期值：");
+        int weekValue = input.nextInt();
+        Week week = values[weekValue-1];
+        //toString()
+        System.out.println(week);
+
+        System.out.print("请输入星期名：");
+        String weekName = input.next();
+        //valueOf()
+        week = Week.valueOf(weekName);
+        System.out.println(week);
+
+        input.close();
+    }
+}</code></pre>
+
+<h3 id="9-5-实现接口的枚举类"><a href="#9-5-实现接口的枚举类" class="headerlink" title="9.5 实现接口的枚举类"></a>9.5 实现接口的枚举类</h3><ul>
+<li>和普通 Java 类一样，枚举类可以实现一个或多个接口</li>
+<li>若每个枚举值在调用实现的接口方法呈现相同的行为方式，则只要统一实现该方法即可。</li>
+<li>若需要每个枚举值在调用实现的接口方法呈现出不同的行为方式，则可以让每个枚举值分别来实现该方法</li>
+</ul>
+<p>语法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//1、枚举类可以像普通的类一样，实现接口，并且可以多个，但要求必须实现里面所有的抽象方法！
+enum A implements 接口1，接口2{
+	//抽象方法的实现
+}
+
+//2、如果枚举类的常量可以继续重写抽象方法!
+enum A implements 接口1，接口2{
+    常量名1(参数){
+        //抽象方法的实现或重写
+    },
+    常量名2(参数){
+        //抽象方法的实现或重写
+    },
+    //...
+}</code></pre>
+
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">interface Info{
+	void show();
+}
+
+//使用enum关键字定义枚举类
+enum Season1 implements Info{
+	//1. 创建枚举类中的对象,声明在enum枚举类的首位
+	SPRING("春天","春暖花开"){
+		public void show(){
+			System.out.println("春天在哪里？");
+		}
+	},
+	SUMMER("夏天","夏日炎炎"){
+		public void show(){
+			System.out.println("宁静的夏天");
+		}
+	},
+	AUTUMN("秋天","秋高气爽"){
+		public void show(){
+			System.out.println("秋天是用来分手的季节");
+		}
+	},
+	WINTER("冬天","白雪皑皑"){
+		public void show(){
+			System.out.println("2002年的第一场雪");
+		}
+	};
+	
+	//2. 声明每个对象拥有的属性:private final修饰
+	private final String SEASON_NAME;
+	private final String SEASON_DESC;
+	
+	//3. 私有化类的构造器
+	private Season1(String seasonName,String seasonDesc){
+		this.SEASON_NAME = seasonName;
+		this.SEASON_DESC = seasonDesc;
+	}
+	
+	public String getSEASON_NAME() {
+		return SEASON_NAME;
+	}
+
+	public String getSEASON_DESC() {
+		return SEASON_DESC;
+	}
+}</code></pre>
+
+<h2 id="10-注解-Annotation"><a href="#10-注解-Annotation" class="headerlink" title="10. 注解(Annotation)"></a>10. 注解(Annotation)</h2><h3 id="10-1-注解概述"><a href="#10-1-注解概述" class="headerlink" title="10.1 注解概述"></a>10.1 注解概述</h3><h4 id="10-1-1-什么是注解"><a href="#10-1-1-什么是注解" class="headerlink" title="10.1.1 什么是注解"></a>10.1.1 什么是注解</h4><p>注解（Annotation）是从<code>JDK5.0</code>开始引入，以“<code>@注解名</code>”在代码中存在。例如：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@Override</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@Deprecated</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@SuppressWarnings(value=”unchecked”)</code></pre>
+
+<p>Annotation 可以像修饰符一样被使用，可用于修饰包、类、构造器、方法、成员变量、参数、局部变量的声明。还可以添加一些参数值，这些信息被保存在 Annotation 的 “name=value” 对中。</p>
+<p>注解可以在类编译、运行时进行加载，体现不同的功能。</p>
+<h4 id="10-1-2-注解与注释"><a href="#10-1-2-注解与注释" class="headerlink" title="10.1.2 注解与注释"></a>10.1.2 注解与注释</h4><p>注解也可以看做是一种注释，通过使用 Annotation，程序员可以在不改变原有逻辑的情况下，在源文件中嵌入一些补充信息。但是，注解，不同于单行注释和多行注释。</p>
+<ul>
+<li>对于单行注释和多行注释是给程序员看的。</li>
+<li>而<strong>注解是可以被编译器或其他程序读取的</strong>。程序还可以根据注解的不同，做出相应的处理。</li>
+</ul>
+<h4 id="10-1-3-注解的重要性"><a href="#10-1-3-注解的重要性" class="headerlink" title="10.1.3 注解的重要性"></a>10.1.3 注解的重要性</h4><p>在JavaSE中，注解的使用目的比较简单，例如标记过时的功能，忽略警告等。在<code>JavaEE/Android中注解占据了更重要的角色</code>，例如用来配置应用程序的任何切面，代替JavaEE旧版中所遗留的<code>繁冗代码</code>和<code>XML配置</code>等。</p>
+<p>未来的开发模式都是基于注解的，JPA是基于注解的，Spring2.5以上都是基于注解的，Hibernate3.x以后也是基于注解的，Struts2有一部分也是基于注解的了。<code>注解是一种趋势</code>，一定程度上可以说：<code>框架 = 注解 + 反射 + 设计模式</code>。</p>
+<h3 id="10-2-常见的Annotation作用"><a href="#10-2-常见的Annotation作用" class="headerlink" title="10.2 常见的Annotation作用"></a>10.2 常见的Annotation作用</h3><p><strong>示例1：生成文档相关的注解</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@author 标明开发该类模块的作者，多个作者之间使用,分割
+@version 标明该类模块的版本
+@see 参考转向，也就是相关主题
+@since 从哪个版本开始增加的
+@param 对方法中某参数的说明，如果没有参数就不能写
+@return 对方法返回值的说明，如果方法的返回值类型是void就不能写
+@exception 对方法可能抛出的异常进行说明 ，如果方法没有用throws显式抛出的异常就不能写</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.annotation.javadoc;
+/**
+ * @author 尚硅谷-宋红康
+ * @version 1.0
+ * @see Math.java
+ */
+public class JavadocTest {
+	/**
+	 * 程序的主方法，程序的入口
+	 * @param args String[] 命令行参数
+	 */
+	public static void main(String[] args) {
+	}
+	
+	/**
+	 * 求圆面积的方法
+	 * @param radius double 半径值
+	 * @return double 圆的面积
+	 */
+	public static double getArea(double radius){
+		return Math.PI * radius * radius;
+	}
+}
+</code></pre>
+
+<p><strong>示例2：在编译时进行格式检查(JDK内置的三个基本注解)</strong></p>
+<p><code>@Override</code>: 限定重写父类方法，该注解只能用于方法</p>
+<p><code>@Deprecated</code>: 用于表示所修饰的元素(类，方法等)已过时。通常是因为所修饰的结构危险或存在更好的选择</p>
+<p><code>@SuppressWarnings</code>: 抑制编译器警告</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.annotation.javadoc;
+&nbsp;
+public class AnnotationTest{
+&nbsp;
+	public static void main(String[] args) {
+		@SuppressWarnings("unused")
+		int a = 10;
+	}
+	@Deprecated
+	public void print(){
+		System.out.println("过时的方法");
+	}
+&nbsp;
+	@Override
+	public String toString() {
+		return "重写的toString方法()";
+	}
+}
+</code></pre>
+
+<p><strong>示例3：跟踪代码依赖性，实现替代配置文件功能</strong></p>
+<ul>
+<li>Servlet3.0提供了注解(annotation)，使得不再需要在web.xml文件中进行Servlet的部署。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) { }
+&nbsp;   
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        doGet(request, response);
+	}  
+}
+</code></pre>
+
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;servlet&gt;
+   &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;com.servlet.LoginServlet&lt;/servlet-class&gt;
+ &lt;/servlet&gt;
+ &lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/login&lt;/url-pattern&gt;
+ &lt;/servlet-mapping&gt;
+</code></pre>
+
+<ul>
+<li>Spring框架中关于“事务”的管理</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">@Transactional(propagation=Propagation.REQUIRES_NEW,isolation=Isolation.READ_COMMITTED,readOnly=false,timeout=3)
+public void buyBook(String username, String isbn) {
+	//1.查询书的单价
+    int price = bookShopDao.findBookPriceByIsbn(isbn);
+    //2. 更新库存
+    bookShopDao.updateBookStock(isbn);	
+    //3. 更新用户的余额
+    bookShopDao.updateUserAccount(username, price);
+}
+</code></pre>
+
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!-- 配置事务属性 --&gt;
+&lt;tx:advice transaction-manager="dataSourceTransactionManager" id="txAdvice"&gt;
+       &lt;tx:attributes&gt;
+       &lt;!-- 配置每个方法使用的事务属性 --&gt;
+       &lt;tx:method name="buyBook" propagation="REQUIRES_NEW" 
+	 isolation="READ_COMMITTED"  read-only="false"  timeout="3" /&gt;
+       &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+</code></pre>
+
+<h3 id="10-3-三个最基本的注解"><a href="#10-3-三个最基本的注解" class="headerlink" title="10.3 三个最基本的注解"></a>10.3 三个最基本的注解</h3><h4 id="10-3-1-Override"><a href="#10-3-1-Override" class="headerlink" title="10.3.1 @Override"></a>10.3.1 @Override</h4><ul>
+<li><p>用于检测被标记的方法为有效的重写方法，如果不是，则报编译错误！</p>
+</li>
+<li><p>只能标记在方法上。</p>
+</li>
+<li><p>它会被编译器程序读取。</p>
+</li>
+</ul>
+<h4 id="10-3-2-Deprecated"><a href="#10-3-2-Deprecated" class="headerlink" title="10.3.2 @Deprecated"></a>10.3.2 @Deprecated</h4><ul>
+<li><p>用于表示被标记的数据已经过时，不推荐使用。</p>
+</li>
+<li><p>可以用于修饰 属性、方法、构造、类、包、局部变量、参数。</p>
+</li>
+<li><p>它会被编译器程序读取。</p>
+</li>
+</ul>
+<h4 id="10-3-3-SuppressWarnings"><a href="#10-3-3-SuppressWarnings" class="headerlink" title="10.3.3 @SuppressWarnings"></a>10.3.3 @SuppressWarnings</h4><ul>
+<li><p>抑制编译警告。当我们不希望看到警告信息的时候，可以使用 SuppressWarnings 注解来抑制警告信息</p>
+</li>
+<li><p>可以用于修饰类、属性、方法、构造、局部变量、参数</p>
+</li>
+<li><p>它会被编译器程序读取。</p>
+</li>
+<li><p>可以指定的警告类型有（了解）</p>
+<ul>
+<li>all，抑制所有警告</li>
+<li>unchecked，抑制与未检查的作业相关的警告</li>
+<li>unused，抑制与未用的程式码及停用的程式码相关的警告</li>
+<li>deprecation，抑制与淘汰的相关警告</li>
+<li>nls，抑制与非 nls 字串文字相关的警告</li>
+<li>null，抑制与空值分析相关的警告</li>
+<li>rawtypes，抑制与使用 raw 类型相关的警告</li>
+<li>static-access，抑制与静态存取不正确相关的警告</li>
+<li>static-method，抑制与可能宣告为 static 的方法相关的警告</li>
+<li>super，抑制与置换方法相关但不含 super 呼叫的警告</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<p>示例代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.annotation;
+
+import java.util.ArrayList;
+
+public class TestAnnotation {
+    @SuppressWarnings("all")
+    public static void main(String[] args) {
+        int i;
+
+        ArrayList list = new ArrayList();
+        list.add("hello");
+        list.add(123);
+        list.add("world");
+
+        Father f = new Son();
+        f.show();
+        f.methodOl();
+    }
+}
+
+class Father{
+    @Deprecated
+    void show() {
+        System.out.println("Father.show");
+    }
+    void methodOl() {
+        System.out.println("Father Method");
+    }
+}
+
+class Son extends Father{
+/*	@Override
+	void method01() {
+		System.out.println("Son Method");
+	}*/
+}</code></pre>
+
+<h3 id="10-4-元注解"><a href="#10-4-元注解" class="headerlink" title="10.4 元注解"></a>10.4 元注解</h3><p>JDK1.5在java.lang.annotation包定义了4个标准的meta-annotation类型，它们被用来提供对其它 annotation类型作说明。</p>
+<p>（1）**@Target：**用于描述注解的使用范围</p>
+<ul>
+<li>可以通过枚举类型ElementType的10个常量对象来指定</li>
+<li>TYPE，METHOD，CONSTRUCTOR，PACKAGE…..</li>
+</ul>
+<p>（2）**@Retention：**用于描述注解的生命周期</p>
+<ul>
+<li>可以通过枚举类型RetentionPolicy的3个常量对象来指定</li>
+<li>SOURCE（源代码）、CLASS（字节码）、RUNTIME（运行时）</li>
+<li><code>唯有RUNTIME阶段才能被反射读取到</code>。</li>
+</ul>
+<p>（3）**@Documented**：表明这个注解应该被 javadoc工具记录。</p>
+<p>（4）**@Inherited：**允许子类继承父类中的注解</p>
+<p>示例代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package java.lang;
+
+import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Override {
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package java.lang;
+
+import java.lang.annotation.*;
+import static java.lang.annotation.ElementType.*;
+
+@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+@Retention(RetentionPolicy.SOURCE)
+public @interface SuppressWarnings {
+    String[] value();
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package java.lang;
+
+import java.lang.annotation.*;
+import static java.lang.annotation.ElementType.*;
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+public @interface Deprecated {
+}</code></pre>
+
+<blockquote>
+<p>拓展：元数据</p>
+<p>String name = “Tom”;</p>
+</blockquote>
+<h3 id="10-5-自定义注解的使用"><a href="#10-5-自定义注解的使用" class="headerlink" title="10.5 自定义注解的使用"></a>10.5 自定义注解的使用</h3><p>一个完整的注解应该包含三个部分：<br>（1）声明<br>（2）使用<br>（3）读取</p>
+<h4 id="10-5-1-声明自定义注解"><a href="#10-5-1-声明自定义注解" class="headerlink" title="10.5.1 声明自定义注解"></a>10.5.1 声明自定义注解</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">【元注解】
+【修饰符】 @interface 注解名{
+    【成员列表】
+}</code></pre>
+
+<ul>
+<li>自定义注解可以通过四个元注解@Retention,@Target，@Inherited,@Documented，分别说明它的声明周期，使用位置，是否被继承，是否被生成到API文档中。</li>
+<li>Annotation 的成员在 Annotation 定义中以无参数有返回值的抽象方法的形式来声明，我们又称为配置参数。返回值类型只能是八种基本数据类型、String类型、Class类型、enum类型、Annotation类型、以上所有类型的数组</li>
+<li>可以使用 default 关键字为抽象方法指定默认返回值</li>
+<li>如果定义的注解含有抽象方法，那么使用时必须指定返回值，除非它有默认值。格式是“方法名 = 返回值”，如果只有一个抽象方法需要赋值，且方法名为value，可以省略“value=”，所以如果注解只有一个抽象方法成员，建议使用方法名value。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.annotation;
+
+import java.lang.annotation.*;
+
+@Inherited
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Table {
+    String value();
+}</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.annotation;
+
+import java.lang.annotation.*;
+
+@Inherited
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Column {
+    String columnName();
+    String columnType();
+}</code></pre>
+
+<h4 id="10-5-2-使用自定义注解"><a href="#10-5-2-使用自定义注解" class="headerlink" title="10.5.2 使用自定义注解"></a>10.5.2 使用自定义注解</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.annotation;
+
+@Table("t_stu")
+public class Student {
+    @Column(columnName = "sid",columnType = "int")
+    private int id;
+    @Column(columnName = "sname",columnType = "varchar(20)")
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+</code></pre>
+
+<h4 id="10-5-3-读取和处理自定义注解"><a href="#10-5-3-读取和处理自定义注解" class="headerlink" title="10.5.3 读取和处理自定义注解"></a>10.5.3 读取和处理自定义注解</h4><p>自定义注解必须配上注解的信息处理流程才有意义。</p>
+<p>我们自己定义的注解，只能使用反射的代码读取。所以自定义注解的声明周期必须是RetentionPolicy.RUNTIME。</p>
+<p>具体的使用见<code>《尚硅谷_宋红康_第17章_反射机制.md》</code>。</p>
+<h3 id="10-6-JUnit单元测试"><a href="#10-6-JUnit单元测试" class="headerlink" title="10.6 JUnit单元测试"></a>10.6 JUnit单元测试</h3><h4 id="10-6-1-测试分类"><a href="#10-6-1-测试分类" class="headerlink" title="10.6.1 测试分类"></a>10.6.1 测试分类</h4><p><strong>黑盒测试：</strong>不需要写代码，给输入值，看程序是否能够输出期望的值。 </p>
+<p><strong>白盒测试：</strong>需要写代码的。关注程序具体的执行流程。</p>
+<img src="image-20220511181800694.png" alt="image-20220511181800694" style="zoom: 50%;">
+
+<p><img src="image-20220524102038600.png" alt="image-20220524102038600"></p>
+<h4 id="10-6-2-JUnit单元测试介绍"><a href="#10-6-2-JUnit单元测试介绍" class="headerlink" title="10.6.2 JUnit单元测试介绍"></a>10.6.2 JUnit单元测试介绍</h4><p>JUnit 是由 Erich Gamma 和 Kent Beck 编写的一个测试框架（regression testing framework），供Java开发人员编写单元测试之用。</p>
+<p><strong>JUnit测试是程序员测试，即所谓白盒测试，因为程序员知道被测试的软件如何（How）完成功能和完成什么样（What）的功能。</strong></p>
+<p>要使用JUnit，必须在项目的编译路径中<code>引入JUnit的库</code>，即相关的.class文件组成的jar包。jar就是一个压缩包，压缩包都是开发好的第三方（Oracle公司第一方，我们自己第二方，其他都是第三方）工具类，都是以class文件形式存在的。</p>
+<h4 id="10-6-3-引入本地JUnit-jar"><a href="#10-6-3-引入本地JUnit-jar" class="headerlink" title="10.6.3 引入本地JUnit.jar"></a>10.6.3 引入本地JUnit.jar</h4><p>第1步：在项目中File-Project Structure中操作：添加Libraries库</p>
+<img src="image-20211228180938922.png" alt="image-20211228180938922" style="zoom:80%;">
+
+<p><img src="image-20221002195547325.png" alt="image-20221002195547325"></p>
+<p>其中，junit-libs包内容如下：</p>
+<p><img src="image-20220813005206452.png" alt="image-20220813005206452"></p>
+<p>第2步：选择要在哪些module中应用JUnit库</p>
+<p><img src="image-20220813005511062.png" alt="image-20220813005511062"></p>
+<p>第3步：检查是否应用成功</p>
+<p><img src="image-20220813005729233.png" alt="image-20220813005729233"></p>
+<p><strong>注意Scope：选择Compile，否则编译时，无法使用JUnit。</strong></p>
+<p>第4步：下次如果有新的模块要使用该libs库，这样操作即可</p>
+<p><img src="image-20220813005944022.png" alt="image-20220813005944022"></p>
+<p><img src="image-20220813010018152.png" alt="image-20220813010018152"></p>
+<p><img src="image-20220813010055217.png" alt="image-20220813010055217"></p>
+<p><img src="image-20220813010124381.png" alt="image-20220813010124381"></p>
+<h4 id="10-6-4-编写和运行-Test单元测试方法"><a href="#10-6-4-编写和运行-Test单元测试方法" class="headerlink" title="10.6.4 编写和运行@Test单元测试方法"></a>10.6.4 编写和运行@Test单元测试方法</h4><p>JUnit4版本，要求@Test标记的方法必须满足如下要求：</p>
+<ul>
+<li>所在的类必须是public的，非抽象的，包含唯一的无参构造器。</li>
+<li>@Test标记的方法本身必须是public，非抽象的，非静态的，void无返回值，()无参数的。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.atguigu.junit;
+
+import org.junit.Test;
+
+public class TestJUnit {
+    @Test
+    public void test01(){
+        System.out.println("TestJUnit.test01");
+    }
+
+    @Test
+    public void test02(){
+        System.out.println("TestJUnit.test02");
+    }
+
+    @Test
+    public void test03(){
+        System.out.println("TestJUnit.test03");
+    }
+}</code></pre>
+
+<p><img src="image-20220106152412245.png" alt="image-20220106152412245"></p>
+<h4 id="10-6-5-设置执行JUnit用例时支持控制台输入"><a href="#10-6-5-设置执行JUnit用例时支持控制台输入" class="headerlink" title="10.6.5 设置执行JUnit用例时支持控制台输入"></a>10.6.5 设置执行JUnit用例时支持控制台输入</h4><p><strong>1. 设置数据：</strong></p>
+<p>默认情况下，在单元测试方法中使用Scanner时，并不能实现控制台数据的输入。需要做如下设置：</p>
+<p>在<code>idea64.exe.vmoptions配置文件</code>中加入下面一行设置，重启idea后生效。</p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties">-Deditable.java.test.console=true</code></pre>
+
+<p><strong>2. 配置文件位置：</strong></p>
+<p><img src="image-20220813011625546.png" alt="image-20220813011625546"></p>
+<p><img src="image-20220813011642180.png" alt="image-20220813011642180"></p>
+<p>添加完成之后，重启IDEA即可。</p>
+<p><strong>3. 如果上述位置设置不成功，需要继续修改如下位置</strong></p>
+<p>修改位置1：IDEA安装目录的bin目录（例如：<code>D:\develop_tools\IDEA\IntelliJ IDEA 2022.1.2\bin</code>）下的idea64.exe.vmoptions文件。 </p>
+<p>修改位置2：C盘的用户目录<code>C:\Users\用户名\AppData\Roaming\JetBrains\IntelliJIdea2022.1</code> 下的idea64.exe.vmoptions`件。</p>
+<h4 id="10-6-6-定义test测试方法模板"><a href="#10-6-6-定义test测试方法模板" class="headerlink" title="10.6.6 定义test测试方法模板"></a>10.6.6 定义test测试方法模板</h4><p>选中自定义的模板组，点击”+”（1.Live Template）来定义模板。</p>
+<p><img src="image-20211229100040505.png" alt="image-20211229100040505"></p>
+<h2 id="11-包装类"><a href="#11-包装类" class="headerlink" title="11. 包装类"></a>11. 包装类</h2><h3 id="11-1-为什么需要包装类"><a href="#11-1-为什么需要包装类" class="headerlink" title="11.1 为什么需要包装类"></a>11.1 为什么需要包装类</h3><p>Java提供了两个类型系统，<code>基本数据类型</code>与<code>引用数据类型</code>。使用基本数据类型在于效率，然而当要使用只针对对象设计的API或新特性（例如泛型），怎么办呢？例如：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">//情况1：方法形参
+Object类的equals(Object obj)
+
+//情况2：方法形参
+ArrayList类的add(Object obj)
+//没有如下的方法：
+add(int number)
+add(double d)
+add(boolean b)
+
+//情况3：泛型
+Set&lt;T&gt;
+List&lt;T&gt;
+Cllection&lt;T&gt;
+Map&lt;K,V&gt;</code></pre>
+
+<h3 id="11-2-有哪些包装类"><a href="#11-2-有哪些包装类" class="headerlink" title="11.2 有哪些包装类"></a>11.2 有哪些包装类</h3><p>Java针对八种基本数据类型定义了相应的引用类型：包装类（封装类）。有了类的特点，就可以调用类中的方法，Java才是真正的面向对象。</p>
+<img src="image-20220329001912486.png" alt="image-20220329001912486" style="zoom:80%;">
+
+<p>封装以后的，内存结构对比：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args){
+	int num = 520;
+	Integer obj = new Integer(520);
+}</code></pre>
+
+<img src="image-20220514163725830.png" alt="image-20220514163725830" style="zoom:80%;">
+
+<h3 id="11-3-自定义包装类"><a href="#11-3-自定义包装类" class="headerlink" title="11.3 自定义包装类"></a>11.3 自定义包装类</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">public class MyInteger {
+    int value;
+
+    public MyInteger() {
+    }
+
+    public MyInteger(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+}
+</code></pre>
+
+<h3 id="11-4-包装类与基本数据类型间的转换"><a href="#11-4-包装类与基本数据类型间的转换" class="headerlink" title="11.4 包装类与基本数据类型间的转换"></a>11.4 包装类与基本数据类型间的转换</h3><h4 id="11-4-1-装箱"><a href="#11-4-1-装箱" class="headerlink" title="11.4.1 装箱"></a>11.4.1 装箱</h4><p> <strong>装箱：把基本数据类型转为包装类对象</strong></p>
+<blockquote>
+<p>转为包装类的对象，是为了使用专门为对象设计的API和特性</p>
+</blockquote>
+<p>基本数值—-&gt;包装对象</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer obj1 = new Integer(4);//使用构造函数函数
+Float f = new Float(“4.56”);
+Long l = new Long(“asdf”);  //NumberFormatException
+
+Integer obj2 = Integer.valueOf(4);//使用包装类中的valueOf方法</code></pre>
+
+<h4 id="11-4-2-拆箱"><a href="#11-4-2-拆箱" class="headerlink" title="11.4.2 拆箱"></a>11.4.2 拆箱</h4><p><strong>拆箱：把包装类对象拆为基本数据类型</strong></p>
+<blockquote>
+<p>转为基本数据类型，一般是因为需要运算，Java中的大多数运算符是为基本数据类型设计的。比较、算术等</p>
+</blockquote>
+<p>包装对象—-&gt;基本数值</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer obj = new Integer(4);
+int num1 = obj.intValue();</code></pre>
+
+<p><strong>自动装箱与拆箱：</strong></p>
+<p>由于我们经常要做基本类型与包装类之间的转换，从<code>JDK5.0 </code>开始，基本类型与包装类的装箱、拆箱动作可以自动完成。例如：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer i = 4;//自动装箱。相当于Integer i = Integer.valueOf(4);
+i = i + 5;//等号右边：将i对象转成基本数值(自动拆箱) i.intValue() + 5;
+//加法运算完成后，再次装箱，把基本数值转成对象。</code></pre>
+
+<blockquote>
+<p>注意：只能与自己对应的类型之间才能实现自动装箱与拆箱。</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer i = 1;
+Double d = 1;//错误的，1是int类型</code></pre>
+
+<h3 id="11-5-基本数据类型、包装类与字符串间的转换"><a href="#11-5-基本数据类型、包装类与字符串间的转换" class="headerlink" title="11.5 基本数据类型、包装类与字符串间的转换"></a>11.5 基本数据类型、包装类与字符串间的转换</h3><p><strong>（1）基本数据类型转为字符串</strong></p>
+<p><strong>方式1：</strong>调用字符串重载的valueOf()方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int a = 10;
+//String str = a;//错误的
+
+String str = String.valueOf(a);</code></pre>
+
+<p><strong>方式2：</strong>更直接的方式</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int a = 10;
+
+String str = a + "";</code></pre>
+
+<p><strong>（2）字符串转为基本数据类型</strong></p>
+<p><strong>方式1：</strong>除了Character类之外，其他所有包装类都具有parseXxx静态方法可以将字符串参数转换为对应的基本类型，例如：</p>
+<ul>
+<li><code>public static int parseInt(String s)</code>：将字符串参数转换为对应的int基本类型。</li>
+<li><code>public static long parseLong(String s)</code>：将字符串参数转换为对应的long基本类型。</li>
+<li><code>public static double parseDouble(String s)</code>：将字符串参数转换为对应的double基本类型。</li>
+</ul>
+<p><strong>方式2：</strong>字符串转为包装类，然后可以自动拆箱为基本数据类型</p>
+<ul>
+<li><code>public static Integer valueOf(String s)</code>：将字符串参数转换为对应的Integer包装类，然后可以自动拆箱为int基本类型</li>
+<li><code>public static Long valueOf(String s)</code>：将字符串参数转换为对应的Long包装类，然后可以自动拆箱为long基本类型</li>
+<li><code>public static Double valueOf(String s)</code>：将字符串参数转换为对应的Double包装类，然后可以自动拆箱为double基本类型</li>
+</ul>
+<p>注意:如果字符串参数的内容无法正确转换为对应的基本类型，则会抛出<code>java.lang.NumberFormatException</code>异常。</p>
+<p><strong>方式3：</strong>通过包装类的构造器实现</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">int a = Integer.parseInt("整数的字符串");
+double d = Double.parseDouble("小数的字符串");
+boolean b = Boolean.parseBoolean("true或false");
+
+int a = Integer.valueOf("整数的字符串");
+double d = Double.valueOf("小数的字符串");
+boolean b = Boolean.valueOf("true或false");
+
+int i = new Integer(“12”);
+</code></pre>
+
+<p>其他方式小结：</p>
+<p><img src="image-20220813012801907.png" alt="image-20220813012801907"></p>
+<h3 id="11-6-包装类的其它API"><a href="#11-6-包装类的其它API" class="headerlink" title="11.6 包装类的其它API"></a>11.6 包装类的其它API</h3><h4 id="11-6-1-数据类型的最大最小值"><a href="#11-6-1-数据类型的最大最小值" class="headerlink" title="11.6.1 数据类型的最大最小值"></a>11.6.1 数据类型的最大最小值</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer.MAX_VALUE和Integer.MIN_VALUE
+    
+Long.MAX_VALUE和Long.MIN_VALUE
+    
+Double.MAX_VALUE和Double.MIN_VALUE</code></pre>
+
+<h4 id="11-6-2-字符转大小写"><a href="#11-6-2-字符转大小写" class="headerlink" title="11.6.2 字符转大小写"></a>11.6.2 字符转大小写</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">Character.toUpperCase('x');
+
+Character.toLowerCase('X');</code></pre>
+
+<h4 id="11-6-3-整数转进制"><a href="#11-6-3-整数转进制" class="headerlink" title="11.6.3 整数转进制"></a>11.6.3 整数转进制</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer.toBinaryString(int i) 
+    
+Integer.toHexString(int i)
+    
+Integer.toOctalString(int i)</code></pre>
+
+<h4 id="11-6-4-比较的方法"><a href="#11-6-4-比较的方法" class="headerlink" title="11.6.4 比较的方法"></a>11.6.4 比较的方法</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">Double.compare(double d1, double d2)
+    
+Integer.compare(int x, int y) </code></pre>
+
+<h3 id="11-7-包装类对象的特点"><a href="#11-7-包装类对象的特点" class="headerlink" title="11.7 包装类对象的特点"></a>11.7 包装类对象的特点</h3><h4 id="11-7-1-包装类缓存对象"><a href="#11-7-1-包装类缓存对象" class="headerlink" title="11.7.1 包装类缓存对象"></a>11.7.1 包装类缓存对象</h4><table>
+<thead>
+<tr>
+<th>包装类</th>
+<th>缓存对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Byte</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td>Short</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td>Integer</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td>Long</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>没有</td>
+</tr>
+<tr>
+<td>Double</td>
+<td>没有</td>
+</tr>
+<tr>
+<td>Character</td>
+<td>0~127</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>true和false</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer a = 1;
+Integer b = 1;
+System.out.println(a == b);//true
+
+Integer i = 128;
+Integer j = 128;
+System.out.println(i == j);//false
+
+Integer m = new Integer(1);//新new的在堆中
+Integer n = 1;//这个用的是缓冲的常量对象，在方法区
+System.out.println(m == n);//false
+
+Integer x = new Integer(1);//新new的在堆中
+Integer y = new Integer(1);//另一个新new的在堆中
+System.out.println(x == y);//false</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Double d1 = 1.0;
+Double d2 = 1.0;
+System.out.println(d1==d2);//false 比较地址，没有缓存对象，每一个都是新new的</code></pre>
+
+<h4 id="11-7-2-类型转换问题"><a href="#11-7-2-类型转换问题" class="headerlink" title="11.7.2 类型转换问题"></a>11.7.2 类型转换问题</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer i = 1000;
+double j = 1000;
+System.out.println(i==j);//true  会先将i自动拆箱为int，然后根据基本数据类型“自动类型转换”规则，转为double比较</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer i = 1000;
+int j = 1000;
+System.out.println(i==j);//true 会自动拆箱，按照基本数据类型进行比较</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Integer i = 1;
+Double d = 1.0
+System.out.println(i==d);//编译报错</code></pre>
+
+<h4 id="11-7-3-包装类对象不可变"><a href="#11-7-3-包装类对象不可变" class="headerlink" title="11.7.3 包装类对象不可变"></a>11.7.3 包装类对象不可变</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TestExam {
+	public static void main(String[] args) {
+		int i = 1;
+		Integer j = new Integer(2);
+		Circle c = new Circle();
+		change(i,j,c);
+		System.out.println("i = " + i);//1
+		System.out.println("j = " + j);//2
+		System.out.println("c.radius = " + c.radius);//10.0
+	}
+	
+	/*
+	 * 方法的参数传递机制：
+	 * （1）基本数据类型：形参的修改完全不影响实参
+	 * （2）引用数据类型：通过形参修改对象的属性值，会影响实参的属性值
+	 * 这类Integer等包装类对象是“不可变”对象，即一旦修改，就是新对象，和实参就无关了
+	 */
+	public static void change(int a ,Integer b,Circle c ){
+		a += 10;
+//		b += 10;//等价于  b = new Integer(b+10);
+		c.radius += 10;
+		/*c = new Circle();
+		c.radius+=10;*/
+	}
+}
+class Circle{
+	double radius;
+}</code></pre>
+
+<h3 id="11-8-练习"><a href="#11-8-练习" class="headerlink" title="11.8 练习"></a>11.8 练习</h3><p>笔试题：如下两个题目输出结果相同吗？各是什么。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Object o1 = true ? new Integer(1) : new Double(2.0);
+System.out.println(o1);//1.0
+</code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Object o2;
+if (true)
+    o2 = new Integer(1);
+else
+    o2 = new Double(2.0);
+System.out.println(o2);//1
+</code></pre>
+
+<p>面试题：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public void method1() {
+    Integer i = new Integer(1);
+    Integer j = new Integer(1);
+    System.out.println(i == j);
+
+    Integer m = 1;
+    Integer n = 1;
+    System.out.println(m == n);//
+
+    Integer x = 128;
+    Integer y = 128;
+    System.out.println(x == y);//
+}
+</code></pre>
+
+<p>练习：</p>
+<p>利用Vector代替数组处理：从键盘读入学生成绩（以负数代表输入结束），找出最高分，并输出学生成绩等级。</p>
+<ul>
+<li><p>提示：数组一旦创建，长度就固定不变，所以在创建数组前就需要知道它的长度。而向量类java.util.Vector可以根据需要动态伸缩。</p>
+</li>
+<li><p>创建Vector对象：Vector v=new Vector();</p>
+</li>
+<li><p>给向量添加元素：v.addElement(Object obj);  //obj必须是对象</p>
+</li>
+<li><p>取出向量中的元素：Object obj=v.elementAt(0);</p>
+<ul>
+<li>注意第一个元素的下标是0，返回值是Object类型的。</li>
+</ul>
+</li>
+<li><p>计算向量的长度：v.size();</p>
+</li>
+<li><p>若与最高分相差10分内：A等；20分内：B等；30分内：C等；其它：D等</p>
+</li>
+</ul>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/03/17/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%938-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E9%AB%98%E7%BA%A7/">https://nan-ying.github.io/2023/03/17/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%938-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E9%AB%98%E7%BA%A7/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/Java/">
+              <span class="chip bg-color">Java</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-03-17T11-18-38',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/20/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%939-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Java知识整理和总结9-异常处理">
+                        
+                        <span class="card-title">Java知识整理和总结9-异常处理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/14/Java%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%937-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E8%BF%9B%E9%98%B6/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Java知识整理和总结7-面向对象编程-进阶">
+                        
+                        <span class="card-title">Java知识整理和总结7-面向对象编程-进阶</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >698.4k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>

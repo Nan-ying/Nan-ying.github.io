@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SpringBoot知识整理和总结2-运维实用篇, Nan-ying&#39;s Blog">
+    <meta name="description" content="SpringBoot运维实用篇​		基础篇发布以后，看到了很多小伙伴在网上的留言，也帮助超过100位小伙伴解决了一些遇到的问题，并且已经发现了部分问题具有典型性，预计将有些问题在后面篇章的合适位置添加到本套课程中，作为解决方案提供给大家。
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>SpringBoot知识整理和总结2-运维实用篇 | Nan-ying&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+  <body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Nan-ying&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Nan-ying&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+ 
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SpringBoot知识整理和总结2-运维实用篇</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+  <div class="card">
+    <div class="card-content article-info">
+      <div class="row tag-cate">
+        <div class="col s7">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/SpringBoot/">
+              <span class="chip bg-color">SpringBoot</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div class="col s5 right-align">
+          
+          <div class="post-cate">
+            <i class="fas fa-bookmark fa-fw icon-category"></i>
+            
+            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+              框架
+            </a>
+            
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="post-info">
+        
+        <div class="post-date info-break-policy">
+          <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2023-07-31
+        </div>
+          
+        <div class="info-break-policy">
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 10k
+        </div>
+         
+        <div class="info-break-policy">
+          <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+          36 分
+        </div>
+         
+        <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
+        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+        <span id="busuanzi_value_page_pv"></span>
+        
+      </div>
+    </div>
+    <hr class="clearfix" />
+
+    
+    <!-- 是否加载使用自带的 prismjs. -->
+    <link
+      rel="stylesheet"
+      href="/libs/prism/prism.min.css"
+    />
+     
+
+    <div class="card-content article-card-content">
+      <div id="articleContent">
+        <h1 id="SpringBoot运维实用篇"><a href="#SpringBoot运维实用篇" class="headerlink" title="SpringBoot运维实用篇"></a>SpringBoot运维实用篇</h1><p>​		基础篇发布以后，看到了很多小伙伴在网上的留言，也帮助超过100位小伙伴解决了一些遇到的问题，并且已经发现了部分问题具有典型性，预计将有些问题在后面篇章的合适位置添加到本套课程中，作为解决方案提供给大家。</p>
+<p>​		从此刻开始，咱们就要进入到实用篇的学习了。实用篇是在基础篇的根基之上，补全SpringBoot的知识图谱。比如在基础篇中只给大家讲了yaml的语法格式，但是具体写yaml文件的时候还有很多实用开发过程中的坑，这些在实用篇中都要进行学习。</p>
+<p>​		实用篇共分为两块内容，分别是运维实用篇和开发实用篇。其实划分的标准是我自己制定的，因为这里面的知识有一些还是比较散的，做两个阶段的划分是为了更好的将同类知识点进行归类，帮助学习者找到知识之间的关联性，这样有助于知识的记忆存储转换，经过一系列的知识反复出现与强化练习，将临时记忆转换成永久性记忆。做课程嘛，不能仅以讲完为目标，要以学习者的学习收获为目标，这也是我这么多年教学秉承的基本理念。</p>
+<p>​		下面就从运维实用篇开始讲，在运维实用篇中，我给学习者的定位是玩转配置，为开发实用篇中做各种技术的整合做好准备工作。与开发实用篇相比，运维实用篇的内容显得略微单薄，并且有部分知识模块在运维实用篇和开发实用篇中都要讲一部分，这些内容都后置到开发实用篇中了。废话不说了，先看看运维实用篇中都包含哪些内容：</p>
+<ul>
+<li>SpringBoot程序的打包与运行</li>
+<li>配置高级</li>
+<li>多环境开发</li>
+<li>日志</li>
+</ul>
+<p>​		下面开启第一部分SpringBoot程序打包与运行的学习</p>
+<h2 id="1-SpringBoot程序的打包与运行"><a href="#1-SpringBoot程序的打包与运行" class="headerlink" title="1. SpringBoot程序的打包与运行"></a>1. SpringBoot程序的打包与运行</h2><p>​		刚开始做开发学习的小伙伴可能在有一个知识上面有错误的认知，我们天天写程序是在Idea下写的，运行也是在Idea下运行的。</p>
+<img src="image-20211201091317258.png" alt="image-20211201091317258" style="zoom:67%;">
+
+
+
+<p>​		但是实际开发完成后，我们的项目是不可能运行在自己的电脑上的。</p>
+<img src="image-20211201091341645.png" alt="image-20211201091341645" style="zoom:67%;">
+
+<p>​		我们以后制作的程序是运行在专用的服务器上的，简单说就是将你做的程序放在一台独立运行的电脑上，这台电脑要比你开发使用的计算机更专业，并且安全等级各个方面要远超过你现在的电脑。</p>
+<img src="image-20211201091502040.png" alt="image-20211201091502040" style="zoom:67%;">
+
+<p>​		那我们的程序如何放置在这台专用的电脑上呢，这就要将我们的程序先组织成一个文件，然后将这个文件传输到这台服务器上。这里面就存在两个过程，一个是打包的过程，另一个是运行的过程。</p>
+<p><font color="#f0f"><b>温馨提示</b></font></p>
+<p>​		企业项目上线为了保障环境适配性会采用下面流程发布项目，这里不讨论此过程。</p>
+<ol>
+<li>开发部门使用Git、SVN等版本控制工具上传工程到版本服务器</li>
+<li>服务器使用版本控制工具下载工程</li>
+<li>服务器上使用Maven工具在当前真机环境下重新构建项目</li>
+<li>启动服务</li>
+</ol>
+<p>​		继续说我们的打包和运行过程。所谓打包指将程序转换成一个可执行的文件，所谓运行指不依赖开发环境执行打包产生的文件。上述两个操作都有对应的命令可以快速执行。</p>
+<h3 id="程序打包与运行"><a href="#程序打包与运行" class="headerlink" title="程序打包与运行"></a>程序打包与运行</h3><p>​		SpringBoot程序是基于Maven创建的，在Maven中提供有打包的指令，叫做package。本操作可以在Idea环境下执行。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">mvn package</code></pre>
+
+<p>​		打包后会产生一个与工程名类似的jar文件，其名称是由模块名+版本号+.jar组成的。</p>
+<p>​		程序包打好以后，就可以直接执行了。在程序包所在路径下，cmd执行指令。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">java -jar 工程包名.jar</code></pre>
+
+<p>​		执行程序打包指令后，程序正常运行，与在Idea下执行程序没有区别。</p>
+<p>​		<font color="#ff0000"><b>特别关注</b></font>：如果你的计算机中没有安装java的jdk环境，是无法正确执行上述操作的，因为程序执行使用的是java指令。</p>
+<p>​		<font color="#ff0000"><b>特别关注</b></font>：在使用向导创建SpringBoot工程时，pom.xml文件中会有如下配置，这一段配置千万不能删除，否则打包后无法正常执行程序。</p>
+<pre class="line-numbers language-XML" data-language="XML"><code class="language-XML">&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>SpringBoot工程可以基于java环境下独立运行jar文件启动服务</li>
+<li>SpringBoot工程执行mvn命令package进行打包</li>
+<li>执行jar命令：java –jar 工程名.jar</li>
+</ol>
+<h3 id="SpringBoot程序打包失败处理"><a href="#SpringBoot程序打包失败处理" class="headerlink" title="SpringBoot程序打包失败处理"></a>SpringBoot程序打包失败处理</h3><p>​		有些小伙伴打包以后执行会出现一些问题，导致程序无法正常执行，例如下面的现象</p>
+<img src="image-20211201094223991.png" alt="image-20211201094223991" style="zoom:67%;">
+
+<p>​		要想搞清楚这个问题就要说说.jar文件的工作机制了，知道了这个东西就知道如何避免此类问题的发生了。</p>
+<p>​		搞java开发平时会接触很多jar包，比如mysql的驱动jar包，而上面我们打包程序后得到的也是一个jar文件。这个时候如果你使用上面的java -jar指令去执行mysql的驱动jar包就会出现上述不可执行的现象，而我们的SpringBoot项目为什么能执行呢？其实是因为打包方式不一样。</p>
+<p>​		在SpringBoot工程的pom.xml中有下面这组配置，这组配置决定了打包出来的程序包是否可以执行。</p>
+<pre class="line-numbers language-XML" data-language="XML"><code class="language-XML">&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+
+<p>​		我们分别开启这段配置和注释掉这段配置分别执行两次打包，然后观察两次打包后的程序包的差别，共有3处比较明显的特征</p>
+<ul>
+<li>打包后文件的大小不同</li>
+<li>打包后所包含的内容不同</li>
+<li>打包程序中个别文件内容不同</li>
+</ul>
+<p>​		先看第一个现象，文件大小不同。带有配置时打包生成的程序包大小如下：</p>
+<img src="image-20211201095610270.png" alt="image-20211201095610270" style="zoom:150%;">
+
+<p>​		不难看出，带有配置的程序包体积比不带配置的大了30倍，那这里面都有什么呢？能差这么多？下面看看里面的内容有什么区别。</p>
+<p>​		<img src="image-20211201101541267.png" alt="image-20211201101541267" style="zoom:50%;"><img src="../../../%25E5%2590%258E%25E7%25AB%25AF%25E8%25AE%25B0%25E8%25A6%2581/%25E5%2590%258E%25E7%25AB%25AF/SpringBoot2%25E5%2585%25A8%25E5%25A5%2597/%25E8%25AE%25B2%25E4%25B9%2589/img/image-20211201101652868.png" alt="image-20211201101652868" style="zoom:50%;"></p>
+<p>​		我们发现内容也完全不一样，仅有一个目录是一样的，叫做META-INF。打开容量大的程序包中的BOOT-INF目录下的classes目录，我们发现其中的内容居然和容量小的程序包中的内容完全一样。</p>
+<p>​		<img src="../../../%25E5%2590%258E%25E7%25AB%25AF%25E8%25AE%25B0%25E8%25A6%2581/%25E5%2590%258E%25E7%25AB%25AF/SpringBoot2%25E5%2585%25A8%25E5%25A5%2597/%25E8%25AE%25B2%25E4%25B9%2589/img/image-20211201101805569.png" alt="image-20211201101805569" style="zoom:50%;"><img src="image-20211201101652868.png" alt="image-20211201101652868" style="zoom:50%;"></p>
+<p>​		原来大的程序包中除了包含小的程序包中的内容，还有别的东西。都有什么呢？回到BOOT-INF目录下，打开lib目录，里面显示了很多个jar文件。</p>
+<p>​		<img src="image-20211201102025791.png" alt="image-20211201102025791" style="zoom:50%;"></p>
+<p>​		仔细翻阅不难发现，这些jar文件都是我们制作这个工程时导入的坐标对应的文件。大概可以想明白了，SpringBoot程序为了让自己打包生成的程序可以独立运行，不仅将项目中自己开发的内容进行了打包，还把当前工程运行需要使用的jar包全部打包进来了。为什么这样做呢？就是为了可以独立运行。不依赖程序包外部的任何资源可以独立运行当前程序。这也是为什么大的程序包容量是小的程序包容量的30倍的主要原因。</p>
+<p>​		再看看大程序包还有什么不同之处，在最外层目录包含一个org目录，进入此目录，目录名是org\springframework\boot\loader，在里面可以找到一个<font color="#ff0000"><b>JarLauncher.class</b></font>的文件，先记得这个文件。再看这套目录名，明显是一个Spring的目录名，为什么要把Spring框架的东西打包到这个程序包中呢？不清楚。</p>
+<p>​		回到两个程序包的最外层目录，查看名称相同的文件夹META-INF下都有一个叫做MANIFEST.MF的文件，但是大小不同，打开文件，比较内容区别</p>
+<ul>
+<li><p>小容量文件的MANIFEST.MF</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">Manifest-Version: 1.0
+Implementation-Title: springboot_08_ssmp
+Implementation-Version: 0.0.1-SNAPSHOT
+Build-Jdk-Spec: 1.8
+Created-By: Maven Jar Plugin 3.2.0</code></pre>
+</li>
+<li><p>大容量文件的MANIFEST.MF</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">Manifest-Version: 1.0
+Spring-Boot-Classpath-Index: BOOT-INF/classpath.idx
+Implementation-Title: springboot_08_ssmp
+Implementation-Version: 0.0.1-SNAPSHOT
+Spring-Boot-Layers-Index: BOOT-INF/layers.idx
+Start-Class: com.itheima.SSMPApplication
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Build-Jdk-Spec: 1.8
+Spring-Boot-Version: 2.5.4
+Created-By: Maven Jar Plugin 3.2.0
+Main-Class: org.springframework.boot.loader.JarLauncher</code></pre></li>
+</ul>
+<p>​		大文件中明显比小文件中多了几行信息，其中最后一行信息是Main-Class: org.springframework.boot.loader.<font color="#ff0000"><b>JarLauncher</b></font>。这句话什么意思呢？如果使用java -jar执行此程序包，将执行Main-Class属性配置的类，这个类恰巧就是前面看到的那个文件。原来SpringBoot打包程序中出现Spring框架的东西是为这里服务的。而这个org.springframework.boot.loader.<font color="#ff0000"><b>JarLauncher</b></font>类内部要查找Start-Class属性中配置的类，并执行对应的类。这个属性在当前配置中也存在，对应的就是我们的引导类类名。</p>
+<p>​		现在这组设定的作用就搞清楚了</p>
+<ol>
+<li>SpringBoot程序添加配置后会打出一个特殊的包，包含Spring框架部分功能，原始工程内容，原始工程依赖的jar包</li>
+<li>首先读取MANIFEST.MF文件中的Main-Class属性，用来标记执行java -jar命令后运行的类</li>
+<li>JarLauncher类执行时会找到Start-Class属性，也就是启动类类名</li>
+<li>运行启动类时会运行当前工程的内容</li>
+<li>运行当前工程时会使用依赖的jar包，从lib目录中查找</li>
+</ol>
+<p>​		看来SpringBoot打出来了包为了能够独立运行，简直是煞费苦心，将所有需要使用的资源全部都添加到了这个包里。这就是为什么这个jar包能独立运行的原因。</p>
+<p>​		再来看之前的报错信息：</p>
+<img src="image-20211201094223991.png" alt="image-20211201094223991" style="zoom:67%;">
+
+<p>​		由于打包时没有使用那段配置，结果打包后形成了一个普通的jar包，在MANIFEST.MF文件中也就没有了Main-Class对应的属性了，所以运行时提示找不到主清单属性，这就是报错的原因。</p>
+<p>​		上述内容搞清楚对我们编程意义并不大，但是对各位小伙伴理清楚SpringBoot工程独立运行的机制是有帮助的。其实整体过程主要是带着大家分析，如果以后遇到了类似的问题，多给自己提问，多问一个为什么，兴趣自己就可以独立解决问题了。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>spring-boot-maven-plugin插件用于将当前程序打包成一个可以独立运行的程序包</li>
+</ol>
+<h3 id="命令行启动常见问题及解决方案"><a href="#命令行启动常见问题及解决方案" class="headerlink" title="命令行启动常见问题及解决方案"></a>命令行启动常见问题及解决方案</h3><p>​		各位小伙伴在DOS环境下启动SpringBoot工程时，可能会遇到端口占用的问题。给大家一组命令，不用深入学习，备用吧。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA"># 查询端口
+netstat -ano
+# 查询指定端口
+netstat -ano |findstr "端口号"
+# 根据进程PID查询进程名称
+tasklist |findstr "进程PID号"
+# 根据PID杀死任务
+taskkill /F /PID "进程PID号"
+# 根据进程名称杀死任务
+taskkill -f -t -im "进程名称"</code></pre>
+
+<p>​		关于打包与运行程序其实还有一系列的配置和参数，下面的内容中遇到再说，这里先开个头，知道如何打包和运行程序。</p>
+<h3 id="SpringBoot项目快速启动（Linux版）"><a href="#SpringBoot项目快速启动（Linux版）" class="headerlink" title="SpringBoot项目快速启动（Linux版）"></a>SpringBoot项目快速启动（Linux版）</h3><p>​		其实对于Linux系统下的程序运行与Windows系统下的程序运行差别不大，命令还是那组命令，只不过各位小伙伴可能对Linux指令不太熟悉，结果就会导致各种各样的问题发生。比如防火墙如何关闭，IP地址如何查询，JDK如何安装等等。这里不作为重点内容给大家普及了，了解一下整体过程就行了。</p>
+<ul>
+<li>基于Linux（CenterOS7）</li>
+<li>安装JDK，且版本不低于打包时使用的JDK版本</li>
+<li>安装包保存在/usr/local/自定义目录中或$HOME下</li>
+<li>其他操作参照Windows版进行</li>
+</ul>
+<h2 id="2-配置高级"><a href="#2-配置高级" class="headerlink" title="2. 配置高级"></a>2. 配置高级</h2><p>​		关于配置在基础篇讲过一部分，基础篇的配置总体上来说就是让各位小伙伴掌握配置的格式。比如配置文件如何写啊，写好的数据如何读取啊，都是基础的语法级知识。在实用篇中就要集中在配置的应用这个方面了，下面就开始配置高级相关内容的第一部分学习，为什么说第一部分，因为在开发实用篇中还有对应的配置高级知识要进行学习。</p>
+<h3 id="2-1-临时属性设置"><a href="#2-1-临时属性设置" class="headerlink" title="2.1 临时属性设置"></a>2.1 临时属性设置</h3><p>​		目前我们的程序包打好了，可以发布了。但是程序包打好以后，里面的配置都已经是固定的了，比如配置了服务器的端口是8080。如果我要启动项目，发现当前我的服务器上已经有应用启动起来并且占用了8080端口，这个时候就尴尬了。难道要重新把打包好的程序修改一下吗？比如我要把打包好的程序启动端口改成80。</p>
+<p><img src="../../../%25E5%2590%258E%25E7%25AB%25AF%25E8%25AE%25B0%25E8%25A6%2581/%25E5%2590%258E%25E7%25AB%25AF/SpringBoot2%25E5%2585%25A8%25E5%25A5%2597/%25E8%25AE%25B2%25E4%25B9%2589/img/image-20211206095113771.png" alt="image-20211206095113771">             <img src="image-20211206095524343.png" alt="image-20211206095524343">             <img src="../../../%25E5%2590%258E%25E7%25AB%25AF%25E8%25AE%25B0%25E8%25A6%2581/%25E5%2590%258E%25E7%25AB%25AF/SpringBoot2%25E5%2585%25A8%25E5%25A5%2597/%25E8%25AE%25B2%25E4%25B9%2589/img/image-20211206095101581.png" alt="image-20211206095101581"></p>
+<p>​		SpringBoot提供了灵活的配置方式，如果你发现你的项目中有个别属性需要重新配置，可以使用临时属性的方式快速修改某些配置。方法也特别简单，在启动的时候添加上对应参数就可以了。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">java –jar springboot.jar –-server.port=80</code></pre>
+
+<p>​		上面的命令是启动SpringBoot程序包的命令，在命令输入完毕后，空一格，然后输入两个-号。下面按照属性名=属性值的形式添加对应参数就可以了。记得，这里的格式不是yaml中的书写格式，当属性存在多级名称时，中间使用点分隔，和properties文件中的属性格式完全相同。</p>
+<p>​		如果你发现要修改的属性不止一个，可以按照上述格式继续写，属性与属性之间使用空格分隔。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">java –jar springboot.jar –-server.port=80 --logging.level.root=debug</code></pre>
+
+<h4 id="属性加载优先级"><a href="#属性加载优先级" class="headerlink" title="属性加载优先级"></a>属性加载优先级</h4><p>​		现在我们的程序配置受两个地方控制了，第一配置文件，第二临时属性。并且我们发现临时属性的加载优先级要高于配置文件的。那是否还有其他的配置方式呢？其实是有的，而且还不少，打开官方文档中对应的内容，就可以查看配置读取的优先顺序。地址奉上：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html">https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config</a></p>
+<img src="image-20211206100859236.png" alt="image-20211206100859236" style="zoom:67%;">
+
+<p>​		我们可以看到，居然有14种配置的位置，而我们现在使用的是这里面的2个。第3条Config data说的就是使用配置文件，第11条Command line arguments说的就是使用命令行临时参数。而这14种配置的顺序就是SpringBoot加载配置的顺序，言外之意，命令行临时属性比配置文件的加载优先级高，所以这个列表上面的优先级低，下面的优先级高。其实这个东西不用背的，你就记得一点，你最终要什么效果，你自己是知道的，不管这个顺序是怎么个高低排序，开发时一定要配置成你要的顺序为准。这个顺序只是在你想不明白问题的时候帮助你分析罢了。</p>
+<p>​		比如你现在加载了一个user.name属性。结果你发现出来的结果和你想的不一样，那肯定是别的优先级比你高的属性覆盖你的配置属性了，那你就可以看着这个顺序挨个排查。哪个位置有可能覆盖了你的属性。</p>
+<p>​		我在课程评论区看到小伙伴学习基础篇的时候问这个问题了，就是这个原因造成的。在yaml中配置了user.name属性值，然后读取出来的时候居然不是自己的配置值，因为在系统属性中有一个属性叫做user.name，两个相互冲突了。而系统属性的加载优先顺序在上面这个列表中是5号，高于3号，所以SpringBoot最终会加载系统配置属性user.name。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>使用jar命令启动SpringBoot工程时可以使用临时属性替换配置文件中的属性</li>
+<li>临时属性添加方式：java –jar 工程名.jar –-属性名=值</li>
+<li>多个临时属性之间使用空格分隔</li>
+<li>临时属性必须是当前boot工程支持的属性，否则设置无效</li>
+</ol>
+<h4 id="开发环境中使用临时属性"><a href="#开发环境中使用临时属性" class="headerlink" title="开发环境中使用临时属性"></a>开发环境中使用临时属性</h4><p>​		临时使用目前是有了，但是上线的时候通过命令行输入的临时属性必须是正确的啊，那这些属性配置值我们必须在开发环境中测试好才行。下面说一下开发环境中如何使用临时属性，其实就是Idea界面下如何操作了。</p>
+<p>​		打开SpringBoot启动类的运行界面，在里面找到配置项。其中Program arguments对应的位置就是添加临时属性的，可以加几个试试效果。</p>
+<img src="image-20211206101947622.png" alt="image-20211206101947622" style="zoom:80%;">
+
+<p>​		做到这里其实可以产生一个思考了，如果对java编程熟悉的小伙伴应该知道，我们运行main方法的时候，如果想使用main方法的参数，也就是下面的args参数，就是在上面这个位置添加的参数。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">public static void main(String[] args) {
+}</code></pre>
+
+<p>​		原来是这样，通过这个args就可以获取到参数。再来看我们的引导类是如何书写的</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">public static void main(String[] args) {
+    SpringApplication.run(SSMPApplication.class,args);
+}</code></pre>
+
+<p>​		这个args参数居然传递给了run方法，看来在Idea中配置的临时参数就是通过这个位置传递到我们的程序中的。言外之意，这里如果不用这个args是不是就断开了外部传递临时属性的入口呢？是这样的，我们可以使用下面的调用方式，这样<strong>外部临时属性就无法进入到SpringBoot程序中</strong>了。确保了安全性</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">public static void main(String[] args) {
+    SpringApplication.run(SSMPApplication.class);
+}</code></pre>
+
+<p>​		或者还可以使用如下格式来玩这个操作，就是将配置不写在配置文件中，直接写成一个字符串数组，传递给程序入口。当然，这种做法并没有什么实际开发意义。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">public static void main(String[] args) {
+    String[] arg = new String[1];
+    arg[0] = "--server.port=8082";
+    SpringApplication.run(SSMPApplication.class, arg);
+}</code></pre>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>启动SpringBoot程序时，可以选择是否使用命令行属性为SpringBoot程序传递启动属性</li>
+</ol>
+<p><strong>思考</strong></p>
+<p>​		现在使用临时属性可以在启动项目前临时更改配置了，但是新的问题又出来了。临时属性好用是好用，就是写的多了会很麻烦。比如我现在有个需求，上线的时候使用临时属性配置20个值，这下可麻烦了，能不能搞得简单点，集中管理一下呢？比如说搞个文件，加载指定文件？还真可以。怎么做呢？咱们下一节再说。</p>
+<h3 id="2-2-配置文件分类"><a href="#2-2-配置文件分类" class="headerlink" title="2.2 配置文件分类"></a>2.2 配置文件分类</h3><p>​		SpringBoot提供了配置文件和临时属性的方式来对程序进行配置。前面一直说的是临时属性，这一节要说说配置文件了。其实这个配置文件我们一直在使用，只不过我们用的是SpringBoot提供的4级配置文件中的其中一个级别。</p>
+<p><strong>4个级别分别是</strong>：</p>
+<ul>
+<li>类路径下配置文件（一直使用的是这个，也就是resources目录中的application.yml文件）</li>
+<li>类路径下config目录下配置文件</li>
+<li>程序包所在目录中配置文件</li>
+<li>程序包所在目录中config目录下配置文件</li>
+</ul>
+<p>​		好复杂，一个一个说。其实上述4种文件是提供给你了4种配置文件书写的位置，功能都是一样的，都是做配置的。那大家关心的就是差别了，没错，就是因为位置不同，产生了差异。总体上来说，4种配置文件如果都存在的话，有一个优先级的问题，说白了就是加入4个文件我都有，里面都有一样的配置，谁生效的问题。上面4个文件的加载优先顺序为</p>
+<ol>
+<li>file ：config/application.yml <strong>【最高】</strong></li>
+<li>file ：application.yml</li>
+<li>classpath：config/application.yml</li>
+<li>classpath：application.yml  <strong>【最低】</strong></li>
+</ol>
+<p>​		那为什么设计这种多种呢？说一个最典型的应用吧。</p>
+<ul>
+<li>场景A：你作为一个开发者，你做程序的时候为了方便自己写代码，配置的数据库肯定是连接你自己本机的，咱们使用4这个级别，也就是之前一直用的application.yml。</li>
+<li>场景B：现在项目开发到了一个阶段，要联调测试了，连接的数据库是测试服务器的数据库，肯定要换一组配置吧。你可以选择把你之前的文件中的内容都改了，目前还不麻烦。</li>
+<li>场景C：测试完了，一切OK。你继续写你的代码，你发现你原来写的配置文件被改成测试服务器的内容了，你要再改回来。现在明白了不？场景B中把你的内容都改掉了，你现在要重新改回来，以后呢？改来改去吗？</li>
+</ul>
+<p>​		解决方案很简单，用上面的3这个级别的配置文件就可以快速解决这个问题，再写一个配置就行了。两个配置文件共存，因为config目录中的配置加载优先级比你的高，所以配置项如果和级别4里面的内容相同就覆盖了，这样是不是很简单？</p>
+<p>​		级别1和2什么时候使用呢？程序==打包以后==就要用这个级别了，管你程序里面配置写的是什么？我的级别高，可以轻松覆盖你，就不用考虑这些配置冲突的问题了。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li><p>配置文件分为4种</p>
+<ul>
+<li>项目类路径配置文件：服务于开发人员本机开发与测试</li>
+<li>项目类路径config目录中配置文件：服务于项目经理整体调控</li>
+<li>工程路径配置文件：服务于运维人员配置涉密线上环境</li>
+<li>工程路径config目录中配置文件：服务于运维经理整体调控</li>
+</ul>
+</li>
+<li><p>多层级配置文件间的属性采用叠加并覆盖的形式作用于程序</p>
+</li>
+</ol>
+<h3 id="2-3-自定义配置文件"><a href="#2-3-自定义配置文件" class="headerlink" title="2.3 自定义配置文件"></a>2.3 自定义配置文件</h3><p>​		之前咱们做配置使用的配置文件都是application.yml，其实这个文件也是可以改名字的，这样方便维护。比如我2020年4月1日搞活动，走了一组配置，2020年5月1日活动取消，恢复原始配置，这个时候只需要重新更换一下配置文件就可以了。但是你总不能在原始配置文件上修改吧，不然搞完活动以后，活动的配置就留不下来了，不利于维护。</p>
+<p>​		自定义配置文件方式有如下两种：</p>
+<p><strong>方式一：使用临时属性设置配置文件名，注意仅仅是名称，不要带扩展名</strong></p>
+<img src="image-20211206105548238.png" alt="image-20211206105548238" style="zoom:67%;">
+
+<p><strong>方式二：使用临时属性设置配置文件路径，这个是全路径名</strong></p>
+<img src="image-20211206105716450.png" alt="image-20211206105716450" style="zoom:67%;">
+
+<p>​		也可以设置加载多个配置文件</p>
+<img src="image-20211206105750285.png" alt="image-20211206105750285" style="zoom:67%;">
+
+<p>​		使用的属性一个是spring.config.name，另一个是spring.config.location，这个一定要区别清楚。</p>
+<p><font color="#f0f"><b>温馨提示</b></font></p>
+<p>​		我们现在研究的都是SpringBoot单体项目，就是单服务器版本。其实企业开发现在更多的是使用基于SpringCloud技术的多服务器项目。这种配置方式和我们现在学习的完全不一样，所有的服务器将不再设置自己的配置文件，而是通过配置中心获取配置，动态加载配置信息。为什么这样做？集中管理。这里不再说这些了，后面再讲这些东西。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>配置文件可以修改名称，通过启动参数设定</li>
+<li>配置文件可以修改路径，通过启动参数设定</li>
+<li>微服务开发中配置文件通过配置中心进行设置</li>
+</ol>
+<h2 id="3-多环境开发"><a href="#3-多环境开发" class="headerlink" title="3. 多环境开发"></a>3. 多环境开发</h2><p>​		讲的内容距离线上开发越来越近了，下面说一说多环境开发问题。</p>
+<p>​		什么是多环境？其实就是说你的电脑上写的程序最终要放到别人的服务器上去运行。每个计算机环境不一样，这就是多环境。常见的多环境开发主要兼顾3种环境设置，开发环境——自己用的，测试环境——自己公司用的，生产环境——甲方爸爸用的。因为这是绝对不同的三台电脑，所以环境肯定有所不同，比如连接的数据库不一样，设置的访问端口不一样等等。</p>
+<img src="image-20211206110958819.png" alt="image-20211206110958819" style="zoom:67%;">
+
+<h3 id="3-1-多环境开发（yaml单一文件版）"><a href="#3-1-多环境开发（yaml单一文件版）" class="headerlink" title="3.1 多环境开发（yaml单一文件版）"></a>3.1 多环境开发（yaml单一文件版）</h3><p>​		那什么是多环境开发？就是针对不同的环境设置不同的配置属性即可。比如你自己开发时，配置你的端口如下：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">server:
+  port: 80</code></pre>
+
+<p>​		如何想设计两组环境呢？中间使用三个减号分隔开</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">server:
+  port: 80
+---
+server:
+  port: 81</code></pre>
+
+<p>​		如何区分两种环境呢？起名字呗</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles: pro
+server:
+	port: 80
+---
+spring:
+	profiles: dev
+server:
+	port: 81</code></pre>
+
+<p>​		那用哪一个呢？设置默认启动哪个就可以了</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles:
+		active: pro		# 启动pro
+---
+spring:
+	profiles: pro
+server:
+	port: 80
+---
+spring:
+	profiles: dev
+server:
+	port: 81</code></pre>
+
+<p>​		就这么简单，再多来一组环境也OK</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles:
+		active: pro		# 启动pro
+---
+spring:
+	profiles: pro
+server:
+	port: 80
+---
+spring:
+	profiles: dev
+server:
+	port: 81
+---
+spring:
+	profiles: test
+server:
+	port: 82</code></pre>
+
+<p>​		其中关于环境名称定义上述格式是过时格式，标准格式如下</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	config:
+    	activate:
+        	on-profile: pro</code></pre>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>多环境开发需要设置若干种常用环境，例如开发、生产、测试环境</li>
+<li>yaml格式中设置多环境使用—区分环境设置边界</li>
+<li>每种环境的区别在于加载的配置属性不同</li>
+<li>启用某种环境时需要指定启动时使用该环境</li>
+</ol>
+<h3 id="3-2-多环境开发（yaml多文件版）"><a href="#3-2-多环境开发（yaml多文件版）" class="headerlink" title="3.2 多环境开发（yaml多文件版）"></a>3.2 多环境开发（yaml多文件版）</h3><p>​		将所有的配置都放在一个配置文件中，尤其是每一个配置应用场景都不一样，这显然不合理，于是就有了将一个配置文件拆分成多个配置文件的想法。拆分后，每个配置文件中写自己的配置，主配置文件中写清楚用哪一个配置文件就好了。</p>
+<p><strong>主配置文件</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles:
+		active: pro		# 启动pro</code></pre>
+
+<p><strong>环境配置文件</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">server:
+	port: 80</code></pre>
+
+<p>​		环境配置文件因为每一个都是配置自己的项，所以连名字都不用写里面了。那问题是如何区分这是哪一组配置呢？使用文件名区分。</p>
+<p><strong>application-pro.yaml</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">server:
+	port: 80</code></pre>
+
+<p><strong>application-dev.yaml</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">server:
+	port: 81</code></pre>
+
+<p>​		文件的命名规则为：application-环境名.yml。</p>
+<p>​		在配置文件中，如果某些配置项所有环境都一样，可以将这些项写入到主配置中，只有哪些有区别的项才写入到环境配置文件中。</p>
+<ul>
+<li>主配置文件中设置公共配置（全局）</li>
+<li>环境分类配置文件中常用于设置冲突属性（局部）</li>
+</ul>
+<p><strong>总结</strong></p>
+<ol>
+<li><p>可以使用独立配置文件定义环境属性</p>
+</li>
+<li><p>独立配置文件便于线上系统维护更新并保障系统安全性</p>
+</li>
+</ol>
+<h3 id="3-3-多环境开发（properties多文件版）"><a href="#3-3-多环境开发（properties多文件版）" class="headerlink" title="3.3 多环境开发（properties多文件版）"></a>3.3 多环境开发（properties多文件版）</h3><p>​		SpringBoot最早期提供的配置文件格式是properties格式的，这种格式的多环境配置也了解一下吧。</p>
+<p><strong>主配置文件</strong></p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties">spring.profiles.active=pro</code></pre>
+
+<p><strong>环境配置文件</strong></p>
+<p><strong>application-pro.properties</strong></p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties">server.port=80</code></pre>
+
+<p><strong>application-dev.properties</strong></p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties">server.port=81</code></pre>
+
+<p>​		文件的命名规则为：application-环境名.properties。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>properties文件多环境配置仅支持多文件格式</li>
+</ol>
+<h3 id="3-4-多环境开发独立配置文件书写技巧"><a href="#3-4-多环境开发独立配置文件书写技巧" class="headerlink" title="3.4 多环境开发独立配置文件书写技巧"></a>3.4 多环境开发独立配置文件书写技巧</h3><p>​		作为程序员在搞配置的时候往往处于一种分久必合合久必分的局面。开始先写一起，后来为了方便维护就拆分。对于多环境开发也是如此，下面给大家说一下如何基于多环境开发做配置独立管理，务必掌握。</p>
+<p><strong>准备工作</strong></p>
+<p>​		将所有的配置根据功能对配置文件中的信息进行拆分，并制作成独立的配置文件，命名规则如下</p>
+<ul>
+<li>application-devDB.yml</li>
+<li>application-devRedis.yml</li>
+<li>application-devMVC.yml</li>
+</ul>
+<p><strong>使用</strong></p>
+<p>​		使用include属性在激活指定环境的情况下，同时对多个环境进行加载使其生效，多个环境间使用逗号分隔</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles:
+    	active: dev
+        include: devDB,devRedis,devMVC</code></pre>
+
+<p>​		比较一下，现在相当于加载dev配置时，再加载对应的3组配置，从结构上就很清晰，用了什么，对应的名称是什么</p>
+<p><strong>注意</strong></p>
+<p>​		当主环境dev与其他环境有相同属性时，主环境属性生效；其他环境中有相同属性时，最后加载的环境属性生效</p>
+<p><strong>改良</strong></p>
+<p>​		但是上面的设置也有一个问题，比如我要切换dev环境为pro时，include也要修改。因为include属性只能使用一次，这就比较麻烦了。SpringBoot从2.4版开始使用group属性替代include属性，降低了配置书写量。简单说就是我先写好，你爱用哪个用哪个。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles:
+    	active: dev
+        group:
+        	"dev": devDB,devRedis,devMVC
+      		"pro": proDB,proRedis,proMVC
+      		"test": testDB,testRedis,testMVC</code></pre>
+
+<p>​		现在再来看，如果切换dev到pro，只需要改一下是不是就结束了？完美！</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>多环境开发使用group属性设置配置文件分组，便于线上维护管理</li>
+</ol>
+<h3 id="3-5-多环境开发控制"><a href="#3-5-多环境开发控制" class="headerlink" title="3.5 多环境开发控制"></a>3.5 多环境开发控制</h3><p>​		多环境开发到这里基本上说完了，最后说一个冲突问题。就是maven和SpringBoot同时设置多环境的话怎么搞。</p>
+<p>​		要想处理这个冲突问题，你要先理清一个关系，究竟谁在多环境开发中其主导地位。也就是说如果现在都设置了多环境，谁的应该是保留下来的，另一个应该遵从相同的设置。</p>
+<p>​		maven是做什么的？项目构建管理的，最终生成代码包的，SpringBoot是干什么的？简化开发的。简化，又不是其主导作用。最终还是要靠maven来管理整个工程，所以SpringBoot应该听maven的。整个确认后下面就好做了。大体思想如下：</p>
+<ul>
+<li>先在maven环境中设置用什么具体的环境</li>
+<li>在SpringBoot中读取maven设置的环境即可</li>
+</ul>
+<p><strong>maven中设置多环境（使用属性方式区分环境）</strong></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;profiles&gt;
+    &lt;profile&gt;
+        &lt;id&gt;env_dev&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;profile.active&gt;dev&lt;/profile.active&gt;
+        &lt;/properties&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;		&lt;!--默认启动环境--&gt;
+        &lt;/activation&gt;
+    &lt;/profile&gt;
+    &lt;profile&gt;
+        &lt;id&gt;env_pro&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;profile.active&gt;pro&lt;/profile.active&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;</code></pre>
+
+<p><strong>SpringBoot中读取maven设置值</strong></p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring:
+	profiles:
+    	active: @profile.active@</code></pre>
+
+<p>​		上面的@属性名@就是读取maven中配置的属性值的语法格式。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>当Maven与SpringBoot同时对多环境进行控制时，以Mavn为主，SpringBoot使用@..@占位符读取Maven对应的配置属性值</li>
+<li>基于SpringBoot读取Maven配置属性的前提下，如果在Idea下测试工程时pom.xml每次更新需要手动compile方可生效</li>
+</ol>
+<h2 id="4-日志"><a href="#4-日志" class="headerlink" title="4. 日志"></a>4. 日志</h2><p>​		运维篇最后一部分我们来聊聊日志，日志大家不陌生，简单介绍一下。日志其实就是记录程序日常运行的信息，主要作用如下：</p>
+<ul>
+<li>编程期调试代码</li>
+<li>运营期记录信息</li>
+<li>记录日常运营重要信息（峰值流量、平均响应时长……）</li>
+<li>记录应用报错信息（错误堆栈）</li>
+<li>记录运维过程数据（扩容、宕机、报警……）</li>
+</ul>
+<p>​		或许各位小伙伴并不习惯于使用日志，没关系，慢慢多用，习惯就好。想进大厂，这是最基本的，别去面试的时候说没用过，完了，没机会了。</p>
+<h4 id="4-1-代码中使用日志工具记录日志"><a href="#4-1-代码中使用日志工具记录日志" class="headerlink" title="4.1 代码中使用日志工具记录日志"></a>4.1 代码中使用日志工具记录日志</h4><p>​		日志的使用格式非常固定，直接上操作步骤：</p>
+<p><strong>步骤①</strong>：添加日志记录操作</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@RestController
+@RequestMapping("/books")
+public class BookController extends BaseClass{
+    // 声明日志对象
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);
+    @GetMapping
+    public String getById(){
+        log.debug("debug...");
+        log.info("info...");
+        log.warn("warn...");
+        log.error("error...");
+        return "springboot is running...2";
+    }
+}</code></pre>
+
+<p>​		上述代码中log对象就是用来记录日志的对象，下面的log.debug，log.info这些操作就是写日志的API了。</p>
+<p><strong>步骤②</strong>：在配置文件中设置日志输出级别</p>
+<p>​		日志设置好以后可以根据设置选择哪些参与记录。这里是根据日志的级别来设置的。日志的级别分为6种，分别是：</p>
+<ul>
+<li>TRACE：运行堆栈信息，使用率低</li>
+<li>DEBUG：程序员调试代码使用</li>
+<li>INFO：记录运维过程数据</li>
+<li>WARN：记录运维过程报警数据</li>
+<li>ERROR：记录错误堆栈信息</li>
+<li>FATAL：灾难信息，合并计入ERROR</li>
+</ul>
+<p>​		一般情况下，开发时候使用DEBUG，上线后使用INFO，运维信息记录使用WARN即可。下面就设置一下日志级别：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"># 开启debug模式，输出调试信息，常用于检查系统运行状况
+debug: true</code></pre>
+
+<p>​		这么设置太简单粗暴了，日志系统通常都提供了细粒度的控制</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"># 开启debug模式，输出调试信息，常用于检查系统运行状况
+debug: true
+
+# 设置日志级别，root表示根节点，即整体应用日志级别
+logging:
+	level:
+    	root: debug</code></pre>
+
+<p>​		还可以再设置更细粒度的控制</p>
+<p><strong>步骤③</strong>：设置日志组，控制指定包对应的日志输出级别，也可以直接控制指定包对应的日志输出级别</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">logging:
+	# 设置日志组
+    group:
+    	# 自定义组名，设置当前组中所包含的包
+        ebank: com.itheima.controller
+    level:
+    	root: warn
+        # 为对应组设置日志级别
+        ebank: debug
+    	# 为对包设置日志级别
+        com.itheima.controller: debug</code></pre>
+
+<p>​		说白了就是总体设置一下，每个包设置一下，如果感觉设置的麻烦，就先把包分个组，对组设置，没了，就这些。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>日志用于记录开发调试与运维过程消息</li>
+<li>日志的级别共6种，通常使用4种即可，分别是DEBUG，INFO,WARN,ERROR</li>
+<li>可以通过日志组或代码包的形式进行日志显示级别的控制</li>
+</ol>
+<h4 id="教你一招：优化日志对象创建代码"><a href="#教你一招：优化日志对象创建代码" class="headerlink" title="教你一招：优化日志对象创建代码"></a>教你一招：优化日志对象创建代码</h4><p>​		写代码的时候每个类都要写创建日志记录对象，这个可以优化一下，使用前面用过的lombok技术给我们提供的工具类即可。</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@RestController
+@RequestMapping("/books")
+public class BookController extends BaseClass{
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);	//这一句可以不写了
+}</code></pre>
+
+<p>​		导入lombok后使用注解搞定，日志对象名为log</p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@Slf4j		//这个注解替代了下面那一行
+@RestController
+@RequestMapping("/books")
+public class BookController extends BaseClass{
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);	//这一句可以不写了
+}</code></pre>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>基于lombok提供的@Slf4j注解为类快速添加日志对象</li>
+</ol>
+<h4 id="4-2-日志输出格式控制"><a href="#4-2-日志输出格式控制" class="headerlink" title="4.2 日志输出格式控制"></a>4.2 日志输出格式控制</h4><p>​		日志已经能够记录了，但是目前记录的格式是SpringBoot给我们提供的，如果想自定义控制就需要自己设置了。先分析一下当前日志的记录格式。</p>
+<p><img src="image-20211206123431222.png" alt="image-20211206123431222"></p>
+<p>​		对于单条日志信息来说，日期，触发位置，记录信息是最核心的信息。级别用于做筛选过滤，PID与线程名用于做精准分析。了解这些信息后就可以DIY日志格式了。本课程不做详细的研究，有兴趣的小伙伴可以学习相关的知识。下面给出课程中模拟的官方日志模板的书写格式，便于大家学习。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">logging:
+	pattern:
+    	console: "%d %clr(%p) --- [%16t] %clr(%-40.40c){cyan} : %m %n"</code></pre>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>日志输出格式设置规则</li>
+</ol>
+<h4 id="4-3-日志文件"><a href="#4-3-日志文件" class="headerlink" title="4.3 日志文件"></a>4.3 日志文件</h4><p>​		日志信息显示，记录已经控制住了，下面就要说一下日志的转存了。日志不能仅显示在控制台上，要把日志记录到文件中，方便后期维护查阅。</p>
+<p>​		对于日志文件的使用存在各种各样的策略，例如每日记录，分类记录，报警后记录等。这里主要研究日志文件如何记录。</p>
+<p>​		记录日志到文件中格式非常简单，设置日志文件名即可。</p>
+<pre class="line-numbers language-YAML" data-language="YAML"><code class="language-YAML">logging:
+	file:
+    	name: server.log</code></pre>
+
+<p>​		虽然使用上述格式可以将日志记录下来了，但是面对线上的复杂情况，一个文件记录肯定是不能够满足运维要求的，通常会每天记录日志文件，同时为了便于维护，还要限制每个日志文件的大小。下面给出日志文件的常用配置方式：</p>
+<pre class="line-numbers language-YAML" data-language="YAML"><code class="language-YAML">logging:
+	logback:
+    	rollingpolicy:
+        	max-file-size: 3KB
+            file-name-pattern: server.%d{yyyy-MM-dd}.%i.log</code></pre>
+
+<p>​		以上格式是基于logback日志技术设置每日日志文件的设置格式，要求容量到达3KB以后就转存信息到第二个文件中。文件命名规则中的%d标识日期，%i是一个递增变量，用于区分日志文件。</p>
+<p><strong>总结</strong></p>
+<ol>
+<li>日志记录到文件</li>
+<li>日志文件格式设置</li>
+</ol>
+<h2 id="运维实用篇完结"><a href="#运维实用篇完结" class="headerlink" title="运维实用篇完结"></a>运维实用篇完结</h2><p>​		运维实用篇到这里就要先告一段落了，为什么不说结束呢？因为运维篇中还有一些知识，但是现在讲解过于分散了。所以要把这些知识与开发实用篇的知识结合在一起讲，也是本课程的教学设计的体现。</p>
+<p>​		在整体运维实用篇中带着大家学习了4块内容，首先学习了如何运行SpringBoot程序，也就是程序的打包与运行，接下来对配置进行了升级学习，不再局限在配置文件中进行设置，通过临时属性，外部配置文件对项目的配置进行管控。在多环境开发中给大家介绍了多种多环境开发的格式，其实掌握一种即可，此外还给大家讲了多环境开发的一些技巧以及与maven的冲突解决方案。最后给大家介绍了日志系统，老实说日志这里讲的相当的潦草，因为大部分日志相关的知识都不应该在这门课中学习，这里只是告诉大家如何整合实用而已。</p>
+<p>​		看了各位小伙伴的评论，知道你们再催更，我也在加油，一起努力吧，实用开发篇再会。实用开发篇会提高更新频度，不全部做完给大家更新了，我先把做好的一部分开放出来，随后做完一点就更新一点，额，好吧，就说到这里吧。</p>
+ 
+      </div>
+      <hr />
+
+      
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Nanying</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://nan-ying.github.io/2023/07/31/SpringBoot%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%932-%E8%BF%90%E7%BB%B4%E5%AE%9E%E7%94%A8%E7%AF%87/">https://nan-ying.github.io/2023/07/31/SpringBoot%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%932-%E8%BF%90%E7%BB%B4%E5%AE%9E%E7%94%A8%E7%AF%87/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Nanying</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+      <div class="tag_share" style="display: block">
+        <div class="post-meta__tag-list" style="display: inline-block">
+          
+          <div class="article-tag">
+            
+            <a href="/tags/SpringBoot/">
+              <span class="chip bg-color">SpringBoot</span>
+            </a>
+            
+          </div>
+          
+        </div>
+        <div
+          class="post_share"
+          style="
+            zoom: 80%;
+            width: fit-content;
+            display: inline-block;
+            float: right;
+            margin: -0.15rem 0;
+          "
+        >
+          <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+        </div>
+      </div>
+       <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+ 
+    </div>
+  </div>
+
+   <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'db88556d05226db24d16',
+        clientSecret: '4981b218ad88ef98f3df857ee9ba26b05bb54051',
+        repo: 'blog-comment',
+        owner: 'Nan-ying',
+        admin: "Nan-ying",
+        id: '2023-07-31T10-40-16',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+         
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/08/03/SpringBoot%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%933-%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SpringBoot知识整理和总结3-开发实用篇">
+                        
+                        <span class="card-title">SpringBoot知识整理和总结3-开发实用篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-08-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/07/27/SpringBoot%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%92%8C%E6%80%BB%E7%BB%931-%E5%9F%BA%E7%A1%80%E7%AF%87/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="SpringBoot知识整理和总结1-基础篇">
+                        
+                        <span class="card-title">SpringBoot知识整理和总结1-基础篇</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+ <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+ <footer class="page-footer bg-color">
+   <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+ 
+
+  <div
+    class="container row center-align"
+    style="margin-bottom: 15px !important;"
+  >
+    <div class="col s12 m8 l8 copy-right">
+      Copyright&nbsp;&copy; 
+      <span id="year"
+        >2022-2023</span
+      >
+      
+      <a href="/about" target="_blank"
+        >Nanying.
+      </a>
+      <span class="with-love" id="heart"
+        ><i class="fa fa-heart" style="color: #ff71a8"></i>
+      </span>
+      &nbsp;|&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank"
+        >Hexo</a
+      >
+      <!-- |&nbsp;Theme&nbsp;<a
+        href="https://github.com/blinkfox/hexo-theme-matery"
+        target="_blank"
+        >Matery</a
+      > -->
+      
+      <br />
+
+      <!-- 时间统计 -->
+      
+      <span id="sitetime"> Loading ...</span
+      ><span class="my-face"> ღゝ◡╹)ノ♡</span>
+      <script>
+        var calcSiteTime = function () {
+          window.setTimeout("calcSiteTime()", 1000);
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+          var diffHours = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days) / hours
+          );
+          var diffMinutes = Math.floor(
+            (diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+              minutes
+          );
+          var diffSeconds = Math.floor(
+            (diff -
+              (diffYears * 365 + diffDays) * days -
+              diffHours * hours -
+              diffMinutes * minutes) /
+              seconds
+          );
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              daysTip =
+                "本站已运行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              daysTip =
+                "本站已運行 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days" +
+              diffHours +
+              " hours " +
+              diffMinutes +
+              " minutes " +
+              diffSeconds +
+              " seconds";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " +
+                diffYears +
+                " 年 " +
+                diffDays +
+                " 天" +
+                diffHours +
+                " 小时 " +
+                diffMinutes +
+                " 分钟 " +
+                diffSeconds +
+                " 秒";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script>
+      
+      <br />
+
+      <!-- 字数、访客统计 -->
+       &nbsp;<i
+        class="fas fa-chart-area"
+      ></i
+      >&nbsp;站点总字数:&nbsp;<span class="white-color"
+        >698.4k</span
+      >
+         
+       
+      <span id="busuanzi_container_site_pv"></span>
+      &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+      <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+       
+      <span id="busuanzi_container_site_uv"></span>
+      &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+      <span id="busuanzi_value_site_uv" class="white-color"></span>
+
+      
+      <br />
+
+      <!-- 运行天数提醒. -->
+      <!--  -->
+      <!-- <span id="sitetime"> Loading ...</span>
+      <script>
+        var calcSiteTime = function () {
+          var seconds = 1000;
+          var minutes = seconds * 60;
+          var hours = minutes * 60;
+          var days = hours * 24;
+          var years = days * 365;
+          var today = new Date();
+          var startYear = "2022";
+          var startMonth = "12";
+          var startDate = "10";
+          var startHour = "0";
+          var startMinute = "0";
+          var startSecond = "0";
+          var todayYear = today.getFullYear();
+          var todayMonth = today.getMonth() + 1;
+          var todayDate = today.getDate();
+          var todayHour = today.getHours();
+          var todayMinute = today.getMinutes();
+          var todaySecond = today.getSeconds();
+          var t1 = Date.UTC(
+            startYear,
+            startMonth,
+            startDate,
+            startHour,
+            startMinute,
+            startSecond
+          );
+          var t2 = Date.UTC(
+            todayYear,
+            todayMonth,
+            todayDate,
+            todayHour,
+            todayMinute,
+            todaySecond
+          );
+          var diff = t2 - t1;
+          var diffYears = Math.floor(diff / years);
+          var diffDays = Math.floor(diff / days - diffYears * 365);
+
+          // 区分是否有年份.
+          var language = "zh-CN";
+          if (startYear === String(todayYear)) {
+            document.getElementById("year").innerHTML = todayYear;
+            var daysTip =
+              "This site has been running for " + diffDays + " days";
+            if (language === "zh-CN") {
+              daysTip = "本站已运行 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              daysTip = "本站已運行 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = daysTip;
+          } else {
+            document.getElementById("year").innerHTML =
+              startYear + " - " + todayYear;
+            var yearsAndDaysTip =
+              "This site has been running for " +
+              diffYears +
+              " years and " +
+              diffDays +
+              " days";
+            if (language === "zh-CN") {
+              yearsAndDaysTip =
+                "本站已运行 " + diffYears + " 年 " + diffDays + " 天";
+            } else if (language === "zh-HK") {
+              yearsAndDaysTip =
+                "本站已運行 " + diffYears + " 年 " + diffDays + " 天";
+            }
+            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+          }
+        };
+
+        calcSiteTime();
+      </script> -->
+      <!--  -->
+      <!-- <br /> -->
+      
+    </div>
+    <div class="col s12 m4 l4 social-link social-statis">
+      
+<a
+  href="https://github.com/Nan-ying"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="访问我的GitHub"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-github"></i>
+</a>
+ 
+<a
+  href="mailto:wangxinwan_wy@163.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="邮件联系我"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-envelope-open"></i>
+</a>
+   
+<a
+  href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2442926123"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="QQ联系我: 2442926123"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-qq"></i>
+</a>
+ 
+<a
+  href="https://blog.csdn.net/weixin_42771853?type=blog"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="关注我的csdn: https://blog.csdn.net/weixin_42771853?type=blog"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fas fa-rss"></i>
+</a>
+ 
+<a
+  href="https://weibo.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到微博"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-weibo"></i>
+</a>
+ 
+<a
+  href="https://www.zhihu.com"
+  class="tooltipped"
+  target="_blank"
+  data-tooltip="跳转到知乎"
+  data-position="top"
+  data-delay="50"
+>
+  <i class="fab fa-zhihu1">知</i>
+</a>
+ 
+
+    </div>
+  </div>
+</footer>
+
+<div class="progress-bar"></div>
+ <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+ <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+ <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+      
+
+    <!-- 雪花特效 -->
+    
+    <script type="text/javascript">
+      // 只在桌面版网页启用特效
+      var windowWidth = $(window).width();
+      if (windowWidth > 768) {
+        document.write(
+          '<script type="text/javascript" src="/libs/others/snow.js"><\/script>'
+        );
+      }
+    </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+    <script src="/libs/others/TencentCaptcha.js"></script>
+    <button
+      id="TencentCaptcha"
+      data-appid="xxxxxxxxxx"
+      data-cbfn="callback"
+      type="button"
+      hidden
+    ></button>
+     <!-- Baidu Analytics -->
+ <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+ 
+    <script
+      src="/libs/others/clicklove.js"
+      async="async"
+    ></script>
+     
+    <script
+      async
+      src="/libs/others/busuanzi.pure.mini.js"
+    ></script>
+      
+
+    <!--腾讯兔小巢-->
+       
+    <script
+      type="text/javascript"
+      src="/libs/background/ribbon-dynamic.js"
+      async="async"
+    ></script>
+     
+    <script
+      src="/libs/instantpage/instantpage.js"
+      type="module"
+    ></script>
+    
+
+    <!-- 动态标签 -->
+    <script type="text/javascript">
+      var OriginTitile = document.title,
+        st;
+      document.addEventListener("visibilitychange", function () {
+        document.hidden
+          ? ((document.title = "看不见我🙈~看不见我🙈~"), clearTimeout(st))
+          : ((document.title = "(๑•̀ㅂ•́) ✧被发现了～"),
+            (st = setTimeout(function () {
+              document.title = OriginTitile;
+            }, 3e3)));
+      });
+    </script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":false},"react":{"opacity":1}});</script></body>
+</html>
