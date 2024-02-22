@@ -5,13 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SpringCloud, Nan-ying&#39;s Blog">
-    <meta name="description" content="之前我们学习的项目一是单体项目，可以满足小型项目或传统项目的开发。而在互联网时代，越来越多的一线互联网公司都在使用微服务技术。
-从谷歌搜索指数来看，国内从自2016年底开始，微服务热度突然暴涨：
+    <meta name="description" content="1.认识微服务1.1.单体架构单体架构（monolithic structure）：顾名思义，整个项目中所有功能模块都在一个工程中开发；项目部署时需要对所有模块一起编译、打包；项目的架构设计、开发模式都非常简单。
 
-那么：
-
-到底什么是微服务？
-企业该不该引">
+当项目规模较小时，这种模">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -448,12 +444,12 @@
         </div>
           
         <div class="info-break-policy">
-          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 31.4k
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 30k
         </div>
          
         <div class="info-break-policy">
           <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-          124 分
+          119 分
         </div>
          
         <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
@@ -474,116 +470,7 @@
 
     <div class="card-content article-card-content">
       <div id="articleContent">
-        <p>之前我们学习的项目一是单体项目，可以满足小型项目或传统项目的开发。而在互联网时代，越来越多的一线互联网公司都在使用微服务技术。</p>
-<p>从谷歌搜索指数来看，国内从自2016年底开始，微服务热度突然暴涨：</p>
-<p><img src="169796321521770.png" alt="img"></p>
-<p>那么：</p>
-<ul>
-<li>到底什么是微服务？</li>
-<li>企业该不该引入微服务？</li>
-<li>微服务技术该如何在企业落地？</li>
-</ul>
-<p>接下来几天，我们就一起来揭开它的神秘面纱。</p>
-<p>计划是这样的，课前资料中给大家准备了一个<strong>单体</strong>的电商小项目：黑马商城，我们会基于这个单体项目来演示从单体架构到微服务架构的演变过程、分析其中存在的问题，以及微服务技术是如何解决这些问题的。</p>
-<p>你会发现每一个微服务技术都是在解决服务化过程中产生的问题，你对于每一个微服务技术具体的应用场景和使用方式都会有更深层次的理解。</p>
-<p>今天作为课程的第一天，我们要完成下面的内容：</p>
-<ul>
-<li>知道单体架构的特点</li>
-<li>知道微服务架构的特点</li>
-<li>学会拆分微服务</li>
-<li>会使用Nacos实现服务治理</li>
-<li>会使用OpenFeign实现远程调用</li>
-</ul>
-<h1 id="0-导入黑马商城项目"><a href="#0-导入黑马商城项目" class="headerlink" title="0.导入黑马商城项目"></a>0.导入黑马商城项目</h1><p>在课前资料中给大家提供了黑马商城项目的资料，我们需要先导入这个单体项目。不过需要注意的是，本篇及后续的微服务学习都是基于Centos7系统下的Docker部署，因此你必须做好一些准备：</p>
-<ul>
-<li>Centos7的环境及一个好用的SSH客户端</li>
-<li>安装好Docker</li>
-<li>会使用Docker</li>
-</ul>
-<p>如果你没有这样的Linux环境，或者不是Centos7的话，那么这里有一篇参考文档：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://b11et3un53m.feishu.cn/wiki/FJAnwOhpIihMkLkOKQocdWZ7nUc">Linux环境搭建</a></li>
-</ul>
-<p>建议按照上面的文档来搭建虚拟机环境，使用其它版本会出现一些环境问题，比较痛苦。</p>
-<p>如果已经有Linux环境，但是没有安装Docker的话，那么这里还有一篇参考文档：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://b11et3un53m.feishu.cn/wiki/Rfocw7ctXij2RBkShcucLZbrn2d">安装Docker</a></li>
-</ul>
-<p>如果不会使用Docker的话可以参考黑马的微服务前置Docker课程，B站地址如下：</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HP4118797/?share_source=copy_web&amp;vd_source=3362e6914fb759983690e6e0f1072453">https://www.bilibili.com/video/BV1HP4118797/?share_source=copy_web&amp;vd_source=3362e6914fb759983690e6e0f1072453</a></p>
-<p>注意：</p>
-<p>如果是学习过上面Docker课程的同学，虚拟机中已经有了黑马商城项目及MySQL数据库了，不过为了跟其他同学保持一致，可以先将整个项目移除。使用下面的命令：</p>
-<p>cd /root</p>
-<p>docker compose down</p>
-<h2 id="0-1-安装MySQL"><a href="#0-1-安装MySQL" class="headerlink" title="0.1.安装MySQL"></a>0.1.安装MySQL</h2><p>在课前资料提供好了MySQL的一个目录：</p>
-<p><img src="169796321521771.png" alt="img"></p>
-<p>其中有MySQL的配置文件和初始化脚本：</p>
-<p><img src="169796321521872.png" alt="img"></p>
-<p>我们将其复制到虚拟机的<code>/root</code>目录。如果<code>/root</code>下已经存在<code>mysql</code>目录则删除旧的，如果不存在则直接复制本地的：</p>
-<p><img src="169796321521873.png" alt="img"></p>
-<p>然后创建一个通用网络：</p>
-<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">docker network create hm-net</code></pre>
-
-<p>使用下面的命令来安装MySQL：</p>
-<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">docker run -d \
-  --name mysql \
-  -p 3306:3306 \
-  -e TZ=Asia/Shanghai \
-  -e MYSQL_ROOT_PASSWORD=123 \
-  -v /root/mysql/data:/var/lib/mysql \
-  -v /root/mysql/conf:/etc/mysql/conf.d \
-  -v /root/mysql/init:/docker-entrypoint-initdb.d \
-  --network hm-net\
-  mysql</code></pre>
-
-<p>此时，通过命令查看mysql容器：</p>
-<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">docker ps</code></pre>
-
-<p>如图：</p>
-<p><img src="169796321521874.png" alt="img"></p>
-<p>发现mysql容器正常运行。</p>
-<blockquote>
-<p>注：图片中的dps命令是我设置的别名，等同于docker ps –format，可以简化命令格式。你可以参考黑马的<a target="_blank" rel="noopener" href="https://b11et3un53m.feishu.cn/wiki/MWQIw4Zvhil0I5ktPHwcoqZdnec">day02-Docker</a> 的2.1.3小节来配置。</p>
-</blockquote>
-<p>此时，如果我们使用MySQL的客户端工具连接MySQL，应该能发现已经创建了黑马商城所需要的表：</p>
-<p><img src="169796321521875.png" alt="img"></p>
-<h2 id="0-2-后端"><a href="#0-2-后端" class="headerlink" title="0.2.后端"></a>0.2.后端</h2><p>然后是Java代码，在课前资料提供了一个hmall目录：</p>
-<p><img src="169796321521876.png" alt="img"></p>
-<p>将其复制到你的工作空间，然后利用Idea打开。</p>
-<p>项目结构如下：</p>
-<p><img src="169796321521877.png" alt="img"></p>
-<p>按下<code>ALT</code> + <code>8</code>键打开services窗口，新增一个启动项：</p>
-<p><img src="169796321521878.png" alt="img"></p>
-<p>在弹出窗口中鼠标向下滚动，找到<code>Spring Boot</code>:</p>
-<p><img src="169796321521879.png" alt="img"></p>
-<p>点击后应该会在services中出现hmall的启动项：</p>
-<p><img src="169796321521880.png" alt="img"></p>
-<p>点击对应按钮，即可实现运行或DEBUG运行。</p>
-<p><strong>不过别着急！！</strong></p>
-<p>我们还需要对这个启动项做简单配置，在<code>HMallApplication</code>上点击鼠标右键，会弹出窗口，然后选择<code>Edit Configuration</code>：</p>
-<p><img src="169796321521881.png" alt="img"></p>
-<p>在弹出窗口中配置SpringBoot的启动环境为local：</p>
-<p><img src="169796321521882.png" alt="img"></p>
-<p>点击OK配置完成。接下来就可以运行了！</p>
-<p>启动完成后，试试看访问下 <a target="_blank" rel="noopener" href="http://localhost:8080/hi">http://localhost:8080/hi</a> 吧！</p>
-<h2 id="0-3-前端"><a href="#0-3-前端" class="headerlink" title="0.3.前端"></a>0.3.前端</h2><p>在课前资料中还提供了一个hmall-nginx的目录：</p>
-<p><img src="169796321521883.png" alt="img"></p>
-<p>其中就是一个nginx程序以及我们的前端代码，直接在windows下将其复制到一个非中文、不包含特殊字符的目录下。然后进入hmall-nginx后，利用cmd启动即可：</p>
-<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell"># 启动nginx
-start nginx.exe
-# 停止
-nginx.exe -s stop
-# 重新加载配置
-nginx.exe -s reload
-# 重启
-nginx.exe -s restart</code></pre>
-
-<p>特别注意：</p>
-<p>nginx.exe 不要双击启动，而是打开cmd窗口，通过命令行启动。停止的时候也一样要是用命令停止。如果启动失败不要重复启动，而是查看logs目录中的error.log日志，查看是否是端口冲突。如果是端口冲突则自行修改端口解决。</p>
-<p>启动成功后，访问<a href="http://localhost:18080，应该能看到我们的门户页面：">http://localhost:18080，应该能看到我们的门户页面：</a></p>
-<p><img src="169796321521884.png" alt="img"></p>
-<h1 id="1-认识微服务"><a href="#1-认识微服务" class="headerlink" title="1.认识微服务"></a>1.认识微服务</h1><p>这一章我们从单体架构的优缺点来分析，看看开发大型项目采用单体架构存在哪些问题，而微服务架构又是如何解决这些问题的。</p>
-<h2 id="1-1-单体架构"><a href="#1-1-单体架构" class="headerlink" title="1.1.单体架构"></a>1.1.单体架构</h2><p>单体架构（monolithic structure）：顾名思义，整个项目中所有功能模块都在一个工程中开发；项目部署时需要对所有模块一起编译、打包；项目的架构设计、开发模式都非常简单。</p>
+        <h1 id="1-认识微服务"><a href="#1-认识微服务" class="headerlink" title="1.认识微服务"></a>1.认识微服务</h1><h2 id="1-1-单体架构"><a href="#1-1-单体架构" class="headerlink" title="1.1.单体架构"></a>1.1.单体架构</h2><p>单体架构（monolithic structure）：顾名思义，整个项目中所有功能模块都在一个工程中开发；项目部署时需要对所有模块一起编译、打包；项目的架构设计、开发模式都非常简单。</p>
 <p><img src="169796321521885.jpeg" alt="img"></p>
 <p>当项目规模较小时，这种模式上手快，部署、运维也都很方便，因此早期很多小型项目都采用这种模式。</p>
 <p>但随着项目的业务规模越来越大，团队开发人员也不断增加，单体架构就呈现出越来越多的问题：</p>
@@ -3891,7 +3778,7 @@ public void tryPayOrderByBalance(PayOrderDTO payOrderDTO) {
     <div class="col s12 m8 l8 copy-right">
       Copyright&nbsp;&copy; 
       <span id="year"
-        >2022-2023</span
+        >2022-2024</span
       >
       
       <a href="/about" target="_blank"
@@ -4054,7 +3941,7 @@ public void tryPayOrderByBalance(PayOrderDTO payOrderDTO) {
         class="fas fa-chart-area"
       ></i
       >&nbsp;站点总字数:&nbsp;<span class="white-color"
-        >760.1k</span
+        >789k</span
       >
          
        

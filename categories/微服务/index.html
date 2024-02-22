@@ -600,6 +600,15 @@
                 </a>
                 
                 
+                <a href="/categories/%E7%AE%97%E6%B3%95/" title="算法: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9EBEA;">算法
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
             </div>
         </div>
     </div>
@@ -625,11 +634,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                分布式调度XXL-JOB1.概述1.1什么是任务调度我们可以思考一下下面业务场景的解决方案:
+                                分布式调度XXL-JOB1.概述1.1什么是任务调度类比下面业务场景的解决方案:
 
 某电商平台需要每天上午10点，下午3点，晚上8点发放一批优惠券
 某银行系统需要在信用卡到期还款日的前三天进行短信提醒
-某财务系统需要在每天凌晨0
+某财务系统需要在每天凌晨0:10分结算
                             
                         </div>
                         <div class="publish-info">
@@ -721,13 +730,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                之前我们学习的项目一是单体项目，可以满足小型项目或传统项目的开发。而在互联网时代，越来越多的一线互联网公司都在使用微服务技术。
-从谷歌搜索指数来看，国内从自2016年底开始，微服务热度突然暴涨：
+                                1.认识微服务1.1.单体架构单体架构（monolithic structure）：顾名思义，整个项目中所有功能模块都在一个工程中开发；项目部署时需要对所有模块一起编译、打包；项目的架构设计、开发模式都非常简单。
 
-那么：
-
-到底什么是微服务？
-企业该不该引
+当项目规模较小时，这种模
                             
                         </div>
                         <div class="publish-info">
@@ -773,8 +778,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1.快速入门要想让Docker帮我们安装和部署软件，肯定要保证你的机器上有Docker. 由于大家的操作系统各不相同，安装方式也不同。为了便于大家学习，我们统一在CentOS的虚拟机中安装Docker，统一学习环境。
-1.1 安装 dock
+                                1.快速入门环境：CentOS7虚拟机
+1.1 安装 docker1.卸载旧版首先如果系统中已经存在旧的Docker，则先卸载：
+yum remove docker \
+    docker-client \
+    docker-clie
                             
                         </div>
                         <div class="publish-info">
@@ -869,7 +877,7 @@
     <div class="col s12 m8 l8 copy-right">
       Copyright&nbsp;&copy; 
       <span id="year"
-        >2022-2023</span
+        >2022-2024</span
       >
       
       <a href="/about" target="_blank"
@@ -1032,7 +1040,7 @@
         class="fas fa-chart-area"
       ></i
       >&nbsp;站点总字数:&nbsp;<span class="white-color"
-        >760.1k</span
+        >789k</span
       >
          
        
