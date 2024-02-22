@@ -5,8 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SpringBoot知识整理和总结4-原理篇, Nan-ying&#39;s Blog">
-    <meta name="description" content="SpringBoot原理篇​		在学习前面三篇的时候，好多小伙伴一直在B站评论区嚷嚷着期待原理篇，今天可以正式的宣布了，他来了他来了他脚踏祥云进来了（此处请自行脑补BGM）。
-​		其实从本人的角度出发，看了这么多学习java的小伙伴的学习">
+    <meta name="description" content="SpringBoot原理篇1. 自动配置工作流程1.1 bean的加载方式​		关于bean的加载方式，spring提供了各种各样的形式。因为spring管理bean整体上来说就是由spring维护对象的生命周期，所以bean的加载可以从大">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -443,12 +442,12 @@
         </div>
           
         <div class="info-break-policy">
-          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 15.4k
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 14.3k
         </div>
          
         <div class="info-break-policy">
           <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-          58 分
+          54 分
         </div>
          
         <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
@@ -469,18 +468,7 @@
 
     <div class="card-content article-card-content">
       <div id="articleContent">
-        <h1 id="SpringBoot原理篇"><a href="#SpringBoot原理篇" class="headerlink" title="SpringBoot原理篇"></a>SpringBoot原理篇</h1><p>​		在学习前面三篇的时候，好多小伙伴一直在B站评论区嚷嚷着期待原理篇，今天可以正式的宣布了，他来了他来了他脚踏祥云进来了（此处请自行脑补BGM）。</p>
-<p>​		其实从本人的角度出发，看了这么多学习java的小伙伴的学习过程，个人观点，不建议小伙伴过早的去研究技术的原理。原因有二：一，<strong>先应用熟练</strong>，<strong>培养技术应用的条件反射</strong>，然后再学原理。大把的学习者天天还纠结于这里少写一个这，那里少写一个那，程序都跑不下去，要啥原理，要啥自行车。这里要说一句啊，懂不懂啥意思那不叫原理，原理是抽象到顶层设计层面的东西。知道为什么写这句话，知道错误的原因和懂原理是两码事。二， <strong>原理真不是看源码</strong>，源码只能称作原理的落地实现方式，当好的落地实现方式出现后，就会有新旧版本的迭代，底层实现方式也会伴随着更新升级。但是原理不变，只是找到了更好的实现最初目标的路径。一个好的课程，一位好的老师，不会用若干行云里雾里的源代码把学习者带到沟里，然后爬不出来，深陷泥潭。一边沮丧的看着源码，一边舔着老师奉其为大神，这就叫不干人事。原理就应该使用最通俗易懂的语言，把设计思想讲出来，至于看源码，只是因为目前的技术原创人员只想到了当前这种最笨的设计方案，还没有更好的。比如spirng程序，写起来很费劲，springboot出来以后就简单轻松了很多，实现方案变了，原理不变。但凡你想通过下面的课程学习去读懂若干行代码，然后特别装逼的告诉自己，我懂原理了。我只能告诉你，你选了一条成本最高的路线，看源码仅仅是验证原理，源码仅对应程序流程，不对应原理。原理是思想级的，不是代码级的，原理是原本的道理。</p>
-<p>​		springboot技术本身就是为了加速spring程序的开发的，可以大胆的说，springboot技术没有自己的原理层面的设计，仅仅是实现方案进行了改进。将springboot定位成工具，你就不会去想方设法的学习其原理了。就像是将木头分割成若干份，我们可以用斧子，用锯子，用刀，用火烧或者一脚踹断它，这些都是方式方法，而究其本质底层原理是植物纤维的组织方式，研究完这个，你再看前述的各种工具，都是基于这个原理在说如何变更破坏这种植物纤维的方式。所以不要一张嘴说了若干种技术，然后告诉自己，这就是spirngboot的原理。没有的事，springboot作为一款工具，压根就没有原理。我们下面要学习的其实就是spirngboot程序的工作流程。</p>
-<p>​		下面就开始学习原理篇，因为没有想出来特别好的名字，所以还是先称作原理篇吧。原理篇中包含如下内容：</p>
-<ul>
-<li>自动配置工作流程</li>
-<li>自定义starter开发</li>
-<li>springboot程序启动流程</li>
-</ul>
-<p>​		下面开启第一部分自动配置工作流程的学习</p>
-<h2 id="1-自动配置工作流程"><a href="#1-自动配置工作流程" class="headerlink" title="1. 自动配置工作流程"></a>1. 自动配置工作流程</h2><p>​		自动配置是springboot技术非常好用的核心因素，前面学习了这么多种技术的整合，每一个都离不开自动配置。不过在学习自动配置的时候，需要你对spring容器如何进行bean管理的过程非常熟悉才行，所以这里需要先复习一下有关spring技术中bean加载相关的知识。方式方法很多，逐一快速复习一下，查漏补缺。不过这里需要声明一点，这里列出的bean的加载方式仅仅应用于后面课程的学习，并不是所有的spring加载bean的方式。跟着我的步伐一种一种的复习，他们这些方案之间有千丝万缕的关系，顺着看完，你就懂自动配置是怎么回事了。</p>
-<h3 id="1-1-bean的加载方式"><a href="#1-1-bean的加载方式" class="headerlink" title="1.1 bean的加载方式"></a>1.1 bean的加载方式</h3><p>​		关于bean的加载方式，spring提供了各种各样的形式。因为spring管理bean整体上来说就是由spring维护对象的生命周期，所以bean的加载可以从大的方面划分成2种形式。已知类并交给spring管理，和已知类名并交给spring管理。有什么区别？一个给.class，一个给类名字符串。内部其实都一样，都是通过spring的BeanDefinition对象初始化spring的bean。如果前面这句话看起来有障碍，可以去复习一下spring的相关知识。B站中有我尊敬的满一航老师录制的spring高级课程，链接地址如下，欢迎大家捧场，记得一键三连哦。</p>
+        <h1 id="SpringBoot原理篇"><a href="#SpringBoot原理篇" class="headerlink" title="SpringBoot原理篇"></a>SpringBoot原理篇</h1><h2 id="1-自动配置工作流程"><a href="#1-自动配置工作流程" class="headerlink" title="1. 自动配置工作流程"></a>1. 自动配置工作流程</h2><h3 id="1-1-bean的加载方式"><a href="#1-1-bean的加载方式" class="headerlink" title="1.1 bean的加载方式"></a>1.1 bean的加载方式</h3><p>​		关于bean的加载方式，spring提供了各种各样的形式。因为spring管理bean整体上来说就是由spring维护对象的生命周期，所以bean的加载可以从大的方面划分成2种形式。已知类并交给spring管理，和已知类名并交给spring管理。有什么区别？一个给.class，一个给类名字符串。内部其实都一样，都是通过spring的BeanDefinition对象初始化spring的bean。如果前面这句话看起来有障碍，可以去复习一下spring的相关知识。B站中有我尊敬的满一航老师录制的spring高级课程，链接地址如下，欢迎大家捧场，记得一键三连哦。</p>
 <pre class="line-numbers language-CMD" data-language="CMD"><code class="language-CMD">https://www.bilibili.com/video/BV1P44y1N7QG</code></pre>
 
 <h4 id="方式一：配置文件-标签"><a href="#方式一：配置文件-标签" class="headerlink" title="方式一：配置文件+<bean/>标签"></a>方式一：配置文件+<code>&lt;bean/&gt;</code>标签</h4><p>​		最高端的食材往往只需要最简单的烹饪方法，搞错了，再来。最初级的bean的加载方式其实可以直击spring管控bean的核心思想，就是提供类名，然后spring就可以管理了。所以第一种方式就是给出bean的类名，至于内部嘛就是反射机制加载成class，然后，就没有然后了，拿到了class你就可以搞定一切了。如果这句话听不太懂，请这些小盆友转战java基础高级部分复习一下反射相关知识。</p>
@@ -2016,7 +2004,7 @@ public class MyListener implements ApplicationListener&lt;ApplicationStartingEve
         class="fas fa-chart-area"
       ></i
       >&nbsp;站点总字数:&nbsp;<span class="white-color"
-        >789k</span
+        >786.6k</span
       >
          
        

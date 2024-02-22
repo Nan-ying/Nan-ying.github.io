@@ -5,10 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SpringBoot知识整理和总结1-基础篇, Nan-ying&#39;s Blog">
-    <meta name="description" content="SpringBoot基础篇​		在基础篇中，我给学习者的定位是先上手，能够使用SpringBoot搭建基于SpringBoot的web项目开发，所以内容设置较少，主要包含如下内容：
+    <meta name="description" content="SpringBoot基础篇1. 快速上手SpringBoot​	SpringBoot技术由Pivotal团队研发制作，功能的话简单概括就是加速Spring程序的开发，这个加速要从如下两个方面来说
 
-SpringBoot快速入门
-SpringBoot基础配">
+Spring程序初始搭建过程
+Spring">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -445,7 +445,7 @@ SpringBoot基础配">
         </div>
           
         <div class="info-break-policy">
-          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 32k
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 31.8k
         </div>
          
         <div class="info-break-policy">
@@ -471,25 +471,17 @@ SpringBoot基础配">
 
     <div class="card-content article-card-content">
       <div id="articleContent">
-        <h1 id="SpringBoot基础篇"><a href="#SpringBoot基础篇" class="headerlink" title="SpringBoot基础篇"></a>SpringBoot基础篇</h1><p>​		在基础篇中，我给学习者的定位是先上手，能够使用SpringBoot搭建基于SpringBoot的web项目开发，所以内容设置较少，主要包含如下内容：</p>
-<ul>
-<li>SpringBoot快速入门</li>
-<li>SpringBoot基础配置</li>
-<li>基于SpringBoot整合SSMP</li>
-</ul>
-<h2 id="1-快速上手SpringBoot"><a href="#1-快速上手SpringBoot" class="headerlink" title="1. 快速上手SpringBoot"></a>1. 快速上手SpringBoot</h2><p>​	学习任意一项技术，首先要知道这个技术的作用是什么，不然学完以后，你都不知道什么时候使用这个技术，也就是技术对应的应用场景。SpringBoot技术由Pivotal团队研发制作，功能的话简单概括就是加速Spring程序的开发，这个加速要从如下两个方面来说</p>
+        <h1 id="SpringBoot基础篇"><a href="#SpringBoot基础篇" class="headerlink" title="SpringBoot基础篇"></a>SpringBoot基础篇</h1><h2 id="1-快速上手SpringBoot"><a href="#1-快速上手SpringBoot" class="headerlink" title="1. 快速上手SpringBoot"></a>1. 快速上手SpringBoot</h2><p>​	SpringBoot技术由Pivotal团队研发制作，功能的话简单概括就是加速Spring程序的开发，这个加速要从如下两个方面来说</p>
 <ul>
 <li>Spring程序初始搭建过程</li>
 <li>Spring程序的开发过程</li>
 </ul>
-<p>​	通过上面两个方面的定位，我们可以产生两个模糊的概念：</p>
+<p>​	通过上面两个方面的定位，可以产生两个模糊的概念：</p>
 <ol>
 <li>SpringBoot开发团队认为原始的Spring程序初始搭建的时候可能有些繁琐，这个过程是可以简化的，那原始的Spring程序初始搭建过程都包含哪些东西了呢？为什么觉得繁琐呢？最基本的Spring程序至少有一个配置文件或配置类，用来描述Spring的配置信息，莫非这个文件都可以不写？此外现在企业级开发使用Spring大部分情况下是做web开发，如果做web开发的话，还要在加载web环境时加载时加载指定的spring配置，这都是最基本的需求了，不写的话怎么知道加载哪个配置文件/配置类呢？那换了SpringBoot技术以后呢，这些还要写吗？谜底稍后揭晓，先卖个关子</li>
 <li>SpringBoot开发团队认为原始的Spring程序开发的过程也有些繁琐，这个过程仍然可以简化。开发过程无外乎使用什么技术，导入对应的jar包（或坐标）然后将这个技术的核心对象交给Spring容器管理，也就是配置成Spring容器管控的bean就可以了。这都是基本操作啊，难道这些东西SpringBoot也能帮我们简化？</li>
 </ol>
 <p>​	带着上面这些疑问我们就着手第一个SpringBoot程序的开发了，看看到底使用SpringBoot技术能简化开发到什么程度。</p>
-<p>​	<font color="#f0f"><b>温馨提示</b></font></p>
-<p>​		如果对Spring程序的基础开发不太懂的小伙伴，看到这里可以弃坑了，下面的内容学习需要具备Spring技术的知识，硬着头皮学不下去的。</p>
 <h3 id="1-1-SpringBoot入门（一）官网版"><a href="#1-1-SpringBoot入门（一）官网版" class="headerlink" title="1.1 SpringBoot入门（一）官网版"></a>1.1 SpringBoot入门（一）官网版</h3><p>​	下面让我们开始做第一个SpringBoot程序吧，本课程基于Idea2020.3版本制作，使用的Maven版本为3.6.1，JDK版本为1.8。如果你的环境和上述环境不同，可能在操作界面和操作过程中略有不同，只要软件匹配兼容即可（说到这个Idea和Maven，它们两个还真不是什么版本都能搭到一起的，说多了都是泪啊）。</p>
 <p>​	下面使用SpringBoot技术快速构建一个SpringMVC的程序，通过这个过程体会<font color="#ff0000"><b>简化</b></font>二字的含义</p>
 <p><strong>步骤①</strong>：创建新模块，选择Spring Initializr，并配置模块相关基础信息</p>
@@ -3632,7 +3624,7 @@ public class BookServiceImpl2 extends ServiceImpl&lt;BookDao,Book&gt; implements
         class="fas fa-chart-area"
       ></i
       >&nbsp;站点总字数:&nbsp;<span class="white-color"
-        >789k</span
+        >786.6k</span
       >
          
        

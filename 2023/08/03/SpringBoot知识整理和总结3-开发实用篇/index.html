@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SpringBoot知识整理和总结3-开发实用篇, Nan-ying&#39;s Blog">
-    <meta name="description" content="SpringBoot开发实用篇​		怀着忐忑的心情，开始了开发实用篇文档的编写。为什么忐忑？特喵的债欠的太多，不知道从何写起。哎，不煽情了，开工。
-​		运维实用篇完结以后，开发实用篇采用日更新的形式发布给各位小伙伴，基本上是每天一集，目前">
+    <meta name="description" content="SpringBoot开发实用篇1. 热部署​		什么是热部署？简单说就是你程序改了，现在要重新启动服务器，嫌麻烦？不用重启，服务器会自己悄悄的把更新后的程序给重新加载一遍，这就是热部署。
+​		热部署的功能是如何实现的呢？这就要分两种情况来">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -443,12 +443,12 @@
         </div>
           
         <div class="info-break-policy">
-          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 50k
+          <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 49.6k
         </div>
          
         <div class="info-break-policy">
           <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-          199 分
+          198 分
         </div>
          
         <span id="busuanzi_container_page_pv" class="info-break-policy"></span>
@@ -469,19 +469,7 @@
 
     <div class="card-content article-card-content">
       <div id="articleContent">
-        <h1 id="SpringBoot开发实用篇"><a href="#SpringBoot开发实用篇" class="headerlink" title="SpringBoot开发实用篇"></a>SpringBoot开发实用篇</h1><p>​		怀着忐忑的心情，开始了开发实用篇文档的编写。为什么忐忑？特喵的债欠的太多，不知道从何写起。哎，不煽情了，开工。</p>
-<p>​		运维实用篇完结以后，开发实用篇采用日更新的形式发布给各位小伙伴，基本上是每天一集，目前已经发布完毕。看评论区，好多小伙伴在求文档，所以赶紧来补文档，加班加点把开发实用篇的文档刨出来。</p>
-<p>​		开发实用篇中因为牵扯到SpringBoot整合各种各样的技术，由于不是每个小伙伴对各种技术都有所掌握，所以在整合每一个技术之前，都会做一个快速的普及，这样的话内容整个开发实用篇所包含的内容就会比较多。各位小伙伴在学习的时候，如果对某一个技术不是很清楚，可以先跳过对应章节，或者先补充一下技术知识，然后再来看对应的课程。开发实用篇具体包含的内容如下：</p>
-<ul>
-<li>热部署</li>
-<li>配置高级</li>
-<li>测试</li>
-<li>数据层解决方案</li>
-<li>整合第三方技术</li>
-<li>监控</li>
-</ul>
-<p>​		看目录感觉内容量并不是很大，但是在数据层解决方案和整合第三方技术中包含了大量的知识，一点一点慢慢学吧。下面开启第一部分热部署相关知识的学习</p>
-<h2 id="1-热部署"><a href="#1-热部署" class="headerlink" title="1. 热部署"></a>1. 热部署</h2><p>​		什么是热部署？简单说就是你程序改了，现在要重新启动服务器，嫌麻烦？不用重启，服务器会自己悄悄的把更新后的程序给重新加载一遍，这就是热部署。</p>
+        <h1 id="SpringBoot开发实用篇"><a href="#SpringBoot开发实用篇" class="headerlink" title="SpringBoot开发实用篇"></a>SpringBoot开发实用篇</h1><h2 id="1-热部署"><a href="#1-热部署" class="headerlink" title="1. 热部署"></a>1. 热部署</h2><p>​		什么是热部署？简单说就是你程序改了，现在要重新启动服务器，嫌麻烦？不用重启，服务器会自己悄悄的把更新后的程序给重新加载一遍，这就是热部署。</p>
 <p>​		热部署的功能是如何实现的呢？这就要分两种情况来说了，非springboot工程和springboot工程的热部署实现方式完全不一样。先说一下原始的非springboot项目是如何实现热部署的。</p>
 <p><strong>非springboot项目热部署实现原理</strong></p>
 <p>​		开发非springboot项目时，我们要制作一个web工程并通过tomcat启动，通常需要先安装tomcat服务器到磁盘中，开发的程序配置发布到安装的tomcat服务器上。如果想实现热部署的效果，这种情况其实有两种做法，一种是在tomcat服务器的配置文件中进行配置，这种做法与你使用什么IDE工具无关，不管你使用eclipse还是idea都行。还有一种做法是通过IDE工具进行配置，比如在idea工具中进行设置，这种形式需要依赖IDE工具，每款IDE工具不同，对应的配置也不太一样。但是核心思想是一样的，就是使用服务器去监控其中加载的应用，发现产生了变化就重新加载一次。</p>
@@ -5241,7 +5229,7 @@ public class PayEndpoint {
         class="fas fa-chart-area"
       ></i
       >&nbsp;站点总字数:&nbsp;<span class="white-color"
-        >789k</span
+        >786.6k</span
       >
          
        
